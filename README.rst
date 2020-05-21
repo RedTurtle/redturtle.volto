@@ -100,7 +100,7 @@ This endpoint works exactly like **@search** but take care of types not searchab
 
 
 Installation
-------------
+============
 
 Install redturtle.volto by adding it to your buildout::
 
@@ -116,19 +116,19 @@ and then running ``bin/buildout``
 
 
 Contribute
-----------
+==========
 
 - Issue Tracker: https://github.com/RedTurtle/redturtle.volto/issues
 - Source Code: https://github.com/RedTurtle/redturtle.volto
 
 
 License
--------
+=======
 
 The project is licensed under the GPLv2.
 
 Authors
--------
+=======
 
 This product was developed by **RedTurtle Technology** team.
 
