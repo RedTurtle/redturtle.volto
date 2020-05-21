@@ -2,8 +2,6 @@
 """Setup tests for this package."""
 from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING
 from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 
 import unittest
 
