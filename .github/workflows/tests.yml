@@ -31,7 +31,9 @@ jobs:
       - name: Install buildout
         run: |
           buildout -N -t 3 code-analysis:return-status-codes=True
-      - name: Run tests
+      - name: Code analysis
         run: |
           bin/code-analysis
+      - name: Run tests
+        run: |
           bin/test
