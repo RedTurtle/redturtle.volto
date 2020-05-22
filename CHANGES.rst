@@ -5,7 +5,8 @@ Changelog
 0.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Install also collective.volto.cookieconsent.
+  [cekk]
 
 
 0.1.0 (2020-05-22)
