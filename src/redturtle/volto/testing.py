@@ -10,6 +10,7 @@ from plone.testing import z2
 
 
 import collective.folderishtypes
+import collective.volto.cookieconsent
 import plone.restapi
 import redturtle.volto
 
@@ -23,6 +24,7 @@ class RedturtleVoltoLayer(PloneSandboxLayer):
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
         self.loadZCML(package=collective.folderishtypes)
+        self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
 
@@ -65,6 +67,7 @@ class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
         )
 
         self.loadZCML(package=collective.folderishtypes)
+        self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
 
