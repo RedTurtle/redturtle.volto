@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.1.1 (unreleased)
+0.1.1 (2020-05-22)
 ------------------
 
 - Install also collective.volto.cookieconsent.
