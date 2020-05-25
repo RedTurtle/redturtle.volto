@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.1.2 (unreleased)
+0.1.2 (2020-05-25)
 ------------------
 
 - Revert to Event and News Item default behaviors.
