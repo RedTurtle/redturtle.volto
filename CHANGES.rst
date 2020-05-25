@@ -5,7 +5,8 @@ Changelog
 0.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Revert to Event and News Item default behaviors.
+  [cekk]
 
 
 0.1.1 (2020-05-22)

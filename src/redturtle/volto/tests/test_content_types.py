@@ -29,3 +29,16 @@ class TestSetup(unittest.TestCase):
             'collective.folderishtypes.dx.content.FolderishDocument',
             portal_types['Document'].klass,
         )
+
+    def test_news_not_folderish(self):
+        portal_types = api.portal.get_tool(name='portal_types')
+        self.assertEqual(
+            'plone.app.contenttypes.content.NewsItem',
+            portal_types['News Item'].klass,
+        )
+
+    def test_event_not_folderish(self):
+        portal_types = api.portal.get_tool(name='portal_types')
+        self.assertEqual(
+            'plone.app.contenttypes.content.Event', portal_types['Event'].klass
+        )

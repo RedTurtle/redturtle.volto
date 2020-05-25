@@ -11,12 +11,15 @@
   
   <!-- Enabled behaviors -->
   <property name="behaviors">
+    <element value="plone.dublincore" />
+    <element value="plone.richtext" />
     <element value="plone.namefromtitle" />
     <element value="plone.allowdiscussion" />
-    <element value="plone.excludefromnavigation" />
     <element value="plone.shortname" />
-    <element value="plone.dublincore" />
+    <element value="plone.excludefromnavigation" />
     <element value="plone.relateditems" />
+    <element value="plone.leadimage" />
+    <element value="plone.versioning" />
     <element value="plone.locking" />
     <element value="volto.blocks" />
   </property>
