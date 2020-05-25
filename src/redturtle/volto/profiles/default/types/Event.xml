@@ -11,12 +11,19 @@
   
   <!-- Enabled behaviors -->
   <property name="behaviors">
+    <element value="plone.eventbasic" />
+    <element value="plone.eventrecurrence" />
+    <element value="plone.eventlocation" />
+    <element value="plone.eventattendees" />
+    <element value="plone.eventcontact" />
+    <element value="plone.dublincore" />
     <element value="plone.namefromtitle" />
+    <element value="plone.richtext" />
     <element value="plone.allowdiscussion" />
     <element value="plone.excludefromnavigation" />
     <element value="plone.shortname" />
-    <element value="plone.dublincore" />
     <element value="plone.relateditems" />
+    <element value="plone.versioning" />
     <element value="plone.locking" />
     <element value="volto.blocks" />
   </property>
