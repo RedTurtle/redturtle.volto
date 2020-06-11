@@ -5,8 +5,12 @@ Changelog
 0.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added default homepage
+  [nzambello]
+- Added blocks behavior to LRF
+  [nzambello]
+- Made editable and viewable Plone Site with blocks behavior
+  [nzambello]
 
 0.1.2 (2020-05-25)
 ------------------
