@@ -7,7 +7,11 @@
   
   <!-- needed to revert collective.folderishtypes.dx changes-->
   <property name="filter_content_types">True</property>
-  <property name="klass">plone.app.contenttypes.content.NewsItem</property>
+  <property name="allowed_content_types">
+    <element value="Image"/>
+    <element value="File"/>
+    <element value="Link"/>
+  </property>
   
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="False">
