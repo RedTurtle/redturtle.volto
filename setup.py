@@ -38,8 +38,8 @@ setup(
     url="https://github.com/collective/redturtle.volto",
     project_urls={
         "PyPI": "https://pypi.python.org/pypi/redturtle.volto",
-        "Source": "https://github.com/collective/redturtle.volto",
-        "Tracker": "https://github.com/collective/redturtle.volto/issues",
+        "Source": "https://github.com/RedTurtle/redturtle.volto",
+        "Tracker": "https://github.com/RedTurtle/redturtle.volto/issues",
         # 'Documentation': 'https://redturtle.volto.readthedocs.io/en/latest/',
     },
     license="GPL version 2",
