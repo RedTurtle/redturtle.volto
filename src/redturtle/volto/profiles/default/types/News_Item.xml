@@ -10,17 +10,8 @@
   <property name="klass">plone.app.contenttypes.content.NewsItem</property>
   
   <!-- Enabled behaviors -->
-  <property name="behaviors">
-    <element value="plone.dublincore" />
-    <element value="plone.richtext" />
-    <element value="plone.namefromtitle" />
-    <element value="plone.allowdiscussion" />
-    <element value="plone.shortname" />
-    <element value="plone.excludefromnavigation" />
-    <element value="plone.relateditems" />
-    <element value="plone.leadimage" />
-    <element value="plone.versioning" />
-    <element value="plone.locking" />
+  <property name="behaviors" purge="False">
+    <element value="plone.richtext" remove="True"/>
     <element value="volto.blocks" />
   </property>
 
