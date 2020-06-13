@@ -15,7 +15,8 @@ Content-types
 -------------
 
 - Disabled **Collection**
-- **Document** are now folderish (thanks to collective.folderishtypes.dx)
+- **Document**, **News Item** and **Event** are folderish types (thanks to collective.folderishtypes.dx)
+- News Item and Event can only contain **Links**, **Images** and **Files**
 - **Plone Site** is a DX content
 - Revert **News Item** and **Event** to be non-folderish (collective.folderishtypes.dx makes them folderish)
 

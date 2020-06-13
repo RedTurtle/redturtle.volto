@@ -34,15 +34,28 @@ class TestSetup(unittest.TestCase):
             portal_types["Document"].klass,
         )
 
-    def test_news_not_folderish(self):
+    def test_news_folderish(self):
         portal_types = api.portal.get_tool(name="portal_types")
         self.assertEqual(
-            "plone.app.contenttypes.content.NewsItem",
+            "collective.folderishtypes.dx.content.FolderishNewsItem",
             portal_types["News Item"].klass,
         )
 
-    def test_event_not_folderish(self):
+    def test_event_folderish(self):
         portal_types = api.portal.get_tool(name="portal_types")
         self.assertEqual(
-            "plone.app.contenttypes.content.Event", portal_types["Event"].klass
+            "collective.folderishtypes.dx.content.FolderishEvent",
+            portal_types["Event"].klass,
         )
+
+    def test_news_can_add_only_some_types(self):
+        portal_types = api.portal.get_tool(name="portal_types")
+        fti = portal_types["News Item"]
+        self.assertTrue(fti.filter_content_types)
+        self.assertEqual(fti.allowed_content_types, ("Image", "File", "Link"))
+
+    def test_events_can_add_only_some_types(self):
+        portal_types = api.portal.get_tool(name="portal_types")
+        fti = portal_types["News Item"]
+        self.assertTrue(fti.filter_content_types)
+        self.assertEqual(fti.allowed_content_types, ("Image", "File", "Link"))
