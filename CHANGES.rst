@@ -9,6 +9,7 @@ Changelog
   [cekk]
 - News Item and Event are folderish and can only contain Links, Images and Files.
   [cekk]
+- Made editable and viewable Plone Site with blocks behavior [nzambello]
 
 0.1.2 (2020-05-25)
 ------------------
