@@ -5,7 +5,7 @@ Changelog
 0.1.3 (unreleased)
 ------------------
 
-- Added default homepage
+- Added default homepages
   [nzambello]
 - Added blocks behavior to LRF
   [nzambello]
