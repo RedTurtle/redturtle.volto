@@ -21,15 +21,6 @@
       />
 
   <genericsetup:registerProfile
-      name="multilingual"
-      title="RedTurtle: Volto (multilingual)"
-      directory="profiles/multilingual"
-      description="Installs the redturtle.volto add-on with multilingual support."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install_multilingual"
-      />
-
-  <genericsetup:registerProfile
       name="uninstall"
       title="RedTurtle: Volto (uninstall)"
       directory="profiles/uninstall"

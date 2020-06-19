@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
+from Products.CMFPlone.utils import get_installer
+from plone import api
 from zope.interface import implementer
 
 import json
@@ -455,26 +456,19 @@ class HiddenProfiles(object):
 def post_install(context):
     """Post install script"""
 
+    is_pam_installed = get_installer(portal, context.REQUEST).isProductInstalled(
+        "plone.app.multilingual"
+    )
+
     create_root_homepage()
+
+    if is_pam_installed:
+        create_lrf_homepages()
 
 
 def uninstall(context):
     """Uninstall script"""
     # Do something at the end of the uninstallation of this package.
-
-
-def post_install_multilingual():
-    portal = api.portal.get()
-
-    portal.it.blocks = homepage_it["blocks"]
-    portal.it.blocks_layout = homepage_it["blocks_layout"]
-    portal.it.setTitle("Benvenuto in Volto!")
-    portal.it.setDescription("Il sistema di gestione contenuti basato su React")
-
-    portal.en.blocks = homepage_en["blocks"]
-    portal.en.blocks_layout = homepage_en["blocks_layout"]
-    portal.en.setTitle("Welcome to Volto!")
-    portal.en.setDescription("The React powered content management system")
 
 
 def create_root_homepage():
@@ -491,3 +485,17 @@ def create_root_homepage():
         portal.manage_addProperty(
             "blocks_layout", json.dumps(homepage_it["blocks_layout"]), "string"
         )
+
+
+def create_lrf_homepages():
+    portal = api.portal.get()
+
+    portal.it.blocks = homepage_it["blocks"]
+    portal.it.blocks_layout = homepage_it["blocks_layout"]
+    portal.it.setTitle("Benvenuto in Volto!")
+    portal.it.setDescription("Il sistema di gestione contenuti basato su React")
+
+    portal.en.blocks = homepage_en["blocks"]
+    portal.en.blocks_layout = homepage_en["blocks_layout"]
+    portal.en.setTitle("Welcome to Volto!")
+    portal.en.setDescription("The React powered content management system")
