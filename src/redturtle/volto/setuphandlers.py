@@ -37,7 +37,7 @@ homepage_en = {
                 "blocks": [
                     {
                         "key": "br6kt",
-                        "text": "Volto  is a React-based frontend for content management systems, currently  supporting three backend implementations: Plone, Guillotina and a NodeJS  reference implementation.",
+                        "text": "Volto  is a React-based frontend for content management systems, currently  supporting three backend implementations: Plone, Guillotina and a NodeJS  reference implementation.",  #  noqa
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
@@ -60,7 +60,7 @@ homepage_en = {
                 "blocks": [
                     {
                         "key": "diiac",
-                        "text": "Plone  is a CMS built on Python with over 19 years of experience. Plone has  very interesting features that appeal to developers and users alike,  such as customizable content types, hierarchical URL object traversing  and a sophisticated content workflow powered by a granular permissions  model. This allows you to build anything from simple websites to  enterprise-grade intranets. Volto exposes all these features and  communicates with Plone via its mature REST API. Volto can be esily themed and is highly customizable.",
+                        "text": "Plone  is a CMS built on Python with over 19 years of experience. Plone has  very interesting features that appeal to developers and users alike,  such as customizable content types, hierarchical URL object traversing  and a sophisticated content workflow powered by a granular permissions  model. This allows you to build anything from simple websites to  enterprise-grade intranets. Volto exposes all these features and  communicates with Plone via its mature REST API. Volto can be esily themed and is highly customizable.",  #  noqa
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
@@ -80,7 +80,9 @@ homepage_en = {
                     "1": {
                         "type": "LINK",
                         "mutability": "MUTABLE",
-                        "data": {"url": "https://github.com/plone/plone.restapi"},
+                        "data": {
+                            "url": "https://github.com/plone/plone.restapi"
+                        },
                     },
                 },
             },
@@ -91,7 +93,7 @@ homepage_en = {
                 "blocks": [
                     {
                         "key": "dibnf",
-                        "text": "This Volto installation works with the last Plone 5.2  running on Python 3.",
+                        "text": "This Volto installation works with the last Plone 5.2  running on Python 3.",  # noqa
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
@@ -126,11 +128,13 @@ homepage_en = {
                 "blocks": [
                     {
                         "key": "9ngcf",
-                        "text": "Volto also supports other APIs like Guillotina,  a Python resource management system, inspired by Plone and using the  same basic concepts like traversal, content types and permissions model.",
+                        "text": "Volto also supports other APIs like Guillotina,  a Python resource management system, inspired by Plone and using the  same basic concepts like traversal, content types and permissions model.",  # noqa
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
-                        "entityRanges": [{"offset": 36, "length": 10, "key": 0}],
+                        "entityRanges": [
+                            {"offset": 36, "length": 10, "key": 0}
+                        ],
                         "data": {},
                     }
                 ],
@@ -168,11 +172,13 @@ homepage_en = {
                 "blocks": [
                     {
                         "key": "4e9ig",
-                        "text": "Last but not least, it also supports a Volto Nodejs-based backend reference API implementation that demos how other systems could also use Volto to display and create content through it.",
+                        "text": "Last but not least, it also supports a Volto Nodejs-based backend reference API implementation that demos how other systems could also use Volto to display and create content through it.",  # noqa
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
-                        "entityRanges": [{"offset": 39, "length": 36, "key": 0}],
+                        "entityRanges": [
+                            {"offset": 39, "length": 36, "key": 0}
+                        ],
                         "data": {},
                     }
                 ],
@@ -258,7 +264,7 @@ homepage_it = {
                         "entityRanges": [{"key": 0, "length": 5, "offset": 0}],
                         "inlineStyleRanges": [],
                         "key": "br6kt",
-                        "text": "Volto \u00e8 un frontend basato su React per i sistemi di gestione dei contenuti, che attualmente supporta tre implementazioni di back-end: Plone, Guillotina e un'implementazione di riferimento di NodeJS.",
+                        "text": "Volto \u00e8 un frontend basato su React per i sistemi di gestione dei contenuti, che attualmente supporta tre implementazioni di back-end: Plone, Guillotina e un'implementazione di riferimento di NodeJS.",  # noqa
                         "type": "unstyled",
                     }
                 ],
@@ -287,7 +293,7 @@ homepage_it = {
                         ],
                         "inlineStyleRanges": [],
                         "key": "diiac",
-                        "text": "Plone \u00e8 un CMS basato su Python con oltre 19 anni di esperienza. Plone ha caratteristiche molto interessanti che piacciono sia agli sviluppatori che agli utenti, come tipi di contenuto personalizzabili, attraversamento gerarchico di oggetti URL e un workflow sui contenuti sofisticato basato su un modello granulare di autorizzazioni. Ci\u00f2 consente di creare qualsiasi cosa, da semplici siti Web a intranet di livello aziendale. Volto espone tutte queste funzionalit\u00e0 e comunica con Plone tramite le sue REST API matura. Volto ha un tema facilmente estendibile ed \u00e8 altamente personalizzabile.",
+                        "text": "Plone \u00e8 un CMS basato su Python con oltre 19 anni di esperienza. Plone ha caratteristiche molto interessanti che piacciono sia agli sviluppatori che agli utenti, come tipi di contenuto personalizzabili, attraversamento gerarchico di oggetti URL e un workflow sui contenuti sofisticato basato su un modello granulare di autorizzazioni. Ci\u00f2 consente di creare qualsiasi cosa, da semplici siti Web a intranet di livello aziendale. Volto espone tutte queste funzionalit\u00e0 e comunica con Plone tramite le sue REST API matura. Volto ha un tema facilmente estendibile ed \u00e8 altamente personalizzabile.",  # noqa
                         "type": "unstyled",
                     }
                 ],
@@ -321,7 +327,7 @@ homepage_it = {
                         "entityRanges": [],
                         "inlineStyleRanges": [],
                         "key": "dibnf",
-                        "text": "Questa installazione di Volto prevede l'ultimo Plone 5.2 in esecuzione su Python 3.",
+                        "text": "Questa installazione di Volto prevede l'ultimo Plone 5.2 in esecuzione su Python 3.",  #  noqa
                         "type": "unstyled",
                     }
                 ],
@@ -353,10 +359,12 @@ homepage_it = {
                     {
                         "data": {},
                         "depth": 0,
-                        "entityRanges": [{"key": 0, "length": 10, "offset": 36}],
+                        "entityRanges": [
+                            {"key": 0, "length": 10, "offset": 36}
+                        ],
                         "inlineStyleRanges": [],
                         "key": "9ngcf",
-                        "text": "Volto supporta anche altre API come Guillotina, un sistema di gestione delle risorse Python, ispirato a Plone e che utilizza gli stessi concetti di base come traversing, tipi di contenuto e modello di autorizzazioni.",
+                        "text": "Volto supporta anche altre API come Guillotina, un sistema di gestione delle risorse Python, ispirato a Plone e che utilizza gli stessi concetti di base come traversing, tipi di contenuto e modello di autorizzazioni.",  #  noqa
                         "type": "unstyled",
                     }
                 ],
@@ -400,7 +408,7 @@ homepage_it = {
                         "entityRanges": [],
                         "inlineStyleRanges": [],
                         "key": "4e9ig",
-                        "text": "Infine, Volto supporta anche un'implementazione dell'API backend di riferimento basata su Nodejs che dimostra come anche altri sistemi potrebbero utilizzare Volto per visualizzare e creare contenuti attraverso di esso.",
+                        "text": "Infine, Volto supporta anche un'implementazione dell'API backend di riferimento basata su Nodejs che dimostra come anche altri sistemi potrebbero utilizzare Volto per visualizzare e creare contenuti attraverso di esso.",  # noqa
                         "type": "unstyled",
                     }
                 ],
@@ -417,7 +425,7 @@ homepage_it = {
                         "entityRanges": [],
                         "inlineStyleRanges": [],
                         "key": "17fir",
-                        "text": "Questa \u00e8 l'homepage di  default. Personalizzala e inizia ad utilizzare Volto!",
+                        "text": "Questa \u00e8 l'homepage di  default. Personalizzala e inizia ad utilizzare Volto!",  # noqa
                         "type": "unstyled",
                     }
                 ],
@@ -457,9 +465,9 @@ def post_install(context):
     """Post install script"""
     portal = api.portal.get()
 
-    is_pam_installed = get_installer(portal, context.REQUEST).isProductInstalled(
-        "plone.app.multilingual"
-    )
+    is_pam_installed = get_installer(
+        portal, context.REQUEST
+    ).isProductInstalled("plone.app.multilingual")
 
     create_root_homepage()
 
@@ -480,7 +488,9 @@ def create_root_homepage():
     portal.setDescription("Il sistema di gestione contenuti basato su React")
 
     if not getattr(portal, "blocks", False):
-        portal.manage_addProperty("blocks", json.dumps(homepage_it["blocks"]), "string")
+        portal.manage_addProperty(
+            "blocks", json.dumps(homepage_it["blocks"]), "string"
+        )
 
     if not getattr(portal, "blocks_layout", False):
         portal.manage_addProperty(
@@ -494,7 +504,9 @@ def create_lrf_homepages():
     portal.it.blocks = homepage_it["blocks"]
     portal.it.blocks_layout = homepage_it["blocks_layout"]
     portal.it.setTitle("Benvenuto in Volto!")
-    portal.it.setDescription("Il sistema di gestione contenuti basato su React")
+    portal.it.setDescription(
+        "Il sistema di gestione contenuti basato su React"
+    )
 
     portal.en.blocks = homepage_en["blocks"]
     portal.en.blocks_layout = homepage_en["blocks_layout"]
