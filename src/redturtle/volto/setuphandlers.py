@@ -455,6 +455,7 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
+        portal = api.portal.get()
 
     is_pam_installed = get_installer(portal, context.REQUEST).isProductInstalled(
         "plone.app.multilingual"
