@@ -101,6 +101,15 @@ And this is the result::
 This endpoint works exactly like **@search** but take care of types not searchable settings.
 
 
+Keywords vocabulary patch
+--------------------------
+
+We copied the patch from kitconcept.volto_ for special characters in keywords vocabulary
+(used for example in Subjects field).
+
+.. _kitconcept.volto: https://github.com/kitconcept/kitconcept.volto/blob/master/src/kitconcept/volto/vocabularies/subject.py
+
+
 Installation
 ============
 
