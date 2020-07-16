@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.1.4 (unreleased)
+0.1.4 (2020-07-16)
 ------------------
 
 - Add keywords vocabulary patch.
