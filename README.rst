@@ -101,6 +101,20 @@ And this is the result::
 This endpoint works exactly like **@search** but take care of types not searchable settings.
 
 
+Fixed Dependencies versions
+===========================
+
+There are some dependencies fixed in setup.py file.
+When Plone 5.2 will be released, we can remove these:
+
+- waitress >= 1.4.3
+- plone.app.contenttypes >= 2.1.6
+- plone.rest >= 1.6.1
+- plone.dexterity >= 2.9.5
+- Products.ZCatalog >= 5.1
+- plone.namedfile >= 5.4.0
+- Products.PloneHotfix20200121 == 1.0
+
 Installation
 ============
 
