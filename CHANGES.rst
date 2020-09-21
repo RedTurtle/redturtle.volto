@@ -2,10 +2,17 @@ Changelog
 =========
 
 
-0.1.4 (unreleased)
+0.1.5 (unreleased)
 ------------------
 
 - Remove resolveuid serializer/deserializer for blocks: now they are integrated in plone.restapi.
+  [cekk]
+
+
+0.1.4 (2020-07-16)
+------------------
+
+- Add keywords vocabulary patch.
   [cekk]
 
 
