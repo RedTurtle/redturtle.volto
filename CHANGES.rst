@@ -5,7 +5,8 @@ Changelog
 0.1.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove resolveuid serializer/deserializer for blocks: now they are integrated in plone.restapi.
+  [cekk]
 
 
 0.1.4 (2020-07-16)
