@@ -7,7 +7,8 @@ Changelog
 
 - Remove resolveuid serializer/deserializer for blocks: now they are integrated in plone.restapi.
   [cekk]
-
+- Enable Editor and Contributor to access Plone vocabularies with restapi.
+  [cekk]
 
 0.1.4 (2020-07-16)
 ------------------

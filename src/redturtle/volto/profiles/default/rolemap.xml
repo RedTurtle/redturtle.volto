@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 <rolemap>
   <permissions>
-  <!-- -*- extra stuff goes here -*- -->
-
+    <permission name="plone.restapi: Access Plone vocabularies" acquire="True">
+      <role name="Manager"/>
+      <role name="Contributor"/>
+      <role name="Editor"/>
+      <role name="Site Administrator"/>
+    </permission>
   </permissions>
 </rolemap>
