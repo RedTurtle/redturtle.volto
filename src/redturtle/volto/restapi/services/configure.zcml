@@ -2,7 +2,9 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:zcml="http://namespaces.zope.org/zcml">
 
+  <include package=".deserializer"  />
   <include package=".navigation"  />
+  <include package=".serializer"  />
   <include package=".site_search"  />
 
 </configure>
