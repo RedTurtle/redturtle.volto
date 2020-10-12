@@ -15,7 +15,7 @@ EXCLUDE_TYPES = ["title", "listing"]
 @adapter(IBlocks, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializer(object):
     """
-    Generic deserializer: parse all block data and try to convert uids into 
+    Generic deserializer: parse all block data and try to convert uids into
     proper urls.
     This potentially handle all text fields and complex blocks.
     """
