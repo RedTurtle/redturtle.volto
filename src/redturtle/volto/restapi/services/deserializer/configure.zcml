@@ -8,7 +8,7 @@
     provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
 
   <!-- custom generic deserializer-->
-  <subscriber factory=".blocks.TextBlockDeserializer"
-    provides="plone.restapi.interfaces.GenericResolveUIDDeserializer"/>
+  <subscriber factory=".blocks.GenericResolveUIDDeserializer"
+    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
 
 </configure>
