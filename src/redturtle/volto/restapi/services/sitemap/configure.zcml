@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+  <plone:service
+    method="GET"
+    for="zope.interface.Interface"
+    factory=".get.SitemapGet"
+    name="@sitemap-settings"
+    permission="zope2.View"
+    />
+</configure>
