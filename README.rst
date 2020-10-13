@@ -29,6 +29,11 @@ Blocks
 - News Item
 - Event
 
+Custom blocks transformers
+--------------------------
+
+There are custom transformers for serializer and deserializer to better manage resolveuids.
+
 @context-navigation endpoint
 ----------------------------
 
