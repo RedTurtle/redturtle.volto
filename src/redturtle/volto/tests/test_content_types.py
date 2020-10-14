@@ -2,6 +2,10 @@
 """Setup tests for this package."""
 from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
+from plone.app.testing import setRoles
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
+from plone.app.testing import TEST_USER_ID
 from plone import api
 
 import unittest
@@ -81,4 +85,3 @@ class TestContentTypesSchema(unittest.TestCase):
         res = response.json()
 
         self.assertEqual(res["properties"]["remoteUrl"]["widget"], "url")
-
