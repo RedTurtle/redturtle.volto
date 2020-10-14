@@ -29,6 +29,11 @@ Blocks
 - News Item
 - Event
 
+Links
+-----
+
+There is a custom adapter for TextLine field that return the proper widget for **remoteUrl**.
+
 @context-navigation endpoint
 ----------------------------
 

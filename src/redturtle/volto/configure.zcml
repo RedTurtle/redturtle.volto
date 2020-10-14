@@ -9,6 +9,7 @@
 
   <include package=".browser" />
   <include package=".restapi" />
+  <include package=".types" />
 
   <include file="permissions.zcml" />
   <include file="upgrades.zcml" />

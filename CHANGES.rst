@@ -9,6 +9,8 @@ Changelog
   [cekk]
 - Enable Editor and Contributor to access Plone vocabularies with restapi.
   [cekk]
+- Add custom TextLine adapter to return the proper widget for **remoteUrl** field.
+  [cekk]
 
 0.1.4 (2020-07-16)
 ------------------
