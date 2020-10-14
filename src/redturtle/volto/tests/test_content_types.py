@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
 from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING
+from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from plone import api
 
 import unittest
 
 
-class TestSetup(unittest.TestCase):
+class TestContentTypes(unittest.TestCase):
     layer = REDTURTLE_VOLTO_INTEGRATION_TESTING
 
     def setUp(self):
@@ -59,3 +60,25 @@ class TestSetup(unittest.TestCase):
         fti = portal_types["News Item"]
         self.assertTrue(fti.filter_content_types)
         self.assertEqual(fti.allowed_content_types, ("Image", "File", "Link"))
+
+
+class TestContentTypesSchema(unittest.TestCase):
+    def setUp(self):
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        self.portal_url = self.portal.absolute_url()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+        self.api_session = RelativeSession(self.portal_url)
+        self.api_session.headers.update({"Accept": "application/json"})
+        self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
+
+    def tearDown(self):
+        self.api_session.close()
+
+    def test_link_remoteUrl_return_proper_widget(self):
+        response = self.api_session.get("/@types/Link")
+        res = response.json()
+
+        self.assertEqual(res["properties"]["remoteUrl"]["widget"], "url")
+
