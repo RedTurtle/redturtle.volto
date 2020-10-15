@@ -42,7 +42,7 @@ class TestServicesSitemap(unittest.TestCase):
 
         self.assertEqual(result["depth"], 3)
 
-        api.portal.set_registry_record("plone.navigation_depth", 5)
+        api.portal.set_registry_record("plone.sitemap_depth", 5)
         commit()
 
         response = self.api_session.get("/@sitemap-settings")
