@@ -101,6 +101,17 @@ And this is the result::
 This endpoint works exactly like **@search** but take care of types not searchable settings.
 
 
+@sitemap-settings
+-----------------
+
+Endpoint that returns sitemap settings for anonymous users (that can't access registry entries).
+
+Returns a data structure like this:
+
+    {
+        'depth': 3
+    }
+
 Keywords vocabulary patch
 --------------------------
 

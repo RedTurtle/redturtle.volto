@@ -4,5 +4,6 @@
 
   <include package=".navigation"  />
   <include package=".site_search"  />
+  <include package=".sitemap"  />
 
 </configure>
