@@ -5,4 +5,4 @@ from plone import api
 
 class SitemapGet(Service):
     def reply(self):
-        return {"depth": api.portal.get_registry_record("plone.navigation_depth")}
+        return {"depth": api.portal.get_registry_record("plone.sitemap_depth")}
