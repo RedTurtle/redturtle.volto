@@ -7,6 +7,8 @@ Changelog
 
 - Remove resolveuid serializer/deserializer for blocks: now they are integrated in plone.restapi.
   [cekk]
+- Add custom transformers for blocks to handle link in generic blocks.
+  [cekk]
 - Enable Editor and Contributor to access Plone vocabularies with restapi.
   [cekk]
 - Add @sitemap-settings endpoint.

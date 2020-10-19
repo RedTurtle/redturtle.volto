@@ -9,7 +9,7 @@ from zope.component import getMultiAdapter
 
 class SearchHandler(OriginalHandler):
     def filter_types(self):
-        plone_utils = api.portal.get_tool(name='plone_utils')
+        plone_utils = api.portal.get_tool(name="plone_utils")
         return plone_utils.getUserFriendlyTypes([])
 
     def search(self, query=None):
@@ -21,20 +21,16 @@ class SearchHandler(OriginalHandler):
         else:
             fullobjects = False
 
-        if 'portal_type' not in query:
-            query['portal_type'] = self.filter_types()
-
-        metadata_fields = query.pop("metadata_fields", [])
-        if not isinstance(metadata_fields, list):
-            metadata_fields = [metadata_fields]
+        if "portal_type" not in query:
+            query["portal_type"] = self.filter_types()
 
         self._constrain_query_by_path(query)
         query = self._parse_query(query)
 
         lazy_resultset = self.catalog.searchResults(query)
-        results = getMultiAdapter(
-            (lazy_resultset, self.request), ISerializeToJson
-        )(metadata_fields=metadata_fields, fullobjects=fullobjects)
+        results = getMultiAdapter((lazy_resultset, self.request), ISerializeToJson)(
+            fullobjects=fullobjects
+        )
 
         return results
 
