@@ -6,5 +6,6 @@
   <include package=".navigation"  />
   <include package=".serializer"  />
   <include package=".site_search"  />
+  <include package=".sitemap"  />
 
 </configure>

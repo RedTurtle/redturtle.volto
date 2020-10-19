@@ -9,6 +9,10 @@ Changelog
   [cekk]
 - Add custom transformers for blocks to handle link in generic blocks.
   [cekk]
+- Enable Editor and Contributor to access Plone vocabularies with restapi.
+  [cekk]
+- Add @sitemap-settings endpoint.
+  [cekk]
 
 0.1.4 (2020-07-16)
 ------------------
