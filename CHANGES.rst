@@ -5,7 +5,8 @@ Changelog
 0.1.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Allow Products.PloneHotfix20200121 versions greater than 1.0.
+  [pnicolli]
 
 
 0.1.5 (2020-10-20)
