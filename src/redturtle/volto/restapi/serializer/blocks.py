@@ -33,8 +33,6 @@ class GenericResolveUIDSerializer(object):
         return new_value
 
     def resolve_uids(self, block):
-        if isinstance(block, str):
-            block[key] = uid_to_url(val)
         if block.get("@type", "") in EXCLUDE_TYPES:
             return
         for key, val in block.items():
