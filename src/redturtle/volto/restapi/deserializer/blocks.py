@@ -74,7 +74,10 @@ class GenericResolveUIDDeserializer(object):
                 block[key] = path2uid(context=self.context, link=val)
             elif isinstance(val, list):
                 for i in val:
-                    self.fix_urls_in_block(block=i)
+                    if isinstance(i, str):
+                        i = path2uid(context=self.context, link=i)
+                    else:
+                        self.fix_urls_in_block(block=i)
             elif isinstance(val, dict):
                 if "entityMap" not in val.keys():
                     self.fix_urls_in_block(block=val)

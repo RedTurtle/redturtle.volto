@@ -33,6 +33,8 @@ class GenericResolveUIDSerializer(object):
         return new_value
 
     def resolve_uids(self, block):
+        if isinstance(block, str):
+            block[key] = uid_to_url(val)
         if block.get("@type", "") in EXCLUDE_TYPES:
             return
         for key, val in block.items():
@@ -44,7 +46,10 @@ class GenericResolveUIDSerializer(object):
                 block[key] = uid_to_url(val)
             elif isinstance(val, list):
                 for i in val:
-                    self.resolve_uids(block=i)
+                    if isinstance(i, str):
+                        i = uid_to_url(i)
+                    else:
+                        self.resolve_uids(block=i)
             elif isinstance(val, dict):
                 if "entityMap" not in val.keys():
                     self.resolve_uids(block=val)
