@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
+from copy import deepcopy
+from plone import api
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
+from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.serializer.blocks import uid_to_url
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
+from zope.component import getMultiAdapter
+from zope.globalrequest import getRequest
 from zope.interface import implementer
-from copy import deepcopy
 
 EXCLUDE_KEYS = ["@type"]
 EXCLUDE_TYPES = ["title", "listing"]
@@ -29,12 +33,20 @@ class GenericResolveUIDSerializer(object):
 
     def __call__(self, value):
         new_value = deepcopy(value)
-        self.resolve_uids(block=new_value)
-        return new_value
+        return self.resolve_uids(block=new_value)
 
     def resolve_uids(self, block):
+        if isinstance(block, str):
+            return uid_to_url(block)
         if block.get("@type", "") in EXCLUDE_TYPES:
-            return
+            return block
+        if isinstance(block, dict) and "UID" in block.keys():
+            # expand internal relations
+            item = api.content.get(UID=block["UID"])
+            if item:
+                return getMultiAdapter(
+                    (item, getRequest()), ISerializeToJson
+                )()
         for key, val in block.items():
             if not val:
                 continue
@@ -43,17 +55,14 @@ class GenericResolveUIDSerializer(object):
             if isinstance(val, str):
                 block[key] = uid_to_url(val)
             elif isinstance(val, list):
-                for i in val:
-                    if isinstance(i, str):
-                        i = uid_to_url(i)
-                    else:
-                        self.resolve_uids(block=i)
+                block[key] = [self.resolve_uids(block=x) for x in val]
             elif isinstance(val, dict):
-                if "entityMap" not in val.keys():
-                    self.resolve_uids(block=val)
-                else:
+                if "entityMap" in val.keys():
                     entity_map = val.get("entityMap", {})
                     for entity_map in entity_map.values():
                         url = entity_map["data"].get("url", "").strip("/")
                         new = uid_to_url(url)
                         entity_map["data"]["url"] = new
+                else:
+                    block[key] = self.resolve_uids(block=val)
+        return block

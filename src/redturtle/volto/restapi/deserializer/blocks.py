@@ -37,7 +37,7 @@ class TextBlockDeserializer(Base):
         return block
 
 
-EXCLUDE_KEYS = ["@type"]
+EXCLUDE_KEYS = ["@type", "token", "value", "@id"]
 EXCLUDE_TYPES = ["title", "listing"]
 
 
@@ -58,13 +58,16 @@ class GenericResolveUIDDeserializer(object):
         self.request = request
 
     def __call__(self, value):
-        new_value = deepcopy(value)
-        self.fix_urls_in_block(block=new_value)
-        return new_value
+        return self.fix_urls_in_block(block=deepcopy(value))
 
     def fix_urls_in_block(self, block):
+        if isinstance(block, str):
+            return path2uid(context=self.context, link=block)
         if block.get("@type", "") in EXCLUDE_TYPES:
-            return
+            return block
+        if "UID" in block.keys():
+            # we store only uid, because other infos can change.
+            return {"UID": block["UID"]}
         for key, val in block.items():
             if not val:
                 continue
@@ -73,18 +76,15 @@ class GenericResolveUIDDeserializer(object):
             if isinstance(val, str):
                 block[key] = path2uid(context=self.context, link=val)
             elif isinstance(val, list):
-                for i in val:
-                    if isinstance(i, str):
-                        i = path2uid(context=self.context, link=i)
-                    else:
-                        self.fix_urls_in_block(block=i)
+                block[key] = [self.fix_urls_in_block(x) for x in val]
             elif isinstance(val, dict):
-                if "entityMap" not in val.keys():
-                    self.fix_urls_in_block(block=val)
-                else:
+                if "entityMap" in val.keys():
                     entity_map = val.get("entityMap", {})
                     for entity_map in entity_map.values():
                         url = entity_map["data"].get("url", "").strip("/")
                         entity_map["data"]["url"] = path2uid(
                             context=self.context, link=url
                         )
+                else:
+                    block[key] = self.fix_urls_in_block(block=val)
+        return block
