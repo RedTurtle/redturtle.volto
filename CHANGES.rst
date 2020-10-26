@@ -5,6 +5,8 @@ Changelog
 0.1.6 (unreleased)
 ------------------
 
+- Allow Products.PloneHotfix20200121 versions greater than 1.0.
+  [pnicolli]
 - Fix generic serializer/deserializer.
   [cekk]
 

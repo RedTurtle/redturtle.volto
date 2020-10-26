@@ -138,7 +138,7 @@ When Plone 5.2 will be released, we can remove these:
 - plone.dexterity >= 2.9.5
 - Products.ZCatalog >= 5.1
 - plone.namedfile >= 5.4.0
-- Products.PloneHotfix20200121 == 1.0
+- Products.PloneHotfix20200121 >= 1.0
 
 
 Installation
