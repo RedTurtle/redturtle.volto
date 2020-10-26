@@ -7,6 +7,8 @@ Changelog
 
 - Allow Products.PloneHotfix20200121 versions greater than 1.0.
   [pnicolli]
+- Fix generic serializer/deserializer.
+  [cekk]
 
 
 0.1.5 (2020-10-20)

@@ -53,7 +53,7 @@ setup(
         "setuptools",
         "z3c.jbot",
         "plone.api>=1.8.4",
-        # "plone.restapi>=7.0.0",
+        "plone.restapi>=7.0.0a1",
         "plone.restapi",
         "plone.app.dexterity",
         "collective.folderishtypes[dexterity]>=3.0.0",
