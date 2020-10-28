@@ -7,8 +7,10 @@
   <subscriber factory=".blocks.TextBlockDeserializer"
     provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
 
-  <!-- custom generic deserializer-->
+  <!-- custom generic blocks deserializer-->
   <subscriber factory=".blocks.GenericResolveUIDDeserializer"
     provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
 
+  <!-- convert resolveuids also in rich text fields -->
+  <adapter factory=".dxfields.RichTextFieldDeserializer" />
 </configure>
