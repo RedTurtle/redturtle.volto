@@ -38,7 +38,7 @@ class TextBlockDeserializer(Base):
 
 
 EXCLUDE_KEYS = ["@type", "token", "value", "@id"]
-EXCLUDE_TYPES = ["title", "listing"]
+EXCLUDE_TYPES = ["title", "listing", "calendar"]
 
 
 @implementer(IBlockFieldDeserializationTransformer)
