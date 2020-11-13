@@ -14,7 +14,6 @@ from zope.interface import implementer
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from plone.app.contenttypes.interfaces import ILink
 from zope.schema.interfaces import ITextLine
-from plone.restapi.deserializer.blocks import path2uid
 
 import lxml
 
