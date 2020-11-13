@@ -4,19 +4,23 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.interfaces import IFieldDeserializer
 from plone.restapi.deserializer.blocks import path2uid
 from plone.restapi.deserializer.dxfields import (
-    RichTextFieldDeserializer as BaseDeserializer,
+    RichTextFieldDeserializer as BaseRichTextDeserializer,
+    TextLineFieldDeserializer as BaseTextLineDeserializer,
 )
 from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapter
+from zope.component import getMultiAdapter
 from zope.interface import implementer
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
+from plone.app.contenttypes.interfaces import ILink
+from zope.schema.interfaces import ITextLine
 
 import lxml
 
 
 @implementer(IFieldDeserializer)
 @adapter(IRichText, IDexterityContent, IRedturtleVoltoLayer)
-class RichTextFieldDeserializer(BaseDeserializer):
+class RichTextFieldDeserializer(BaseRichTextDeserializer):
     def __call__(self, value):
         html = value.get("data", u"")
         if html:
@@ -37,3 +41,20 @@ class RichTextFieldDeserializer(BaseDeserializer):
             img.set("src", path2uid(context=self.context, link=img.get("src")))
 
         return safe_unicode(lxml.html.tostring(root))
+
+
+@implementer(IFieldDeserializer)
+@adapter(ITextLine, ILink, IRedturtleVoltoLayer)
+class LinkTextLineFieldDeserializer(BaseTextLineDeserializer):
+    def __call__(self, value):
+        value = super(LinkTextLineFieldDeserializer, self).__call__(value)
+        if self.field.getName() == "remoteUrl":
+            portal = getMultiAdapter(
+                (self.context, self.context.REQUEST), name="plone_portal_state"
+            ).portal()
+            portal_url = portal.portal_url()
+            if value.startswith(portal_url):
+                value = "${{portal_url}}{path}".format(
+                    path=value.replace(portal_url, "")
+                )
+        return value
