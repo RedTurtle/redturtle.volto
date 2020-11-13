@@ -14,6 +14,7 @@ from zope.interface import implementer
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from plone.app.contenttypes.interfaces import ILink
 from zope.schema.interfaces import ITextLine
+from plone.restapi.deserializer.blocks import path2uid
 
 import lxml
 
@@ -52,9 +53,8 @@ class LinkTextLineFieldDeserializer(BaseTextLineDeserializer):
             portal = getMultiAdapter(
                 (self.context, self.context.REQUEST), name="plone_portal_state"
             ).portal()
-            portal_url = portal.portal_url()
-            if value.startswith(portal_url):
-                value = "${{portal_url}}{path}".format(
-                    path=value.replace(portal_url, "")
-                )
+
+            transformed_url = path2uid(context=portal, link=value)
+            if transformed_url != value and "resolveuid" in transformed_url:
+                value = "${{portal_url}}/{uid}".format(uid=transformed_url)
         return value
