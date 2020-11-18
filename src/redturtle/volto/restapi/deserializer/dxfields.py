@@ -22,9 +22,13 @@ import lxml
 @adapter(IRichText, IDexterityContent, IRedturtleVoltoLayer)
 class RichTextFieldDeserializer(BaseRichTextDeserializer):
     def __call__(self, value):
-        html = value.get("data", u"")
-        if html:
-            value["data"] = self.convert_internal_links(html=html)
+        if value:
+            if isinstance(value, dict):
+                html = value.get("data", u"")
+                if html:
+                    value["data"] = self.convert_internal_links(html=html)
+            else:
+                value = self.convert_internal_links(html=value)
         return super(RichTextFieldDeserializer, self).__call__(value=value)
 
     def convert_internal_links(self, html):
