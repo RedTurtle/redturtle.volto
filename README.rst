@@ -111,10 +111,10 @@ This endpoint works exactly like **@search** but take care of types not searchab
 
 Endpoint that returns sitemap settings for anonymous users (that can't access registry entries).
 
-Returns a data structure like this:
+Returns a data structure like this::
 
     {
-        'depth': 3
+        'depth': 3,
     }
 
 Keywords vocabulary patch
