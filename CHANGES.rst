@@ -11,7 +11,8 @@ Changelog
   [cekk]
 - Skip also "calendar" when check for url deserializing blocks
   [lucabel]
-
+- Fix document template.
+  [cekk]
 
 0.1.5 (2020-10-20)
 ------------------
