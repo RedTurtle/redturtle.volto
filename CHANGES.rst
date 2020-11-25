@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.1.6 (unreleased)
+0.1.6 (2020-11-25)
 ------------------
 
 - Allow Products.PloneHotfix20200121 versions greater than 1.0.
