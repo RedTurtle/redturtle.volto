@@ -10,4 +10,12 @@
     profile="design.plone.contenttypes:default"
     handler=".upgrades.update_rolemap"
     />
+  <genericsetup:upgradeStep
+    source="1001"
+    destination="1002"
+    title="Add new collection criteria for exclude_from_nav"
+    description=""
+    profile="design.plone.contenttypes:default"
+    handler=".upgrades.update_registry"
+    />
 </configure>

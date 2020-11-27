@@ -3,6 +3,18 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="redturtle.volto">
 
-<!-- -*- extra stuff goes here -*- -->
+
+    <records interface="plone.app.querystring.interfaces.IQueryField"
+             prefix="plone.app.querystring.field.exclude_from_nav">
+        <value key="title" i18n:translate="">Show elements excluded from navigation</value>
+        <value key="description" i18n:translate="">Select False to show only elements not excluded from navigation.</value>
+        <value key="enabled">True</value>
+        <value key="sortable">False</value>
+        <value key="operations">
+            <element>plone.app.querystring.operation.boolean.isTrue</element>
+            <element>plone.app.querystring.operation.boolean.isFalse</element>
+        </value>
+       <value key="group" i18n:translate="">Metadata</value>
+    </records>
 
 </registry>

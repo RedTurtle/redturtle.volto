@@ -5,7 +5,8 @@ Changelog
 0.1.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add exclude_from_nav as Collection criteria (used also in Volto's listing blocks).
+  [cekk]
 
 
 0.1.6 (2020-11-25)
