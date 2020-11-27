@@ -1,6 +1,3 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -15,7 +12,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: redturtle.volto\n"
+"Domain: DOMAIN\n"
 
 #: redturtle/volto/configure.zcml:23
 msgid "Installs the redturtle.volto add-on."
@@ -35,11 +32,11 @@ msgstr ""
 
 #: redturtle/volto/profiles/default/registry.xml
 msgid "Select False to show only elements not excluded from navigation."
-msgstr ""
+msgstr "Seleziona False per mostrare solo gli elementi non omessi dalla navigazione."
 
 #: redturtle/volto/profiles/default/registry.xml
 msgid "Show elements excluded from navigation"
-msgstr ""
+msgstr "Elementi omessi dalla navigazione"
 
 #: redturtle/volto/configure.zcml:32
 msgid "Uninstalls the redturtle.volto add-on."
