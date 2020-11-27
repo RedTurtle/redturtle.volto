@@ -140,6 +140,11 @@ When Plone 5.2 will be released, we can remove these:
 - plone.namedfile >= 5.4.0
 - Products.PloneHotfix20200121 >= 1.0
 
+New Criteria
+============
+
+There is one new criteria for Collections and Listing blocks that search on **exclude_from_nav** index.
+
 
 Installation
 ============
