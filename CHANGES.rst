@@ -2,14 +2,36 @@ Changelog
 =========
 
 
-0.1.5 (unreleased)
+0.1.7 (unreleased)
+------------------
+
+- Add exclude_from_nav as Collection criteria (used also in Volto's listing blocks).
+  [cekk]
+- Add custom TextLine adapter to return the proper widget for **remoteUrl** field.
+  [cekk]
+
+0.1.6 (2020-11-25)
+------------------
+
+- Allow Products.PloneHotfix20200121 versions greater than 1.0.
+  [pnicolli]
+- Fix generic serializer/deserializer.
+  [cekk]
+- Skip also "calendar" when check for url deserializing blocks
+  [lucabel]
+- Fix document template.
+  [cekk]
+
+0.1.5 (2020-10-20)
 ------------------
 
 - Remove resolveuid serializer/deserializer for blocks: now they are integrated in plone.restapi.
   [cekk]
+- Add custom transformers for blocks to handle link in generic blocks.
+  [cekk]
 - Enable Editor and Contributor to access Plone vocabularies with restapi.
   [cekk]
-- Add custom TextLine adapter to return the proper widget for **remoteUrl** field.
+- Add @sitemap-settings endpoint.
   [cekk]
 
 0.1.4 (2020-07-16)

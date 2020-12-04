@@ -29,33 +29,24 @@ class SiteSearchTest(unittest.TestCase):
 
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
-        api.content.create(
-            container=self.portal, type="Folder", title="Foo folder"
-        )
-        api.content.create(
-            container=self.portal, type="Document", title="Foo document"
-        )
-        api.content.create(
-            container=self.portal, type="Event", title="Foo event"
-        )
+        api.content.create(container=self.portal, type="Folder", title="Foo folder")
+        api.content.create(container=self.portal, type="Document", title="Foo document")
+        api.content.create(container=self.portal, type="Event", title="Foo event")
 
     def test_route_exists(self):
         response = self.api_session.get("/@site-search")
-
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            response.headers.get("Content-Type"), "application/json"
-        )
+        self.assertEqual(response.headers.get("Content-Type"), "application/json")
 
     def test_types_not_searched(self):
         registry = getUtility(IRegistry)
         search_settings = registry.forInterface(ISearchSchema, prefix="plone")
-        search_settings.types_not_searched = ('Folder',)
+        search_settings.types_not_searched = ("Folder",)
         commit()
 
         response = self.api_session.get("/@site-search")
         result = response.json()
 
-        self.assertEqual(result['items_total'], 2)
-        titles = [x['title'] for x in result['items']]
-        self.assertEqual(['Foo document', 'Foo event'], titles)
+        self.assertEqual(result["items_total"], 2)
+        titles = [x["title"] for x in result["items"]]
+        self.assertEqual(["Foo document", "Foo event"], titles)

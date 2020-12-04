@@ -34,6 +34,11 @@ Links
 
 There is a custom adapter for TextLine field that return the proper widget for **remoteUrl**.
 
+Custom blocks transformers
+--------------------------
+
+There are custom transformers for serializer and deserializer to better manage resolveuids.
+
 @context-navigation endpoint
 ----------------------------
 
@@ -106,6 +111,17 @@ And this is the result::
 This endpoint works exactly like **@search** but take care of types not searchable settings.
 
 
+@sitemap-settings
+-----------------
+
+Endpoint that returns sitemap settings for anonymous users (that can't access registry entries).
+
+Returns a data structure like this::
+
+    {
+        'depth': 3,
+    }
+
 Keywords vocabulary patch
 --------------------------
 
@@ -127,7 +143,12 @@ When Plone 5.2 will be released, we can remove these:
 - plone.dexterity >= 2.9.5
 - Products.ZCatalog >= 5.1
 - plone.namedfile >= 5.4.0
-- Products.PloneHotfix20200121 == 1.0
+- Products.PloneHotfix20200121 >= 1.0
+
+New Criteria
+============
+
+There is one new criteria for Collections and Listing blocks that search on **exclude_from_nav** index.
 
 
 Installation
