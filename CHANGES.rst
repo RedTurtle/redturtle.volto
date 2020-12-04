@@ -7,7 +7,8 @@ Changelog
 
 - Add exclude_from_nav as Collection criteria (used also in Volto's listing blocks).
   [cekk]
-
+- Add custom TextLine adapter to return the proper widget for **remoteUrl** field.
+  [cekk]
 
 0.1.6 (2020-11-25)
 ------------------
