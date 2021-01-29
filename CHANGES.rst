@@ -5,11 +5,7 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- [new] Add IFeed adapter to overrides.zcml in order to allow
-  a volto-theme rss block to call RSS feed from other volto 
-  site passing through /api and converting url to remove this
-  path sub part
-  Port here from modena the RSS.pt template override
+- [new] Add here from modena the RSS.pt template override
   [lucabel]
   
 
