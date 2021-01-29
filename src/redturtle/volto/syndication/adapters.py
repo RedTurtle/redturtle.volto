@@ -6,6 +6,12 @@ from plone.dexterity.interfaces import IDexterityContent
 from zope.component import adapts
 
 
+class IDexterityContentSyndacable(IDexterityContent):
+    """
+    Marker interface to have a more specific hook
+    for the adapter below
+    """
+
 class DexterityItem(BaseDexterityItem):
     """
     We need to customize this adapter to use in some specific case
@@ -14,7 +20,7 @@ class DexterityItem(BaseDexterityItem):
     sub path. This means that result links contains '/api' and we
     need to remove it
     """
-    adapts(IDexterityContent, IFeed)
+    adapts(IDexterityContentSyndacable, IFeed)
 
     def __init__(self, context, feed):
         super(DexterityItem, self).__init__(context, feed)
