@@ -9,29 +9,30 @@
   xmlns:media="http://search.yahoo.com/mrss/">
 
 <tal:block
-    tal:define="feed view/feed;
+    tal:define="portal_url context/portal_url;
+                portal_url_no_api python: portal_url.replace('/api', '');
+                feed view/feed;
                 items python: [f for f in feed.items]">
 
 <channel rdf:about="" tal:attributes="rdf:about request/URL">
   <title tal:content="feed/title">The title</title>
   <link tal:content="feed/link" />
   <description tal:content="feed/description" />
-  <image tal:attributes="rdf:resource string:${context/portal_url}/logo.png" />
+  <image tal:attributes="rdf:resource string:${portal_url}/logo.png" />
 
   <items>
     <rdf:Seq>
       <tal:block repeat="item python: items">
         <rdf:li rdf:resource=""
-                tal:attributes="rdf:resource python:getattr(item, 'link', '')" />
+                tal:attributes="rdf:resource python:getattr(item, 'link', '').replace(portal_url, portal_url_no_api)" />
       </tal:block>
     </rdf:Seq>
   </items>
 
 </channel>
-
 <tal:block repeat="item python: items">
   <item rdf:about=""
-        tal:define="link python:getattr(item, 'link', '')"
+        tal:define="link python:getattr(item, 'link', '').replace(portal_url, portal_url_no_api)"
         tal:attributes="rdf:about link">
     <title tal:content="item/title" />
     <link tal:content="link" />
