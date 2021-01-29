@@ -5,7 +5,12 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- [new] Add IFeed adapter to overrides.zcml in order to allow
+  a volto-theme rss block to call RSS feed from other volto 
+  site passing through /api and converting url to remove this
+  path sub part
+  [lucabel]
+  
 
 
 1.0.0 (2020-12-07)

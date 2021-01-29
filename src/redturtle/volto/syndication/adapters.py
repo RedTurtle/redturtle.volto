@@ -23,6 +23,9 @@ class DexterityItem(BaseDexterityItem):
     @property
     def link(self):
         link = super(DexterityItem, self).link
-        return link.replace(self.portal_url + '/api', self.portal_url)
+        return link.replace(
+            "{portal_url}/api/".format(portal_url=self.portal_url), 
+            "{portal_url}".format(portal_url=self.portal_url)
+        )
         
     guid = link
