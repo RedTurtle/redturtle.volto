@@ -5,7 +5,9 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- [new] Add here from modena the RSS.pt template override
+  [lucabel]
+  
 
 
 1.0.0 (2020-12-07)
