@@ -10,6 +10,7 @@
   <include package=".browser" />
   <include package=".restapi" />
   <include package=".types" />
+  <include package=".syndication" />
 
   <include file="permissions.zcml" />
   <include file="upgrades.zcml" />

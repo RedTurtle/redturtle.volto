@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="redturtle.volto">
+
+  <include package="z3c.unconfigure" file="meta.zcml" />
+  <include package="Products.CMFPlone.browser.syndication" file="configure.zcml"/>
+
+  <unconfigure>
+      <adapter
+        factory="Products.CMFPlone.browser.syndication.adapters.DexterityItem"
+        for="plone.dexterity.interfaces.IDexterityContent
+             Products.CMFPlone.interfaces.syndication.IFeed"
+        provides="Products.CMFPlone.interfaces.syndication.IFeedItem" />
+  </unconfigure>
+
+  <adapter
+    factory=".adapters.DexterityItem"
+    for="plone.dexterity.interfaces.IDexterityContent
+         Products.CMFPlone.interfaces.syndication.IFeed"
+    provides="Products.CMFPlone.interfaces.syndication.IFeedItem" />
+
+</configure>

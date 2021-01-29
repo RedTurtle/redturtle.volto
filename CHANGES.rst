@@ -9,6 +9,7 @@ Changelog
   a volto-theme rss block to call RSS feed from other volto 
   site passing through /api and converting url to remove this
   path sub part
+  Port here from modena the RSS.pt template override
   [lucabel]
   
 

@@ -6,6 +6,5 @@
     component=".vocabularies.KeywordsVocabularyFactory"
     name="plone.app.vocabularies.Keywords"
     />
-  <include package=".syndication" file="overrides.zcml" />
 
 </configure>
