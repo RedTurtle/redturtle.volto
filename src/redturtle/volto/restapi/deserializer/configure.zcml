@@ -3,12 +3,10 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="plone.restapi">
 
-  <!-- fix for https://github.com/plone/plone.restapi/pull/993-->
-  <subscriber factory=".blocks.TextBlockDeserializer"
-    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
-
   <!-- custom generic blocks deserializer-->
-  <subscriber factory=".blocks.GenericResolveUIDDeserializer"
+  <subscriber factory=".blocks.GenericResolveUIDDeserializerContents"
+    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
+  <subscriber factory=".blocks.GenericResolveUIDDeserializerRoot"
     provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
 
   <!-- convert resolveuids also in rich text fields -->

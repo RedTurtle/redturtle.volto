@@ -5,6 +5,7 @@ from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.serializer.blocks import uid_to_url
+from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getMultiAdapter
@@ -15,8 +16,6 @@ EXCLUDE_KEYS = ["@type"]
 EXCLUDE_TYPES = ["title", "listing"]
 
 
-@implementer(IBlockFieldSerializationTransformer)
-@adapter(IBlocks, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializer(object):
     """
     Generic deserializer: parse all block data and try to convert uids into
@@ -66,3 +65,15 @@ class GenericResolveUIDSerializer(object):
                 else:
                     block[key] = self.resolve_uids(block=val)
         return block
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IBlocks, IRedturtleVoltoLayer)
+class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
+    """ Deserializer for content-types that implements IBlocks behavior """
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
+class GenericResolveUIDSerializerRoot(GenericResolveUIDSerializer):
+    """ Deserializer for site-root """
