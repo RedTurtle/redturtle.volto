@@ -46,6 +46,8 @@ class GenericResolveUIDSerializer(object):
                 return getMultiAdapter(
                     (item, getRequest()), ISerializeToJson
                 )()
+            else:
+                return {}
         for key, val in block.items():
             if not val:
                 continue
@@ -54,7 +56,12 @@ class GenericResolveUIDSerializer(object):
             if isinstance(val, str):
                 block[key] = uid_to_url(val)
             elif isinstance(val, list):
-                block[key] = [self.resolve_uids(block=x) for x in val]
+                new_val = []
+                for x in val:
+                    fixed_block = self.resolve_uids(block=x)
+                    if fixed_block:
+                        new_val.append(fixed_block)
+                block[key] = new_val
             elif isinstance(val, dict):
                 if "entityMap" in val.keys():
                     entity_map = val.get("entityMap", {})
