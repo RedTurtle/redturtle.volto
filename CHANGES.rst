@@ -7,7 +7,10 @@ Changelog
 
 - [new] Add here from modena the RSS.pt template override
   [lucabel]
-  
+- Remove text block serializer that is already merged into plone.restapi.
+  [cekk]
+- Register generic serializer also for site root.
+  [cekk]
 
 
 1.0.0 (2020-12-07)

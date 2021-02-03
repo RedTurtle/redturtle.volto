@@ -2,47 +2,17 @@
 from copy import deepcopy
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.deserializer.blocks import path2uid
-from plone.restapi.deserializer.blocks import TextBlockDeserializer as Base
 from plone.restapi.interfaces import IBlockFieldDeserializationTransformer
+from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
-
-
-@adapter(IBlocks, IRedturtleVoltoLayer)
-@implementer(IBlockFieldDeserializationTransformer)
-class TextBlockDeserializer(Base):
-    """
-    To remove when https://github.com/plone/plone.restapi/pull/993 is merged
-    """
-
-    order = 100
-    block_type = "text"
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
-    def __call__(self, block):
-        # Convert absolute links to resolveuid
-        # Assumes in-place mutations
-
-        entity_map = block.get("text", {}).get("entityMap", {})
-        for entity in entity_map.values():
-            if entity.get("type") == "LINK":
-                href = entity.get("data", {}).get("url", "")
-                entity["data"]["url"] = path2uid(
-                    context=self.context, link=href
-                )
-        return block
 
 
 EXCLUDE_KEYS = ["@type", "token", "value", "@id"]
 EXCLUDE_TYPES = ["title", "listing", "calendar"]
 
 
-@implementer(IBlockFieldDeserializationTransformer)
-@adapter(IBlocks, IRedturtleVoltoLayer)
 class GenericResolveUIDDeserializer(object):
     """
     Generic deserializer: parse all block data and try to change urls to
@@ -88,3 +58,15 @@ class GenericResolveUIDDeserializer(object):
                 else:
                     block[key] = self.fix_urls_in_block(block=val)
         return block
+
+
+@implementer(IBlockFieldDeserializationTransformer)
+@adapter(IBlocks, IRedturtleVoltoLayer)
+class GenericResolveUIDDeserializerContents(GenericResolveUIDDeserializer):
+    """ Deserializer for content-types that implements IBlocks behavior """
+
+
+@implementer(IBlockFieldDeserializationTransformer)
+@adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
+class GenericResolveUIDDeserializerRoot(GenericResolveUIDDeserializer):
+    """ Deserializer for site-root """
