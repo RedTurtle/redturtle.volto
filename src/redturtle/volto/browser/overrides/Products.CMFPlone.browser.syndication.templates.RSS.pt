@@ -37,9 +37,13 @@
     <title tal:content="item/title" />
     <link tal:content="link" />
     <description tal:content="item/description" />
-    <media:group tal:condition="python: item.field_name == 'image'">
-      <media:content medium="image" url="${link}/@@images/image/thumb" />
-    </media:group>
+    <tal:image tal:condition="python: item.field_name == 'image'" tal:on-error="string:">
+        <tal:image_metadata tal:define="url string:${link}/@@images/image/thumb;
+                                        size item/file/size|nothing;
+                                        mime item/file/contentType|nothing">
+            <enclosure url="${url}" tal:attributes="size size; type mime"/>
+        </tal:image_metadata>
+    </tal:image>
     <content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/"
         tal:condition="feed/settings/render_body">
         <tal:opencdata tal:replace="structure python:'&lt;![CDATA['" />
