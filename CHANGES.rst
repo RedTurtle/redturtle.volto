@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.1 (unreleased)
+1.0.1 (2021-02-08)
 ------------------
 
 - [new] Add here from modena the RSS.pt template override
