@@ -7,5 +7,6 @@
     provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
   <subscriber factory=".blocks.GenericResolveUIDSerializerRoot"
     provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
-
+  
+  <adapter factory=".dxfields.TextLineFieldSerializer" />
 </configure>
