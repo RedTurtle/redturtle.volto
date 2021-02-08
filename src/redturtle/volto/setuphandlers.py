@@ -3,6 +3,10 @@ from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFPlone.utils import get_installer
 from plone import api
 from zope.interface import implementer
+from redturtle.volto.robots_txt import ROBOTS_TXT
+from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 
 import json
 
@@ -471,6 +475,8 @@ def post_install(context):
 
     create_root_homepage()
 
+    set_robots()
+
     if is_pam_installed:
         create_lrf_homepages()
 
@@ -512,3 +518,9 @@ def create_lrf_homepages():
     portal.en.blocks_layout = homepage_en["blocks_layout"]
     portal.en.setTitle("Welcome to Volto!")
     portal.en.setDescription("The React powered content management system")
+
+
+def set_robots():
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(ISiteSchema, prefix="plone")
+    settings.robots_txt = ROBOTS_TXT

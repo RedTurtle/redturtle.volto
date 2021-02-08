@@ -11,7 +11,8 @@ Changelog
   [cekk]
 - Register generic serializer also for site root.
   [cekk]
-
+- Customize robots.txt to disallow /api entry.
+  [cekk]
 
 1.0.0 (2020-12-07)
 ------------------
