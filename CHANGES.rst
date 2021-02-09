@@ -5,7 +5,10 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Patched Products.PortalTransforms
+  (https://github.com/plone/Products.PortalTransforms/pull/43).
+  [cekk]
+
 
 
 1.0.2 (2021-02-09)
