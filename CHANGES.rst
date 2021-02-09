@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.2 (unreleased)
+1.0.2 (2021-02-09)
 ------------------
 
 - Re-add remoteUrl field serializer.
