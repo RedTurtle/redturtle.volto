@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="collective.monkeypatcher">
+
+    <include package="collective.monkeypatcher" />
+
+    <monkey:patch
+        description="This works around issue https://github.com/plone/Products.PortalTransforms/pull/43"
+        class="Products.PortalTransforms.transforms.safe_html.SafeHTML"
+        original="scrub_html"
+        replacement=".monkey.scrub_html"
+        />
+
+</configure>

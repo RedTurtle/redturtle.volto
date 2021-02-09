@@ -131,6 +131,14 @@ We copied the patch from kitconcept.volto_ for special characters in keywords vo
 .. _kitconcept.volto: https://github.com/kitconcept/kitconcept.volto/blob/master/src/kitconcept/volto/vocabularies/subject.py
 
 
+Products.PortalTransforms patch
+-------------------------------
+
+See https://github.com/plone/Products.PortalTransforms/pull/43
+
+There is a monkeypatch to apply that changes.
+
+
 Fixed dependencies versions
 ===========================
 
