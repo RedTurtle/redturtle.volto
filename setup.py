@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="redturtle.volto",
-    version='1.0.1.dev0',
+    version="1.0.4.dev0",
     description="Helper package to setup a RedTurtle's Plone site ready to work with Volto.",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -57,6 +57,7 @@ setup(
         "plone.app.dexterity",
         "collective.folderishtypes[dexterity]>=3.0.0",
         "collective.volto.cookieconsent",
+        "collective.monkeypatcher",
         # remove these when use Plone >= 5.2.2
         "waitress>=1.4.3",
         "plone.app.contenttypes>=2.1.6",

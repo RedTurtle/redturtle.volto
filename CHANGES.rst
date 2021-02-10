@@ -2,7 +2,29 @@ Changelog
 =========
 
 
-1.0.1 (unreleased)
+1.0.4 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.0.3 (2021-02-09)
+------------------
+
+- Patched Products.PortalTransforms
+  (https://github.com/plone/Products.PortalTransforms/pull/43).
+  [cekk]
+
+
+
+1.0.2 (2021-02-09)
+------------------
+
+- Re-add remoteUrl field serializer.
+  [cekk]
+
+
+1.0.1 (2021-02-08)
 ------------------
 
 - [new] Add here from modena the RSS.pt template override
