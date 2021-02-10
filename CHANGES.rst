@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.4 (unreleased)
+1.0.4 (2021-02-10)
 ------------------
 
 - Customize robots.txt to disallow /api entry.
