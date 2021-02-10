@@ -7,7 +7,7 @@
     destination="1001"
     title="Upgrade to 1001"
     description=""
-    profile="design.plone.contenttypes:default"
+    profile="redturtle.volto:default"
     handler=".upgrades.update_rolemap"
     />
   <genericsetup:upgradeStep
@@ -15,7 +15,15 @@
     destination="1002"
     title="Add new collection criteria for exclude_from_nav"
     description=""
-    profile="design.plone.contenttypes:default"
+    profile="redturtle.volto:default"
     handler=".upgrades.update_registry"
+    />
+  <genericsetup:upgradeStep
+    source="1002"
+    destination="1003"
+    title="customize robots.txt"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_1003"
     />
 </configure>

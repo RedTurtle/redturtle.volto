@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from redturtle.volto.setuphandlers import set_robots
 import logging
 
 logger = logging.getLogger(__name__)
@@ -24,3 +25,7 @@ def update_registry(context):
 
 def update_controlpanel(context):
     update_profile(context, "controlpanel")
+
+
+def to_1003(context):
+    set_robots()
