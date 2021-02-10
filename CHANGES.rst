@@ -5,8 +5,8 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Customize robots.txt to disallow /api entry.
+  [cekk]
 
 1.0.3 (2021-02-09)
 ------------------
@@ -32,8 +32,6 @@ Changelog
 - Remove text block serializer that is already merged into plone.restapi.
   [cekk]
 - Register generic serializer also for site root.
-  [cekk]
-- Customize robots.txt to disallow /api entry.
   [cekk]
 
 1.0.0 (2020-12-07)
