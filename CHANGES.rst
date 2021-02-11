@@ -5,7 +5,9 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Custom @search endpoint to fix bug with Access inactive portal content permission
+  (https://github.com/plone/plone.restapi/pull/1066)
+  [cekk]
 
 
 1.0.4 (2021-02-10)

@@ -139,6 +139,12 @@ See https://github.com/plone/Products.PortalTransforms/pull/43
 There is a monkeypatch to apply that changes.
 
 
+@search endpoint
+----------------
+
+We customized @search endpoint for that bug: https://github.com/plone/plone.restapi/pull/1066
+
+
 Fixed dependencies versions
 ===========================
 
