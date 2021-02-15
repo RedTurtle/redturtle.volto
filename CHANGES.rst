@@ -5,8 +5,10 @@ Changelog
 1.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Disallow Plone site indexing: add noindex in <head>
+  [cekk]
+- Revert robots.txt customization because is in conflict to noindex directive.
+  [cekk]
 
 1.0.5 (2021-02-11)
 ------------------

@@ -145,6 +145,15 @@ There is a monkeypatch to apply that changes.
 We customized @search endpoint for that bug: https://github.com/plone/plone.restapi/pull/1066
 
 
+Disallow bot indexing
+---------------------
+
+There is a custom viewlet that add a <meta> tag in the <head> section to prevent bot indexing.
+
+For reference: https://developers.google.com/search/docs/advanced/crawling/block-indexing?visit_id=637489966041845317-1328107746&rd=1
+
+
+
 Fixed dependencies versions
 ===========================
 

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from redturtle.volto.setuphandlers import set_robots
 import logging
 
 logger = logging.getLogger(__name__)
@@ -28,4 +27,6 @@ def update_controlpanel(context):
 
 
 def to_1003(context):
-    set_robots()
+    """
+    removed the method that updated robots.txt, so this upgrade-step does nothing
+    """
