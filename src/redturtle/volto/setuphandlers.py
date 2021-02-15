@@ -515,9 +515,3 @@ def create_lrf_homepages():
     portal.en.blocks_layout = homepage_en["blocks_layout"]
     portal.en.setTitle("Welcome to Volto!")
     portal.en.setDescription("The React powered content management system")
-
-
-def set_robots():
-    registry = getUtility(IRegistry)
-    settings = registry.forInterface(ISiteSchema, prefix="plone")
-    settings.robots_txt = ROBOTS_TXT
