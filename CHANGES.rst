@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.6 (unreleased)
+1.0.6 (2021-02-15)
 ------------------
 
 - Disallow Plone site indexing: add noindex in <head>
