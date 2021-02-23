@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.9 (unreleased)
+1.0.9 (2021-02-23)
 ------------------
 
 - Handle unauthorized in blocks serializer.
