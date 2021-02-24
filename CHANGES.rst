@@ -4,10 +4,40 @@ Changelog
 
 1.1.0 (unreleased)
 ------------------
+1.0.10 (unreleased)
+-------------------
 
 - New endpoint to search Events: @events-search.
   [cekk]
 
+
+1.0.9 (2021-02-23)
+------------------
+
+- Handle unauthorized in blocks serializer.
+  [cekk]
+
+
+1.0.8 (2021-02-19)
+------------------
+
+- Fix typo.
+  [cekk]
+
+
+1.0.7 (2021-02-19)
+------------------
+
+- Do not run dependencies when upgrading plone.app.registry.
+  [cekk]
+
+1.0.6 (2021-02-15)
+------------------
+
+- Disallow Plone site indexing: add noindex in <head>
+  [cekk]
+- Revert robots.txt customization because is in conflict to noindex directive.
+  [cekk]
 
 1.0.5 (2021-02-11)
 ------------------

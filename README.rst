@@ -154,6 +154,15 @@ This uses `get_events` method to search events: that method handle recurrences a
 The usage is similar to `@querystring-search`.
 
 
+Disallow bot indexing
+---------------------
+
+There is a custom viewlet that add a <meta> tag in the <head> section to prevent bot indexing.
+
+For reference: https://developers.google.com/search/docs/advanced/crawling/block-indexing?visit_id=637489966041845317-1328107746&rd=1
+
+
+
 Fixed dependencies versions
 ===========================
 

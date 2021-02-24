@@ -10,4 +10,13 @@
         layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
         />
 
+    <!-- Add noindex head tag: https://developers.google.com/search/docs/advanced/crawling/block-indexing?visit_id=637489966041845317-1328107746&rd=1 -->
+    <browser:viewlet
+        name="redturtle.volto.noindex"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+        template="noindex.pt"
+        permission="zope2.View"
+        layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+        />
+
 </configure>

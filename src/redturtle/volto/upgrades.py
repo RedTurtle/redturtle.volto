@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from redturtle.volto.setuphandlers import set_robots
 import logging
 
 logger = logging.getLogger(__name__)
@@ -7,8 +6,10 @@ logger = logging.getLogger(__name__)
 DEFAULT_PROFILE = "profile-design.plone.contenttypes:default"
 
 
-def update_profile(context, profile):
-    context.runImportStepFromProfile(DEFAULT_PROFILE, profile)
+def update_profile(context, profile, run_dependencies=True):
+    context.runImportStepFromProfile(
+        DEFAULT_PROFILE, profile, run_dependencies
+    )
 
 
 def update_types(context):
@@ -20,7 +21,7 @@ def update_rolemap(context):
 
 
 def update_registry(context):
-    update_profile(context, "plone.app.registry")
+    update_profile(context, "plone.app.registry", run_dependencies=False)
 
 
 def update_controlpanel(context):
@@ -28,4 +29,6 @@ def update_controlpanel(context):
 
 
 def to_1003(context):
-    set_robots()
+    """
+    removed the method that updated robots.txt, so this upgrade-step does nothing
+    """

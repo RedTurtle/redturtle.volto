@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from AccessControl.unauthorized import Unauthorized
 from copy import deepcopy
 from plone import api
 from plone.restapi.behaviors import IBlocks
@@ -41,13 +42,7 @@ class GenericResolveUIDSerializer(object):
             return block
         if isinstance(block, dict) and "UID" in block.keys():
             # expand internal relations
-            item = api.content.get(UID=block["UID"])
-            if item:
-                return getMultiAdapter(
-                    (item, getRequest()), ISerializeToJson
-                )()
-            else:
-                return {}
+            return self.get_item_from_uid(block=block)
         for key, val in block.items():
             if not val:
                 continue
@@ -72,6 +67,16 @@ class GenericResolveUIDSerializer(object):
                 else:
                     block[key] = self.resolve_uids(block=val)
         return block
+
+    def get_item_from_uid(self, block):
+        try:
+            item = api.content.get(UID=block["UID"])
+        except Unauthorized:
+            return {}
+        if item:
+            return getMultiAdapter((item, getRequest()), ISerializeToJson)()
+        else:
+            return {}
 
 
 @implementer(IBlockFieldSerializationTransformer)
