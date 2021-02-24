@@ -2,10 +2,11 @@ Changelog
 =========
 
 
-1.0.6 (unreleased)
+1.1.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- New endpoint to search Events: @events-search.
+  [cekk]
 
 
 1.0.5 (2021-02-11)
