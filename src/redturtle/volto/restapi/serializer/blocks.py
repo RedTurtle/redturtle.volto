@@ -5,6 +5,7 @@ from plone import api
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
 from plone.restapi.interfaces import ISerializeToJsonSummary
+from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.serializer.blocks import uid_to_url
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
@@ -74,9 +75,18 @@ class GenericResolveUIDSerializer(object):
         except Unauthorized:
             return {}
         if item:
-            return getMultiAdapter(
-                (item, getRequest()), ISerializeToJsonSummary
-            )()
+            if item == self.context:
+                # STOP RECURSION: if we serialize the complete object, we get
+                # maximum recursion depth, so serialize the object with
+                # summary. If we need more infos, let's add them into summary
+                # serializer
+                return getMultiAdapter(
+                    (item, getRequest()), ISerializeToJsonSummary
+                )()
+            else:
+                return getMultiAdapter(
+                    (item, getRequest()), ISerializeToJson
+                )()
         else:
             return {}
 

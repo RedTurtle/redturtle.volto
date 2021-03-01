@@ -5,7 +5,9 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Better handle serialization for recursion problems: now only serialize with ISerializeToJsonSummary
+  if the referred item is the current context.
+  [cekk]
 
 
 1.1.0 (2021-03-01)
