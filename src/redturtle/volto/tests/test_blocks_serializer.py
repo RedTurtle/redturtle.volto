@@ -83,4 +83,3 @@ class TestBlocksSerializer(unittest.TestCase):
                 (self.page_a, self.request), ISerializeToJsonSummary
             )(),
         )
-
