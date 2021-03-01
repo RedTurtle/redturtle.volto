@@ -2,10 +2,12 @@ Changelog
 =========
 
 
-1.0.10 (unreleased)
--------------------
+1.1.0 (unreleased)
+------------------
 
-- Nothing changed yet.
+- Expand uids with ISerializeToJsonSummary and not with fullobject to gain space and
+  avoid maximum recursion depth it a block has an internal reference to the current context.
+  [cekk]
 
 
 1.0.9 (2021-02-23)

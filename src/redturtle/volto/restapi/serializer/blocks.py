@@ -4,7 +4,7 @@ from copy import deepcopy
 from plone import api
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
-from plone.restapi.interfaces import ISerializeToJson
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.blocks import uid_to_url
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
@@ -74,7 +74,9 @@ class GenericResolveUIDSerializer(object):
         except Unauthorized:
             return {}
         if item:
-            return getMultiAdapter((item, getRequest()), ISerializeToJson)()
+            return getMultiAdapter(
+                (item, getRequest()), ISerializeToJsonSummary
+            )()
         else:
             return {}
 
