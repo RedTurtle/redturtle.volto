@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.0 (unreleased)
+1.1.0 (2021-03-01)
 ------------------
 
 - Expand uids with ISerializeToJsonSummary and not with fullobject to gain space and
