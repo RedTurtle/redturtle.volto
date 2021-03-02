@@ -13,7 +13,9 @@ from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
+from zope.annotation import IAnnotations
 
+SERIALIZED_UIDS = "request.annotations.serialized_uid"
 EXCLUDE_KEYS = ["@type"]
 EXCLUDE_TYPES = ["title", "listing"]
 
@@ -43,6 +45,12 @@ class GenericResolveUIDSerializer(object):
             return block
         if isinstance(block, dict) and "UID" in block.keys():
             # expand internal relations
+            request_annotations = IAnnotations(self.request)
+            if (
+                SERIALIZED_UIDS in request_annotations
+                and block["UID"] in request_annotations[SERIALIZED_UIDS]
+            ):
+                return {}
             return self.get_item_from_uid(block=block)
         for key, val in block.items():
             if not val:
@@ -75,18 +83,26 @@ class GenericResolveUIDSerializer(object):
         except Unauthorized:
             return {}
         if item:
-            if item == self.context:
-                # STOP RECURSION: if we serialize the complete object, we get
-                # maximum recursion depth, so serialize the object with
-                # summary. If we need more infos, let's add them into summary
-                # serializer
-                return getMultiAdapter(
-                    (item, getRequest()), ISerializeToJsonSummary
-                )()
-            else:
-                return getMultiAdapter(
-                    (item, getRequest()), ISerializeToJson
-                )()
+
+            request_annotations = IAnnotations(self.request)
+            if SERIALIZED_UIDS not in request_annotations:
+                request_annotations[SERIALIZED_UIDS] = []
+            request_annotations[SERIALIZED_UIDS].append(block["UID"])
+
+            return getMultiAdapter((item, getRequest()), ISerializeToJson)()
+
+            # if item == self.context:
+            #     # STOP RECURSION: if we serialize the complete object, we get
+            #     # maximum recursion depth, so serialize the object with
+            #     # summary. If we need more infos, let's add them into summary
+            #     # serializer
+            #     return getMultiAdapter(
+            #         (item, getRequest()), ISerializeToJsonSummary
+            #     )()
+            # else:
+            #     return getMultiAdapter(
+            #         (item, getRequest()), ISerializeToJson
+            #     )()
         else:
             return {}
 

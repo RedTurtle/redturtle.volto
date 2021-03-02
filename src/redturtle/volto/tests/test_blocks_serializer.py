@@ -77,6 +77,9 @@ class TestBlocksSerializer(unittest.TestCase):
         response = self.api_session.get(self.page_a.absolute_url())
 
         res = response.json()
+        import pdb
+
+        pdb.set_trace()
         self.assertEqual(
             res["blocks"]["foo"]["field"][0],
             getMultiAdapter(
