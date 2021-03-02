@@ -4,7 +4,8 @@ from copy import deepcopy
 from plone import api
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
-from plone.restapi.interfaces import ISerializeToJsonSummary
+
+#  from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.serializer.blocks import uid_to_url
 from Products.CMFPlone.interfaces import IPloneSiteRoot
@@ -49,7 +50,7 @@ class GenericResolveUIDSerializer(object):
             if (
                 SERIALIZED_UIDS in request_annotations
                 and block["UID"] in request_annotations[SERIALIZED_UIDS]
-            ):
+            ):  # noqa
                 return {}
             return self.get_item_from_uid(block=block)
         for key, val in block.items():
