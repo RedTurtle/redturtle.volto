@@ -39,6 +39,10 @@ Custom blocks transformers
 
 There are custom transformers for serializer and deserializer to better manage resolveuids.
 
+There is an edge-case when a block refers its context: in this case, to avoid maximum recursion depth
+in uids resolving, that uid will be expanded with the Summary json version and not the full object.
+
+
 @context-navigation endpoint
 ----------------------------
 
