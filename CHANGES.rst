@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.1 (unreleased)
+1.2.0 (2021-03-02)
 ------------------
 
 - New endpoint to search Events: @events-search.
