@@ -1,10 +1,10 @@
 Changelog
 =========
 
-
 1.1.1 (unreleased)
 ------------------
 
+- New endpoint to search Events: @events-search.
 - Better handle serialization for recursion problems: now only serialize with ISerializeToJsonSummary
   if the referred item is the current context.
   [cekk]

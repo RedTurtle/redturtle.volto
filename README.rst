@@ -148,6 +148,15 @@ There is a monkeypatch to apply that changes.
 
 We customized @search endpoint for that bug: https://github.com/plone/plone.restapi/pull/1066
 
+@events-search endpoint
+-----------------------
+
+Endpoint similar to `@querystring-search` that is used to make queries for events.
+
+This uses `get_events` method to search events: that method handle recurrences and avoid wrong results.
+
+The usage is similar to `@querystring-search`.
+
 
 Disallow bot indexing
 ---------------------
