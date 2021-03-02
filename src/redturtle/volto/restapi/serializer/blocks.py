@@ -48,9 +48,8 @@ class GenericResolveUIDSerializer(object):
             # expand internal relations
             request_annotations = IAnnotations(self.request)
             if (
-                SERIALIZED_UIDS in request_annotations
-                and block["UID"]
-                in request_annotations[SERIALIZED_UIDS]  # noqa
+                SERIALIZED_UIDS in request_annotations  # noqa
+                and block["UID"] in request_annotations[SERIALIZED_UIDS]
             ):
                 return {}
             return self.get_item_from_uid(block=block)
