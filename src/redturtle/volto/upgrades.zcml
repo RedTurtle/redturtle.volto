@@ -26,4 +26,13 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_1003"
     />
+  
+  <genericsetup:upgradeStep
+    source="1003"
+    destination="1004"
+    title="fix events recurrences"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_1004"
+    />
 </configure>
