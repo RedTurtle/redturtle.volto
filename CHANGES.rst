@@ -4,7 +4,8 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Monkeypatch for Events recurrences.
+  [cekk]
 
 
 1.2.0 (2021-03-02)

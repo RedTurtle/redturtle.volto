@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from plone import api
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -32,3 +34,14 @@ def to_1003(context):
     """
     removed the method that updated robots.txt, so this upgrade-step does nothing
     """
+
+
+def to_1004(context):
+    """
+    """
+    brains = api.content.find(portal_type="Event")
+    logger.info("Reindexing {} Events".format(len(brains)))
+
+    for brain in brains:
+        event = brain.getObject()
+        event.reindexObject(idxs=["start", "end"])

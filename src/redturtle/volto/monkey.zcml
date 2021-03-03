@@ -12,4 +12,10 @@
         replacement=".monkey.scrub_html"
         />
 
+    <monkey:patch
+        description="This fix the problem with Events recurrences"
+        class="plone.app.event.recurrence.RecurrenceSupport"
+        original="occurrences"
+        replacement=".monkey.occurrences"
+        />
 </configure>

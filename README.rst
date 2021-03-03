@@ -186,6 +186,13 @@ New Criteria
 
 There is one new criteria for Collections and Listing blocks that search on **exclude_from_nav** index.
 
+Events recurrence patch
+=======================
+
+There is a monkeypatch for Events recurrences that fix their duration.
+
+If it works well, we can make a pr in p.a.event.
+
 
 Installation
 ============
