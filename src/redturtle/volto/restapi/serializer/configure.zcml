@@ -3,9 +3,16 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="plone.restapi">
 
+  <!-- generic block -->
   <subscriber factory=".blocks.GenericResolveUIDSerializerContents"
     provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
   <subscriber factory=".blocks.GenericResolveUIDSerializerRoot"
+    provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
+  
+  <!-- listing block -->
+  <subscriber factory=".blocks.ListingResolveUIDSerializerContents"
+    provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
+  <subscriber factory=".blocks.ListingResolveUIDSerializerRoot"
     provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
   
   <adapter factory=".dxfields.TextLineFieldSerializer" />

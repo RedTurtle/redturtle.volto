@@ -14,8 +14,10 @@ from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
+import os
+
 EXCLUDE_KEYS = ["@type"]
-EXCLUDE_TYPES = ["title", "listing"]
+EXCLUDE_TYPES = ["title", "listing", "text"]
 
 
 class GenericResolveUIDSerializer(object):
@@ -27,6 +29,7 @@ class GenericResolveUIDSerializer(object):
 
     order = 200  # after standard ones
     block_type = None
+    disabled = os.environ.get("disable_transform_resolveuid", False)
 
     def __init__(self, context, request):
         self.context = context
@@ -91,6 +94,25 @@ class GenericResolveUIDSerializer(object):
             return {}
 
 
+class ListingResolveUIDSerializer(object):
+    order = 1
+    block_type = "listing"
+    disabled = os.environ.get("disable_transform_resolveuid", False)
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self, value):
+        import pdb
+
+        pdb.set_trace()
+        linkMore = value.get("linkMore")
+        if linkMore:
+            linkMore["href"] = uid_to_url(linkMore.get("href", ""))
+        return value
+
+
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IBlocks, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
@@ -99,5 +121,17 @@ class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
 
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
-class GenericResolveUIDSerializerRoot(GenericResolveUIDSerializer):
+class GenericResolveUIDSerializerRoot(ListingResolveUIDSerializer):
+    """ Deserializer for site-root """
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IBlocks, IRedturtleVoltoLayer)
+class ListingResolveUIDSerializerContents(ListingResolveUIDSerializer):
+    """ Deserializer for content-types that implements IBlocks behavior """
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
+class ListingResolveUIDSerializerRoot(GenericResolveUIDSerializer):
     """ Deserializer for site-root """
