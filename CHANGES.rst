@@ -6,7 +6,8 @@ Changelog
 
 - Monkeypatch for Events recurrences.
   [cekk]
-
+- Fix profile name in upgrade-steps.
+  [cekk]
 
 1.2.0 (2021-03-02)
 ------------------

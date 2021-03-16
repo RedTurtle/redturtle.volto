@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_PROFILE = "profile-design.plone.contenttypes:default"
+DEFAULT_PROFILE = "profile-redturtle.volto:default"
 
 
 def update_profile(context, profile, run_dependencies=True):
