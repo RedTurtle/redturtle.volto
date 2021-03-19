@@ -35,4 +35,13 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_1004"
     />
+
+  <genericsetup:upgradeStep
+    source="1004"
+    destination="1005"
+    title="Add p.a.caching profile"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_1005"
+    />
 </configure>

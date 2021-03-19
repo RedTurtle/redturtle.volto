@@ -61,6 +61,7 @@ setup(
         # remove these when use Plone >= 5.2.2
         "waitress>=1.4.3",
         "plone.app.contenttypes>=2.1.6",
+        "plone.app.caching>=3.0.0a3",
         "plone.rest>=1.6.1",
         "plone.dexterity>=2.9.5",
         "Products.ZCatalog>=5.1",
