@@ -46,6 +46,7 @@ def to_1004(context):
         event = brain.getObject()
         event.reindexObject(idxs=["start", "end"])
 
+
 def to_1005(context):
     context.runImportStepFromProfile(
         "profile-plone.app.caching:default", "plone.app.registry", False
