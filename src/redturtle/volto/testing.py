@@ -33,6 +33,7 @@ class RedturtleVoltoLayer(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'redturtle.volto:default')
 
+
 REDTURTLE_VOLTO_FIXTURE = RedturtleVoltoLayer()
 
 
