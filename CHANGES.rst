@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.2 (unreleased)
+1.2.2 (2021-03-25)
 ------------------
 
 - Added upgrade step to import p.a.c. profile.
