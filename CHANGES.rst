@@ -4,8 +4,8 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added upgrade step to import p.a.c. profile.
+  [daniele]
 
 1.2.1 (2021-03-17)
 ------------------

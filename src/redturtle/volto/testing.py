@@ -13,6 +13,7 @@ import collective.folderishtypes
 import collective.volto.cookieconsent
 import plone.restapi
 import redturtle.volto
+import plone.app.caching
 
 
 class RedturtleVoltoLayer(PloneSandboxLayer):
@@ -27,9 +28,11 @@ class RedturtleVoltoLayer(PloneSandboxLayer):
         self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
+        self.loadZCML(package=plone.app.caching)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'redturtle.volto:default')
+        applyProfile(portal, "plone.app.caching:default")
+        applyProfile(portal, "redturtle.volto:default")
 
 
 REDTURTLE_VOLTO_FIXTURE = RedturtleVoltoLayer()
@@ -37,13 +40,13 @@ REDTURTLE_VOLTO_FIXTURE = RedturtleVoltoLayer()
 
 REDTURTLE_VOLTO_INTEGRATION_TESTING = IntegrationTesting(
     bases=(REDTURTLE_VOLTO_FIXTURE,),
-    name='RedturtleVoltoLayer:IntegrationTesting',
+    name="RedturtleVoltoLayer:IntegrationTesting",
 )
 
 
 REDTURTLE_VOLTO_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(REDTURTLE_VOLTO_FIXTURE,),
-    name='RedturtleVoltoLayer:FunctionalTesting',
+    name="RedturtleVoltoLayer:FunctionalTesting",
 )
 
 
@@ -53,7 +56,7 @@ REDTURTLE_VOLTO_ACCEPTANCE_TESTING = FunctionalTesting(
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
         z2.ZSERVER_FIXTURE,
     ),
-    name='RedturtleVoltoLayer:AcceptanceTesting',
+    name="RedturtleVoltoLayer:AcceptanceTesting",
 )
 
 
@@ -70,9 +73,11 @@ class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
         self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
+        self.loadZCML(package=plone.app.caching)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'redturtle.volto:default')
+        applyProfile(portal, "plone.app.caching:default")
+        applyProfile(portal, "redturtle.volto:default")
 
 
 REDTURTLE_VOLTO_API_FIXTURE = RedturtleVoltoRestApiLayer()
