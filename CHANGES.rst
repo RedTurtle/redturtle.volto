@@ -4,7 +4,7 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- added block type 'searchEvents' to EXCLUDE_TYPES [giuliaghisini]
 
 
 1.2.2 (2021-03-25)
