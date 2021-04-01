@@ -10,7 +10,7 @@ from zope.interface import implementer
 
 
 EXCLUDE_KEYS = ["@type", "token", "value", "@id"]
-EXCLUDE_TYPES = ["title", "listing", "calendar"]
+EXCLUDE_TYPES = ["title", "listing", "calendar", "searchEvents"]
 
 
 class GenericResolveUIDDeserializer(object):
