@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.3 (unreleased)
+1.2.3 (2021-04-01)
 ------------------
 
 - added block type 'searchEvents' to EXCLUDE_TYPES [giuliaghisini]
