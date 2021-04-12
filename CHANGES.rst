@@ -4,7 +4,8 @@ Changelog
 1.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Customize translation for remoteUrl field description only for restapi call.
+  [cekk]
 
 
 1.2.3 (2021-04-01)

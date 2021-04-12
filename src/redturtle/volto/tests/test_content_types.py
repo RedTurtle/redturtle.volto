@@ -88,3 +88,12 @@ class TestContentTypesSchema(unittest.TestCase):
         res = response.json()
 
         self.assertEqual(res["properties"]["remoteUrl"]["widget"], "url")
+
+    def test_link_remoteUrl_return_proper_description(self):
+        response = self.api_session.get("/@types/Link")
+        res = response.json()
+
+        self.assertEqual(
+            res["properties"]["remoteUrl"]["description"],
+            "Insert an external link directly into the field,or select an internal link clicking on the icon.",  # noqa
+        )
