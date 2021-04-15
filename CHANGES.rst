@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.4 (unreleased)
+1.2.4 (2021-04-15)
 ------------------
 
 - Customize translation for remoteUrl field description only for restapi call.
