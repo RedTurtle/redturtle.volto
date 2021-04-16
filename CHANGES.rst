@@ -4,7 +4,8 @@ Changelog
 1.2.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Monkeypatch to respect locally allowed types also on content paste.
+  [cekk]
 
 
 1.2.4 (2021-04-15)

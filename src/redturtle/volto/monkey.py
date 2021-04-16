@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
 from lxml import etree
 from lxml import html
 from lxml.html.clean import Cleaner
@@ -154,3 +155,11 @@ def occurrences(self, range_start=None, range_end=None):
 
     for start in starts:
         yield get_obj(start)
+
+
+def _verifyObjectPaste(self, obj, validate_src=True):
+    self._old__verifyObjectPaste(obj, validate_src=True)
+    portal_type = getattr(aq_base(obj), "portal_type", None)
+    locally_allowed_types = getattr(self, "locally_allowed_types", [])
+    if locally_allowed_types and portal_type not in locally_allowed_types:
+        raise ValueError("Disallowed subobject type: %s" % portal_type)

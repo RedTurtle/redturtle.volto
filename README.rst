@@ -126,22 +126,6 @@ Returns a data structure like this::
         'depth': 3,
     }
 
-Keywords vocabulary patch
---------------------------
-
-We copied the patch from kitconcept.volto_ for special characters in keywords vocabulary
-(used for example in Subjects field).
-
-.. _kitconcept.volto: https://github.com/kitconcept/kitconcept.volto/blob/master/src/kitconcept/volto/vocabularies/subject.py
-
-
-Products.PortalTransforms patch
--------------------------------
-
-See https://github.com/plone/Products.PortalTransforms/pull/43
-
-There is a monkeypatch to apply that changes.
-
 
 @search endpoint
 ----------------
@@ -165,6 +149,37 @@ There is a custom viewlet that add a <meta> tag in the <head> section to prevent
 
 For reference: https://developers.google.com/search/docs/advanced/crawling/block-indexing?visit_id=637489966041845317-1328107746&rd=1
 
+Patches
+=======
+
+Keywords vocabulary
+-------------------
+
+We copied the patch from kitconcept.volto_ for special characters in keywords vocabulary
+(used for example in Subjects field).
+
+.. _kitconcept.volto: https://github.com/kitconcept/kitconcept.volto/blob/master/src/kitconcept/volto/vocabularies/subject.py
+
+
+Products.PortalTransforms
+-------------------------
+
+See https://github.com/plone/Products.PortalTransforms/pull/43
+
+There is a monkeypatch to apply that changes.
+
+Events recurrence
+-----------------
+
+There is a monkeypatch for Events recurrences that fix their duration.
+
+If it works well, we can make a pr in p.a.event.
+
+
+Respect locally allowed types on paste
+--------------------------------------
+
+Disallow paste items that are not allowed into destination folder.
 
 
 Fixed dependencies versions
@@ -185,13 +200,6 @@ New Criteria
 ============
 
 There is one new criteria for Collections and Listing blocks that search on **exclude_from_nav** index.
-
-Events recurrence patch
-=======================
-
-There is a monkeypatch for Events recurrences that fix their duration.
-
-If it works well, we can make a pr in p.a.event.
 
 
 Installation
