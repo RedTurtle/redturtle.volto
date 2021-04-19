@@ -18,4 +18,13 @@
         original="occurrences"
         replacement=".monkey.occurrences"
         />
+
+    <monkey:patch
+        description="Patch for disallow paste object also for locally filters"
+        class="plone.dexterity.content.PasteBehaviourMixin"
+        original="_verifyObjectPaste"
+        preserveOriginal="True"
+        replacement=".monkey._verifyObjectPaste"
+        />
+    
 </configure>
