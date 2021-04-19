@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.5 (unreleased)
+1.3.0 (2021-04-19)
 ------------------
 
 - Monkeypatch to respect locally allowed types also on content paste.
