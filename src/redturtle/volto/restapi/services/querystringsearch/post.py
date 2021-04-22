@@ -9,6 +9,10 @@ from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services.querystringsearch.get import QuerystringSearchPost
 from zope.component import getMultiAdapter
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class RTQuerystringSearchPost(QuerystringSearchPost):
     """
@@ -76,11 +80,11 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
                         (brain.getObject(), self.request), ISerializeToJson
                     )(include_items=False)
                 except KeyError:
-                    # Guard in case the brain returned refers to an object that doesn't
-                    # exists because it failed to uncatalog itself or the catalog has
-                    # stale cataloged objects for some reason
+                    # Guard in case the brain returned refers to an object that
+                    # doesn't exists because it failed to uncatalog itself or
+                    # the catalog has stale cataloged objects for some reason
                     logger.warning(
-                        "Brain getObject error: {} doesn't exist anymore".format(
+                        "Brain getObject error: {} doesn't exist anymore".format(  # noqa
                             brain.getPath()
                         )
                     )
