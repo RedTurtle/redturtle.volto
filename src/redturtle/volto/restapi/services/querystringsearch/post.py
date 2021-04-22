@@ -2,20 +2,30 @@
 from datetime import datetime
 from plone.app.event.base import get_events
 from plone.app.querystring import queryparser
+from plone.restapi.batching import HypermediaBatch
 from plone.restapi.deserializer import json_body
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.services import Service
+from plone.restapi.services.querystringsearch.get import QuerystringSearchPost
 from zope.component import getMultiAdapter
-from plone.restapi.batching import HypermediaBatch
-
-import logging
-
-logger = logging.getLogger(__name__)
 
 
-class EventsSearchPost(Service):
-    def generate_query(self):
+class RTQuerystringSearchPost(QuerystringSearchPost):
+    """
+    Perform a custom search if we are searching events
+    """
+
+    def reply(self):
+        query = json_body(self.request).get("query", [])
+        for param in query:
+            i = param.get("i", "")
+            v = param.get("v", [])
+            if i == "portal_type" and v == ["Event"]:
+                # do a custom search
+                return self.reply_events()
+        return super(RTQuerystringSearchPost, self).reply()
+
+    def generate_query_for_events(self):
         data = json_body(self.request)
         parsed_query = queryparser.parseFormquery(
             context=self.context, formquery=data["query"]
@@ -26,13 +36,7 @@ class EventsSearchPost(Service):
         query = {
             k: v for k, v in parsed_query.items() if k not in ["start", "end"]
         }
-        query.update(
-            {
-                k: v
-                for k, v in data.items()
-                if k not in ["fullobjects", "query", "b_start", "b_size"]
-            }
-        )
+
         start = None
         end = None
         if "start" in parsed_query:
@@ -41,8 +45,18 @@ class EventsSearchPost(Service):
             end = datetime.fromisoformat(parsed_query["end"]["query"])
         return start, end, fullobjects, b_size, b_start, query
 
-    def reply(self):
-        start, end, fullobjects, b_size, b_start, query = self.generate_query()
+    def reply_events(self):
+        """
+        use plone.app.event query for a better recurrences management
+        """
+        (
+            start,
+            end,
+            fullobjects,
+            b_size,
+            b_start,
+            query,
+        ) = self.generate_query_for_events()
         brains = get_events(
             start=start, end=end, context=self.context, **query
         )
