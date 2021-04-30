@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+  <plone:service
+    method="POST"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    factory=".post.RTQuerystringSearchPost"
+    name="@querystring-search"
+    permission="zope2.View"
+    layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+    />
+
+  <plone:service
+    method="POST"
+    for="Products.CMFCore.interfaces.IContentish"
+    factory=".post.RTQuerystringSearchPost"
+    name="@querystring-search"
+    permission="zope2.View"
+    layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+    />
+</configure>

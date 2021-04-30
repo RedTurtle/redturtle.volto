@@ -4,7 +4,8 @@ Changelog
 1.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove @events-search endpoint and customize @querystring-search one to handle Events like @events-search.
+  [cekk]
 
 
 1.3.0 (2021-04-19)

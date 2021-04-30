@@ -132,14 +132,12 @@ Returns a data structure like this::
 
 We customized @search endpoint for that bug: https://github.com/plone/plone.restapi/pull/1066
 
-@events-search endpoint
------------------------
+@querystring-search endpoint customization
+------------------------------------------
 
-Endpoint similar to `@querystring-search` that is used to make queries for events.
+If we are searching only for `Event` types, do a special search using **get_events** method to search events: that method handle recurrences and avoid wrong results.
 
-This uses `get_events` method to search events: that method handle recurrences and avoid wrong results.
-
-The usage is similar to `@querystring-search`.
+Otherwise, perform a default querystring-search.
 
 
 Disallow bot indexing
