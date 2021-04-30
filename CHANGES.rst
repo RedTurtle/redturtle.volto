@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3.1 (unreleased)
+2.0.0 (2021-04-30)
 ------------------
 
 - Remove @events-search endpoint and customize @querystring-search one to handle Events like @events-search.
