@@ -41,13 +41,28 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             k: v for k, v in parsed_query.items() if k not in ["start", "end"]
         }
 
+        sort = "start"
+        sort_reverse = False
         start = None
         end = None
         if "start" in parsed_query:
             start = datetime.fromisoformat(parsed_query["start"]["query"])
         if "end" in parsed_query:
             end = datetime.fromisoformat(parsed_query["end"]["query"])
-        return start, end, fullobjects, b_size, b_start, query
+        if data.get("sort_on", ""):
+            sort = data["sort_on"]
+        if data.get("sort_order", ""):
+            sort_reverse = data["sort_order"] == "descending" and True or False
+        return (
+            start,
+            end,
+            fullobjects,
+            b_size,
+            b_start,
+            query,
+            sort_reverse,
+            sort,
+        )
 
     def reply_events(self):
         """
@@ -60,9 +75,16 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             b_size,
             b_start,
             query,
+            sort_reverse,
+            sort,
         ) = self.generate_query_for_events()
         brains = get_events(
-            start=start, end=end, context=self.context, **query
+            start=start,
+            end=end,
+            context=self.context,
+            sort=sort,
+            sort_reverse=sort_reverse,
+            **query
         )
         batch = HypermediaBatch(self.request, brains)
         results = {}

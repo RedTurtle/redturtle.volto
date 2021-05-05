@@ -4,7 +4,8 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle sort order in querystringsearch patch.
+  [cekk]
 
 
 2.0.0 (2021-04-30)
