@@ -40,7 +40,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         query = {
             k: v for k, v in parsed_query.items() if k not in ["start", "end"]
         }
-
+        limit = int(data.get("limit", 1000))
         sort = "start"
         sort_reverse = False
         start = None
@@ -62,6 +62,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             query,
             sort_reverse,
             sort,
+            limit,
         )
 
     def reply_events(self):
@@ -77,6 +78,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             query,
             sort_reverse,
             sort,
+            limit,
         ) = self.generate_query_for_events()
         brains = get_events(
             start=start,
@@ -84,7 +86,8 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             context=self.context,
             sort=sort,
             sort_reverse=sort_reverse,
-            **query
+            limit=limit,
+            **query,
         )
         batch = HypermediaBatch(self.request, brains)
         results = {}
@@ -96,6 +99,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
 
         results["items"] = []
         for brain in batch:
+            result = None
             if fullobjects:
                 try:
                     result = getMultiAdapter(
@@ -114,7 +118,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
                 result = getMultiAdapter(
                     (brain, self.request), ISerializeToJsonSummary
                 )()
-
-            results["items"].append(result)
+            if result:
+                results["items"].append(result)
 
         return results

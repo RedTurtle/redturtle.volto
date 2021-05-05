@@ -18,7 +18,6 @@ class SearchHandler(OriginalHandler):
 
         self._constrain_query_by_path(query)
         query = self._parse_query(query)
-
         # se non passiamo i parametri con **, non viene controllato bene
         # il permesso di vedere i contenuti scaduti quando si passa un path
         lazy_resultset = self.catalog.searchResults(**query)
