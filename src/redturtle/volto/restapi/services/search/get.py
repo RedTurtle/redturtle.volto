@@ -16,6 +16,10 @@ class SearchHandler(OriginalHandler):
         else:
             fullobjects = False
 
+        if "use_site_search_settings" in query:
+            del query["use_site_search_settings"]
+            query = self.filter_query(query)
+
         self._constrain_query_by_path(query)
         query = self._parse_query(query)
         # se non passiamo i parametri con **, non viene controllato bene

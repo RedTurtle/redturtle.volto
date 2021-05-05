@@ -4,7 +4,8 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Compatibility with changes in plone.restapi 7.3.2.
+  [cekk]
 
 
 2.0.2 (2021-05-05)
