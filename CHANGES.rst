@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.3 (unreleased)
+2.1.0 (2021-05-05)
 ------------------
 
 - Compatibility with changes in plone.restapi 7.3.2.
