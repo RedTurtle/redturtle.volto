@@ -50,9 +50,9 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         query_end = parsed_query.get("end", {})
         if (
             query_start
-            and isinstance(query_start.get("query", None), list)
-            and query_start.get("range", "") == "minmax"
-            and not query_end
+            and isinstance(query_start.get("query", None), list)  # noqa
+            and query_start.get("range", "") == "minmax"  # noqa
+            and not query_end  # noqa
         ):
             # caso limite che non deve succedere
             start = self.get_datetime_value(query_start["query"][0])
