@@ -4,7 +4,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix start and end values handling in querystring-search.
+  [cekk]
 
 
 2.1.0 (2021-05-05)

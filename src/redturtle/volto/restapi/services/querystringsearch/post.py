@@ -45,9 +45,9 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         sort_reverse = False
         start = None
         end = None
-        if "start" in parsed_query:
+        if parsed_query.get("start", ""):
             start = datetime.fromisoformat(parsed_query["start"]["query"])
-        if "end" in parsed_query:
+        if parsed_query.get("end", ""):
             end = datetime.fromisoformat(parsed_query["end"]["query"])
         if data.get("sort_on", ""):
             sort = data["sort_on"]
