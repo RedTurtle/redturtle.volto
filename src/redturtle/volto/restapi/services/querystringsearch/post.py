@@ -8,6 +8,7 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services.querystringsearch.get import QuerystringSearchPost
 from zope.component import getMultiAdapter
+from DateTime import DateTime
 
 import logging
 
@@ -45,10 +46,22 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         sort_reverse = False
         start = None
         end = None
-        if parsed_query.get("start", ""):
-            start = datetime.fromisoformat(parsed_query["start"]["query"])
-        if parsed_query.get("end", ""):
-            end = datetime.fromisoformat(parsed_query["end"]["query"])
+        query_start = parsed_query.get("start", {})
+        query_end = parsed_query.get("end", {})
+        if (
+            query_start
+            and isinstance(query_start.get("query", None), list)
+            and query_start.get("range", "") == "minmax"
+            and not query_end
+        ):
+            # caso limite che non deve succedere
+            start = self.get_datetime_value(query_start["query"][0])
+            end = self.get_datetime_value(query_start["query"][1])
+        else:
+            if query_start:
+                start = self.get_datetime_value(query_start["query"])
+            if query_end:
+                end = self.get_datetime_value(query_end["query"])
         if data.get("sort_on", ""):
             sort = data["sort_on"]
         if data.get("sort_order", ""):
@@ -64,6 +77,11 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             sort,
             limit,
         )
+
+    def get_datetime_value(self, value):
+        if isinstance(value, DateTime):
+            return value.utcdatetime()
+        return datetime.fromisoformat(value)
 
     def reply_events(self):
         """
