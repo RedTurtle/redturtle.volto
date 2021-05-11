@@ -44,4 +44,13 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_1005"
     />
+
+  <genericsetup:upgradeStep
+    source="1005"
+    destination="1006"
+    title="Add new caching policies"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.update_registry"
+    />
 </configure>

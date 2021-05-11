@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <version>1005</version>
+  <version>1006</version>
   <dependencies>
     <dependency>profile-collective.folderishtypes.dx:default</dependency>
     <dependency>profile-collective.volto.cookieconsent:default</dependency>
     <dependency>profile-plone.restapi:blocks</dependency>
-    <dependency>profile-plone.app.caching:with-caching-proxy</dependency>
   </dependencies>
 </metadata>

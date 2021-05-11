@@ -4,8 +4,8 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Updated caching policies.
+  [daniele]
 
 1.2.2 (2021-03-25)
 ------------------
