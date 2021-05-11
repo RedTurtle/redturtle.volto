@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.2 (unreleased)
+2.1.2 (2021-05-11)
 ------------------
 
 - Additional fix in start and end values handling in querystring-search.
