@@ -193,7 +193,11 @@ There is a monkeypatch for Events recurrences that fix their duration.
 
 If it works well, we can make a pr in p.a.event.
 
+Caching controlpanel
+====================
 
+After installation the caching control panel is populated with custom policies while caching is globally enabled by default. Please, set the caching proxies properly.
+ 
 Installation
 ============
 

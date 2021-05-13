@@ -4,7 +4,7 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
-- Updated caching policies.
+- Provided basic setup for caching policies in control panel.
   [daniele]
 
 1.2.2 (2021-03-25)
