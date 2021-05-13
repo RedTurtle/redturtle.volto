@@ -465,9 +465,26 @@ def post_install(context):
     """Post install script"""
     portal = api.portal.get()
 
-    is_pam_installed = get_installer(
-        portal, context.REQUEST
-    ).isProductInstalled("plone.app.multilingual")
+    try:
+        from Products.CMFPlone.utils import get_installer
+    except ImportError:
+        # BBB For Plone 5.0 and lower.
+        qi = getToolByName(portal, 'portal_quickinstaller', None)
+        if qi is None:
+            return
+        old_qi = True
+    else:
+        qi = get_installer(portal)
+        old_qi = False
+    
+    if old_qi:
+        is_pam_installed = get_installer(
+            portal, context.REQUEST
+        ).isProductInstalled("plone.app.multilingual")
+    else:
+        is_pam_installed = get_installer(
+            portal, context.REQUEST
+        ).is_product_installed("plone.app.multilingual")   
 
     create_root_homepage()
 
