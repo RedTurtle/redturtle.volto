@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-11-27 14:55+0000\n"
+"POT-Creation-Date: 2021-04-12 15:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.volto\n"
 
-#: redturtle/volto/configure.zcml:23
+#: redturtle/volto/configure.zcml:25
 msgid "Installs the redturtle.volto add-on."
 msgstr ""
 
@@ -25,11 +25,11 @@ msgstr ""
 msgid "Metadata"
 msgstr ""
 
-#: redturtle/volto/configure.zcml:23
+#: redturtle/volto/configure.zcml:25
 msgid "RedTurtle: Volto"
 msgstr ""
 
-#: redturtle/volto/configure.zcml:32
+#: redturtle/volto/configure.zcml:34
 msgid "RedTurtle: Volto (uninstall)"
 msgstr ""
 
@@ -41,6 +41,11 @@ msgstr ""
 msgid "Show elements excluded from navigation"
 msgstr ""
 
-#: redturtle/volto/configure.zcml:32
+#: redturtle/volto/configure.zcml:34
 msgid "Uninstalls the redturtle.volto add-on."
+msgstr ""
+
+#. Default: "Insert an external link directly into the field,or select an internal link clicking on the icon."
+#: redturtle/volto/types/adapters.py:25
+msgid "remoteUrl_restapi_label"
 msgstr ""

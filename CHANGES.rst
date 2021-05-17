@@ -1,11 +1,72 @@
 Changelog
 =========
 
-1.2.3 (unreleased)
+2.1.3 (unreleased)
 ------------------
 
 - Provided basic setup for caching policies in control panel.
   [daniele]
+
+2.1.2 (2021-05-11)
+------------------
+
+- Additional fix in start and end values handling in querystring-search.
+  [cekk]
+
+
+2.1.1 (2021-05-11)
+------------------
+
+- Fix start and end values handling in querystring-search.
+  [cekk]
+
+
+2.1.0 (2021-05-05)
+------------------
+
+- Compatibility with changes in plone.restapi 7.3.2.
+  [cekk]
+
+
+2.0.2 (2021-05-05)
+------------------
+
+- Handle also limit in querystringsearch patch.
+  [cekk]
+
+2.0.1 (2021-05-05)
+------------------
+
+- Handle sort order in querystringsearch patch.
+  [cekk]
+
+
+2.0.0 (2021-04-30)
+------------------
+
+- Remove @events-search endpoint and customize @querystring-search one to handle Events like @events-search.
+  [cekk]
+
+
+1.3.0 (2021-04-19)
+------------------
+
+- Monkeypatch to respect locally allowed types also on content paste.
+  [cekk]
+
+
+1.2.4 (2021-04-15)
+------------------
+
+- Customize translation for remoteUrl field description only for restapi call.
+  [cekk]
+
+
+1.2.3 (2021-04-01)
+------------------
+
+- added block type 'searchEvents' to EXCLUDE_TYPES [giuliaghisini]
+
 
 1.2.2 (2021-03-25)
 ------------------

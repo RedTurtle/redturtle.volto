@@ -126,36 +126,18 @@ Returns a data structure like this::
         'depth': 3,
     }
 
-Keywords vocabulary patch
---------------------------
-
-We copied the patch from kitconcept.volto_ for special characters in keywords vocabulary
-(used for example in Subjects field).
-
-.. _kitconcept.volto: https://github.com/kitconcept/kitconcept.volto/blob/master/src/kitconcept/volto/vocabularies/subject.py
-
-
-Products.PortalTransforms patch
--------------------------------
-
-See https://github.com/plone/Products.PortalTransforms/pull/43
-
-There is a monkeypatch to apply that changes.
-
 
 @search endpoint
 ----------------
 
 We customized @search endpoint for that bug: https://github.com/plone/plone.restapi/pull/1066
 
-@events-search endpoint
------------------------
+@querystring-search endpoint customization
+------------------------------------------
 
-Endpoint similar to `@querystring-search` that is used to make queries for events.
+If we are searching only for `Event` types, do a special search using **get_events** method to search events: that method handle recurrences and avoid wrong results.
 
-This uses `get_events` method to search events: that method handle recurrences and avoid wrong results.
-
-The usage is similar to `@querystring-search`.
+Otherwise, perform a default querystring-search.
 
 
 Disallow bot indexing
@@ -165,6 +147,37 @@ There is a custom viewlet that add a <meta> tag in the <head> section to prevent
 
 For reference: https://developers.google.com/search/docs/advanced/crawling/block-indexing?visit_id=637489966041845317-1328107746&rd=1
 
+Patches
+=======
+
+Keywords vocabulary
+-------------------
+
+We copied the patch from kitconcept.volto_ for special characters in keywords vocabulary
+(used for example in Subjects field).
+
+.. _kitconcept.volto: https://github.com/kitconcept/kitconcept.volto/blob/master/src/kitconcept/volto/vocabularies/subject.py
+
+
+Products.PortalTransforms
+-------------------------
+
+See https://github.com/plone/Products.PortalTransforms/pull/43
+
+There is a monkeypatch to apply that changes.
+
+Events recurrence
+-----------------
+
+There is a monkeypatch for Events recurrences that fix their duration.
+
+If it works well, we can make a pr in p.a.event.
+
+
+Respect locally allowed types on paste
+--------------------------------------
+
+Disallow paste items that are not allowed into destination folder.
 
 
 Fixed dependencies versions
@@ -193,11 +206,13 @@ There is a monkeypatch for Events recurrences that fix their duration.
 
 If it works well, we can make a pr in p.a.event.
 
+
 Caching controlpanel
 ====================
 
 After installation the caching control panel is populated with custom policies while caching is globally enabled by default. Please, set the caching proxies properly.
  
+
 Installation
 ============
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
 from lxml import etree
 from lxml import html
 from lxml.html.clean import Cleaner
@@ -8,6 +9,7 @@ from plone.event.interfaces import IEventAccessor
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
 from plone.registry.interfaces import IRegistry
+from Products.CMFPlone.interfaces import IConstrainTypes
 from Products.CMFPlone.interfaces import IFilterSchema
 from Products.CMFPlone.utils import safe_encode
 from Products.PortalTransforms.libtransforms.utils import bodyfinder
@@ -154,3 +156,13 @@ def occurrences(self, range_start=None, range_end=None):
 
     for start in starts:
         yield get_obj(start)
+
+
+def _verifyObjectPaste(self, obj, validate_src=True):
+    self._old__verifyObjectPaste(obj, validate_src=True)
+    portal_type = getattr(aq_base(obj), "portal_type", None)
+    constrains = IConstrainTypes(self, None)
+    if constrains:
+        allowed_ids = [i.getId() for i in constrains.allowedContentTypes()]
+        if portal_type not in allowed_ids:
+            raise ValueError("Disallowed subobject type: %s" % portal_type)
