@@ -4,8 +4,8 @@ Changelog
 2.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Provided basic setup for caching policies in control panel.
+  [daniele]
 
 2.1.2 (2021-05-11)
 ------------------
