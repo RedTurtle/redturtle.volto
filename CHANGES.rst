@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.3 (unreleased)
+3.0.0 (unreleased)
 ------------------
 
 - Provided basic setup for caching policies in control panel.
