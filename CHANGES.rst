@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0 (unreleased)
+3.0.0 (2021-05-28)
 ------------------
 
 - Provided basic setup for caching policies in control panel.
