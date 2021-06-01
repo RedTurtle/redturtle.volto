@@ -2,12 +2,9 @@
 from Acquisition import aq_base
 from collective.volto.blocksfield.field import BlocksField
 from copy import deepcopy
-from design.plone.contenttypes.upgrades.draftjs_converter import to_draftjs
 from plone import api
-from plone.app.textfield.value import RichTextValue
 from plone.dexterity.utils import iterSchemata
 from zope.schema import getFields
-
 
 import logging
 import json
@@ -67,7 +64,7 @@ def to_1005(context):
     )
 
 
-def to_volto13(context):
+def to_volto13(context):  # noqa: C901
     # convert listing blocks with new standard
 
     logger.info("### START CONVERSION TO VOLTO 13 ###")
@@ -118,6 +115,8 @@ def to_volto13(context):
                         item.blocks = blocks
                 elif isinstance(field, BlocksField):
                     value = deepcopy(field.get(item))
+                    if not value:
+                        continue
                     if isinstance(value, str):
                         if value == "":
                             setattr(
@@ -125,14 +124,8 @@ def to_volto13(context):
                                 name,
                                 {"blocks": {}, "blocks_layout": {"items": []}},
                             )
-                        else:
-                            import pdb
-
-                            pdb.set_trace()
-                        continue
-                    if not value:
-                        continue
+                            continue
                     blocks = value.get("blocks", {})
                     if blocks:
                         fix_listing(blocks, brain.getURL())
-                    setattr(item, name, value)
+                        setattr(item, name, value)
