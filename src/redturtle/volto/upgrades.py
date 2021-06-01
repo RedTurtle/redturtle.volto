@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
+from collective.volto.blocksfield.field import BlocksField
+from copy import deepcopy
+from design.plone.contenttypes.upgrades.draftjs_converter import to_draftjs
 from plone import api
+from plone.app.textfield.value import RichTextValue
+from plone.dexterity.utils import iterSchemata
+from zope.schema import getFields
+
 
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -52,5 +61,78 @@ def to_1005(context):
         "profile-plone.app.caching:default", "plone.app.registry", False
     )
     context.runImportStepFromProfile(
-        "profile-plone.app.caching:with-caching-proxy", "plone.app.registry", False
+        "profile-plone.app.caching:with-caching-proxy",
+        "plone.app.registry",
+        False,
     )
+
+
+def to_volto13(context):
+    # convert listing blocks with new standard
+
+    logger.info("### START CONVERSION TO VOLTO 13 ###")
+
+    def fix_listing(blocks, url):
+        for block in blocks.values():
+            if block.get("@type", "") == "listing":
+                if block.get("template", False) and not block.get(
+                    "variation", False
+                ):
+                    block["variation"] = block["template"]
+                    del block["template"]
+                    logger.info("- {}".format(url))
+                if block.get("template", False) and block.get(
+                    "variation", False
+                ):
+                    del block["template"]
+                    logger.info("- {}".format(url))
+
+    # fix root
+    portal = api.portal.get()
+    portal_blocks = json.loads(portal.blocks)
+    fix_listing(portal_blocks, portal)
+    portal.blocks = json.dumps(portal_blocks)
+
+    # fix blocks in contents
+    pc = api.portal.get_tool(name="portal_catalog")
+    brains = pc()
+    tot = len(brains)
+    i = 0
+    for brain in brains:
+        i += 1
+        if i % 1000 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        item = aq_base(brain.getObject())
+        if getattr(item, "blocks", {}):
+            blocks = deepcopy(item.blocks)
+            if blocks:
+                fix_listing(blocks, brain.getURL())
+                item.blocks = blocks
+        for schema in iterSchemata(item):
+            # fix blocks in blocksfields
+            for name, field in getFields(schema).items():
+                if name == "blocks":
+                    blocks = deepcopy(item.blocks)
+                    if blocks:
+                        fix_listing(blocks, brain.getURL())
+                        item.blocks = blocks
+                elif isinstance(field, BlocksField):
+                    value = deepcopy(field.get(item))
+                    if isinstance(value, str):
+                        if value == "":
+                            setattr(
+                                item,
+                                name,
+                                {"blocks": {}, "blocks_layout": {"items": []}},
+                            )
+                        else:
+                            import pdb
+
+                            pdb.set_trace()
+                        continue
+                    if not value:
+                        continue
+                    blocks = value.get("blocks", {})
+                    if blocks:
+                        fix_listing(blocks, brain.getURL())
+                    setattr(item, name, value)
