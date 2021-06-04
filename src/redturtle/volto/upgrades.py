@@ -92,9 +92,12 @@ def to_volto13(context):  # noqa: C901
 
     # fix root
     portal = api.portal.get()
-    portal_blocks = json.loads(portal.blocks)
-    fix_listing(portal_blocks, portal.absolute_url())
-    portal.blocks = json.dumps(portal_blocks)
+
+    portal_blocks = getattr(portal, "blocks", "")
+    if portal_blocks:
+        portal_blocks = json.loads(portal_blocks)
+        fix_listing(portal_blocks, portal.absolute_url())
+        portal.blocks = json.dumps(portal_blocks)
 
     # fix blocks in contents
     pc = api.portal.get_tool(name="portal_catalog")
