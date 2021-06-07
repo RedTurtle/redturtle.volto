@@ -16,6 +16,7 @@ from Products.CMFPlone.utils import safe_encode
 from Products.PortalTransforms.libtransforms.utils import bodyfinder
 from Products.PortalTransforms.transforms.safe_html import hasScript
 from zope.component import getUtility
+from zope.globalrequest import getRequest
 
 import datetime
 import six
@@ -171,7 +172,8 @@ def _verifyObjectPaste(self, obj, validate_src=True):
 
 # PURGE/BAN EVERYTHING (NO TYPE CHECKING)
 def isPurged(obj):
-    return True
+    if getRequest() is not None:
+        return True
 
 
 purge.isPurged = isPurged
