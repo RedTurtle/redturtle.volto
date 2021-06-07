@@ -67,6 +67,7 @@ setup(
         "Products.ZCatalog>=5.1",
         "plone.namedfile>=5.4.0",
         "Products.PloneHotfix20200121>=1.0",
+        "collective.purgebyid",
     ],
     extras_require={
         "test": [

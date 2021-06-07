@@ -5,6 +5,7 @@ from lxml import html
 from lxml.html.clean import Cleaner
 from plone.app.event.base import dt_start_of_day
 from plone.app.event.recurrence import Occurrence
+from plone.app.caching import purge
 from plone.event.interfaces import IEventAccessor
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
@@ -166,3 +167,11 @@ def _verifyObjectPaste(self, obj, validate_src=True):
         allowed_ids = [i.getId() for i in constrains.allowedContentTypes()]
         if portal_type not in allowed_ids:
             raise ValueError("Disallowed subobject type: %s" % portal_type)
+
+
+# PURGE/BAN EVERYTHING (NO TYPE CHECKING)
+def isPurged(obj):
+    return True
+
+
+purge.isPurged = isPurged
