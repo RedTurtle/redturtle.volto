@@ -8,6 +8,18 @@ redturtle.volto
 
 This is an helper package that setup a RedTurtle's Plone site ready to work with Volto.
 
+
+|python| |version| |ci|
+
+.. |python| image:: https://img.shields.io/pypi/pyversions/redturtle.volto.svg
+  :target: https://pypi.python.org/pypi/redturtle.volto/
+
+.. |version| image:: http://img.shields.io/pypi/v/redturtle.volto.svg
+  :target: https://pypi.python.org/pypi/redturtle.volto
+
+.. |ci| image:: https://github.com/RedTurtle/redturtle.volto/actions/workflows/tests.yml/badge.svg
+  :target: https://github.com/RedTurtle/redturtle.volto/actions
+
 Features
 ========
 
