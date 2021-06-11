@@ -104,7 +104,7 @@ def to_volto13(context):  # noqa: C901
                 block["querystring"]["sort_order_boolean"] = (
                     True
                     if block["sort_order"] == "descending"
-                    or block["sort_order"]
+                    or block["sort_order"]  # noqa
                     else False
                 )
                 del block["sort_order"]
