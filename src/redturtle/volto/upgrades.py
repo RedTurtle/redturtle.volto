@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
-from collective.volto.blocksfield.field import BlocksField
 from copy import deepcopy
 from plone import api
 from plone.dexterity.utils import iterSchemata
@@ -8,6 +7,13 @@ from zope.schema import getFields
 
 import logging
 import json
+
+try:
+    from collective.volto.blocksfield.field import BlocksField
+
+    HAS_BLOCKSFIELD = True
+except ImportError:
+    HAS_BLOCKSFIELD = False
 
 logger = logging.getLogger(__name__)
 
@@ -127,11 +133,13 @@ def to_volto13(context):  # noqa: C901
 
     # fix root
     portal = api.portal.get()
+
     portal_blocks = getattr(portal, "blocks", "")
     if portal_blocks:
-        json_blocks = json.loads(portal_blocks)
-        fix_listing(json_blocks, portal)
-        portal.blocks = json.dumps(json_blocks)
+        portal_blocks = json.loads(portal_blocks)
+        fix_listing(portal_blocks, portal.absolute_url())
+        portal.blocks = json.dumps(portal_blocks)
+
     # fix blocks in contents
     pc = api.portal.get_tool(name="portal_catalog")
     brains = pc()
@@ -155,19 +163,26 @@ def to_volto13(context):  # noqa: C901
                     if blocks:
                         fix_listing(blocks, brain.getURL())
                         item.blocks = blocks
-                elif isinstance(field, BlocksField):
-                    value = deepcopy(field.get(item))
-                    if not value:
+                else:
+                    if not HAS_BLOCKSFIELD:
+                        # blocks are only in blocks field
                         continue
-                    if isinstance(value, str):
-                        if value == "":
-                            setattr(
-                                item,
-                                name,
-                                {"blocks": {}, "blocks_layout": {"items": []}},
-                            )
+                    if isinstance(field, BlocksField):
+                        value = deepcopy(field.get(item))
+                        if not value:
                             continue
-                    blocks = value.get("blocks", {})
-                    if blocks:
-                        fix_listing(blocks, brain.getURL())
-                        setattr(item, name, value)
+                        if isinstance(value, str):
+                            if value == "":
+                                setattr(
+                                    item,
+                                    name,
+                                    {
+                                        "blocks": {},
+                                        "blocks_layout": {"items": []},
+                                    },
+                                )
+                                continue
+                        blocks = value.get("blocks", {})
+                        if blocks:
+                            fix_listing(blocks, brain.getURL())
+                            setattr(item, name, value)
