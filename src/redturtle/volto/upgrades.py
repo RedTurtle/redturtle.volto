@@ -182,7 +182,14 @@ def to_volto13(context):  # noqa: C901
                                     },
                                 )
                                 continue
-                        blocks = value.get("blocks", {})
+                        try:
+                            blocks = value.get("blocks", {})
+                        except AttributeError:
+                            logger.warning(
+                                "[RICHTEXT] - {} (not converted)".format(
+                                    brain.getURL()
+                                )
+                            )
                         if blocks:
                             fix_listing(blocks, brain.getURL())
                             setattr(item, name, value)
