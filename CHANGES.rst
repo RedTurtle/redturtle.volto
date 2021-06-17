@@ -1,11 +1,17 @@
 Changelog
 =========
 
-3.0.1 (unreleased)
+3.0.2 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+3.0.1 (2021-06-08)
+------------------
+
+- review caching profile
+  [mamico]
 
 3.0.0 (2021-05-28)
 ------------------
