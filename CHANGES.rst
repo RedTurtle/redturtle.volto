@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.1.1 (unreleased)
+3.1.1 (2021-06-17)
 ------------------
 
 - Handle contents with old Richtext values in volto13 migration.
