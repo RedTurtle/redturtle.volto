@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.1.0 (unreleased)
+3.1.0 (2021-06-17)
 ------------------
 
 - [BREAKING CHANGE] Volto 13 support. The upgrade-step will update listing blocks data.
