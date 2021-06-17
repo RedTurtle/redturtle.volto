@@ -1,10 +1,11 @@
 Changelog
 =========
 
-3.0.2 (unreleased)
+3.1.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- [BREAKING CHANGE] Volto 13 support. The upgrade-step will update listing blocks data.
+  [cekk]
 
 
 3.0.1 (2021-06-08)
