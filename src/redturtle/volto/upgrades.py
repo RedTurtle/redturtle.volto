@@ -1,7 +1,19 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
+from copy import deepcopy
 from plone import api
+from plone.dexterity.utils import iterSchemata
+from zope.schema import getFields
 
 import logging
+import json
+
+try:
+    from collective.volto.blocksfield.field import BlocksField
+
+    HAS_BLOCKSFIELD = True
+except ImportError:
+    HAS_BLOCKSFIELD = False
 
 logger = logging.getLogger(__name__)
 
@@ -52,5 +64,125 @@ def to_1005(context):
         "profile-plone.app.caching:default", "plone.app.registry", False
     )
     context.runImportStepFromProfile(
-        "profile-plone.app.caching:with-caching-proxy", "plone.app.registry", False
+        "profile-plone.app.caching:with-caching-proxy",
+        "plone.app.registry",
+        False,
     )
+
+
+def to_volto13(context):  # noqa: C901
+    # convert listing blocks with new standard
+
+    logger.info("### START CONVERSION TO VOLTO 13 ###")
+
+    def fix_listing(blocks, url):
+        for block in blocks.values():
+            if block.get("@type", "") != "listing":
+                continue
+            if block.get("template", False) and not block.get(
+                "variation", False
+            ):
+                block["variation"] = block["template"]
+                del block["template"]
+                logger.info("- {}".format(url))
+            if block.get("template", False) and block.get("variation", False):
+                del block["template"]
+                logger.info("- {}".format(url))
+
+            # Migrate to internal structure
+            if not block.get("querystring", False):
+                # Creates if it is not created
+                block["querystring"] = {}
+            if block.get("query", False) or block.get("query") == []:
+                block["querystring"]["query"] = block["query"]
+                del block["query"]
+            if block.get("sort_on", False):
+                block["querystring"]["sort_on"] = block["sort_on"]
+                del block["sort_on"]
+            if block.get("sort_order", False):
+                block["querystring"]["sort_order"] = block["sort_order"]
+                if isinstance(block["sort_order"], bool):
+                    block["querystring"]["sort_order"] = (
+                        "descending" if block["sort_order"] else "ascending"
+                    )
+                else:
+                    block["querystring"]["sort_order"] = block["sort_order"]
+                block["querystring"]["sort_order_boolean"] = (
+                    True
+                    if block["sort_order"] == "descending"
+                    or block["sort_order"]  # noqa
+                    else False
+                )
+                del block["sort_order"]
+            if block.get("limit", False):
+                block["querystring"]["limit"] = block["limit"]
+                del block["limit"]
+            if block.get("batch_size", False):
+                block["querystring"]["batch_size"] = block["batch_size"]
+                del block["batch_size"]
+            if block.get("depth", False):
+                block["querystring"]["depth"] = block["depth"]
+                del block["depth"]
+
+            # batch_size to b_size, idempotent
+            if block["querystring"].get("batch_size", False):
+                block["querystring"]["b_size"] = block["querystring"][
+                    "batch_size"
+                ]
+                del block["querystring"]["batch_size"]
+
+    # fix root
+    portal = api.portal.get()
+
+    portal_blocks = getattr(portal, "blocks", "")
+    if portal_blocks:
+        portal_blocks = json.loads(portal_blocks)
+        fix_listing(portal_blocks, portal.absolute_url())
+        portal.blocks = json.dumps(portal_blocks)
+
+    # fix blocks in contents
+    pc = api.portal.get_tool(name="portal_catalog")
+    brains = pc()
+    tot = len(brains)
+    i = 0
+    for brain in brains:
+        i += 1
+        if i % 1000 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        item = aq_base(brain.getObject())
+        if getattr(item, "blocks", {}):
+            blocks = deepcopy(item.blocks)
+            if blocks:
+                fix_listing(blocks, brain.getURL())
+                item.blocks = blocks
+        for schema in iterSchemata(item):
+            # fix blocks in blocksfields
+            for name, field in getFields(schema).items():
+                if name == "blocks":
+                    blocks = deepcopy(item.blocks)
+                    if blocks:
+                        fix_listing(blocks, brain.getURL())
+                        item.blocks = blocks
+                else:
+                    if not HAS_BLOCKSFIELD:
+                        # blocks are only in blocks field
+                        continue
+                    if isinstance(field, BlocksField):
+                        value = deepcopy(field.get(item))
+                        if not value:
+                            continue
+                        if isinstance(value, str):
+                            if value == "":
+                                setattr(
+                                    item,
+                                    name,
+                                    {
+                                        "blocks": {},
+                                        "blocks_layout": {"items": []},
+                                    },
+                                )
+                                continue
+                        blocks = value.get("blocks", {})
+                        if blocks:
+                            fix_listing(blocks, brain.getURL())
+                            setattr(item, name, value)
