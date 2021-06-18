@@ -4,7 +4,8 @@ Changelog
 3.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix also linkMore in volto13 migration.
+  [cekk]
 
 
 3.1.1 (2021-06-17)

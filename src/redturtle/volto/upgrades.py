@@ -79,6 +79,7 @@ def to_volto13(context):  # noqa: C901
         for block in blocks.values():
             if block.get("@type", "") != "listing":
                 continue
+            # fix template
             if block.get("template", False) and not block.get(
                 "variation", False
             ):
@@ -130,6 +131,25 @@ def to_volto13(context):  # noqa: C901
                     "batch_size"
                 ]
                 del block["querystring"]["batch_size"]
+
+            # fix linkMore
+            if "linkMore" in block:
+                block["linkTitle"] = block["linkMore"].get("title", "")
+                href = block["linkMore"].get("href", "")
+                item = api.content.get(href)
+                if item:
+                    block["linkHref"] = [
+                        {
+                            "@id": href,
+                            "Description": item.Description(),
+                            "Title": item.Title(),
+                            "title": item.Title(),
+                        }
+                    ]
+                else:
+                    block["linkHref"] = [{"@id": href, "title": href}]
+                del block["linkMore"]
+                logger.info(" - [LINKMORE] {}".format(url))
 
     # fix root
     portal = api.portal.get()
