@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.1.2 (unreleased)
+3.1.2 (2021-06-18)
 ------------------
 
 - Fix also linkMore in volto13 migration.
