@@ -95,7 +95,10 @@ def to_volto13(context):  # noqa: C901
                 # Creates if it is not created
                 block["querystring"] = {}
             if block.get("query", False) or block.get("query") == []:
-                block["querystring"]["query"] = block["query"]
+                if not block["querystring"].get("query", []):
+                    # first time.
+                    # there is a bug in volto that re-creates block['query']
+                    block["querystring"]["query"] = block["query"]
                 del block["query"]
             if block.get("sort_on", False):
                 block["querystring"]["sort_on"] = block["sort_on"]
