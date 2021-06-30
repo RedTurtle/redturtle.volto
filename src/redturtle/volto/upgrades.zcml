@@ -69,4 +69,12 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_volto13"
     />
+  <genericsetup:upgradeStep
+    source="1100"
+    destination="1101"
+    title="Migrate to volto 13 - bis"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_volto13_bis"
+    />
 </configure>

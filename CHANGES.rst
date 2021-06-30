@@ -1,11 +1,17 @@
 Changelog
 =========
 
-3.1.3 (unreleased)
+3.1.4 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+3.1.3 (2021-06-30)
+------------------
+
+- Fix b_size conversion in upgrade-step for Volto 13.
+  [cekk]
 
 3.1.2 (2021-06-18)
 ------------------
