@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.1.3 (unreleased)
+3.1.3 (2021-06-30)
 ------------------
 
 - Fix b_size conversion in upgrade-step for Volto 13.
