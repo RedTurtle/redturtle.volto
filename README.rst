@@ -191,6 +191,13 @@ Respect locally allowed types on paste
 
 Disallow paste items that are not allowed into destination folder.
 
+@workflow endpoint
+------------------
+
+See https://github.com/plone/plone.restapi/pull/1184
+
+When is merged, we can remove this patch.
+
 
 Fixed dependencies versions
 ===========================

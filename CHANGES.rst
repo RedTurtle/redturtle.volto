@@ -4,7 +4,8 @@ Changelog
 3.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Customize @workflow endpoint for plone.restapi #1184 pr.
+  [cekk]
 
 
 3.1.3 (2021-06-30)
