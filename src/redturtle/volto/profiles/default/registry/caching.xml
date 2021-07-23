@@ -23,11 +23,6 @@
   <record name="plone.app.caching.strongCaching.plone.stableResource.maxage">
     <value>86400</value>
   </record>
-  <record name="plone.cachepurging.interfaces.ICachePurgingSettings.cachingProxies" interface="plone.cachepurging.interfaces.ICachePurgingSettings" field="cachingProxies">
-    <value>
-      <element>http://localhost:9068</element>
-    </value>
-  </record>
   <record name="plone.cachepurging.interfaces.ICachePurgingSettings.enabled" interface="plone.cachepurging.interfaces.ICachePurgingSettings" field="enabled">
     <value>True</value>
   </record>

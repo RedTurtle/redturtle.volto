@@ -4,7 +4,8 @@ Changelog
 3.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove default cache proxy address on install.
+  [cekk]
 
 
 3.1.3 (2021-06-30)
