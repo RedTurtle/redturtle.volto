@@ -4,7 +4,10 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
-  <!-- REMOVE THIS SERVICE WHEN https://github.com/plone/plone.restapi/pull/1184 IS MERGED AND RELEASED-->
+  <!-- 
+    REMOVE THIS SERVICE WHEN https://github.com/plone/plone.restapi/pull/1184
+    and https://github.com/plone/plone.restapi/pull/1190 ARE MERGED AND RELEASED
+  -->
 
   <adapter
       factory=".info.WorkflowInfo"
@@ -23,6 +26,15 @@
   <plone:service
       method="GET"
       factory=".info.WorkflowInfoService"
+      for="Products.CMFCore.interfaces.IContentish"
+      permission="zope2.View"
+      name="@workflow"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
+
+  <plone:service
+      method="POST"
+      factory=".transition.WorkflowTransition"
       for="Products.CMFCore.interfaces.IContentish"
       permission="zope2.View"
       name="@workflow"
