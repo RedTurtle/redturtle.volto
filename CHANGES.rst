@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.1.4 (unreleased)
+3.2.0 (2021-08-02)
 ------------------
 
 - Customize @workflow endpoint for plone.restapi #1184 and #1190 pr.
