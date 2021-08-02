@@ -6,6 +6,8 @@ Changelog
 
 - Customize @workflow endpoint for plone.restapi #1184 pr.
   [cekk]
+- Remove default cache proxy address on install.
+  [cekk]
 
 
 3.1.3 (2021-06-30)
