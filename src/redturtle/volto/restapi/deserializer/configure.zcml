@@ -11,7 +11,10 @@
 
   <!-- convert resolveuids also in rich text fields -->
   <adapter factory=".dxfields.RichTextFieldDeserializer" />
-
+  
   <!-- convert Link widget value in normalized url -->
   <adapter factory=".dxfields.LinkTextLineFieldDeserializer" />
+  
+  
+  <!-- <adapter factory=".dxfields.DatetimeFieldDeserializer" /> -->
 </configure>

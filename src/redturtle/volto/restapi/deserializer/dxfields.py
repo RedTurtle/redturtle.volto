@@ -1,20 +1,27 @@
 # -*- coding: utf-8 -*-
+from plone.app.contenttypes.interfaces import ILink
+from plone.app.event.base import default_timezone
 from plone.app.textfield.interfaces import IRichText
 from plone.dexterity.interfaces import IDexterityContent
-from plone.restapi.interfaces import IFieldDeserializer
 from plone.restapi.deserializer.blocks import path2uid
 from plone.restapi.deserializer.dxfields import (
+    DatetimeFieldDeserializer as DefaultDatetimeFieldDeserializer,
     RichTextFieldDeserializer as BaseRichTextDeserializer,
     TextLineFieldDeserializer as BaseTextLineDeserializer,
 )
+from plone.restapi.interfaces import IFieldDeserializer
 from Products.CMFPlone.utils import safe_unicode
+from pytz import timezone
+from pytz import utc
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.interface import implementer
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
-from plone.app.contenttypes.interfaces import ILink
+from zope.schema.interfaces import IDatetime
 from zope.schema.interfaces import ITextLine
 
+import pytz
+import dateutil
 import lxml
 
 
@@ -60,4 +67,40 @@ class LinkTextLineFieldDeserializer(BaseTextLineDeserializer):
             transformed_url = path2uid(context=portal, link=value)
             if transformed_url != value and "resolveuid" in transformed_url:
                 value = "${{portal_url}}/{uid}".format(uid=transformed_url)
+        return value
+
+
+@implementer(IFieldDeserializer)
+@adapter(IDatetime, IDexterityContent, IRedturtleVoltoLayer)
+class DatetimeFieldDeserializer(DefaultDatetimeFieldDeserializer):
+    def __call__(self, value):
+        """
+        Always set current timezone and ignore stored one.
+        """
+        if value is None:
+            self.field.validate(value)
+            return
+
+        tzinfo = pytz.timezone(default_timezone())
+
+        # Parse ISO 8601 string with dateutil
+        try:
+            dt = dateutil.parser.parse(value)
+        except ValueError:
+            raise ValueError(u"Invalid date: {}".format(value))
+
+        # Convert to TZ aware in UTC
+        if dt.tzinfo is not None:
+            dt = dt.astimezone(utc)
+        else:
+            dt = utc.localize(dt)
+
+        # Convert to local TZ aware or naive UTC
+        if tzinfo is not None:
+            tz = timezone(tzinfo.zone)
+            value = tz.normalize(dt.astimezone(tz))
+        else:
+            value = utc.normalize(dt.astimezone(utc)).replace(tzinfo=None)
+
+        self.field.validate(value)
         return value
