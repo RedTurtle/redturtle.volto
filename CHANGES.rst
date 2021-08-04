@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.2.1 (unreleased)
+3.2.1 (2021-08-04)
 ------------------
 
 - Remove customized @workflow endpoint. Is now merged in plone.restapi >= 8.7.1.
