@@ -59,8 +59,8 @@ class DateTimeFieldSerializer:
         )
         if value and self.field.interface == IPublication:
             # the patch: we want the dates with full tz infos
-            # value is taken from
-            # plone.app.dexterity.behaviors.metadata.Publication and escape
-            # the timezone
+            # default value is taken from
+            # plone.app.dexterity.behaviors.metadata.Publication that escape
+            # timezone
             return getattr(self.context, self.field.__name__)()
         return value

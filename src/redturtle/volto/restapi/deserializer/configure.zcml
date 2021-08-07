@@ -16,5 +16,5 @@
   <adapter factory=".dxfields.LinkTextLineFieldDeserializer" />
   
   
-  <!-- <adapter factory=".dxfields.DatetimeFieldDeserializer" /> -->
+  <adapter factory=".dxfields.DatetimeFieldDeserializer" />
 </configure>
