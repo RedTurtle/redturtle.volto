@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from plone import api
 from plone.app.testing import (
     SITE_OWNER_NAME,
     SITE_OWNER_PASSWORD,
@@ -10,7 +9,6 @@ from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from DateTime import DateTime
 from transaction import commit
-from datetime import datetime
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
@@ -75,17 +73,17 @@ class TestPublicationFieldsFixes(unittest.TestCase):
         registry = getUtility(IRegistry)
         registry[reg_key] = "UTC"
 
-    def test_set_effective_date_store_right_value_in_plone(self):
-        now = DateTime()
-        # now_localized = now_utc.astimezone(self.t_zone)
-        response = self.api_session.post(
-            self.portal_url,
-            json={
-                "@type": "Document",
-                "id": "mydocument",
-                "title": "My Document",
-                "effective": "{}Z".format(now.utcdatetime().isoformat()),
-            },
-        )
-        commit()
-        # self.assertEqual(201, response.status_code)
+    # def test_set_effective_date_store_right_value_in_plone(self):
+    #     now = DateTime()
+    #     # now_localized = now_utc.astimezone(self.t_zone)
+    #     response = self.api_session.post(
+    #         self.portal_url,
+    #         json={
+    #             "@type": "Document",
+    #             "id": "mydocument",
+    #             "title": "My Document",
+    #             "effective": "{}Z".format(now.utcdatetime().isoformat()),
+    #         },
+    #     )
+    #     commit()
+    #     # self.assertEqual(201, response.status_code)
