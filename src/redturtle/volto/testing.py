@@ -7,15 +7,12 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.restapi.testing import PloneRestApiDXLayer
 from plone.testing import z2
-from plone.testing.layer import Layer
 
 import collective.folderishtypes
 import collective.volto.cookieconsent
 import plone.restapi
 import redturtle.volto
 import plone.app.caching
-import os
-import time
 
 
 class RedturtleVoltoLayer(PloneSandboxLayer):
