@@ -37,10 +37,9 @@ class TestPublicationFieldsFixes(unittest.TestCase):
         self._orig_content_zone = content._zone
         content._zone = "GMT+2"
 
-        reg_key = "plone.portal_timezone"
         registry = getUtility(IRegistry)
-        registry[reg_key] = tz
-
+        registry["plone.portal_timezone"] = tz
+        registry["plone.available_timezones"] = [tz]
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
         self.portal_url = self.portal.absolute_url()
@@ -69,21 +68,30 @@ class TestPublicationFieldsFixes(unittest.TestCase):
         content.FLOOR_DATE = DateTime(1970, 0)
         content.CEILING_DATE = DateTime(2500, 0)
 
-        reg_key = "plone.portal_timezone"
         registry = getUtility(IRegistry)
-        registry[reg_key] = "UTC"
+        registry["plone.portal_timezone"] = "UTC"
+        registry["plone.available_timezones"] = ["UTC"]
 
-    # def test_set_effective_date_store_right_value_in_plone(self):
-    #     now = DateTime()
-    #     # now_localized = now_utc.astimezone(self.t_zone)
-    #     response = self.api_session.post(
-    #         self.portal_url,
-    #         json={
-    #             "@type": "Document",
-    #             "id": "mydocument",
-    #             "title": "My Document",
-    #             "effective": "{}Z".format(now.utcdatetime().isoformat()),
-    #         },
-    #     )
-    #     commit()
-    #     # self.assertEqual(201, response.status_code)
+    def test_set_effective_date_store_right_value_in_plone(self):
+        effective = DateTime()
+        expires = effective + 1
+        self.api_session.post(
+            self.portal_url,
+            json={
+                "@type": "Document",
+                "id": "mydocument",
+                "title": "My Document",
+                "effective": "{}Z".format(effective.utcdatetime().isoformat()),
+                "expires": "{}Z".format(expires.utcdatetime().isoformat()),
+            },
+        )
+        commit()
+
+        self.assertEqual(
+            self.portal["mydocument"].effective().strftime("%d-%m-%Y %H:%M"),
+            effective.strftime("%d-%m-%Y %H:%M"),
+        )
+        self.assertEqual(
+            self.portal["mydocument"].expires().strftime("%d-%m-%Y %H:%M"),
+            expires.strftime("%d-%m-%Y %H:%M"),
+        )

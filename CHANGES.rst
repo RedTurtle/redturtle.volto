@@ -4,7 +4,8 @@ Changelog
 3.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Customize serializer/deserializer for DateTime fields to correctly set effective and expires with right timezone delta.
+  [cekk]
 
 
 3.2.0 (2021-08-02)
