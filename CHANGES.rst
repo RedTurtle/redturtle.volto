@@ -4,8 +4,8 @@ Changelog
 3.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Enable Anonymous to access Plone vocabularies with restapi. **@vocabularies** endpoint has been customized to limit the vocabularies that anonymous can actually access.
+  [cekk]
 
 3.2.1 (2021-08-04)
 ------------------
