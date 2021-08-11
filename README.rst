@@ -232,7 +232,7 @@ Grant **plone.restapi: Access Plone vocabularies** permission to Anonymous users
 
 This allows users to potentially access to all vocabularies.
 
-To avoid this, we patched the *@vocabularies* endpoint and add an additional check:
+To avoid this, we patched the *@vocabularies* endpoint and add an additional checks:
 
 - Anonymous can't access to the vocabularies list (@vocabularies)
 - Anonymous can only access to a limited list of vocabularies (see below)
@@ -240,10 +240,15 @@ To avoid this, we patched the *@vocabularies* endpoint and add an additional che
 - Simple users can only acces to a limited list of vocabularies (see below)
 - Advanced users can access to all vocabularies
 
-Available vocabularies through restapi
---------------------------------------
+Available vocabularies
+----------------------
 
-There is a check in @vocabularies endpoint that checks if the given vocabulary name is in a whitelist.
+- plone.app.vocabularies.Keywords
+
+Customize available vocabularies list
+-------------------------------------
+
+There is a check in @vocabularies endpoint that checks if the given vocabulary name  is in a whitelist.
 
 That list is composed joining a list of names provided by some utilities.
 
@@ -251,11 +256,11 @@ There is a base list in this package, but you can extend it registering an utili
 
     <utility
         provides="redturtle.volto.interfaces.IRestapiPublicVocabularies"
-        factory=".my_utiliy.allowed_vocabularies"
+        factory=".my_utility.allowed_vocabularies"
     />
 
 
-And in *my_utiliy.py* file::
+And in *my_utility.py* file::
 
     def allowed_vocabularies():
         return ["my.vocabulary", "my.other.vocabulary"]
