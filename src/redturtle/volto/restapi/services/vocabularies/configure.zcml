@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <plone:service
+      method="GET"
+      accept="application/json"
+      factory=".get.VocabulariesGet"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      permission="plone.restapi.vocabularies"
+      name="@vocabularies"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
+
+  <plone:service
+      method="GET"
+      accept="application/json"
+      factory=".get.VocabulariesGet"
+      for="Products.CMFCore.interfaces.IContentish"
+      permission="plone.restapi.vocabularies"
+      name="@vocabularies"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
+
+    <utility
+        provides="redturtle.volto.interfaces.IRestapiPublicVocabularies"
+        factory=".enabled_vocabularies.allowed_vocabularies"
+    />
+</configure>
