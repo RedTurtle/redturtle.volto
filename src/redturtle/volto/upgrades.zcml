@@ -77,4 +77,12 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_volto13_bis"
     />
+  <genericsetup:upgradeStep
+    source="1101"
+    destination="1200"
+    title="Customizable exposed vocabularies"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.update_rolemap"
+    />
 </configure>
