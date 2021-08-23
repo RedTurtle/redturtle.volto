@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from redturtle.volto.testing import (
-    REDTURTLE_VOLTO_INTEGRATION_TESTING,
-)  # noqa: E501
+from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING  # noqa: E501
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -45,12 +43,10 @@ class TestSetup(unittest.TestCase):
         roles = self.portal.rolesOfPermission(
             "plone.restapi: Access Plone vocabularies"
         )
-        enabled_roles = [
-            x["name"] for x in roles if x["selected"] == "SELECTED"
-        ]
+        enabled_roles = [x["name"] for x in roles if x["selected"] == "SELECTED"]
         self.assertEqual(
             enabled_roles,
-            ["Contributor", "Editor", "Manager", "Site Administrator"],
+            ["Anonymous", "Contributor", "Editor", "Manager", "Site Administrator"],
         )
 
 

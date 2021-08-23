@@ -1,12 +1,19 @@
 Changelog
 =========
 
-3.2.1 (unreleased)
+3.2.2 (unreleased)
 ------------------
 
 - Customize serializer/deserializer for DateTime fields to correctly set effective and expires with right timezone delta.
   [cekk]
+- Enable Anonymous to access Plone vocabularies with restapi. **@vocabularies** endpoint has been customized to limit the vocabularies that anonymous can actually access.
+  [cekk]
 
+3.2.1 (2021-08-04)
+------------------
+
+- Remove customized @workflow endpoint. Is now merged in plone.restapi >= 8.7.1.
+  [cekk]
 
 3.2.0 (2021-08-02)
 ------------------
