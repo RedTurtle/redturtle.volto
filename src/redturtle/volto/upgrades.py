@@ -194,7 +194,7 @@ def to_volto13(context):  # noqa: C901
                                 setattr(
                                     item,
                                     name,
-                                    {"blocks": {}, "blocks_layout": {"items": []},},
+                                    {"blocks": {}, "blocks_layout": {"items": []}},
                                 )
                                 continue
                         try:
@@ -270,7 +270,7 @@ def to_volto13_bis(context):  # noqa: C901
                                 setattr(
                                     item,
                                     name,
-                                    {"blocks": {}, "blocks_layout": {"items": []},},
+                                    {"blocks": {}, "blocks_layout": {"items": []}},
                                 )
                                 continue
                         try:
