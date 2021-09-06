@@ -41,6 +41,8 @@ Blocks
 - News Item
 - Event
 
+There are also some adapters registered for **IBlockSearchableText** to index some common blocks.
+
 Links
 -----
 

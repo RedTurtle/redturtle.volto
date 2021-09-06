@@ -4,7 +4,8 @@ Changelog
 3.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Index text from some common blocks.
+  [cekk]
 
 
 3.2.2 (2021-08-24)
