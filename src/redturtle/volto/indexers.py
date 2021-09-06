@@ -59,22 +59,6 @@ class SimpleCardBlockSearchableText:
 
 @implementer(IBlockSearchableText)
 @adapter(IDexterityContent, IBrowserRequest)
-class SimpleCardBlockSearchableText:
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
-    def __call__(self, value):
-        return " ".join(
-            (
-                _extract_text(value.get("simple_card_title", {})),
-                _extract_text(value.get("simple_card_content", {})),
-            )
-        )
-
-
-@implementer(IBlockSearchableText)
-@adapter(IDexterityContent, IBrowserRequest)
 class CardWithImageBlockSearchableText:
     def __init__(self, context, request):
         self.context = context
