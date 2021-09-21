@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.2.3 (unreleased)
+3.3.0 (2021-09-21)
 ------------------
 
 - Index text from some common blocks.
