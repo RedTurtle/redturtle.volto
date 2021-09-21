@@ -4,7 +4,8 @@ Changelog
 3.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix date timezones in fields.
+  [cekk]
 
 
 3.2.2 (2021-08-24)
