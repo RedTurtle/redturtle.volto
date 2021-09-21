@@ -8,7 +8,6 @@ from plone.app.testing import PloneSandboxLayer
 from plone.restapi.testing import PloneRestApiDXLayer
 from plone.testing import z2
 
-
 import collective.folderishtypes
 import collective.volto.cookieconsent
 import plone.restapi

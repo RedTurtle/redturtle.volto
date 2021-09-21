@@ -192,6 +192,17 @@ Respect locally allowed types on paste
 Disallow paste items that are not allowed into destination folder.
 
 
+DateTime field serializer/deserializer
+--------------------------------------
+
+Customized these adapters to correctly set effective and expires dates.
+
+Without this change, these dates will be stored with UTC hour and not with the current timezone's hour
+because behavior's `setter/getter <https://github.com/plone/plone.app.dexterity/blob/master/plone/app/dexterity/behaviors/metadata.py#L278>`_ strip timezone from the value.
+
+With this patch we will send to the setter the date with already localized hour, so even if the setter strip timezone info, we are going to save the correct date.
+
+
 Fixed dependencies versions
 ===========================
 
