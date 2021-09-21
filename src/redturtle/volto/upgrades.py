@@ -21,9 +21,7 @@ DEFAULT_PROFILE = "profile-redturtle.volto:default"
 
 
 def update_profile(context, profile, run_dependencies=True):
-    context.runImportStepFromProfile(
-        DEFAULT_PROFILE, profile, run_dependencies
-    )
+    context.runImportStepFromProfile(DEFAULT_PROFILE, profile, run_dependencies)
 
 
 def update_types(context):
@@ -64,9 +62,7 @@ def to_1005(context):
         "profile-plone.app.caching:default", "plone.app.registry", False
     )
     context.runImportStepFromProfile(
-        "profile-plone.app.caching:with-caching-proxy",
-        "plone.app.registry",
-        False,
+        "profile-plone.app.caching:with-caching-proxy", "plone.app.registry", False,
     )
 
 
@@ -80,9 +76,7 @@ def to_volto13(context):  # noqa: C901
             if block.get("@type", "") != "listing":
                 continue
             # fix template
-            if block.get("template", False) and not block.get(
-                "variation", False
-            ):
+            if block.get("template", False) and not block.get("variation", False):
                 block["variation"] = block["template"]
                 del block["template"]
                 logger.info("- {}".format(url))
@@ -133,9 +127,7 @@ def to_volto13(context):  # noqa: C901
 
             # batch_size to b_size, idempotent
             if block["querystring"].get("batch_size", False):
-                block["querystring"]["b_size"] = block["querystring"][
-                    "batch_size"
-                ]
+                block["querystring"]["b_size"] = block["querystring"]["batch_size"]
                 del block["querystring"]["batch_size"]
 
             # fix linkMore
@@ -202,19 +194,14 @@ def to_volto13(context):  # noqa: C901
                                 setattr(
                                     item,
                                     name,
-                                    {
-                                        "blocks": {},
-                                        "blocks_layout": {"items": []},
-                                    },
+                                    {"blocks": {}, "blocks_layout": {"items": []}},
                                 )
                                 continue
                         try:
                             blocks = value.get("blocks", {})
                         except AttributeError:
                             logger.warning(
-                                "[RICHTEXT] - {} (not converted)".format(
-                                    brain.getURL()
-                                )
+                                "[RICHTEXT] - {} (not converted)".format(brain.getURL())
                             )
                         if blocks:
                             fix_listing(blocks, brain.getURL())
@@ -283,20 +270,21 @@ def to_volto13_bis(context):  # noqa: C901
                                 setattr(
                                     item,
                                     name,
-                                    {
-                                        "blocks": {},
-                                        "blocks_layout": {"items": []},
-                                    },
+                                    {"blocks": {}, "blocks_layout": {"items": []}},
                                 )
                                 continue
                         try:
                             blocks = value.get("blocks", {})
                         except AttributeError:
                             logger.warning(
-                                "[RICHTEXT] - {} (not converted)".format(
-                                    brain.getURL()
-                                )
+                                "[RICHTEXT] - {} (not converted)".format(brain.getURL())
                             )
                         if blocks:
                             fix_listing(blocks, brain.getURL())
                             setattr(item, name, value)
+
+
+def to_1300(context):
+    logger.info("Reindexing SearchableText")
+    pc = api.portal.get_tool(name="portal_catalog")
+    pc.reindexIndex("SearchableText", context.REQUEST)

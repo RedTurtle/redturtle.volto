@@ -85,4 +85,12 @@
     profile="redturtle.volto:default"
     handler=".upgrades.update_rolemap"
     />
+  <genericsetup:upgradeStep
+    source="1200"
+    destination="1300"
+    title="Index standard blocks"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_1300"
+    />
 </configure>

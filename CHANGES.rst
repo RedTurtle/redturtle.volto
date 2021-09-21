@@ -4,6 +4,8 @@ Changelog
 3.2.3 (unreleased)
 ------------------
 
+- Index text from some common blocks.
+  [cekk]
 - Fix date timezones in fields.
   [cekk]
 

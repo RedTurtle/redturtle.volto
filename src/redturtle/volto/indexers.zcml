@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="redturtle.volto"
+    >
+
+    <!-- make some block indexable -->
+    <adapter
+        factory=".indexers.AccordionBlockSearchableText"
+        name="accordion"
+        />
+    <adapter
+        factory=".indexers.AlertBlockSearchableText"
+        name="alert"
+        />
+    <adapter
+        factory=".indexers.SimpleCardBlockSearchableText"
+        name="testo_riquadro_semplice"
+        />
+    <adapter
+        factory=".indexers.CardWithImageBlockSearchableText"
+        name="testo_riquadro_immagine"
+        />
+    
+</configure>

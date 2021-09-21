@@ -11,6 +11,7 @@
   <include package=".restapi" />
   <include package=".types" />
 
+  <include file="indexers.zcml" />
   <include file="monkey.zcml" />
   <include file="permissions.zcml" />
   <include file="upgrades.zcml" />
