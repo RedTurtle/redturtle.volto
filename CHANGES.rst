@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.3.1 (unreleased)
+3.4.0 (2021-09-29)
 ------------------
 
 - Better handle events searches.
