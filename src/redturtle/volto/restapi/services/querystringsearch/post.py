@@ -15,9 +15,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-EVENT_QUERIES = [""]
-
-
 class RTQuerystringSearchPost(QuerystringSearchPost):
     """
     Perform a custom search if we are searching events
@@ -29,6 +26,9 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         return super(RTQuerystringSearchPost, self).reply()
 
     def is_event_search(self):
+        """
+        Check if we need to perform a custom search with p.a.events method
+        """
         query = json_body(self.request).get("query", [])
         indexes = [x["i"] for x in query]
 
@@ -36,13 +36,10 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         indexes_check = "start" in indexes
 
         for param in query:
-            # o = param.get("o", "")
             i = param.get("i", "")
             v = param.get("v", [])
             if i == "portal_type" and v == ["Event"]:
                 portal_type_check = True
-            # if i in ["start", "end"] and o in EVENT_QUERIES:
-            #     date_check = True
         return portal_type_check and indexes_check
 
     def generate_query_for_events(self):
