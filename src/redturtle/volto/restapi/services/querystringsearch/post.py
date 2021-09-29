@@ -15,20 +15,35 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+EVENT_QUERIES = [""]
+
+
 class RTQuerystringSearchPost(QuerystringSearchPost):
     """
     Perform a custom search if we are searching events
     """
 
     def reply(self):
+        if self.is_event_search():
+            return self.reply_events()
+        return super(RTQuerystringSearchPost, self).reply()
+
+    def is_event_search(self):
         query = json_body(self.request).get("query", [])
+        indexes = [x["i"] for x in query]
+
+        portal_type_check = False
+        indexes_check = "start" in indexes
+
         for param in query:
+            # o = param.get("o", "")
             i = param.get("i", "")
             v = param.get("v", [])
             if i == "portal_type" and v == ["Event"]:
-                # do a custom search
-                return self.reply_events()
-        return super(RTQuerystringSearchPost, self).reply()
+                portal_type_check = True
+            # if i in ["start", "end"] and o in EVENT_QUERIES:
+            #     date_check = True
+        return portal_type_check and indexes_check
 
     def generate_query_for_events(self):
         data = json_body(self.request)
@@ -38,30 +53,11 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         fullobjects = data.get("fullobjects", False)
         b_size = data.get("b_size", None)
         b_start = data.get("b_start", 0)
-        query = {
-            k: v for k, v in parsed_query.items() if k not in ["start", "end"]
-        }
+        query = {k: v for k, v in parsed_query.items() if k not in ["start", "end"]}
         limit = int(data.get("limit", 1000))
         sort = "start"
         sort_reverse = False
-        start = None
-        end = None
-        query_start = parsed_query.get("start", {})
-        query_end = parsed_query.get("end", {})
-        if (
-            query_start
-            and isinstance(query_start.get("query", None), list)  # noqa
-            and query_start.get("range", "") == "minmax"  # noqa
-            and not query_end  # noqa
-        ):
-            # caso limite che non deve succedere
-            start = self.get_datetime_value(query_start["query"][0])
-            end = self.get_datetime_value(query_start["query"][1])
-        else:
-            if query_start:
-                start = self.get_datetime_value(query_start["query"])
-            if query_end:
-                end = self.get_datetime_value(query_end["query"])
+        start, end = self.parse_event_dates(parsed_query)
         if data.get("sort_on", ""):
             sort = data["sort_on"]
         if data.get("sort_order", ""):
@@ -77,6 +73,39 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             sort,
             limit,
         )
+
+    def parse_event_dates(self, parsed_query):
+        start = None
+        end = None
+
+        query_start = parsed_query.get("start", {})
+        query_end = parsed_query.get("end", {})
+        if not query_start and not query_end:
+            return start, end
+
+        if query_start:
+            range = query_start.get("range", "")
+            value = query_start.get("query", "")
+
+            if not query_end and isinstance(value, list) and range == "minmax":
+                start = self.get_datetime_value(value[0])
+                end = self.get_datetime_value(value[1])
+                return start, end
+            start = self.get_datetime_value(value)
+        if query_end:
+            range = query_end.get("range", "")
+            value = query_end.get("query", "")
+            if not query_start and isinstance(value, list) and range == "minmax":
+                start = self.get_datetime_value(value[0])
+                end = self.get_datetime_value(value[1])
+                return start, end
+            dt_value = self.get_datetime_value(value)
+            if range == "min":
+                start = dt_value
+            elif range == "max":
+                end = dt_value
+
+        return start, end
 
     def get_datetime_value(self, value):
         if isinstance(value, DateTime):
