@@ -4,7 +4,8 @@ Changelog
 3.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Better handle events searches.
+  [cekk]
 
 
 3.3.0 (2021-09-21)
