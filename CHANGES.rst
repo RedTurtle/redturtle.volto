@@ -4,7 +4,8 @@ Changelog
 3.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Disable ramcache from tersecaching.
+  [cekk]
 
 
 3.3.0 (2021-09-21)

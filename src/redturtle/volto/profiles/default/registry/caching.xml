@@ -10,7 +10,7 @@
   </record>
   <record name="plone.app.caching.terseCaching.plone.content.dynamic.ramCache">
     <field ref="plone.app.caching.terseCaching.ramCache"/>
-    <value>True</value>
+    <value>False</value>
   </record>
   <record name="plone.app.caching.terseCaching.plone.content.dynamic.smaxage">
     <field ref="plone.app.caching.terseCaching.smaxage"/>

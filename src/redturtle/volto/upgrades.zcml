@@ -93,4 +93,12 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_1300"
     />
+  <genericsetup:upgradeStep
+    source="1300"
+    destination="1400"
+    title="Disable ramcache for terse caching"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_1400"
+    />
 </configure>
