@@ -47,8 +47,7 @@ def to_1003(context):
 
 
 def to_1004(context):
-    """
-    """
+    """ """
     brains = api.content.find(portal_type="Event")
     logger.info("Reindexing {} Events".format(len(brains)))
 
@@ -62,7 +61,9 @@ def to_1005(context):
         "profile-plone.app.caching:default", "plone.app.registry", False
     )
     context.runImportStepFromProfile(
-        "profile-plone.app.caching:with-caching-proxy", "plone.app.registry", False,
+        "profile-plone.app.caching:with-caching-proxy",
+        "plone.app.registry",
+        False,
     )
 
 
@@ -288,3 +289,10 @@ def to_1300(context):
     logger.info("Reindexing SearchableText")
     pc = api.portal.get_tool(name="portal_catalog")
     pc.reindexIndex("SearchableText", context.REQUEST)
+
+
+def to_1400(context):
+    logger.info("Disable ramcache for terse caching")
+    api.portal.set_registry_record(
+        "plone.app.caching.terseCaching.plone.content.dynamic.ramCache", False
+    )

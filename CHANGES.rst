@@ -4,7 +4,8 @@ Changelog
 3.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Disable ramcache from tersecaching (to fix the problem with cache invalidation for balanced instances..see README).
+  [cekk]
 
 
 3.4.0 (2021-09-29)

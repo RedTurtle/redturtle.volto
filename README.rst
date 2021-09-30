@@ -281,6 +281,14 @@ And in *my_utility.py* file::
 
 The endpoint get all registered utilities and join all values.
 
+RamCache in tersecaching
+------------------------
+
+We disabled ramcache for tersecaching (plone.app.caching.terseCaching.plone.content.dynamic.ramCache) because
+it seems not correctly purged when there are more instances and a content has been modified.
+
+We need to check why it's not purged and fix it.
+
 Installation
 ============
 
