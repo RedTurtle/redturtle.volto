@@ -4,7 +4,7 @@ Changelog
 3.3.1 (unreleased)
 ------------------
 
-- Disable ramcache from tersecaching.
+- Disable ramcache from tersecaching (to fix the problem with cache invalidation for balanced instances..see README).
   [cekk]
 
 
