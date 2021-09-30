@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.4.1 (unreleased)
+3.4.1 (2021-09-30)
 ------------------
 
 - Disable ramcache from tersecaching (to fix the problem with cache invalidation for balanced instances..see README).
