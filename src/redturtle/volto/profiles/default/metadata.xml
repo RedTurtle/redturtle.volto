@@ -6,5 +6,6 @@
     <dependency>profile-collective.folderishtypes.dx:default</dependency>
     <dependency>profile-collective.volto.cookieconsent:default</dependency>
     <dependency>profile-plone.restapi:blocks</dependency>
+    <dependency>profile-kitconcept.seo:default</dependency>
   </dependencies>
 </metadata>
