@@ -13,6 +13,7 @@ import collective.volto.cookieconsent
 import plone.restapi
 import redturtle.volto
 import plone.app.caching
+import kitconcept.seo
 
 
 class RedturtleVoltoLayer(PloneSandboxLayer):
@@ -28,6 +29,7 @@ class RedturtleVoltoLayer(PloneSandboxLayer):
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
         self.loadZCML(package=plone.app.caching)
+        self.loadZCML(package=kitconcept.seo)
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plone.app.caching:default")
@@ -64,15 +66,14 @@ class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        super(RedturtleVoltoRestApiLayer, self).setUpZope(
-            app, configurationContext
-        )
+        super(RedturtleVoltoRestApiLayer, self).setUpZope(app, configurationContext)
 
         self.loadZCML(package=collective.folderishtypes)
         self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
         self.loadZCML(package=plone.app.caching)
+        self.loadZCML(package=kitconcept.seo)
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plone.app.caching:default")

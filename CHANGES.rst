@@ -4,8 +4,8 @@ Changelog
 3.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix tests.
+  [cekk]
 
 3.4.1 (2021-09-30)
 ------------------

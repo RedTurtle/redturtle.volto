@@ -68,7 +68,7 @@ setup(
         "plone.namedfile>=5.4.0",
         "Products.PloneHotfix20200121>=1.0",
         "collective.purgebyid",
-        "kitconcept.seo>=1.4.0",
+        "kitconcept.seo>=2.0.0",
     ],
     extras_require={
         "test": [
