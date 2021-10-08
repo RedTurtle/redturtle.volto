@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:cache="http://namespaces.zope.org/cache"
     xmlns:plone="http://namespaces.plone.org/plone">
 
   <plone:service
@@ -10,5 +11,7 @@
     permission="zope2.View"
     layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
     />
+
+  <cache:ruleset ruleset="plone.content.dynamic" for=".get.SearchGet" />
 
 </configure>

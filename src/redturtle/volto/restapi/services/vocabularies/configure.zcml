@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:cache="http://namespaces.zope.org/cache"
     xmlns:plone="http://namespaces.plone.org/plone"
     >
 
@@ -27,4 +28,7 @@
         provides="redturtle.volto.interfaces.IRestapiPublicVocabularies"
         factory=".enabled_vocabularies.allowed_vocabularies"
     />
+
+  <cache:ruleset ruleset="plone.content.dynamic" for=".get.VocabulariesGet" />
+
 </configure>

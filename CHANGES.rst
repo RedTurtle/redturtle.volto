@@ -4,8 +4,8 @@ Changelog
 3.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- p.a.caching rules for rest api services
+  [mamico]
 
 3.4.2 (2021-10-01)
 ------------------
