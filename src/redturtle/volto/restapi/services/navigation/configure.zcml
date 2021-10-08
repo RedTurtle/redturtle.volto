@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:cache="http://namespaces.zope.org/cache"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone">
 
@@ -10,4 +11,7 @@
     name="@context-navigation"
     permission="zope2.View"
     />
+
+  <cache:ruleset ruleset="plone.content.dynamic" for=".get.NavigationGet" />
+
 </configure>
