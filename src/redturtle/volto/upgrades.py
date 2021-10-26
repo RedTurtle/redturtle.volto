@@ -5,7 +5,6 @@ from plone import api
 from plone.dexterity.utils import iterSchemata
 from zope.schema import getFields
 from plone.app.upgrade.utils import installOrReinstallProduct
-from Products.CMFPlone.interfaces.controlpanel import IImagingSchema
 
 import logging
 import json
