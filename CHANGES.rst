@@ -4,7 +4,8 @@ Changelog
 3.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add plone.volto dependency
+  [cekk]
 
 
 3.5.0 (2021-10-11)

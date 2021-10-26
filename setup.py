@@ -51,24 +51,11 @@ setup(
     python_requires=">=3.7",
     install_requires=[
         "setuptools",
-        "z3c.jbot",
-        "plone.api>=1.8.4",
-        "plone.restapi>=7.0.0b1",
-        "plone.app.dexterity",
-        "collective.folderishtypes[dexterity]>=3.0.0",
         "collective.volto.cookieconsent",
         "collective.monkeypatcher",
-        # remove these when use Plone >= 5.2.2
-        "waitress>=1.4.3",
-        "plone.app.contenttypes>=2.1.6",
-        "plone.app.caching>=3.0.0a3",
-        "plone.rest>=1.6.1",
-        "plone.dexterity>=2.9.5",
-        "Products.ZCatalog>=5.1",
-        "plone.namedfile>=5.4.0",
-        "Products.PloneHotfix20200121>=1.0",
         "collective.purgebyid",
         "kitconcept.seo>=2.0.0",
+        "plone.volto",
     ],
     extras_require={
         "test": [
