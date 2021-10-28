@@ -101,4 +101,12 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_1400"
     />
+  <genericsetup:upgradeStep
+    source="1400"
+    destination="2000"
+    title="Add plone.volto dependency"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_2000"
+    />
 </configure>

@@ -6,11 +6,12 @@
     i18n_domain="redturtle.volto">
 
   <i18n:registerTranslations directory="locales" />
+  <include file="dependencies.zcml" />
 
   <include package=".browser" />
   <include package=".restapi" />
   <include package=".types" />
-
+  
   <include file="indexers.zcml" />
   <include file="monkey.zcml" />
   <include file="permissions.zcml" />

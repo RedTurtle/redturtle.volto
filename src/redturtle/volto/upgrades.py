@@ -4,6 +4,7 @@ from copy import deepcopy
 from plone import api
 from plone.dexterity.utils import iterSchemata
 from zope.schema import getFields
+from plone.app.upgrade.utils import installOrReinstallProduct
 
 import logging
 import json
@@ -296,3 +297,17 @@ def to_1400(context):
     api.portal.set_registry_record(
         "plone.app.caching.terseCaching.plone.content.dynamic.ramCache", False
     )
+
+
+def to_2000(context):
+    old_values = api.portal.get_registry_record(name="plone.allowed_sizes")
+    installOrReinstallProduct(api.portal.get(), "plone.volto")
+
+    new_values = api.portal.get_registry_record(name="plone.allowed_sizes")
+    new_keys = [x.split(" ")[0] for x in new_values]
+    for old_value in old_values:
+        miniature = old_value.split(" ")[0]
+        if miniature not in new_keys:
+            new_values.append(old_value)
+
+    api.portal.set_registry_record("plone.allowed_sizes", new_values)

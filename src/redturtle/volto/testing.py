@@ -10,10 +10,11 @@ from plone.testing import z2
 
 import collective.folderishtypes
 import collective.volto.cookieconsent
-import plone.restapi
-import redturtle.volto
-import plone.app.caching
 import kitconcept.seo
+import plone.app.caching
+import plone.restapi
+import plone.volto
+import redturtle.volto
 
 
 class RedturtleVoltoLayer(PloneSandboxLayer):
@@ -28,6 +29,7 @@ class RedturtleVoltoLayer(PloneSandboxLayer):
         self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
+        self.loadZCML(package=plone.volto)
         self.loadZCML(package=plone.app.caching)
         self.loadZCML(package=kitconcept.seo)
 
@@ -71,6 +73,7 @@ class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
         self.loadZCML(package=collective.folderishtypes)
         self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
+        self.loadZCML(package=plone.volto)
         self.loadZCML(package=redturtle.volto)
         self.loadZCML(package=plone.app.caching)
         self.loadZCML(package=kitconcept.seo)
