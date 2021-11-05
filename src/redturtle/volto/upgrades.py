@@ -300,14 +300,23 @@ def to_1400(context):
 
 
 def to_2000(context):
-    old_values = api.portal.get_registry_record(name="plone.allowed_sizes")
+    portal_types = api.portal.get_tool(name="portal_types")
+    document_behaviors = list(portal_types["Document"].behaviors) + [
+        "volto.preview_image"
+    ]
+
+    old_images = api.portal.get_registry_record(name="plone.allowed_sizes")
     installOrReinstallProduct(api.portal.get(), "plone.volto")
 
-    new_values = api.portal.get_registry_record(name="plone.allowed_sizes")
-    new_keys = [x.split(" ")[0] for x in new_values]
-    for old_value in old_values:
+    # adjust behaviors
+    portal_types["Document"].behaviors = tuple(document_behaviors)
+
+    # adjust image scales
+    new_images = api.portal.get_registry_record(name="plone.allowed_sizes")
+    new_keys = [x.split(" ")[0] for x in new_images]
+    for old_value in old_images:
         miniature = old_value.split(" ")[0]
         if miniature not in new_keys:
-            new_values.append(old_value)
+            new_images.append(old_value)
 
-    api.portal.set_registry_record("plone.allowed_sizes", new_values)
+    api.portal.set_registry_record("plone.allowed_sizes", new_images)

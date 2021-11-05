@@ -4,7 +4,8 @@ Changelog
 3.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix upgrade-step for plone.volto.
+  [cekk]
 
 
 3.6.0 (2021-10-28)
