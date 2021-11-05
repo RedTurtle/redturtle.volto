@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.6.1 (unreleased)
+3.6.1 (2021-11-05)
 ------------------
 
 - Fix upgrade-step for plone.volto.
