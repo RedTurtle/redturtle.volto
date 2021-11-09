@@ -17,4 +17,5 @@
   
   
   <adapter factory=".dxfields.DatetimeFieldDeserializer" />
+
 </configure>
