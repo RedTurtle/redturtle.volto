@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.6.2 (unreleased)
+3.6.2 (2021-11-09)
 ------------------
 
 - Bypass plone.volto serialization for blocks right now (in monkeypatch.py).
