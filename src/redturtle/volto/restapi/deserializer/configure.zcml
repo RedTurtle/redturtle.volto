@@ -18,14 +18,4 @@
   
   <adapter factory=".dxfields.DatetimeFieldDeserializer" />
 
-
-  <!-- temporary fix until we fix blocks -->
-  <subscriber
-      factory=".transforms.NestedResolveUIDDeserializer"
-      provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"
-      />
-  <subscriber
-      factory=".transforms.NestedResolveUIDDeserializerRoot"
-      provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"
-      />
 </configure>

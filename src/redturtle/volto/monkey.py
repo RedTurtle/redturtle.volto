@@ -33,9 +33,7 @@ def scrub_html(self, orig):
         strip_outer = bodyfinder
     else:
         # partial html (i.e. coming from WYSIWYG editor)
-        tree = html.fragment_fromstring(
-            orig, create_parent=True, parser=html_parser
-        )
+        tree = html.fragment_fromstring(orig, create_parent=True, parser=html_parser)
 
         def strip_outer(s):
             return s[5:-6]
@@ -177,3 +175,11 @@ def isPurged(obj):
 
 
 purge.isPurged = isPurged
+
+
+def plone_volto_deserializer_call(self, value):
+    return value
+
+
+def plone_volto_serializer_call(self, value):
+    return value

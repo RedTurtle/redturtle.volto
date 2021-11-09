@@ -4,7 +4,7 @@ Changelog
 3.6.2 (unreleased)
 ------------------
 
-- Bypass plone.volto serialization for blocks right now.
+- Bypass plone.volto serialization for blocks right now (in monkeypatch.py).
   [cekk]
 
 

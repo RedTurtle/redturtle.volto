@@ -27,4 +27,16 @@
         replacement=".monkey._verifyObjectPaste"
         />
     
+    <monkey:patch
+        description="Patch for disallow plone.volto deserialization"
+        class="plone.volto.transforms.NestedResolveUIDDeserializerBase"
+        original="__call__"
+        replacement=".monkey.plone_volto_deserializer_call"
+        />
+    <monkey:patch
+        description="Patch for disallow plone.volto serialization"
+        class="plone.volto.transforms.NestedResolveUIDSerializerBase"
+        original="__call__"
+        replacement=".monkey.plone_volto_serializer_call"
+        />
 </configure>

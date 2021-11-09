@@ -11,14 +11,4 @@
   <adapter factory=".dxfields.DateTimeFieldSerializer" />
   <adapter factory=".dxfields.TextLineFieldSerializer" />
   
-  <!-- temporary fix until we fix blocks -->
-  <subscriber
-      factory=".transforms.NestedResolveUIDSerializer"
-      provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
-      />
-  <subscriber
-      factory=".transforms.NestedResolveUIDSerializerRoot"
-      provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
-      />
-
 </configure>
