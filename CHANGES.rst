@@ -4,7 +4,8 @@ Changelog
 3.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Bypass plone.volto serialization for blocks right now.
+  [cekk]
 
 
 3.6.1 (2021-11-05)
