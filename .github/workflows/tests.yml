@@ -1,42 +1,34 @@
 name: Tests
-
-on:
-  push:
-    paths-ignore:
-      - '**.md'
-      - '**.rst'
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 4
+      fail-fast: false
       matrix:
-        python: ["3.7"]
-        plone: ["52"]
-        # exclude:
-        #   - python: "3.7"
-        #     plone: "51"
+        python: [3.7, 3.8, 3.9]
+        plone: ["6.0.0a1", "5.2-latest"]
+        exclude:
+          - plone: "5.2-latest"
+            python: 3.9
+
     steps:
-      - uses: actions/checkout@v1
-      - name: Cache eggs
-        uses: actions/cache@v1
-        with:
-          path: eggs
-          key: ${{ runner.OS }}-build-python${{ matrix.python }}-${{ matrix.plone }}
-      - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v1
+      # git checkout
+      - uses: actions/checkout@v2
+
+      - name: Setup Plone ${{ matrix.plone }} with Python ${{ matrix.python }}
+        id: setup
+        uses: plone/setup-plone@v1.0.0
         with:
           python-version: ${{ matrix.python }}
-      - name: Install dependencies
+          plone-version: ${{ matrix.plone }}
+
+      # Install plone.volto with test extras
+      - name: Install redturtle.volto
         run: |
-          pip install -r requirements.txt -c constraints_plone${{ matrix.plone }}.txt
-          cp test_plone${{ matrix.plone }}.cfg buildout.cfg
-      - name: Install buildout
+          pip install ".[test]" --use-deprecated legacy-resolver
+
+      # test
+      - name: test
         run: |
-          buildout -N -t 3 code-analysis:return-status-codes=True
-      - name: Code analysis
-        run: |
-          bin/code-analysis
-      - name: Run tests
-        run: |
-          bin/test
+          zope-testrunner --auto-color --auto-progress --test-path src
