@@ -10,8 +10,8 @@
       factory=".get.VocabulariesGet"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       permission="plone.restapi.vocabularies"
-      name="@vocabularies"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@vocabularies"
       />
 
   <plone:service
@@ -20,15 +20,18 @@
       factory=".get.VocabulariesGet"
       for="Products.CMFCore.interfaces.IContentish"
       permission="plone.restapi.vocabularies"
-      name="@vocabularies"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@vocabularies"
       />
 
-    <utility
-        provides="redturtle.volto.interfaces.IRestapiPublicVocabularies"
-        factory=".enabled_vocabularies.allowed_vocabularies"
-    />
+  <utility
+      factory=".enabled_vocabularies.allowed_vocabularies"
+      provides="redturtle.volto.interfaces.IRestapiPublicVocabularies"
+      />
 
-  <cache:ruleset ruleset="plone.content.dynamic" for=".get.VocabulariesGet" />
+  <cache:ruleset
+      for=".get.VocabulariesGet"
+      ruleset="plone.content.dynamic"
+      />
 
 </configure>

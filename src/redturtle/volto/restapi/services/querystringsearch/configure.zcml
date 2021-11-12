@@ -1,26 +1,30 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:cache="http://namespaces.zope.org/cache"
-    xmlns:plone="http://namespaces.plone.org/plone">
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
 
   <plone:service
-    method="POST"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    factory=".post.RTQuerystringSearchPost"
-    name="@querystring-search"
-    permission="zope2.View"
-    layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
-    />
+      method="POST"
+      factory=".post.RTQuerystringSearchPost"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@querystring-search"
+      />
 
   <plone:service
-    method="POST"
-    for="Products.CMFCore.interfaces.IContentish"
-    factory=".post.RTQuerystringSearchPost"
-    name="@querystring-search"
-    permission="zope2.View"
-    layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
-    />
+      method="POST"
+      factory=".post.RTQuerystringSearchPost"
+      for="Products.CMFCore.interfaces.IContentish"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@querystring-search"
+      />
 
-  <cache:ruleset ruleset="plone.content.dynamic" for=".post.RTQuerystringSearchPost" />
+  <cache:ruleset
+      for=".post.RTQuerystringSearchPost"
+      ruleset="plone.content.dynamic"
+      />
 
 </configure>

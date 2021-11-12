@@ -1,21 +1,26 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:zcml="http://namespaces.zope.org/zcml"
-    i18n_domain="plone.restapi">
+    i18n_domain="plone.restapi"
+    >
 
   <!-- custom generic blocks deserializer-->
-  <subscriber factory=".blocks.GenericResolveUIDDeserializerContents"
-    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
-  <subscriber factory=".blocks.GenericResolveUIDDeserializerRoot"
-    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
+  <subscriber
+      factory=".blocks.GenericResolveUIDDeserializerContents"
+      provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"
+      />
+  <subscriber
+      factory=".blocks.GenericResolveUIDDeserializerRoot"
+      provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"
+      />
 
   <!-- convert resolveuids also in rich text fields -->
   <adapter factory=".dxfields.RichTextFieldDeserializer" />
-  
+
   <!-- convert Link widget value in normalized url -->
   <adapter factory=".dxfields.LinkTextLineFieldDeserializer" />
-  
-  
+
+
   <adapter factory=".dxfields.DatetimeFieldDeserializer" />
 
 </configure>
