@@ -29,7 +29,7 @@ class TestSetup(unittest.TestCase):
 
     def test_product_installed(self):
         """Test if redturtle.volto is installed."""
-        self.assertTrue(self.installer.isProductInstalled("redturtle.volto"))
+        self.assertTrue(self.installer.is_product_installed("redturtle.volto"))
 
     def test_browserlayer(self):
         """Test that IRedturtleVoltoLayer is registered."""
@@ -62,12 +62,12 @@ class TestUninstall(unittest.TestCase):
             self.installer = api.portal.get_tool("portal_quickinstaller")
         roles_before = api.user.get_roles(TEST_USER_ID)
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        self.installer.uninstallProducts(["redturtle.volto"])
+        self.installer.uninstall_product("redturtle.volto")
         setRoles(self.portal, TEST_USER_ID, roles_before)
 
     def test_product_uninstalled(self):
         """Test if redturtle.volto is cleanly uninstalled."""
-        self.assertFalse(self.installer.isProductInstalled("redturtle.volto"))
+        self.assertFalse(self.installer.is_product_installed("redturtle.volto"))
 
     def test_browserlayer_removed(self):
         """Test that IRedturtleVoltoLayer is removed."""

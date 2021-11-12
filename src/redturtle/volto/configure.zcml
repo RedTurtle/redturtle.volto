@@ -25,6 +25,14 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       post_handler=".setuphandlers.post_install"
       />
+  
+  <genericsetup:registerProfile
+      name="plone5"
+      title="RedTurtle: Volto (Plone 5 customizations)"
+      directory="profiles/plone5"
+      description="Installs some customizations only for Plone 5."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
 
   <genericsetup:registerProfile
       name="uninstall"
