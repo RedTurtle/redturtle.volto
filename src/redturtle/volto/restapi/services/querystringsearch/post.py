@@ -23,7 +23,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
     def reply(self):
         if self.is_event_search():
             return self.reply_events()
-        return super(RTQuerystringSearchPost, self).reply()
+        return super().reply()
 
     def is_event_search(self):
         """

@@ -320,3 +320,21 @@ def to_2000(context):
             new_images.append(old_value)
 
     api.portal.set_registry_record("plone.allowed_sizes", new_images)
+
+
+def to_2001(context):
+    logger.info("Reindexing image_field")
+    from plone.app.contenttypes.behaviors.leadimage import ILeadImageBehavior
+
+    catalog = api.portal.get_tool("portal_catalog")
+
+    brains = api.content.find(object_provides=ILeadImageBehavior.__identifier__)
+    tot = len(brains)
+    i = 0
+
+    for brain in brains:
+        i += 1
+        if i % 500 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        obj = brain.getObject()
+        catalog.catalog_object(obj)

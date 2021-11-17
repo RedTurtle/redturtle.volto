@@ -11,4 +11,6 @@
   <adapter factory=".dxfields.DateTimeFieldSerializer" />
   <adapter factory=".dxfields.TextLineFieldSerializer" />
   
+  <adapter factory=".summary.DefaultJSONSummarySerializer" />
+  
 </configure>
