@@ -15,6 +15,10 @@ from zope.interface import Interface
 @adapter(Interface, IRedturtleVoltoLayer)
 class DefaultJSONSummarySerializer(BaseSerializer):
     def get_image_scales(self, data):
+        """
+        this is a backward compatibility for old volto templates that need
+        a full image scales object
+        """
         query = self.request.form
         if not query:
             # maybe its a POST request
@@ -24,6 +28,7 @@ class DefaultJSONSummarySerializer(BaseSerializer):
         if "_all" not in metadata_fields:
             return {}
         if data.get("image", None):
+            # it's a fullobjects data, so we already have the infos
             return None
         if not data.get("image_field", ""):
             return None
