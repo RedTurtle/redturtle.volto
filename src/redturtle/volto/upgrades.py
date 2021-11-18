@@ -324,14 +324,13 @@ def to_2000(context):
 
 def to_2001(context):
     logger.info("Reindexing image_field")
-    from plone.app.contenttypes.behaviors.leadimage import ILeadImageBehavior
-
     catalog = api.portal.get_tool("portal_catalog")
 
-    brains = api.content.find(object_provides=ILeadImageBehavior.__identifier__)
+    brains = api.content.find(
+        object_provides="plone.app.contenttypes.behaviors.leadimage.ILeadImage"
+    )
     tot = len(brains)
     i = 0
-
     for brain in brains:
         i += 1
         if i % 500 == 0:
