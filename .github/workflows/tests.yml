@@ -23,7 +23,7 @@ jobs:
           python-version: ${{ matrix.python }}
           plone-version: ${{ matrix.plone }}
 
-      # Install plone.volto with test extras
+      # Install redturtle.volto with test extras
       - name: Install redturtle.volto
         run: |
           pip install ".[test]" --use-deprecated legacy-resolver

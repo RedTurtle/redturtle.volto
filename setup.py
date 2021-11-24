@@ -50,11 +50,11 @@ setup(
     python_requires=">=3.7",
     install_requires=[
         "setuptools",
-        "collective.volto.cookieconsent",
+        "collective.volto.cookieconsent>=1.1.1",
         "collective.monkeypatcher",
-        "collective.purgebyid",
+        "collective.purgebyid>=1.1.2",
         "kitconcept.seo>=2.0.0",
-        "plone.volto",
+        "plone.volto>=3.1.0a6",
         "plone.restapi>=8.13.0",
     ],
     extras_require={
