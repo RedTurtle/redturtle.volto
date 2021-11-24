@@ -80,13 +80,9 @@ class GenericResolveUIDSerializer(object):
                 # maximum recursion depth, so serialize the object with
                 # summary. If we need more infos, let's add them into summary
                 # serializer
-                return getMultiAdapter(
-                    (item, getRequest()), ISerializeToJsonSummary
-                )()
+                return getMultiAdapter((item, getRequest()), ISerializeToJsonSummary)()
             else:
-                return getMultiAdapter(
-                    (item, getRequest()), ISerializeToJson
-                )()
+                return getMultiAdapter((item, getRequest()), ISerializeToJson)()
         else:
             return {}
 
@@ -94,10 +90,10 @@ class GenericResolveUIDSerializer(object):
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IBlocks, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
-    """ Deserializer for content-types that implements IBlocks behavior """
+    """Deserializer for content-types that implements IBlocks behavior"""
 
 
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerRoot(GenericResolveUIDSerializer):
-    """ Deserializer for site-root """
+    """Deserializer for site-root"""

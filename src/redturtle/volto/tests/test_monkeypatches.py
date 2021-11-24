@@ -45,7 +45,5 @@ class TestRespectLocallyAllowedTypes(unittest.TestCase):
         constraints.setConstrainTypesMode(1)
         constraints.setLocallyAllowedTypes(("News Item",))
 
-        self.assertRaises(
-            ValueError, self.folder._verifyObjectPaste, self.document
-        )
+        self.assertRaises(ValueError, self.folder._verifyObjectPaste, self.document)
         self.folder._verifyObjectPaste(self.news)

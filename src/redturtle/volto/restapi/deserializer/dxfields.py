@@ -46,9 +46,7 @@ class RichTextFieldDeserializer(BaseRichTextDeserializer):
 
         # fix links
         for link in root.xpath("//a"):
-            link.set(
-                "href", path2uid(context=self.context, link=link.get("href"))
-            )
+            link.set("href", path2uid(context=self.context, link=link.get("href")))
 
         # fix image src
         for img in root.xpath("//img"):
@@ -77,8 +75,7 @@ class LinkTextLineFieldDeserializer(BaseTextLineDeserializer):
 @adapter(IDatetime, IDexterityContent, IRedturtleVoltoLayer)
 class DatetimeFieldDeserializer(DefaultDatetimeFieldDeserializer):
     def __call__(self, value):
-        """
-        """
+        """ """
         # PATCH
         is_publication_field = self.field.interface == IPublication
         if is_publication_field:

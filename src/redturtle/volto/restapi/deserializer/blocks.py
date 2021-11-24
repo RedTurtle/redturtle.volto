@@ -63,10 +63,10 @@ class GenericResolveUIDDeserializer(object):
 @implementer(IBlockFieldDeserializationTransformer)
 @adapter(IBlocks, IRedturtleVoltoLayer)
 class GenericResolveUIDDeserializerContents(GenericResolveUIDDeserializer):
-    """ Deserializer for content-types that implements IBlocks behavior """
+    """Deserializer for content-types that implements IBlocks behavior"""
 
 
 @implementer(IBlockFieldDeserializationTransformer)
 @adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
 class GenericResolveUIDDeserializerRoot(GenericResolveUIDDeserializer):
-    """ Deserializer for site-root """
+    """Deserializer for site-root"""
