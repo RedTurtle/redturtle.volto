@@ -4,8 +4,8 @@ Changelog
 3.7.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Upgrade-step to reindex SearchableText for all contents with a table block.
+  [cekk]
 
 3.7.0 (2021-12-01)
 ------------------
