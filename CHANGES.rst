@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.6.3 (unreleased)
+3.7.0 (2021-12-01)
 ------------------
 
 - Remove enabled_vocabularies implementation because in recent plone.restapi (>8.15.2) there is a standard way.
