@@ -109,4 +109,12 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_2000"
     />
+  <genericsetup:upgradeStep
+    source="2000"
+    destination="2100"
+    title="Reindex pages with table blocks"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_2100"
+    />
 </configure>

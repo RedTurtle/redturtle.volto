@@ -320,3 +320,55 @@ def to_2000(context):
             new_images.append(old_value)
 
     api.portal.set_registry_record("plone.allowed_sizes", new_images)
+
+
+def to_2100(context):  # noqa: C901
+    logger.info("## Reindex pages with table blocks ##")
+
+    def has_table_block(blocks):
+        for block in blocks.values():
+            if block.get("@type", "") == "table":
+                return True
+        return False
+
+    pc = api.portal.get_tool(name="portal_catalog")
+    brains = pc()
+    tot = len(brains)
+    i = 0
+    items_reindexed = []
+    for brain in brains:
+        i += 1
+        if i % 1000 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        item_obj = brain.getObject()
+        item = aq_base(item_obj)
+        if getattr(item, "blocks", {}):
+            if has_table_block(item.blocks):
+                items_reindexed.append(brain.getPath())
+                item_obj.reindexObject(idxs=['SearchableText'])
+        for schema in iterSchemata(item):
+            # fix blocks in blocksfields
+            for name, field in getFields(schema).items():
+                if name == "blocks":
+                    blocks = getattr(item, "blocks", {})
+                    if has_table_block(blocks):
+                        items_reindexed.append(brain.getPath())
+                        item_obj.reindexObject(idxs=['SearchableText'])
+                else:
+                    if not HAS_BLOCKSFIELD:
+                        # blocks are only in blocks field
+                        continue
+                    if isinstance(field, BlocksField):
+                        value = field.get(item)
+                        if not value:
+                            continue
+                        if isinstance(value, str):
+                            continue
+                        blocks = value.get("blocks", {})
+                        if has_table_block(blocks):
+                            items_reindexed.append(brain.getPath())
+                            item_obj.reindexObject(idxs=['SearchableText'])
+
+    logger.info("Reindexed {} items".format(len(items_reindexed)))
+    for path in items_reindexed:
+        logger.info("- {}".format(path))
