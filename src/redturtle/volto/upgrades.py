@@ -335,6 +335,7 @@ def to_2100(context):  # noqa: C901
     brains = pc()
     tot = len(brains)
     i = 0
+    items_reindexed = []
     for brain in brains:
         i += 1
         if i % 1000 == 0:
@@ -342,6 +343,7 @@ def to_2100(context):  # noqa: C901
         item = aq_base(brain.getObject())
         if getattr(item, "blocks", {}):
             if has_table_block(item.blocks):
+                items_reindexed.append(brain.getPath())
                 item.reindexObject(idxs=["SearchableText"])
         for schema in iterSchemata(item):
             # fix blocks in blocksfields
@@ -349,6 +351,7 @@ def to_2100(context):  # noqa: C901
                 if name == "blocks":
                     blocks = getattr(item, "blocks", {})
                     if has_table_block(blocks):
+                        items_reindexed.append(brain.getPath())
                         item.reindexObject(idxs=["SearchableText"])
                 else:
                     if not HAS_BLOCKSFIELD:
@@ -362,4 +365,9 @@ def to_2100(context):  # noqa: C901
                             continue
                         blocks = value.get("blocks", {})
                         if has_table_block(blocks):
+                            items_reindexed.append(brain.getPath())
                             item.reindexObject(idxs=["SearchableText"])
+
+    logger.info("Reindexed {} items".format(len(items_reindexed)))
+    for path in items_reindexed:
+        logger.info("- {}".format(path))
