@@ -54,6 +54,7 @@ setup(
         "collective.purgebyid",
         "kitconcept.seo>=2.0.0",
         "plone.volto",
+        "plone.restapi>=8.15.2",
     ],
     extras_require={
         "test": [
