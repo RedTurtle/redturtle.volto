@@ -323,7 +323,7 @@ def to_2000(context):
 
 
 def to_2100(context):  # noqa: C901
-    # reindex pages with table blocks
+    logger.info("## Reindex pages with table blocks ##")
 
     def has_table_block(blocks):
         for block in blocks.values():
@@ -344,7 +344,7 @@ def to_2100(context):  # noqa: C901
         if getattr(item, "blocks", {}):
             if has_table_block(item.blocks):
                 items_reindexed.append(brain.getPath())
-                item.reindexObject(idxs=["SearchableText"])
+                pc.catalog_object(item)
         for schema in iterSchemata(item):
             # fix blocks in blocksfields
             for name, field in getFields(schema).items():
@@ -352,7 +352,7 @@ def to_2100(context):  # noqa: C901
                     blocks = getattr(item, "blocks", {})
                     if has_table_block(blocks):
                         items_reindexed.append(brain.getPath())
-                        item.reindexObject(idxs=["SearchableText"])
+                        pc.catalog_object(item)
                 else:
                     if not HAS_BLOCKSFIELD:
                         # blocks are only in blocks field
@@ -366,7 +366,7 @@ def to_2100(context):  # noqa: C901
                         blocks = value.get("blocks", {})
                         if has_table_block(blocks):
                             items_reindexed.append(brain.getPath())
-                            item.reindexObject(idxs=["SearchableText"])
+                            pc.catalog_object(item)
 
     logger.info("Reindexed {} items".format(len(items_reindexed)))
     for path in items_reindexed:
