@@ -4,7 +4,8 @@ Changelog
 3.7.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Customized ZCTextIndexQueryParser for https://github.com/plone/plone.restapi/pull/1209.
+  [cekk]
 
 
 3.7.1 (2021-12-01)
