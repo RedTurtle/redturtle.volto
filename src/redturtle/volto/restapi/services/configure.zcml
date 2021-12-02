@@ -7,5 +7,6 @@
   <include package=".search" />
   <include package=".site_search" />
   <include package=".sitemap" />
+  <include package=".search" />
 
 </configure>
