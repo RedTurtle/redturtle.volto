@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.7.2 (unreleased)
+3.7.2 (2021-12-02)
 ------------------
 
 - Customized ZCTextIndexQueryParser for https://github.com/plone/plone.restapi/pull/1209.
