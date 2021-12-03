@@ -1,12 +1,31 @@
 Changelog
 =========
 
-3.6.3 (unreleased)
+3.7.3 (unreleased)
 ------------------
 
 - Customized json summary serializer to expose image scales when requested _all metadata_fields without waking up the object.
   [cekk]
 
+
+3.7.2 (2021-12-02)
+------------------
+
+- Customized ZCTextIndexQueryParser for https://github.com/plone/plone.restapi/pull/1209.
+  [cekk]
+
+
+3.7.1 (2021-12-01)
+------------------
+
+- Upgrade-step to reindex SearchableText for all contents with a table block (change in plone.restapi 8.16.1).
+  [cekk]
+
+3.7.0 (2021-12-01)
+------------------
+
+- Remove enabled_vocabularies implementation because in recent plone.restapi (>8.15.2) there is a standard way.
+  [cekk]
 
 3.6.2 (2021-11-09)
 ------------------

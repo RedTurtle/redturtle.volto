@@ -7,5 +7,6 @@
   <include package=".deserializer"  />
   <include package=".serializer"  />
   <include package=".services"  />
+  <include package=".search"  />
 
 </configure>

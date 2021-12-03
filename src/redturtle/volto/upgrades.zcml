@@ -111,10 +111,18 @@
     />
   <genericsetup:upgradeStep
     source="2000"
-    destination="2001"
+    destination="2100"
+    title="Reindex pages with table blocks"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_2100"
+    />
+  <genericsetup:upgradeStep
+    source="2100"
+    destination="2200"
     title="Reindex images"
     description=""
     profile="redturtle.volto:default"
-    handler=".upgrades.to_2001"
+    handler=".upgrades.to_2100"
     />
 </configure>

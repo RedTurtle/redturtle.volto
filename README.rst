@@ -213,48 +213,14 @@ Caching controlpanel
 After installation the caching control panel is populated with custom policies while caching is globally enabled by default. Please, set the caching proxies properly.
  
 
-@vocabularies endpoint
-======================
+@vocabularies permissions
+=========================
 
-Grant **plone.restapi: Access Plone vocabularies** permission to Anonymous users.
+According to new plone.restapi implementation, @vocabularies endpoint will check some permissions to make a vocabulary available or not.
 
-This allows users to potentially access to all vocabularies.
+We patched PERMISSIONS variable in __init__ file to allow Keywords vocabulary to be available for anonymous users.
 
-To avoid this, we patched the *@vocabularies* endpoint and add an additional checks:
-
-- Anonymous can't access to the vocabularies list (@vocabularies)
-- Anonymous can only access to a limited list of vocabularies (see below)
-- Simple users (users that only have basic roles like Member and Authenticated) can access to the vocabularies list
-- Simple users can only acces to a limited list of vocabularies (see below)
-- Advanced users can access to all vocabularies
-
-Available vocabularies
-----------------------
-
-- plone.app.vocabularies.Keywords
-
-Customize available vocabularies list
--------------------------------------
-
-There is a check in @vocabularies endpoint that checks if the given vocabulary name  is in a whitelist.
-
-That list is composed joining a list of names provided by some utilities.
-
-There is a base list in this package, but you can extend it registering an utility like this::
-
-    <utility
-        provides="redturtle.volto.interfaces.IRestapiPublicVocabularies"
-        factory=".my_utility.allowed_vocabularies"
-    />
-
-
-And in *my_utility.py* file::
-
-    def allowed_vocabularies():
-        return ["my.vocabulary", "my.other.vocabulary"]
-
-
-The endpoint get all registered utilities and join all values.
+Reference: https://github.com/plone/plone.restapi/pull/1258#issuecomment-980628982
 
 RamCache in tersecaching
 ------------------------
