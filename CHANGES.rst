@@ -4,7 +4,8 @@ Changelog
 3.7.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Upgrade-step to add default blocks in pages that don't have them.
+  [cekk]
 
 
 3.7.2 (2021-12-02)

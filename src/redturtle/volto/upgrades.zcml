@@ -117,4 +117,12 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_2100"
     />
+  <genericsetup:upgradeStep
+    source="2100"
+    destination="2200"
+    title="Add default blocks to pages created automatically"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_2200"
+    />
 </configure>

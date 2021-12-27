@@ -5,6 +5,8 @@ from plone import api
 from plone.dexterity.utils import iterSchemata
 from zope.schema import getFields
 from plone.app.upgrade.utils import installOrReinstallProduct
+from plone.restapi.behaviors import IBlocks
+from uuid import uuid4
 
 import logging
 import json
@@ -345,7 +347,7 @@ def to_2100(context):  # noqa: C901
         if getattr(item, "blocks", {}):
             if has_table_block(item.blocks):
                 items_reindexed.append(brain.getPath())
-                item_obj.reindexObject(idxs=['SearchableText'])
+                item_obj.reindexObject(idxs=["SearchableText"])
         for schema in iterSchemata(item):
             # fix blocks in blocksfields
             for name, field in getFields(schema).items():
@@ -353,7 +355,7 @@ def to_2100(context):  # noqa: C901
                     blocks = getattr(item, "blocks", {})
                     if has_table_block(blocks):
                         items_reindexed.append(brain.getPath())
-                        item_obj.reindexObject(idxs=['SearchableText'])
+                        item_obj.reindexObject(idxs=["SearchableText"])
                 else:
                     if not HAS_BLOCKSFIELD:
                         # blocks are only in blocks field
@@ -367,8 +369,33 @@ def to_2100(context):  # noqa: C901
                         blocks = value.get("blocks", {})
                         if has_table_block(blocks):
                             items_reindexed.append(brain.getPath())
-                            item_obj.reindexObject(idxs=['SearchableText'])
+                            item_obj.reindexObject(idxs=["SearchableText"])
 
     logger.info("Reindexed {} items".format(len(items_reindexed)))
     for path in items_reindexed:
         logger.info("- {}".format(path))
+
+
+def to_2200(context):  # noqa: C901
+    logger.info("## Add default blocks ##")
+
+    pc = api.portal.get_tool(name="portal_catalog")
+    brains = pc(object_provides=IBlocks.__identifier__)
+    tot = len(brains)
+    i = 0
+    items_fixed = []
+    for brain in brains:
+        i += 1
+        if i % 500 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        item_obj = brain.getObject()
+        item = aq_base(item_obj)
+        blocks = getattr(item, "blocks", {})
+        if not blocks or blocks == {}:
+            title_uuid = str(uuid4())
+            item.blocks = {title_uuid: {"@type": "title"}}
+            item.blocks_layout = {"items": [title_uuid]}
+            items_fixed.append(brain.getPath())
+    logger.info("Fixed {} items".format(len(items_fixed)))
+    # for path in items_reindexed:
+    #     logger.info("- {}".format(path))
