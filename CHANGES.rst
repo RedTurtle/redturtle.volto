@@ -1,10 +1,17 @@
 Changelog
 =========
 
-3.7.3 (unreleased)
+3.7.4 (unreleased)
 ------------------
 
 - Customized json summary serializer to expose image scales when requested _all metadata_fields without waking up the object.
+  [cekk]
+
+
+3.7.3 (2021-12-27)
+------------------
+
+- Upgrade-step to add default blocks in pages that don't have them.
   [cekk]
 
 

@@ -5,6 +5,8 @@ from plone import api
 from plone.dexterity.utils import iterSchemata
 from zope.schema import getFields
 from plone.app.upgrade.utils import installOrReinstallProduct
+from plone.restapi.behaviors import IBlocks
+from uuid import uuid4
 
 import logging
 import json
@@ -374,7 +376,30 @@ def to_2100(context):  # noqa: C901
         logger.info("- {}".format(path))
 
 
-def to_2100(context):
+def to_2200(context):  # noqa: C901
+    logger.info("## Add default blocks ##")
+
+    pc = api.portal.get_tool(name="portal_catalog")
+    brains = pc(object_provides=IBlocks.__identifier__)
+    tot = len(brains)
+    i = 0
+    items_fixed = []
+    for brain in brains:
+        i += 1
+        if i % 500 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        item_obj = brain.getObject()
+        item = aq_base(item_obj)
+        blocks = getattr(item, "blocks", {})
+        if not blocks or blocks == {}:
+            title_uuid = str(uuid4())
+            item.blocks = {title_uuid: {"@type": "title"}}
+            item.blocks_layout = {"items": [title_uuid]}
+            items_fixed.append(brain.getPath())
+    logger.info("Fixed {} items".format(len(items_fixed)))
+
+
+def to_3000(context):
     logger.info("Reindexing image_field")
     catalog = api.portal.get_tool("portal_catalog")
 
