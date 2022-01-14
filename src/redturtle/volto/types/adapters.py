@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """JsonSchema providers."""
+from plone.app.z3cform.interfaces import IAjaxSelectWidget
 from plone.restapi.types.adapters import TextLineJsonSchemaProvider as Base
+from plone.restapi.types.adapters import DefaultJsonSchemaProvider
 from plone.restapi.types.interfaces import IJsonSchemaProvider
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
@@ -30,3 +32,10 @@ class TextLineJsonSchemaProvider(Base):
                 context=self.request,
             )
         return super(TextLineJsonSchemaProvider, self).get_description()
+
+
+@adapter(IAjaxSelectWidget, Interface, Interface)
+@implementer(IJsonSchemaProvider)
+class AjaxSelectJsonSchemaProvider(DefaultJsonSchemaProvider):
+    def get_widget(self):
+        return "token"
