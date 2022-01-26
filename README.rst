@@ -195,6 +195,11 @@ because behavior's `setter/getter <https://github.com/plone/plone.app.dexterity/
 
 With this patch we will send to the setter the date with already localized hour, so even if the setter strip timezone info, we are going to save the correct date.
 
+Default ISerializeToJsonSummary adapter
+---------------------------------------
+
+This is a patch for backward compatibility for old volto templates that need a full image scales object.
+
 
 New Criteria
 ============

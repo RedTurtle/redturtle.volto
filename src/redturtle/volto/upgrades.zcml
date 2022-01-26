@@ -125,4 +125,13 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_2200"
     />
+  
+  <genericsetup:upgradeStep
+    source="2200"
+    destination="3000"
+    title="Reindex images"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_3000"
+    />
 </configure>

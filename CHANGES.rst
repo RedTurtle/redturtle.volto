@@ -4,7 +4,8 @@ Changelog
 3.7.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Customized json summary serializer to expose image scales when requested _all metadata_fields without waking up the object.
+  [cekk]
 
 
 3.7.3 (2021-12-27)

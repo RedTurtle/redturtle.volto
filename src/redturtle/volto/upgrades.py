@@ -397,5 +397,20 @@ def to_2200(context):  # noqa: C901
             item.blocks_layout = {"items": [title_uuid]}
             items_fixed.append(brain.getPath())
     logger.info("Fixed {} items".format(len(items_fixed)))
-    # for path in items_reindexed:
-    #     logger.info("- {}".format(path))
+
+
+def to_3000(context):
+    logger.info("Reindexing image_field")
+    catalog = api.portal.get_tool("portal_catalog")
+
+    brains = api.content.find(
+        object_provides="plone.app.contenttypes.behaviors.leadimage.ILeadImage"
+    )
+    tot = len(brains)
+    i = 0
+    for brain in brains:
+        i += 1
+        if i % 500 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        obj = brain.getObject()
+        catalog.catalog_object(obj)
