@@ -61,7 +61,7 @@ class DefaultJSONSummarySerializer(BaseSerializer):
         for k, v in data.items():
             if v in EMPTY_DATES:
                 data[k] = None
-            if v in EMPTY_STRINGS and k != "ExpirationDate":
+            if v in EMPTY_STRINGS and k not in ["ExpirationDate", "EffectiveDate"]:
                 # this is a Volto compatibility
                 data[k] = None
         scales = self.get_image_scales(data)
