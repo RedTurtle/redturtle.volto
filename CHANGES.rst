@@ -4,7 +4,8 @@ Changelog
 3.8.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Return null value in summary serialization for dates not set (because metadata are set with dates in the future or past for better filtering/sorting).
+  [cekk]
 
 
 3.8.0 (2022-01-26)

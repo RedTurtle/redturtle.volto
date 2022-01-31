@@ -11,6 +11,17 @@ from zope.interface import implementer
 from zope.interface import Interface
 
 
+EMPTY_DATES = [
+    "1969-12-30T23:00:00+00:00",
+    "2499-12-30T23:00:00+00:00",
+    "2499-12-31T00:00:00+00:00",
+    "2100-12-31T00:00:00",
+    "2100-12-31T00:00:00+00:00",
+]
+
+EMPTY_STRINGS = ["None"]
+
+
 @implementer(ISerializeToJsonSummary)
 @adapter(Interface, IRedturtleVoltoLayer)
 class DefaultJSONSummarySerializer(BaseSerializer):
@@ -45,6 +56,14 @@ class DefaultJSONSummarySerializer(BaseSerializer):
 
     def __call__(self):
         data = super().__call__()
+
+        # return empty values if dates are not set:
+        for k, v in data.items():
+            if v in EMPTY_DATES:
+                data[k] = None
+            if v in EMPTY_STRINGS and k not in ["ExpirationDate", "EffectiveDate"]:
+                # this is a Volto compatibility
+                data[k] = None
         scales = self.get_image_scales(data)
         if scales:
             data["image"] = {"scales": scales}
