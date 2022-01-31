@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.8.1 (unreleased)
+3.8.1 (2022-01-31)
 ------------------
 
 - Return null value in summary serialization for dates not set (because metadata are set with dates in the future or past for better filtering/sorting).
