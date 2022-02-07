@@ -4,7 +4,8 @@ Changelog
 3.8.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle non-path values in blocks deserializer when trying to extract UIDs.
+  [cekk]
 
 
 3.8.1 (2022-01-31)
