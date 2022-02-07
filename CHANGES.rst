@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.8.2 (unreleased)
+3.8.2 (2022-02-07)
 ------------------
 
 - Handle non-path values in blocks deserializer when trying to extract UIDs.
