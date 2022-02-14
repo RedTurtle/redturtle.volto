@@ -4,7 +4,8 @@ Changelog
 3.8.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix null dates in summary serialization (now we handle differente use-cases).
+  [cekk]
 
 
 3.8.2 (2022-02-07)
