@@ -11,7 +11,6 @@ from plone.restapi.serializer.summary import (
 )
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
-from zope.component import getMultiAdapter
 from zope.interface import implementer
 from zope.interface import Interface
 
