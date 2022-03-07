@@ -79,7 +79,5 @@ class TestBlocksSerializer(unittest.TestCase):
         res = response.json()
         self.assertEqual(
             res["blocks"]["foo"]["field"][0],
-            getMultiAdapter(
-                (self.page_a, self.request), ISerializeToJsonSummary
-            )(),
+            getMultiAdapter((self.page_a, self.request), ISerializeToJsonSummary)(),
         )
