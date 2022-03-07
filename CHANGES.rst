@@ -6,6 +6,8 @@ Changelog
 
 - Fix null dates in summary serialization (now we handle differente use-cases).
   [cekk]
+- Return remoteUrl metadata when serializing a brain for backward compatibility with non-brain serializers.
+  [cekk]
 
 
 3.8.2 (2022-02-07)
