@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.8.3 (unreleased)
+3.8.3 (2022-03-07)
 ------------------
 
 - Fix null dates in summary serialization (now we handle differente use-cases).
