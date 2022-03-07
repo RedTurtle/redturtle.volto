@@ -105,7 +105,11 @@ class DefaultJSONSummarySerializer(BaseSerializer):
         if self.context.portal_type == "Link":
             if "_all" in metadata_fields or "remoteUrl" in metadata_fields:
                 remote_url = self.get_remote_url()
-                data["remoteUrl"] = remote_url
+                # set twice because old templates can use both
                 if not remote_url:
-                    return ""
+                    data["getRemoteUrl"] = ""
+                    data["remoteUrl"] = ""
+                else:
+                    data["remoteUrl"] = remote_url
+                    data["getRemoteUrl"] = remote_url
         return data
