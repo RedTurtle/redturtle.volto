@@ -18,14 +18,6 @@ import re
 
 RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 
-EMPTY_DATES = [
-    "1969-12-30T23:00:00+00:00",
-    "2499-12-30T23:00:00+00:00",
-    "2499-12-31T00:00:00+00:00",
-    "2100-12-31T00:00:00",
-    "2100-12-31T00:00:00+00:00",
-]
-
 EMPTY_STRINGS = ["None"]
 
 
@@ -94,8 +86,9 @@ class DefaultJSONSummarySerializer(BaseSerializer):
         metadata_fields = self.get_metadata_fields()
         # return empty values if dates are not set:
         for k, v in data.items():
-            if v in EMPTY_DATES:
-                data[k] = None
+            if isinstance(v, str):
+                if v.startswith("1969") or v.startswith("2100") or v.startswith("2499"):
+                    data[k] = None
             if v in EMPTY_STRINGS and k not in ["ExpirationDate", "EffectiveDate"]:
                 # this is a Volto compatibility
                 data[k] = None

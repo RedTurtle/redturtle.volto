@@ -51,6 +51,7 @@ class TestSummaryCustomization(unittest.TestCase):
         )
 
         self.news_with_image.reindexObject()
+
         transaction.commit()
 
     def tearDown(self):
@@ -77,3 +78,30 @@ class TestSummaryCustomization(unittest.TestCase):
         self.assertEqual(res["items"][1]["title"], self.news_without_image.title)
         self.assertIn("image", res["items"][0])
         self.assertNotIn("image", res["items"][1])
+
+    def test_summary_return_empty_effective_date_if_not_set(self):
+        page = api.content.create(
+            container=self.portal,
+            type="Document",
+            title="Document",
+        )
+        transaction.commit()
+
+        response = self.api_session.get(
+            "/@search?metadata_fields=effective&UID={}".format(page.UID())
+        )
+        self.assertEqual(response.status_code, 200)
+        res = response.json()
+
+        self.assertEqual(len(res["items"]), 1)
+        self.assertEqual(res["items"][0]["effective"], None)
+
+        api.content.transition(obj=page, transition="publish")
+        transaction.commit()
+
+        res = self.api_session.get(
+            "/@search?metadata_fields=effective&UID={}".format(page.UID())
+        ).json()
+
+        self.assertEqual(len(res["items"]), 1)
+        self.assertEqual(res["items"][0]["effective"], page.effective_date)
