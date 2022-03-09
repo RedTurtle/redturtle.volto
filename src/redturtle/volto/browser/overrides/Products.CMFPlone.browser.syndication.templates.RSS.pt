@@ -9,6 +9,7 @@
 
 <tal:block
     tal:define="portal_url context/portal_url;
+                image_miniature python:context.portal_registry.get('redturtle.volto.rss_image_miniature', None) or 'thumb';
                 portal_url_no_api python: portal_url.replace('/api', '');
                 feed view/feed;
                 items python: [f for f in feed.items]">
@@ -37,7 +38,7 @@
     <link tal:content="link" />
     <description tal:content="item/description" />
     <tal:image tal:condition="python: item.field_name == 'image'" tal:on-error="string:">
-        <tal:image_metadata tal:define="url string:${link}/@@images/image/thumb;
+        <tal:image_metadata tal:define="url string:${link}/@@images/image/${image_miniature};
                                         size item/file/size|nothing;
                                         mime item/file/contentType|nothing">
             <enclosure url="${url}" tal:attributes="size size; type mime"/>

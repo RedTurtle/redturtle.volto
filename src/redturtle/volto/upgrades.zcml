@@ -134,4 +134,14 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_3000"
     />
+
+  <genericsetup:upgradeStep
+    source="3000"
+    destination="3001"
+    title="Allow to customize RSS minitaure"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.update_registry"
+    />
+
 </configure>

@@ -4,7 +4,8 @@ Changelog
 3.8.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Allow to select custom miniature for RSS template
+  [lucabel]
 
 
 3.8.3 (2022-03-07)
