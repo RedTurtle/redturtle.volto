@@ -230,6 +230,18 @@ it seems not correctly purged when there are more instances and a content has be
 
 We need to check why it's not purged and fix it.
 
+
+Template overrides
+==================
+
+RSS.pt Template
+---------------
+There is a customization of the Products.CMFPlone.browser.syndication.templates.RSS.pt
+template to add enclosure tag to feed items.
+A record has also been added to the registry to be able to set the miniature to be
+displayed with the RSS item. This record is named redturtle.volto.rss_image_miniature
+
+
 Installation
 ============
 
