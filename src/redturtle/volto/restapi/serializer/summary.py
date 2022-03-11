@@ -103,7 +103,6 @@ class DefaultJSONSummarySerializer(BaseSerializer):
         if force_all_metadata:
             self.force_all_metadata = True
         data = super().__call__()
-        metadata_fields = self.metadata_fields()
         # return empty values if dates are not set:
         for k, v in data.items():
             if isinstance(v, str):
