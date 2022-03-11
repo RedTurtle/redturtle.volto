@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from multiprocessing.context import _force_start_method
 from plone import api
 from plone.app.testing import (
     SITE_OWNER_NAME,
@@ -11,7 +10,6 @@ from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.interfaces import ISerializeToJson
 from zope.component import getMultiAdapter
 
 import unittest
