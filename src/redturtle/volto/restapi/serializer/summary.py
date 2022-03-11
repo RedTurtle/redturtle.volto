@@ -117,13 +117,12 @@ class DefaultJSONSummarySerializer(BaseSerializer):
         if scales:
             data["image"] = {"scales": scales}
         if self.context.portal_type == "Link":
-            if "remoteUrl" in metadata_fields or self.show_all_metadata_fields:
-                remote_url = self.get_remote_url()
-                # set twice because old templates can use both
-                if not remote_url:
-                    data["getRemoteUrl"] = ""
-                    data["remoteUrl"] = ""
-                else:
-                    data["remoteUrl"] = remote_url
-                    data["getRemoteUrl"] = remote_url
+            remote_url = self.get_remote_url()
+            # set twice because old templates can use both
+            if not remote_url:
+                data["getRemoteUrl"] = ""
+                data["remoteUrl"] = ""
+            else:
+                data["remoteUrl"] = remote_url
+                data["getRemoteUrl"] = remote_url
         return data
