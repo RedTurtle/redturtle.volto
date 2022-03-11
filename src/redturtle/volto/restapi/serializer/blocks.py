@@ -2,15 +2,17 @@
 from AccessControl.unauthorized import Unauthorized
 from copy import deepcopy
 from plone import api
+from plone.indexer.interfaces import IIndexableObject
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
-from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.interfaces import ISerializeToJson
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.blocks import uid_to_url
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
@@ -70,23 +72,27 @@ class GenericResolveUIDSerializer(object):
         return block
 
     def get_item_from_uid(self, block):
+        """
+        Return serialized item from uid.
+        We return the summary one because we want to avoid recursion and too much complex data returned here.
+        For example if we serialize the whole context, we will have also all its blocks.
+        This could lead to a huge amount of data returned.
+        We need to wrap the item with IIndexableObject to be able to get all metadata like it was a brain.
+        """
         try:
             item = api.content.get(UID=block["UID"])
         except Unauthorized:
             return {}
         if item:
-            if item == self.context:
-                # STOP RECURSION: if we serialize the complete object, we get
-                # maximum recursion depth, so serialize the object with
-                # summary. If we need more infos, let's add them into summary
-                # serializer
-                return getMultiAdapter(
-                    (item, getRequest()), ISerializeToJsonSummary
-                )()
-            else:
-                return getMultiAdapter(
-                    (item, getRequest()), ISerializeToJson
-                )()
+            wrapper = queryMultiAdapter(
+                (
+                    item,
+                    self.context.portal_catalog,
+                ),
+                IIndexableObject,
+            )
+            adapter = getMultiAdapter((wrapper, getRequest()), ISerializeToJsonSummary)
+            return adapter(force_all_metadata=True)
         else:
             return {}
 
@@ -94,10 +100,10 @@ class GenericResolveUIDSerializer(object):
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IBlocks, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
-    """ Deserializer for content-types that implements IBlocks behavior """
+    """Deserializer for content-types that implements IBlocks behavior"""
 
 
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerRoot(GenericResolveUIDSerializer):
-    """ Deserializer for site-root """
+    """Deserializer for site-root"""
