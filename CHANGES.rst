@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.8.4 (unreleased)
+3.8.4 (2022-03-14)
 ------------------
 
 - Allow to select custom miniature for RSS template
