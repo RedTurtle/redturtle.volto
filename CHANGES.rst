@@ -6,7 +6,8 @@ Changelog
 
 - Allow to select custom miniature for RSS template
   [lucabel]
-
+- Better serialize refs in blocks: now we don't serialize the full object, but only the summary (with all metadata) to decrease (A LOT) the size of the response.
+  [cekk]
 
 3.8.3 (2022-03-07)
 ------------------

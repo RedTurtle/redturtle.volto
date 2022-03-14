@@ -10,7 +10,6 @@ from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.interfaces import ISerializeToJson
 from zope.component import getMultiAdapter
 
 import unittest
@@ -48,7 +47,7 @@ class TestBlocksSerializer(unittest.TestCase):
     def tearDown(self):
         self.api_session.close()
 
-    def test_blocks_internal_refs_with_uid_get_serialized(self):
+    def test_blocks_internal_refs_with_uid_get_serialized_as_summary(self):
 
         self.page_a.blocks = {
             "foo": {
@@ -58,11 +57,13 @@ class TestBlocksSerializer(unittest.TestCase):
         }
         commit()
         response = self.api_session.get(self.page_a.absolute_url())
-
+        brain = api.content.find(UID=self.page_b.UID())[0]
         res = response.json()
         self.assertEqual(
             res["blocks"]["foo"]["field"][0],
-            getMultiAdapter((self.page_b, self.request), ISerializeToJson)(),
+            getMultiAdapter((brain, self.request), ISerializeToJsonSummary)(
+                force_all_metadata=True
+            ),
         )
 
     def test_blocks_internal_refs_dont_generate_recursion_depth(self):
@@ -75,9 +76,11 @@ class TestBlocksSerializer(unittest.TestCase):
         }
         commit()
         response = self.api_session.get(self.page_a.absolute_url())
-
+        brain = api.content.find(UID=self.page_a.UID())[0]
         res = response.json()
         self.assertEqual(
             res["blocks"]["foo"]["field"][0],
-            getMultiAdapter((self.page_a, self.request), ISerializeToJsonSummary)(),
+            getMultiAdapter((brain, self.request), ISerializeToJsonSummary)(
+                force_all_metadata=True
+            ),
         )
