@@ -75,7 +75,7 @@ class GenericResolveUIDSerializer(object):
         This could lead to a huge amount of data returned.
         We need to wrap the item with IIndexableObject to be able to get all metadata like it was a brain.
         """
-        items = api.content.find(UID=block["UID"])
+        items = api.content.find(UID=block["UID"], show_inactive=False)
         if len(items) == 0:
             return {}
         item = items[0]
