@@ -78,22 +78,13 @@ class GenericResolveUIDSerializer(object):
         This could lead to a huge amount of data returned.
         We need to wrap the item with IIndexableObject to be able to get all metadata like it was a brain.
         """
-        try:
-            item = api.content.get(UID=block["UID"])
-        except Unauthorized:
+        items = api.content.find(UID=block["UID"])
+        if len(items) == 0:
             return {}
-        if item:
-            wrapper = queryMultiAdapter(
-                (
-                    item,
-                    self.context.portal_catalog,
-                ),
-                IIndexableObject,
-            )
-            adapter = getMultiAdapter((wrapper, getRequest()), ISerializeToJsonSummary)
-            return adapter(force_all_metadata=True)
-        else:
-            return {}
+        item = items[0]
+
+        adapter = getMultiAdapter((item, getRequest()), ISerializeToJsonSummary)
+        return adapter(force_all_metadata=True)
 
 
 @implementer(IBlockFieldSerializationTransformer)
