@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from AccessControl.unauthorized import Unauthorized
 from copy import deepcopy
 from plone import api
-from plone.indexer.interfaces import IIndexableObject
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
 from plone.restapi.interfaces import ISerializeToJsonSummary
@@ -11,7 +9,6 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getMultiAdapter
-from zope.component import queryMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
@@ -78,22 +75,13 @@ class GenericResolveUIDSerializer(object):
         This could lead to a huge amount of data returned.
         We need to wrap the item with IIndexableObject to be able to get all metadata like it was a brain.
         """
-        try:
-            item = api.content.get(UID=block["UID"])
-        except Unauthorized:
+        items = api.content.find(UID=block["UID"], show_inactive=False)
+        if len(items) == 0:
             return {}
-        if item:
-            wrapper = queryMultiAdapter(
-                (
-                    item,
-                    self.context.portal_catalog,
-                ),
-                IIndexableObject,
-            )
-            adapter = getMultiAdapter((wrapper, getRequest()), ISerializeToJsonSummary)
-            return adapter(force_all_metadata=True)
-        else:
-            return {}
+        item = items[0]
+
+        adapter = getMultiAdapter((item, getRequest()), ISerializeToJsonSummary)
+        return adapter(force_all_metadata=True)
 
 
 @implementer(IBlockFieldSerializationTransformer)

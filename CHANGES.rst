@@ -4,7 +4,8 @@ Changelog
 3.9.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Refs serialization in blocks now uses brains instead adapted objects because brain has all catalog metadata and can get the fullobject.
+  [cekk]
 
 
 3.9.0 (2022-03-14)
