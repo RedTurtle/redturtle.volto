@@ -84,6 +84,26 @@ class GenericResolveUIDSerializer(object):
         return adapter(force_all_metadata=True)
 
 
+class TableResolveUIDSerializer(object):
+    """ """
+
+    order = 210  # after standard ones
+    block_type = "table"
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self, value):
+        for row in value.get("table", {}).get("rows", []):
+            for cell in row.get("cells", []):
+                for entity in cell.get("value", {}).get("entityMap", {}).values():
+                    if entity.get("type") == "LINK":
+                        url = entity.get("data", {}).get("url", "")
+                        entity["data"]["url"] = uid_to_url(url)
+        return value
+
+
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IBlocks, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
@@ -93,4 +113,16 @@ class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerRoot(GenericResolveUIDSerializer):
+    """Deserializer for site-root"""
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IBlocks, IRedturtleVoltoLayer)
+class TableResolveUIDSerializerContents(TableResolveUIDSerializer):
+    """Deserializer for content-types that implements IBlocks behavior"""
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
+class TableResolveUIDSerializerRoot(TableResolveUIDSerializer):
     """Deserializer for site-root"""

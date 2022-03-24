@@ -240,6 +240,11 @@ template to add enclosure tag to feed items.
 A record has also been added to the registry to be able to set the miniature to be
 displayed with the RSS item. This record is named redturtle.volto.rss_image_miniature
 
+Fix internal links
+==================
+
+There is a view **@@fix-links** that will check internal links into blocks and fix some links that refs to a staging
+or local development environment.
 
 Installation
 ============
@@ -255,6 +260,7 @@ Install redturtle.volto by adding it to your buildout::
 
 
 and then running ``bin/buildout``
+
 
 
 Contribute

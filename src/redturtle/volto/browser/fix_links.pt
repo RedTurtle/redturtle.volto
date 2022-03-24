@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/@@main_template/macros/master"
+      i18n:domain="redturtle.volto">
+
+<body>
+    <metal:content-title fill-slot="content-title">
+    <h1>Fix links</h1>
+    </metal:content-title>
+    <metal:content-description fill-slot="content-description">
+    </metal:content-description>
+    <metal:content-core fill-slot="content-core">
+
+        <div class="form">
+            <form action="${context/portal_url}/fix-links" method="POST">
+                <div class="field">
+                    <label for="to_replace" class="horizontal focus">
+                        Urls to replace
+                        <span class="formHelp">
+                            Insert a list of urls to replace. They can be localhost (http://localhost:8080/Plone) or staging urls (with /api at the end).
+                            All links found with these patterns will be replaced with current portal url (${context/portal_url}) and then tried to converted into a safer way (like blocks deserializers works).
+                        </span>
+                    </label>
+                    <textarea id="to_replace"
+                              name="to_replace"
+                              tal:define="to_replace request/form/to_replace|nothing"
+                              class="textarea-widget text-field">${to_replace}</textarea>
+                </div>
+                <div class="field">
+                    <span class="option">
+                        <input id="dry_mode"
+                            name="dry_mode"
+                            class="single-checkbox-bool-widget bool-field"
+                            checked
+                            type="checkbox">
+                        <label for="dry_mode" class="horizontal focus">
+                            Dry mode
+                            <span class="formHelp">Do not save new data.</span>
+                        </label>
+                    </span>
+                </div>
+                <div class="formControls">
+                    <input id="confirm"
+                           name="confirm"
+                           class="submit-widget button-field context"
+                           value="Confirm"
+                           type="submit">
+                </div>
+            </form>
+        </div>
+        <div tal:define="data view/results" tal:condition="data">
+            <h2>Results</h2>
+            <div class="pat-autotoc autotabs"
+                 data-pat-autotoc="section:fieldset;levels:legend;">
+                <fieldset tal:define="fixed data/fixed|nothing"
+                          tal:condition="fixed">
+                    <legend tal:define="tot python:len(fixed)">Fixed links (${tot})</legend>
+                    <div>
+                        <div tal:repeat="res fixed" class="panel panel-default">
+                            <div class="panel-heading">
+                                <a href="${res/url}">${res/url}</a>
+                            </div>
+                            <a href="#modal-fixed-${repeat/res/index}"
+                            class="plone-btn plone-btn-large plone-btn-primary pat-plone-modal"
+                            data-pat-plone-modal="">See changes</a>
+                                <div id="modal-fixed-${repeat/res/index}" style="display: none">
+                                    <div style="display:flex;gap: 10px;justify-content: center;">
+                                        <div style="width:50%;">
+                                            <h3>OLD</h3>
+                                            <pre style="height:500px;">${res/old}</pre>
+                                        </div>
+                                        <div style="width:50%;">
+                                            <h3>NEW</h3>
+                                            <pre style="height:500px;">${res/new}</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            <hr />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset tal:define="not_fixed data/not_fixed|nothing"
+                          tal:condition="not_fixed">
+                    <legend tal:define="tot python:len(not_fixed)">Not fixed links (${tot})</legend>
+                    <div>
+                        <div tal:repeat="res not_fixed" class="panel panel-default">
+                            <div class="panel-heading">
+                                <a href="${res/url}">${res/url}</a>
+                            </div>
+                            <a href="#modal-not-fixed-${repeat/res/index}"
+                            class="plone-btn plone-btn-large plone-btn-primary pat-plone-modal"
+                            data-pat-plone-modal="">See changes</a>
+                                <div id="modal-not-fixed-${repeat/res/index}" style="display: none">
+                                    <div style="display:flex;gap: 10px;justify-content: center;">
+                                        <div style="width:50%;">
+                                            <h3>OLD</h3>
+                                            <pre style="height:500px;">${res/old}</pre>
+                                        </div>
+                                        <div style="width:50%;">
+                                            <h3>NEW</h3>
+                                            <pre style="height:500px;">${res/new}</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            <hr />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </metal:content-core>
+</body>
+
+</html>
