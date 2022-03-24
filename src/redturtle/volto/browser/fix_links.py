@@ -36,7 +36,6 @@ class View(BrowserView):
                 logger.info(" - Progress {}/{}".format(i + 1, tot))
             item = brain.getObject()
             aq_base_obj = aq_base(item)
-            has_error = False
             for schemata in iterSchemata(aq_base_obj):
                 for name, field in getFieldsInOrder(schemata):
                     if name in ["blocks_layout"]:
@@ -115,7 +114,7 @@ class View(BrowserView):
         res = {"ok": True}
         try:
             data = json.dumps(blocks)
-        except:
+        except Exception:
             return res
         if self.check_pattern(value=data):
             res["ok"] = False
