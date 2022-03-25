@@ -84,6 +84,9 @@ class DefaultJSONSummarySerializer(BaseSerializer):
             value = self.context.getRemoteUrl
         if not value:
             return ""
+        if value.startswith("http"):
+            # it isn't an internal link, so we can return it
+            return value
         path = replace_link_variables_by_paths(context=self.context, url=value)
         match = RESOLVEUID_RE.match(path)
         if match:

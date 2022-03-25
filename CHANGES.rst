@@ -4,7 +4,8 @@ Changelog
 3.9.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix remoteUrl serialization in summary.
+  [cekk]
 
 
 3.9.1 (2022-03-17)
