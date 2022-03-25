@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.9.2 (unreleased)
+3.9.2 (2022-03-25)
 ------------------
 
 - Fix remoteUrl serialization in summary.
