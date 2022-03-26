@@ -4,7 +4,10 @@ Changelog
 3.9.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Table block serializer/deserializer for internal links.
+  [cekk]
+- Add view for fix internal links.
+  [cekk]
 
 
 3.9.2 (2022-03-25)
