@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.9.3 (unreleased)
-------------------
+3.10.0 (2022-03-26)
+-------------------
 
 - Add Table block serializer/deserializer for internal links.
   [cekk]
