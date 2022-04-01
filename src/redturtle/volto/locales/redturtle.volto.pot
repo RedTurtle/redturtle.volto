@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-12 15:30+0000\n"
+"POT-Creation-Date: 2022-04-01 14:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,40 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.volto\n"
 
-#: redturtle/volto/configure.zcml:25
+#: redturtle/volto/configure.zcml:28
 msgid "Installs the redturtle.volto add-on."
 msgstr ""
 
-#: redturtle/volto/profiles/default/registry.xml
+#: redturtle/volto/profiles/default/registry/criteria.xml
 msgid "Metadata"
 msgstr ""
 
-#: redturtle/volto/configure.zcml:25
+#: redturtle/volto/configure.zcml:28
 msgid "RedTurtle: Volto"
 msgstr ""
 
-#: redturtle/volto/configure.zcml:34
+#: redturtle/volto/configure.zcml:37
 msgid "RedTurtle: Volto (uninstall)"
 msgstr ""
 
-#: redturtle/volto/profiles/default/registry.xml
+#: redturtle/volto/profiles/default/registry/criteria.xml
 msgid "Select False to show only elements not excluded from navigation."
 msgstr ""
 
-#: redturtle/volto/profiles/default/registry.xml
+#: redturtle/volto/profiles/default/registry/criteria.xml
 msgid "Show elements excluded from navigation"
 msgstr ""
 
-#: redturtle/volto/configure.zcml:34
+#: redturtle/volto/configure.zcml:37
 msgid "Uninstalls the redturtle.volto add-on."
 msgstr ""
 
 #. Default: "Insert an external link directly into the field,or select an internal link clicking on the icon."
 #: redturtle/volto/types/adapters.py:25
 msgid "remoteUrl_restapi_label"
+msgstr ""
+
+#. Default: "Volto URL: Content url without \"/api\"."
+#: redturtle/volto/adapters/stringinterp.py:13
+msgid "stringinterp_volto_url"
 msgstr ""

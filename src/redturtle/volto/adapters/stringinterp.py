@@ -10,7 +10,10 @@ from redturtle.volto import _
 class VoltoUrlSubstitution(BaseSubstitution):
 
     category = stringinterp_mf(u"All Content")
-    description = _(u"Volto URL")
+    description = _(
+        "stringinterp_volto_url",
+        defalut=u'Volto URL: Content url without "/api".',
+    )
 
     def safe_call(self):
         absolute_url = self.context.absolute_url()
