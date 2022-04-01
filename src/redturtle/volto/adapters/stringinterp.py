@@ -12,7 +12,7 @@ class VoltoUrlSubstitution(BaseSubstitution):
     category = stringinterp_mf(u"All Content")
     description = _(
         "stringinterp_volto_url",
-        defalut=u'Volto URL: Content url without "/api".',
+        default=u'Volto URL: Content url without "/api".',
     )
 
     def safe_call(self):
