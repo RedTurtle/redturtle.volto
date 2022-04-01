@@ -246,6 +246,14 @@ Fix internal links
 There is a view **@@fix-links** that will check internal links into blocks and fix some links that refs to a staging
 or local development environment.
 
+
+Stringinterp adapters
+=====================
+
+There is a new stringinterp adapter that can be used for example in content rules: **{volto_url}**
+
+This adapter will remove "/api" from the content's absolute_url.
+
 Installation
 ============
 

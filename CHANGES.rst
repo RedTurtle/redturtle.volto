@@ -4,7 +4,8 @@ Changelog
 3.10.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add stringinterp adapter to replace *{volto_url}* with the current frontend url (backend url without "/api").
+  [cekk]
 
 
 3.10.0 (2022-03-26)

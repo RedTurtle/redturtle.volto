@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+   <adapter
+       for="*"
+       provides="plone.stringinterp.interfaces.IStringSubstitution"
+       factory=".stringinterp.VoltoUrlSubstitution"
+       name="volto_url"
+       />
+
+</configure>
