@@ -144,4 +144,12 @@
     handler=".upgrades.update_registry"
     />
 
+  <genericsetup:upgradeStep
+    source="3001"
+    destination="3100"
+    title="Add new metadata for Events"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_3100"
+    />
 </configure>

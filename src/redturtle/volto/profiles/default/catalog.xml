@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
 <object name="portal_catalog">
-  <!--<column value="my_meta_column"/>-->
+  <!-- metadata -->
+  <column value="open_end"/>
+  <column value="whole_day"/>
+  <column value="recurrence"/>
 </object>

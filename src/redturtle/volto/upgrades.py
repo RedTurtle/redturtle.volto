@@ -43,6 +43,10 @@ def update_controlpanel(context):
     update_profile(context, "controlpanel")
 
 
+def update_catalog(context):
+    update_profile(context, "catalog")
+
+
 def to_1003(context):
     """
     removed the method that updated robots.txt, so this upgrade-step does nothing
@@ -406,6 +410,22 @@ def to_3000(context):
     brains = api.content.find(
         object_provides="plone.app.contenttypes.behaviors.leadimage.ILeadImage"
     )
+    tot = len(brains)
+    i = 0
+    for brain in brains:
+        i += 1
+        if i % 500 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        obj = brain.getObject()
+        catalog.catalog_object(obj)
+
+
+def to_3100(context):
+    logger.info("Reindexing Events")
+    update_catalog(context)
+    catalog = api.portal.get_tool("portal_catalog")
+
+    brains = api.content.find(portal_type="Event")
     tot = len(brains)
     i = 0
     for brain in brains:

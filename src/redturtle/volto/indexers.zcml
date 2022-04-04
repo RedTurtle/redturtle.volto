@@ -3,6 +3,20 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="redturtle.volto"
     >
+    
+
+    <adapter
+      factory=".indexers.open_end"
+      name="open_end"
+      />
+    <adapter
+      factory=".indexers.whole_day"
+      name="whole_day"
+      />
+    <adapter
+      factory=".indexers.recurrence"
+      name="recurrence"
+      />
 
     <!-- make some block indexable -->
     <adapter
@@ -22,4 +36,5 @@
         name="testo_riquadro_immagine"
         />
     
+
 </configure>
