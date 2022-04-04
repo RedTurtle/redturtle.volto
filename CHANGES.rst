@@ -4,7 +4,8 @@ Changelog
 3.11.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add new metadata for Events dates.
+  [cekk]
 
 
 3.11.0 (2022-04-01)
