@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.11.1 (unreleased)
+3.12.0 (2022-04-04)
 -------------------
 
 - Add new metadata for Events dates.
