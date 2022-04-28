@@ -4,7 +4,8 @@ Changelog
 3.12.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Improve event search to return result with a start date according to rrules.
+  [lucabel]
 
 
 3.12.0 (2022-04-04)

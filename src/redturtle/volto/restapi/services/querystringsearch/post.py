@@ -9,6 +9,10 @@ from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services.querystringsearch.get import QuerystringSearchPost
 from zope.component import getMultiAdapter
 from DateTime import DateTime
+from datetime import datetime
+from plone import api
+from dateutil import rrule, parser
+from dateutil.tz import tzutc
 
 import logging
 
@@ -50,15 +54,20 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         fullobjects = data.get("fullobjects", False)
         b_size = data.get("b_size", None)
         b_start = data.get("b_start", 0)
-        query = {k: v for k, v in parsed_query.items() if k not in ["start", "end"]}
+        query = {
+            k: v for k, v in parsed_query.items() if k not in ["start", "end"]
+        }
         limit = int(data.get("limit", 1000))
         sort = "start"
         sort_reverse = False
         start, end = self.parse_event_dates(parsed_query)
+        print(start)
+        print(end)
         if data.get("sort_on", ""):
             sort = data["sort_on"]
         if data.get("sort_order", ""):
             sort_reverse = data["sort_order"] == "descending" and True or False
+        print(start)
         return (
             start,
             end,
@@ -92,7 +101,11 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         if query_end:
             range = query_end.get("range", "")
             value = query_end.get("query", "")
-            if not query_start and isinstance(value, list) and range == "minmax":
+            if (
+                not query_start
+                and isinstance(value, list)
+                and range == "minmax"
+            ):
                 start = self.get_datetime_value(value[0])
                 end = self.get_datetime_value(value[1])
                 return start, end
@@ -162,6 +175,41 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
                 result = getMultiAdapter(
                     (brain, self.request), ISerializeToJsonSummary
                 )()
+                # If we have recurrence we should consider that start date and end
+                # date are taken from metadata in catalog.
+                # so these values are updated only when the object is reindexd.
+                if result["recurrence"]:
+                    rrule_obj = rrule.rrulestr(result["recurrence"])
+                    now = datetime.now().replace(
+                        hour=0, minute=0, second=0, microsecond=0
+                    )
+                    event_start = parser.parse(result["start"]).replace(
+                        tzinfo=None
+                    )
+                    if (
+                        event_start < now
+                        and result["start"][0:10] == result["end"][0:10]
+                    ):
+                        try:
+                            next_date = rrule_obj.after(now, inc=False)
+                        except TypeError:
+                            now_tz = now.replace(tzinfo=tzutc())
+                            next_date = rrule_obj.after(now_tz, inc=False)
+                        next_date_day = next_date.strftime("%Y-%m-%d")
+
+                        old_start = result["start"]
+                        new_start = result["start"].replace(
+                            old_start[0:10], next_date_day
+                        )
+
+                        old_end = result["end"]
+                        new_end = result["end"].replace(
+                            old_end[0:10], next_date_day
+                        )
+
+                        result["start"] = new_start
+                        result["end"] = new_end
+
             if result:
                 results["items"].append(result)
 
