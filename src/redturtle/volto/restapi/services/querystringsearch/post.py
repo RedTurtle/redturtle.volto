@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 from plone.app.event.base import get_events
 from plone.app.querystring import queryparser
 from plone.restapi.batching import HypermediaBatch

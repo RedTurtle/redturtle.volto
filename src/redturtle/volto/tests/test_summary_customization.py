@@ -10,8 +10,6 @@ from plone.restapi.testing import RelativeSession
 from plone.namedfile.file import NamedBlobImage
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from datetime import datetime
-from plone.app.querystring import queryparser
-from plone.restapi.deserializer import json_body
 import unittest
 import transaction
 import os
