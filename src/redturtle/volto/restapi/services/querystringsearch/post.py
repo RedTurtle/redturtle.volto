@@ -59,13 +59,10 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         sort = "start"
         sort_reverse = False
         start, end = self.parse_event_dates(parsed_query)
-        print(start)
-        print(end)
         if data.get("sort_on", ""):
             sort = data["sort_on"]
         if data.get("sort_order", ""):
             sort_reverse = data["sort_order"] == "descending" and True or False
-        print(start)
         return (
             start,
             end,
