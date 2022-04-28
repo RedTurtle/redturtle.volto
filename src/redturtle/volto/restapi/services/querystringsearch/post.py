@@ -9,7 +9,6 @@ from plone.restapi.services.querystringsearch.get import QuerystringSearchPost
 from zope.component import getMultiAdapter
 from DateTime import DateTime
 from datetime import datetime
-from plone import api
 from dateutil import rrule, parser
 from dateutil.tz import tzutc
 
