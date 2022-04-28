@@ -180,10 +180,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
                     event_start = parser.parse(result["start"]).replace(
                         tzinfo=None
                     )
-                    if (
-                        event_start < now
-                        and result["start"][0:10] == result["end"][0:10]
-                    ):
+                    if event_start < now and result["start"][0:10] == result["end"][0:10]:
                         try:
                             next_date = rrule_obj.after(now, inc=False)
                         except TypeError:
