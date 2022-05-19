@@ -4,8 +4,8 @@ Changelog
 3.12.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Add *query* to ignored keys in blocks deserializer. This avoid blocks with querystringsearch widget to be parsed (for example the search one).
+  [cekk]
 
 3.12.1 (2022-05-19)
 -------------------
