@@ -9,4 +9,11 @@
        name="volto_url"
        />
 
+  <adapter
+       for="*"
+       provides="plone.stringinterp.interfaces.IStringSubstitution"
+       factory=".stringinterp.VoltoParentUrlSubstitution"
+       name="volto_parent_url"
+       />
+
 </configure>
