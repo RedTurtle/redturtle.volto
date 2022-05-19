@@ -4,7 +4,8 @@ Changelog
 3.12.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add string interp for volto_parent_url.
+  [eikichi18]
 
 
 3.12.0 (2022-04-04)
