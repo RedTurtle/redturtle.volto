@@ -23,6 +23,7 @@ class VoltoUrlSubstitution(BaseSubstitution):
         fixed_portal_url = portal_url.replace("/api", "")
         return absolute_url.replace(portal_url, fixed_portal_url)
 
+
 @adapter(IContentish)
 class VoltoParentUrlSubstitution(BaseSubstitution):
 
