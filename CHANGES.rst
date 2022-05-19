@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.12.1 (unreleased)
+3.12.1 (2022-05-19)
 -------------------
 
 - Add string interp for volto_parent_url.
