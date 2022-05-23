@@ -13,10 +13,4 @@
     <element value="Link"/>
   </property>
   
-  <!-- Enabled behaviors -->
-  <property name="behaviors" purge="False">
-    <element value="plone.richtext" remove="True"/>
-    <element value="volto.blocks" />
-  </property>
-
 </object>
