@@ -9,7 +9,7 @@ import time
 
 class SiteSettingsGet(Service):
     def reply(self):
-        res = {"scales": self.get_logo_scales()}
+        res = {"logo": {"scales": self.get_logo_scales()}}
         return res
 
     def get_logo_scales(self):
