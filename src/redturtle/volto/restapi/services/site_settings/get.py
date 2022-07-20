@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from redturtle.volto.adapters.scaling import LogoAnnotationStorage
-from plone import api
 from plone.restapi.imaging import get_scale_infos
 from plone.restapi.services import Service
+from redturtle.volto.adapters.scaling import LogoAnnotationStorage
 from zope.annotation.interfaces import IAnnotations
 
 import time
