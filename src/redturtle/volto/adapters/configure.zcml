@@ -16,4 +16,14 @@
        name="volto_parent_url"
        />
 
+    <!-- scaling factory per il logo -->
+    <adapter
+      factory=".scaling.LogoImageScalingFactory"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      />
+
+    <subscriber
+        for="plone.registry.interfaces.IRecordModifiedEvent"
+        handler=".event_listeners.detectSiteLogoChange"
+        />
 </configure>
