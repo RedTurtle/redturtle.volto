@@ -39,7 +39,6 @@ class SiteSettingsGet(Service):
                 height=actual_width,
                 width=actual_height,
                 direction="thumbnail",
-                scale=name,
             )
 
             if scale is None:

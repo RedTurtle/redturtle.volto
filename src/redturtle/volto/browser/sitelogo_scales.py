@@ -8,6 +8,14 @@ from redturtle.volto.adapters.scaling import LogoAnnotationStorage
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getUtility
 from zope.interface import alsoProvides
+from plone.formwidget.namedfile.converter import b64decode_file
+from plone.registry.interfaces import IRegistry
+from plone.restapi.imaging import get_scale_infos
+from plone.restapi.services import Service
+from Products.CMFPlone.interfaces import ISiteSchema
+from zope.component import getUtility
+from zope.publisher.interfaces import NotFound
+from plone.namedfile.file import NamedImage
 
 import logging
 import time
@@ -25,6 +33,28 @@ class ImageScaleLogo(ImageScale):
 
 class SiteLogoScaling(ImageScaling):
     _scale_view_class = ImageScaleLogo
+
+    def publishTraverse(self, request, name):
+        """used for traversal via publisher, i.e. when using as a url"""
+        if name == "site_logo":
+            if "." in name:
+                name, ext = name.rsplit(".", 1)
+            registry = getUtility(IRegistry)
+            settings = registry.forInterface(ISiteSchema, prefix="plone")
+            logo = getattr(settings, name, "")
+            if not logo:
+                raise NotFound(self, name, self.request)
+
+            filename, img_data = b64decode_file(logo)
+            data = NamedImage(data=img_data, filename=filename)
+            scale_view = self._scale_view_class(
+                self.context,
+                self.request,
+                data=data,
+                fieldname=name,
+            )
+            return scale_view
+        return super().publishTraverse(request, name)
 
     def scale(
         self,
