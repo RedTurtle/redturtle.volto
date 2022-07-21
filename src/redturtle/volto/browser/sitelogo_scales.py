@@ -1,4 +1,5 @@
 from plone.formwidget.namedfile.converter import b64decode_file
+from plone.namedfile.file import NamedImage
 from plone.namedfile.scaling import ImageScale
 from plone.namedfile.scaling import ImageScaling
 from plone.protect.interfaces import IDisableCSRFProtection
@@ -8,14 +9,7 @@ from redturtle.volto.adapters.scaling import LogoAnnotationStorage
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getUtility
 from zope.interface import alsoProvides
-from plone.formwidget.namedfile.converter import b64decode_file
-from plone.registry.interfaces import IRegistry
-from plone.restapi.imaging import get_scale_infos
-from plone.restapi.services import Service
-from Products.CMFPlone.interfaces import ISiteSchema
-from zope.component import getUtility
 from zope.publisher.interfaces import NotFound
-from plone.namedfile.file import NamedImage
 
 import logging
 import time
