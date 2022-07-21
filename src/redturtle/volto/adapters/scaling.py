@@ -1,13 +1,8 @@
-# -*- coding: utf-8 -*-
-from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedBlobImage
 from plone.namedfile.scaling import DefaultImageScalingFactory
-from plone.registry.interfaces import IRegistry
 from plone.scale.interfaces import IImageScaleFactory
 from plone.scale.storage import AnnotationStorage
 from plone.scale.storage import IImageScaleStorage
-from Products.CMFPlone.interfaces import ISiteSchema
-from zope.component import getUtility
 from zope.interface import implementer
 
 import logging

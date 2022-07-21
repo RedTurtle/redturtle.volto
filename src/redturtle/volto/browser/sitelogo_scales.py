@@ -1,4 +1,3 @@
-from plone import api
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.scaling import ImageScale
 from plone.namedfile.scaling import ImageScaling
