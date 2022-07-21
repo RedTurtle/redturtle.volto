@@ -6,8 +6,6 @@ from plone.restapi.services import Service
 from Products.CMFPlone.interfaces import ISiteSchema
 from zope.component import getUtility
 
-import time
-
 
 class SiteSettingsGet(Service):
     def reply(self):
