@@ -29,6 +29,8 @@ class LogoImageScalingFactory(DefaultImageScalingFactory):
     def __call__(
         self,
         fieldname,
+        filename,
+        img_data,
         direction="thumbnail",
         height=None,
         width=None,
@@ -36,47 +38,16 @@ class LogoImageScalingFactory(DefaultImageScalingFactory):
         **parameters
     ):
 
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ISiteSchema, prefix="plone")
-        logo = getattr(settings, "site_logo", "")
-        if not logo:
-            return
-        filename, data = b64decode_file(logo)
-
-        """Factory for image scales`."""
-        # If quality wasn't in the parameters, try the site's default scaling
-        # quality if it exists.
         if "quality" not in parameters:
             quality = self.get_quality()
             if quality:
                 parameters["quality"] = quality
-
-        result = self.create_scale(
-            data, direction=direction, height=height, width=width, **parameters
-        )
-
-        # if not getattr(orig_value, "contentType", "") == "image/svg+xml":
-        #     try:
-        #         result = self.create_scale(
-        #             orig_data,
-        #             direction=direction,
-        #             height=height,
-        #             width=width,
-        #             **parameters
-        #         )
-        #     except (ConflictError, KeyboardInterrupt):
-        #         raise
-        #     except Exception:
-        #         logger.exception(
-        #             'Could not scale "{0!r}" of {1!r}'.format(
-        #                 orig_value, self.context.absolute_url()
-        #             )
-        #         )
-        #         return
-        #     if result is None:
-        #         return
-        # else:
-        #     result = orig_data.read(), "svg+xml", (width, height)
+        if filename.endswith(".svg") and img_data.startswith(b"<svg"):
+            result = img_data, "svg+xml", (width, height)
+        else:
+            result = self.create_scale(
+                img_data, direction=direction, height=height, width=width, **parameters
+            )
 
         data, format_, dimensions = result
         mimetype = "image/{0}".format(format_.lower())

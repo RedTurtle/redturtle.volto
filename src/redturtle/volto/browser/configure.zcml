@@ -31,7 +31,7 @@
     <browser:page
       class=".sitelogo_scales.SiteLogoScaling"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="site-logo-scales"
+      name="images"
       permission="zope.Public"
     />
 
