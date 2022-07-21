@@ -1,3 +1,4 @@
+from plone import api
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.registry.interfaces import IRegistry
 from plone.restapi.imaging import get_scale_infos
@@ -6,9 +7,6 @@ from Products.CMFPlone.interfaces import ISiteSchema
 from redturtle.volto.adapters.scaling import LogoAnnotationStorage
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getUtility
-from plone import api
-from plone.registry.interfaces import IRegistry
-from Products.CMFPlone.interfaces import ISiteSchema
 
 import time
 
@@ -16,20 +14,16 @@ import time
 class SiteSettingsGet(Service):
     def reply(self):
         registry = getUtility(IRegistry)
+        settings = registry.forInterface(ISiteSchema, prefix="plone")
 
-        res = {"site_logo": self.get_logo_scales()}
+        res = {
+            "site_logo": self.get_logo_scales(settings=settings),
+            "site_title": getattr(settings, "site_title", ""),
+        }
         return res
 
-    def get_logo_scales(self, fieldname="site_logo"):
+    def get_logo_scales(self, settings, fieldname="site_logo"):
         res = {}
-        annotations = IAnnotations(self.context)
-        logo_last_modified = annotations.get("logo_modified_date", time.time())
-        storage = LogoAnnotationStorage(
-            context=self.context, modified=logo_last_modified
-        )
-
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ISiteSchema, prefix="plone")
         logo = getattr(settings, fieldname, "")
         if not logo:
             return {}
