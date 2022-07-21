@@ -22,7 +22,10 @@ class SiteSettingsGet(Service):
         res = {}
         logo = getattr(settings, fieldname, "")
         if not logo:
-            return {}
+            return {
+                "filename": "logo.png",
+                "download": "%s/logo.png" % api.portal.get().absolute_url(),
+            }
 
         filename, img_data = b64decode_file(logo)
         res["filename"] = filename
