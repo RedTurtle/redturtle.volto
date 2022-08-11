@@ -5,14 +5,22 @@
     >
 
   <!-- custom generic blocks deserializer-->
-  <subscriber factory=".blocks.GenericResolveUIDDeserializerContents"
-    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
-  <subscriber factory=".blocks.GenericResolveUIDDeserializerRoot"
-    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
-  <subscriber factory=".blocks.TableResolveUIDDeserializerRoot"
-    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
-  <subscriber factory=".blocks.TableResolveUIDDeserializerContents"
-    provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"/>
+  <subscriber
+      factory=".blocks.GenericResolveUIDDeserializerContents"
+      provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"
+      />
+  <subscriber
+      factory=".blocks.GenericResolveUIDDeserializerRoot"
+      provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"
+      />
+  <subscriber
+      factory=".blocks.TableResolveUIDDeserializerRoot"
+      provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"
+      />
+  <subscriber
+      factory=".blocks.TableResolveUIDDeserializerContents"
+      provides="plone.restapi.interfaces.IBlockFieldDeserializationTransformer"
+      />
 
   <!-- convert resolveuids also in rich text fields -->
   <adapter factory=".dxfields.RichTextFieldDeserializer" />
