@@ -46,6 +46,7 @@ class TestBlocksSearchable(unittest.TestCase):
                 ],
             },
         }
+        self.document.blocks_layout = {"items": ["xyz"]}
         self.document.reindexObject()
         commit()
 
@@ -62,6 +63,7 @@ class TestBlocksSearchable(unittest.TestCase):
         self.document.blocks = {
             "xyz": {"@type": "alert", "text": {"blocks": [{"text": "alert"}]}},
         }
+        self.document.blocks_layout = {"items": ["xyz"]}
         self.document.reindexObject()
         commit()
 
@@ -81,6 +83,7 @@ class TestBlocksSearchable(unittest.TestCase):
                 "simple_card_content": {"blocks": [{"text": "simpletext"}]},
             },
         }
+        self.document.blocks_layout = {"items": ["xyz"]}
         self.document.reindexObject()
         commit()
 
@@ -105,6 +108,7 @@ class TestBlocksSearchable(unittest.TestCase):
                 "image_card_content": {"blocks": [{"text": "imagetext"}]},
             },
         }
+        self.document.blocks_layout = {"items": ["xyz"]}
         self.document.reindexObject()
         commit()
 

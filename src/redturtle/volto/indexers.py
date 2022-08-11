@@ -1,10 +1,30 @@
 # -*- coding: utf-8 -*-
+from plone.app.contenttypes.interfaces import IEvent
 from plone.dexterity.interfaces import IDexterityContent
+from plone.indexer.decorator import indexer
 from plone.restapi.interfaces import IBlockSearchableText
 from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapter
 from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
+
+
+@indexer(IEvent)
+def open_end(obj):
+    """ """
+    return getattr(obj.aq_base, "open_end", False)
+
+
+@indexer(IEvent)
+def whole_day(obj):
+    """ """
+    return getattr(obj.aq_base, "whole_day", False)
+
+
+@indexer(IEvent)
+def recurrence(obj):
+    """ """
+    return getattr(obj.aq_base, "recurrence", "")
 
 
 def _extract_text(block_data):

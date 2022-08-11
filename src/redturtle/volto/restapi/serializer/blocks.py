@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from AccessControl.unauthorized import Unauthorized
 from copy import deepcopy
 from plone import api
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.serializer.blocks import uid_to_url
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
@@ -70,21 +68,40 @@ class GenericResolveUIDSerializer(object):
         return block
 
     def get_item_from_uid(self, block):
-        try:
-            item = api.content.get(UID=block["UID"])
-        except Unauthorized:
+        """
+        Return serialized item from uid.
+        We return the summary one because we want to avoid recursion and too much complex data returned here.
+        For example if we serialize the whole context, we will have also all its blocks.
+        This could lead to a huge amount of data returned.
+        We need to wrap the item with IIndexableObject to be able to get all metadata like it was a brain.
+        """
+        items = api.content.find(UID=block["UID"], show_inactive=False)
+        if len(items) == 0:
             return {}
-        if item:
-            if item == self.context:
-                # STOP RECURSION: if we serialize the complete object, we get
-                # maximum recursion depth, so serialize the object with
-                # summary. If we need more infos, let's add them into summary
-                # serializer
-                return getMultiAdapter((item, getRequest()), ISerializeToJsonSummary)()
-            else:
-                return getMultiAdapter((item, getRequest()), ISerializeToJson)()
-        else:
-            return {}
+        item = items[0]
+
+        adapter = getMultiAdapter((item, getRequest()), ISerializeToJsonSummary)
+        return adapter(force_all_metadata=True)
+
+
+class TableResolveUIDSerializer(object):
+    """ """
+
+    order = 210  # after standard ones
+    block_type = "table"
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self, value):
+        for row in value.get("table", {}).get("rows", []):
+            for cell in row.get("cells", []):
+                for entity in cell.get("value", {}).get("entityMap", {}).values():
+                    if entity.get("type") == "LINK":
+                        url = entity.get("data", {}).get("url", "")
+                        entity["data"]["url"] = uid_to_url(url)
+        return value
 
 
 @implementer(IBlockFieldSerializationTransformer)
@@ -96,4 +113,16 @@ class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerRoot(GenericResolveUIDSerializer):
+    """Deserializer for site-root"""
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IBlocks, IRedturtleVoltoLayer)
+class TableResolveUIDSerializerContents(TableResolveUIDSerializer):
+    """Deserializer for content-types that implements IBlocks behavior"""
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
+class TableResolveUIDSerializerRoot(TableResolveUIDSerializer):
     """Deserializer for site-root"""

@@ -183,3 +183,16 @@ def plone_volto_deserializer_call(self, value):
 
 def plone_volto_serializer_call(self, value):
     return value
+
+
+# IGNORE USESELESS "No such index: 'show_inactive'" warnings
+try:
+    from plone.restapi.search.query import ZCatalogCompatibleQueryAdapter
+
+    ZCatalogCompatibleQueryAdapter.ignore_query_params = [
+        "metadata_fields",
+        "show_inactive",
+        "skipNull",
+    ]
+except ImportError:
+    pass

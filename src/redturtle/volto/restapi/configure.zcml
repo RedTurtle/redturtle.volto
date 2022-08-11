@@ -3,10 +3,11 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
-  <include package="plone.restapi" />
-
-  <include package=".deserializer" />
-  <include package=".serializer" />
-  <include package=".services" />
+  <include package="plone.restapi"  />
+  
+  <include package=".deserializer"  />
+  <include package=".serializer"  />
+  <include package=".services"  />
+  <include package=".search"  />
 
 </configure>

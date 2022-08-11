@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="redturtle.volto",
-    version="3.6.3.dev0",
+    version="3.12.3.dev0",
     description="Helper package to setup a RedTurtle's Plone site ready to work with Volto.",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -55,7 +55,7 @@ setup(
         "collective.purgebyid>=1.1.2",
         "kitconcept.seo>=2.0.0",
         "plone.volto>=3.1.0a6",
-        "plone.restapi>=8.13.0",
+        "plone.restapi>=8.16.1",
     ],
     extras_require={
         "test": [

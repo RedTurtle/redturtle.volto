@@ -1,0 +1,8 @@
+<registry>
+  <record name="redturtle.volto.rss_image_miniature">
+    <field type="plone.registry.field.TextLine">
+        <title>RSS miniature</title>
+    </field>
+    <value>thumb</value>
+  </record>
+</registry>

@@ -56,13 +56,13 @@ class TestVocabularyEndpoint(unittest.TestCase):
 
         transaction.commit()
 
-    def test_anonymous_cant_get_list_of_vocabularies(self):
+    def test_anonymous_can_get_list_of_vocabularies(self):
         api_session = RelativeSession(self.portal_url)
         api_session.headers.update({"Accept": "application/json"})
         # api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
         response = api_session.get("/@vocabularies")
 
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 200)
 
         api_session.close()
 
@@ -105,7 +105,6 @@ class TestVocabularyEndpoint(unittest.TestCase):
         for username in ["member", "contributor", "editor"]:
             api_session.auth = (username, "secret")
             response = api_session.get("/@vocabularies/plone.app.vocabularies.Keywords")
-
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["items_total"], 2)
             self.assertEqual(response.json()["items"][0]["title"], "bar")
@@ -122,29 +121,13 @@ class TestVocabularyEndpoint(unittest.TestCase):
 
         api_session.close()
 
-    def test_basic_users_cant_get_other_vocabularies(self):
+    def test_users_cant_get_other_vocabularies(self):
         api_session = RelativeSession(self.portal_url)
         api_session.headers.update({"Accept": "application/json"})
 
         api_session.auth = ("member", "secret")
         response = api_session.get("/@vocabularies/plone.app.vocabularies.Users")
 
-        self.assertEqual(response.status_code, 401)
-
-        api_session.close()
-
-    def test_users_can_get_other_vocabularies(self):
-        api_session = RelativeSession(self.portal_url)
-        api_session.headers.update({"Accept": "application/json"})
-
-        api_session.auth = ("contributor", "secret")
-        response = api_session.get("/@vocabularies/plone.app.vocabularies.Users")
-
-        self.assertEqual(response.status_code, 200)
-
-        api_session.auth = ("editor", "secret")
-        response = api_session.get("/@vocabularies/plone.app.vocabularies.Users")
-
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 403)
 
         api_session.close()

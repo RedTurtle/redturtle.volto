@@ -53,9 +53,8 @@ Custom blocks transformers
 
 There are custom transformers for serializer and deserializer to better manage resolveuids.
 
-There is an edge-case when a block refers its context: in this case, to avoid maximum recursion depth
-in uids resolving, that uid will be expanded with the Summary json version and not the full object.
-
+If a block refers to some internal content, on deserialization we only store its UID, and in serialization
+we "expand" informations with the summary-serialized content.
 
 @context-navigation endpoint
 ----------------------------
@@ -195,6 +194,11 @@ because behavior's `setter/getter <https://github.com/plone/plone.app.dexterity/
 
 With this patch we will send to the setter the date with already localized hour, so even if the setter strip timezone info, we are going to save the correct date.
 
+Default ISerializeToJsonSummary adapter
+---------------------------------------
+
+This is a patch for backward compatibility for old volto templates that need a full image scales object.
+
 
 New Criteria
 ============
@@ -208,48 +212,14 @@ Caching controlpanel
 After installation the caching control panel is populated with custom policies while caching is globally enabled by default. Please, set the caching proxies properly.
  
 
-@vocabularies endpoint
-======================
+@vocabularies permissions
+=========================
 
-Grant **plone.restapi: Access Plone vocabularies** permission to Anonymous users.
+According to new plone.restapi implementation, @vocabularies endpoint will check some permissions to make a vocabulary available or not.
 
-This allows users to potentially access to all vocabularies.
+We patched PERMISSIONS variable in __init__ file to allow Keywords vocabulary to be available for anonymous users.
 
-To avoid this, we patched the *@vocabularies* endpoint and add an additional checks:
-
-- Anonymous can't access to the vocabularies list (@vocabularies)
-- Anonymous can only access to a limited list of vocabularies (see below)
-- Simple users (users that only have basic roles like Member and Authenticated) can access to the vocabularies list
-- Simple users can only acces to a limited list of vocabularies (see below)
-- Advanced users can access to all vocabularies
-
-Available vocabularies
-----------------------
-
-- plone.app.vocabularies.Keywords
-
-Customize available vocabularies list
--------------------------------------
-
-There is a check in @vocabularies endpoint that checks if the given vocabulary name  is in a whitelist.
-
-That list is composed joining a list of names provided by some utilities.
-
-There is a base list in this package, but you can extend it registering an utility like this::
-
-    <utility
-        provides="redturtle.volto.interfaces.IRestapiPublicVocabularies"
-        factory=".my_utility.allowed_vocabularies"
-    />
-
-
-And in *my_utility.py* file::
-
-    def allowed_vocabularies():
-        return ["my.vocabulary", "my.other.vocabulary"]
-
-
-The endpoint get all registered utilities and join all values.
+Reference: https://github.com/plone/plone.restapi/pull/1258#issuecomment-980628982
 
 RamCache in tersecaching
 ------------------------
@@ -258,6 +228,31 @@ We disabled ramcache for tersecaching (plone.app.caching.terseCaching.plone.cont
 it seems not correctly purged when there are more instances and a content has been modified.
 
 We need to check why it's not purged and fix it.
+
+
+Template overrides
+==================
+
+RSS.pt Template
+---------------
+There is a customization of the Products.CMFPlone.browser.syndication.templates.RSS.pt
+template to add enclosure tag to feed items.
+A record has also been added to the registry to be able to set the miniature to be
+displayed with the RSS item. This record is named redturtle.volto.rss_image_miniature
+
+Fix internal links
+==================
+
+There is a view **@@fix-links** that will check internal links into blocks and fix some links that refs to a staging
+or local development environment.
+
+
+Stringinterp adapters
+=====================
+
+There is a new stringinterp adapter that can be used for example in content rules: **{volto_url}**
+
+This adapter will remove "/api" from the content's absolute_url.
 
 Installation
 ============
@@ -273,6 +268,7 @@ Install redturtle.volto by adding it to your buildout::
 
 
 and then running ``bin/buildout``
+
 
 
 Contribute

@@ -1,11 +1,125 @@
 Changelog
 =========
 
-3.6.3 (unreleased)
-------------------
+3.12.3 (unreleased)
+-------------------
 
 - Nothing changed yet.
 
+
+3.12.2 (2022-05-19)
+-------------------
+
+- Add *query* to ignored keys in blocks deserializer. This avoid blocks with querystringsearch widget to be parsed (for example the search one).
+  [cekk]
+
+3.12.1 (2022-05-19)
+-------------------
+
+- Add string interp for volto_parent_url.
+  [eikichi18]
+
+
+3.12.0 (2022-04-04)
+-------------------
+
+- Add new metadata for Events dates.
+  [cekk]
+
+
+3.11.0 (2022-04-01)
+-------------------
+
+- Add stringinterp adapter to replace *{volto_url}* with the current frontend url (backend url without "/api").
+  [cekk]
+
+
+3.10.0 (2022-03-26)
+-------------------
+
+- Add Table block serializer/deserializer for internal links.
+  [cekk]
+- Add view for fix internal links.
+  [cekk]
+
+
+3.9.2 (2022-03-25)
+------------------
+
+- Fix remoteUrl serialization in summary.
+  [cekk]
+
+
+3.9.1 (2022-03-17)
+------------------
+
+- Refs serialization in blocks now uses brains instead adapted objects because brain has all catalog metadata and can get the fullobject.
+  [cekk]
+
+
+3.9.0 (2022-03-14)
+------------------
+
+- Allow to select custom miniature for RSS template
+  [lucabel]
+- Better serialize refs in blocks: now we don't serialize the full object, but only the summary (with all metadata) to decrease (A LOT) the size of the response.
+  [cekk]
+
+3.8.3 (2022-03-07)
+------------------
+
+- Fix null dates in summary serialization (now we handle differente use-cases).
+  [cekk]
+- Return remoteUrl metadata when serializing a brain for backward compatibility with non-brain serializers.
+  [cekk]
+
+
+3.8.2 (2022-02-07)
+------------------
+
+- Handle non-path values in blocks deserializer when trying to extract UIDs.
+  [cekk]
+
+
+3.8.1 (2022-01-31)
+------------------
+
+- Return null value in summary serialization for dates not set (because metadata are set with dates in the future or past for better filtering/sorting).
+  [cekk]
+
+
+3.8.0 (2022-01-26)
+------------------
+
+- Customized json summary serializer to expose image scales when requested _all metadata_fields without waking up the object.
+  [cekk]
+
+
+3.7.3 (2021-12-27)
+------------------
+
+- Upgrade-step to add default blocks in pages that don't have them.
+  [cekk]
+
+
+3.7.2 (2021-12-02)
+------------------
+
+- Customized ZCTextIndexQueryParser for https://github.com/plone/plone.restapi/pull/1209.
+  [cekk]
+
+
+3.7.1 (2021-12-01)
+------------------
+
+- Upgrade-step to reindex SearchableText for all contents with a table block (change in plone.restapi 8.16.1).
+  [cekk]
+
+3.7.0 (2021-12-01)
+------------------
+
+- Remove enabled_vocabularies implementation because in recent plone.restapi (>8.15.2) there is a standard way.
+  [cekk]
 
 3.6.2 (2021-11-09)
 ------------------

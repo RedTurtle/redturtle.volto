@@ -5,6 +5,8 @@ from plone import api
 from plone.dexterity.utils import iterSchemata
 from zope.schema import getFields
 from plone.app.upgrade.utils import installOrReinstallProduct
+from plone.restapi.behaviors import IBlocks
+from uuid import uuid4
 
 import logging
 import json
@@ -39,6 +41,10 @@ def update_registry(context):
 
 def update_controlpanel(context):
     update_profile(context, "controlpanel")
+
+
+def update_catalog(context):
+    update_profile(context, "catalog")
 
 
 def to_1003(context):
@@ -320,3 +326,111 @@ def to_2000(context):
             new_images.append(old_value)
 
     api.portal.set_registry_record("plone.allowed_sizes", new_images)
+
+
+def to_2100(context):  # noqa: C901
+    logger.info("## Reindex pages with table blocks ##")
+
+    def has_table_block(blocks):
+        for block in blocks.values():
+            if block.get("@type", "") == "table":
+                return True
+        return False
+
+    pc = api.portal.get_tool(name="portal_catalog")
+    brains = pc()
+    tot = len(brains)
+    i = 0
+    items_reindexed = []
+    for brain in brains:
+        i += 1
+        if i % 1000 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        item_obj = brain.getObject()
+        item = aq_base(item_obj)
+        if getattr(item, "blocks", {}):
+            if has_table_block(item.blocks):
+                items_reindexed.append(brain.getPath())
+                item_obj.reindexObject(idxs=["SearchableText"])
+        for schema in iterSchemata(item):
+            # fix blocks in blocksfields
+            for name, field in getFields(schema).items():
+                if name == "blocks":
+                    blocks = getattr(item, "blocks", {})
+                    if has_table_block(blocks):
+                        items_reindexed.append(brain.getPath())
+                        item_obj.reindexObject(idxs=["SearchableText"])
+                else:
+                    if not HAS_BLOCKSFIELD:
+                        # blocks are only in blocks field
+                        continue
+                    if isinstance(field, BlocksField):
+                        value = field.get(item)
+                        if not value:
+                            continue
+                        if isinstance(value, str):
+                            continue
+                        blocks = value.get("blocks", {})
+                        if has_table_block(blocks):
+                            items_reindexed.append(brain.getPath())
+                            item_obj.reindexObject(idxs=["SearchableText"])
+
+    logger.info("Reindexed {} items".format(len(items_reindexed)))
+    for path in items_reindexed:
+        logger.info("- {}".format(path))
+
+
+def to_2200(context):  # noqa: C901
+    logger.info("## Add default blocks ##")
+
+    pc = api.portal.get_tool(name="portal_catalog")
+    brains = pc(object_provides=IBlocks.__identifier__)
+    tot = len(brains)
+    i = 0
+    items_fixed = []
+    for brain in brains:
+        i += 1
+        if i % 500 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        item_obj = brain.getObject()
+        item = aq_base(item_obj)
+        blocks = getattr(item, "blocks", {})
+        if not blocks or blocks == {}:
+            title_uuid = str(uuid4())
+            item.blocks = {title_uuid: {"@type": "title"}}
+            item.blocks_layout = {"items": [title_uuid]}
+            items_fixed.append(brain.getPath())
+    logger.info("Fixed {} items".format(len(items_fixed)))
+
+
+def to_3000(context):
+    logger.info("Reindexing image_field")
+    catalog = api.portal.get_tool("portal_catalog")
+
+    brains = api.content.find(
+        object_provides="plone.app.contenttypes.behaviors.leadimage.ILeadImage"
+    )
+    tot = len(brains)
+    i = 0
+    for brain in brains:
+        i += 1
+        if i % 500 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        obj = brain.getObject()
+        catalog.catalog_object(obj)
+
+
+def to_3100(context):
+    logger.info("Reindexing Events")
+    update_catalog(context)
+    catalog = api.portal.get_tool("portal_catalog")
+
+    brains = api.content.find(portal_type="Event")
+    tot = len(brains)
+    i = 0
+    for brain in brains:
+        i += 1
+        if i % 500 == 0:
+            logger.info("Progress: {}/{}".format(i, tot))
+        obj = brain.getObject()
+        catalog.catalog_object(obj)
