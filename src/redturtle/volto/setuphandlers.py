@@ -455,7 +455,7 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
-    if api.env.plone_version() < "6.0.1":
+    if api.env.plone_version() < "6":
         ps = api.portal.get_tool(name="portal_setup")
         ps.runAllImportStepsFromProfile("redturtle.volto:plone5")
 
