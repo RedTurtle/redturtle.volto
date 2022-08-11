@@ -29,32 +29,32 @@ class TestServicesContextNavigation(unittest.TestCase):
 
         folder = api.content.create(
             container=self.portal,
-            type='Folder',
-            title='Folder',
+            type="Folder",
+            title="Folder",
             description="",
         )
         api.content.create(
-            container=folder, type='Document', title='Page', description=""
+            container=folder, type="Document", title="Page", description=""
         )
 
         folder2 = api.content.create(
-            container=folder, type='Folder', title='Folder A', description=""
+            container=folder, type="Folder", title="Folder A", description=""
         )
 
         api.content.create(
-            container=folder, type='Folder', title='Folder B', description=""
+            container=folder, type="Folder", title="Folder B", description=""
         )
 
         api.content.create(
-            container=folder, type='Folder', title='Folder C', description=""
+            container=folder, type="Folder", title="Folder C", description=""
         )
 
         api.content.create(
-            container=folder2, type='Folder', title='Folder AA', description=""
+            container=folder2, type="Folder", title="Folder AA", description=""
         )
 
         api.content.create(
-            container=folder2, type='Folder', title='Folder AB', description=""
+            container=folder2, type="Folder", title="Folder AB", description=""
         )
 
         transaction.commit()
@@ -68,27 +68,27 @@ class TestServicesContextNavigation(unittest.TestCase):
         self.assertEqual(
             response.json(),
             {
-                '@id': '{}/folder'.format(self.portal_url),
-                'items': [
+                "@id": "{}/folder".format(self.portal_url),
+                "items": [
                     {
-                        '@id': '{}/folder/page'.format(self.portal_url),
-                        'description': '',
-                        'title': 'Page',
+                        "@id": "{}/folder/page".format(self.portal_url),
+                        "description": "",
+                        "title": "Page",
                     },
                     {
-                        '@id': '{}/folder/folder-a'.format(self.portal_url),
-                        'description': '',
-                        'title': 'Folder A',
+                        "@id": "{}/folder/folder-a".format(self.portal_url),
+                        "description": "",
+                        "title": "Folder A",
                     },
                     {
-                        '@id': '{}/folder/folder-b'.format(self.portal_url),
-                        'description': '',
-                        'title': 'Folder B',
+                        "@id": "{}/folder/folder-b".format(self.portal_url),
+                        "description": "",
+                        "title": "Folder B",
                     },
                     {
-                        '@id': '{}/folder/folder-c'.format(self.portal_url),
-                        'description': '',
-                        'title': 'Folder C',
+                        "@id": "{}/folder/folder-c".format(self.portal_url),
+                        "description": "",
+                        "title": "Folder C",
                     },
                 ],
             },
@@ -102,43 +102,43 @@ class TestServicesContextNavigation(unittest.TestCase):
         self.assertEqual(
             response.json(),
             {
-                '@id': '{}/folder'.format(self.portal_url),
-                'items': [
+                "@id": "{}/folder".format(self.portal_url),
+                "items": [
                     {
-                        '@id': '{}/folder/page'.format(self.portal_url),
-                        'description': '',
-                        'title': 'Page',
+                        "@id": "{}/folder/page".format(self.portal_url),
+                        "description": "",
+                        "title": "Page",
                     },
                     {
-                        '@id': '{}/folder/folder-a'.format(self.portal_url),
-                        'description': '',
-                        'items': [
+                        "@id": "{}/folder/folder-a".format(self.portal_url),
+                        "description": "",
+                        "items": [
                             {
-                                '@id': '{}/folder/folder-a/folder-aa'.format(
+                                "@id": "{}/folder/folder-a/folder-aa".format(
                                     self.portal_url
                                 ),
-                                'description': '',
-                                'title': 'Folder AA',
+                                "description": "",
+                                "title": "Folder AA",
                             },
                             {
-                                '@id': '{}/folder/folder-a/folder-ab'.format(
+                                "@id": "{}/folder/folder-a/folder-ab".format(
                                     self.portal_url
                                 ),
-                                'description': '',
-                                'title': 'Folder AB',
+                                "description": "",
+                                "title": "Folder AB",
                             },
                         ],
-                        'title': 'Folder A',
+                        "title": "Folder A",
                     },
                     {
-                        '@id': '{}/folder/folder-b'.format(self.portal_url),
-                        'description': '',
-                        'title': 'Folder B',
+                        "@id": "{}/folder/folder-b".format(self.portal_url),
+                        "description": "",
+                        "title": "Folder B",
                     },
                     {
-                        '@id': '{}/folder/folder-c'.format(self.portal_url),
-                        'description': '',
-                        'title': 'Folder C',
+                        "@id": "{}/folder/folder-c".format(self.portal_url),
+                        "description": "",
+                        "title": "Folder C",
                     },
                 ],
             },
