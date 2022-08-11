@@ -53,7 +53,7 @@ setup(
         "collective.monkeypatcher",
         "collective.purgebyid",
         "kitconcept.seo>=2.0.0",
-        "plone.volto",
+        "plone.volto>3.1.0",
         "plone.restapi>=8.16.1",
     ],
     extras_require={
