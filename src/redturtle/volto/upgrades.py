@@ -434,3 +434,9 @@ def to_3100(context):
             logger.info("Progress: {}/{}".format(i, tot))
         obj = brain.getObject()
         catalog.catalog_object(obj)
+
+
+def to_4000(context):
+    portal_types = api.portal.get_tool(name="portal_types")
+    fti = portal_types["Folder"]
+    fti.global_allow = True

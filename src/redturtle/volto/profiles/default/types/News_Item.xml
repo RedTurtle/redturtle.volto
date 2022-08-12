@@ -5,7 +5,7 @@
     name="News Item"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
   
-  <!-- needed to revert collective.folderishtypes.dx changes-->
+  <!-- needed to revert plone.volto changes-->
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
     <element value="Image"/>
@@ -13,10 +13,4 @@
     <element value="Link"/>
   </property>
   
-  <!-- Enabled behaviors -->
-  <property name="behaviors" purge="False">
-    <element value="plone.richtext" remove="True"/>
-    <element value="volto.blocks" />
-  </property>
-
 </object>
