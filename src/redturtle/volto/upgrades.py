@@ -434,3 +434,7 @@ def to_3100(context):
             logger.info("Progress: {}/{}".format(i, tot))
         obj = brain.getObject()
         catalog.catalog_object(obj)
+
+
+def to_3200(context):
+    update_registry(context)

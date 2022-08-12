@@ -33,6 +33,16 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="images"
       permission="zope.Public"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
     />
+
+<!-- Site Control Panel -->
+  <browser:page
+      name="site-controlpanel-redturtle-volto"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".site.RedTurtleVoltoSiteControlPanel"
+      permission="plone.app.controlpanel.Site"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
 
 </configure>

@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cache="http://namespaces.zope.org/cache"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+  <adapter
+        factory=".controlpanel.RedTurtleVoltoSiteControlPanel"
+        provides="redturtle.volto.interfaces.IRedTurtleVoltoSiteSchema"
+        name="site-controlpanel-redturtle-volto" />
+
+</configure>

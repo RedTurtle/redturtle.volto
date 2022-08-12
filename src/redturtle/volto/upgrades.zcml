@@ -152,4 +152,12 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_3100"
     />
+  <genericsetup:upgradeStep
+    source="310"
+    destination="3200"
+    title="Add new site settings"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_3200"
+    />
 </configure>
