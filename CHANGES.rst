@@ -4,7 +4,10 @@ Changelog
 4.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix upgrade-step.
+  [cekk]
+- Allow add Document into News Item and Event.
+  [cekk]
 
 
 4.0.0 (2022-08-12)

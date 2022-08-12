@@ -440,3 +440,13 @@ def to_4000(context):
     portal_types = api.portal.get_tool(name="portal_types")
     fti = portal_types["Folder"]
     fti.global_allow = True
+
+    for ptype in ["Event", "News Item"]:
+        fti = portal_types[ptype]
+        fti.filter_content_types = True
+        fti.allowed_content_types = (
+            "Document",
+            "Image",
+            "File",
+            "Link",
+        )

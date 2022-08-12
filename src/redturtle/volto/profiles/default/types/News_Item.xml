@@ -8,6 +8,7 @@
   <!-- needed to revert plone.volto changes-->
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
+    <element value="Document"/>
     <element value="Image"/>
     <element value="File"/>
     <element value="Link"/>
