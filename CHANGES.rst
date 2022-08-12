@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.12.3 (unreleased)
--------------------
+4.0.0 (2022-08-12)
+------------------
 
 - Remove content-types customizations to be aligned with plone.volto configs.
   [cekk] 
