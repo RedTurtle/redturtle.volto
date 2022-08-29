@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.0.2 (unreleased)
+4.0.2 (2022-08-29)
 ------------------
 
 - Patch for plone.volto upgrade-step (https://github.com/plone/plone.volto/pull/86).
