@@ -58,13 +58,17 @@ class TestContentTypes(unittest.TestCase):
         portal_types = api.portal.get_tool(name="portal_types")
         fti = portal_types["News Item"]
         self.assertTrue(fti.filter_content_types)
-        self.assertEqual(fti.allowed_content_types, ("Image", "File", "Link"))
+        self.assertEqual(
+            fti.allowed_content_types, ("Document", "Image", "File", "Link")
+        )
 
     def test_events_can_add_only_some_types(self):
         portal_types = api.portal.get_tool(name="portal_types")
         fti = portal_types["News Item"]
         self.assertTrue(fti.filter_content_types)
-        self.assertEqual(fti.allowed_content_types, ("Image", "File", "Link"))
+        self.assertEqual(
+            fti.allowed_content_types, ("Document", "Image", "File", "Link")
+        )
 
 
 class TestContentTypesSchema(unittest.TestCase):
