@@ -4,7 +4,8 @@ Changelog
 4.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Patch for plone.volto upgrade-step (https://github.com/plone/plone.volto/pull/86).
+  [cekk]
 
 
 4.0.1 (2022-08-12)
