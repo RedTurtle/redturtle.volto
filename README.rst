@@ -242,6 +242,11 @@ Fix internal links
 There is a view **@@fix-links** that will check internal links into blocks and fix some links that refs to a staging
 or local development environment.
 
+Find blocks
+===========
+
+There is a view **@@find-blocks** that will return contents that have at least one block of the given type.
+
 
 Stringinterp adapters
 =====================

@@ -4,7 +4,8 @@ Changelog
 4.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add new utility view `@@find-blocks`.
+  [cekk]
 
 
 4.0.2 (2022-08-29)
