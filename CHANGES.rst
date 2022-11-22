@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.0.3 (unreleased)
+4.1.0 (2022-11-22)
 ------------------
 
 - Add new utility view `@@find-blocks`.
