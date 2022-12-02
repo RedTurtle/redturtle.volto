@@ -4,4 +4,6 @@
   <column value="open_end"/>
   <column value="whole_day"/>
   <column value="recurrence"/>
+  <!-- backport -->
+  <column value="image_scales"/>
 </object>

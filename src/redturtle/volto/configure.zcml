@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="redturtle.volto">
 
@@ -12,11 +13,22 @@
   <include package=".browser" />
   <include package=".restapi" />
   <include package=".types" />
-  
+
   <include file="indexers.zcml" />
   <include file="monkey.zcml" />
   <include file="permissions.zcml" />
   <include file="upgrades.zcml" />
+
+  <!-- https://github.com/plone/Products.CMFPlone/pull/3521/ backport -->
+  <!-- TODO: upgrade step -->
+  <configure zcml:condition="not-have plone-60">
+      <adapter factory=".backports.image_scales" name="image_scales" />
+      <adapter factory=".backports.ImageScales" />
+      <!-- TODO:
+            verificare se con plone.namedfile 6.0.0 questo adapter
+            potrebbe diventare non necessario -->
+      <adapter factory=".backports.ImageFieldScales" />
+  </configure>
 
   <genericsetup:registerProfile
       name="default"

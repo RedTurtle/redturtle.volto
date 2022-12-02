@@ -27,6 +27,7 @@ setup(
         "Framework :: Plone :: 5.2",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
@@ -55,6 +56,7 @@ setup(
         "kitconcept.seo>=2.0.0",
         "plone.volto>3.1.0",
         "plone.restapi>=8.16.1",
+        "plone.namedfile>=6.0.0",
     ],
     extras_require={
         "test": [
