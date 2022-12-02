@@ -76,8 +76,9 @@ class TestSummaryCustomization(unittest.TestCase):
         self.assertEqual(len(res["items"]), 2)
         self.assertEqual(res["items"][0]["title"], self.news_with_image.title)
         self.assertEqual(res["items"][1]["title"], self.news_without_image.title)
-        self.assertIn("image", res["items"][0])
+        self.assertEqual(len(res["items"][0]["image_scales"]["image"]), 1)
         self.assertNotIn("image", res["items"][1])
+        self.assertEqual(res["items"][1]["image_scales"], None)
 
     def test_summary_return_empty_effective_date_if_not_set(self):
         page = api.content.create(
