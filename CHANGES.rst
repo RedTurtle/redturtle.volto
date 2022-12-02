@@ -1,10 +1,11 @@
 Changelog
 =========
 
-4.1.1 (unreleased)
+5.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- https://github.com/plone/Products.CMFPlone/pull/3521 backport #62
+  [mamico]
 
 
 4.1.0 (2022-11-22)
