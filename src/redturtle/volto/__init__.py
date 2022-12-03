@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 """Init and utils."""
-from zope.i18nmessageid import MessageFactory
+from OFS.interfaces import IOrderedContainer
+from plone import api
 from plone.app.content.browser.vocabulary import PERMISSIONS
 from plone.volto import upgrades
 from plone.volto.upgrades import MIGRATION
-from plone import api
-from OFS.interfaces import IOrderedContainer
+from zope.i18nmessageid import MessageFactory
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 

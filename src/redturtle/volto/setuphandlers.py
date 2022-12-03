@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFPlone.utils import get_installer
-from plone import api
 from zope.interface import implementer
 
 import json
@@ -37,7 +37,7 @@ homepage_en = {
                 "blocks": [
                     {
                         "key": "br6kt",
-                        "text": "Volto  is a React-based frontend for content management systems, currently  supporting three backend implementations: Plone, Guillotina and a NodeJS  reference implementation.",  #  noqa
+                        "text": "Volto  is a React-based frontend for content management systems, currently  supporting three backend implementations: Plone, Guillotina and a NodeJS  reference implementation.",  # noqa
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
@@ -60,7 +60,7 @@ homepage_en = {
                 "blocks": [
                     {
                         "key": "diiac",
-                        "text": "Plone  is a CMS built on Python with over 19 years of experience. Plone has  very interesting features that appeal to developers and users alike,  such as customizable content types, hierarchical URL object traversing  and a sophisticated content workflow powered by a granular permissions  model. This allows you to build anything from simple websites to  enterprise-grade intranets. Volto exposes all these features and  communicates with Plone via its mature REST API. Volto can be esily themed and is highly customizable.",  #  noqa
+                        "text": "Plone  is a CMS built on Python with over 19 years of experience. Plone has  very interesting features that appeal to developers and users alike,  such as customizable content types, hierarchical URL object traversing  and a sophisticated content workflow powered by a granular permissions  model. This allows you to build anything from simple websites to  enterprise-grade intranets. Volto exposes all these features and  communicates with Plone via its mature REST API. Volto can be esily themed and is highly customizable.",  # noqa
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
@@ -327,7 +327,7 @@ homepage_it = {
                         "entityRanges": [],
                         "inlineStyleRanges": [],
                         "key": "dibnf",
-                        "text": "Questa installazione di Volto prevede l'ultimo Plone 5.2 in esecuzione su Python 3.",  #  noqa
+                        "text": "Questa installazione di Volto prevede l'ultimo Plone 5.2 in esecuzione su Python 3.",  # noqa
                         "type": "unstyled",
                     }
                 ],
@@ -364,7 +364,7 @@ homepage_it = {
                         ],
                         "inlineStyleRanges": [],
                         "key": "9ngcf",
-                        "text": "Volto supporta anche altre API come Guillotina, un sistema di gestione delle risorse Python, ispirato a Plone e che utilizza gli stessi concetti di base come traversing, tipi di contenuto e modello di autorizzazioni.",  #  noqa
+                        "text": "Volto supporta anche altre API come Guillotina, un sistema di gestione delle risorse Python, ispirato a Plone e che utilizza gli stessi concetti di base come traversing, tipi di contenuto e modello di autorizzazioni.",  # noqa
                         "type": "unstyled",
                     }
                 ],

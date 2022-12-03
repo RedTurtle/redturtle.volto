@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
+from DateTime import DateTime
 from plone.app.event.base import get_events
 from plone.app.querystring import queryparser
 from plone.restapi.batching import HypermediaBatch
@@ -8,9 +9,9 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services.querystringsearch.get import QuerystringSearchPost
 from zope.component import getMultiAdapter
-from DateTime import DateTime
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +44,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         return portal_type_check and indexes_check
 
     def generate_query_for_events(self):
+        # TODO: explains and unit tests
         data = json_body(self.request)
         parsed_query = queryparser.parseFormquery(
             context=self.context, formquery=data["query"]
@@ -72,6 +74,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         )
 
     def parse_event_dates(self, parsed_query):
+        # TODO: explains and unit tests
         start = None
         end = None
 
@@ -105,6 +108,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         return start, end
 
     def get_datetime_value(self, value):
+        # TODO: explains
         if isinstance(value, DateTime):
             return value.utcdatetime()
         return datetime.fromisoformat(value)

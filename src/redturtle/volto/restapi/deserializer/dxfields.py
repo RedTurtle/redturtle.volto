@@ -5,11 +5,9 @@ from plone.app.event.base import default_timezone
 from plone.app.textfield.interfaces import IRichText
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.deserializer.blocks import path2uid
-from plone.restapi.deserializer.dxfields import (
-    DatetimeFieldDeserializer as DefaultDatetimeFieldDeserializer,
-    RichTextFieldDeserializer as BaseRichTextDeserializer,
-    TextLineFieldDeserializer as BaseTextLineDeserializer,
-)
+from plone.restapi.deserializer.dxfields import DatetimeFieldDeserializer as DefaultDatetimeFieldDeserializer
+from plone.restapi.deserializer.dxfields import RichTextFieldDeserializer as BaseRichTextDeserializer
+from plone.restapi.deserializer.dxfields import TextLineFieldDeserializer as BaseTextLineDeserializer
 from plone.restapi.interfaces import IFieldDeserializer
 from Products.CMFPlone.utils import safe_unicode
 from pytz import timezone
@@ -77,7 +75,7 @@ class LinkTextLineFieldDeserializer(BaseTextLineDeserializer):
 @adapter(IDatetime, IDexterityContent, IRedturtleVoltoLayer)
 class DatetimeFieldDeserializer(DefaultDatetimeFieldDeserializer):
     def __call__(self, value):
-        """
+        """TODO: explain this and create some unit tests
         """
         # PATCH
         is_publication_field = self.field.interface == IPublication

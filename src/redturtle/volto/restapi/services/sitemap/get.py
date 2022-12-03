@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from plone.restapi.services import Service
 from plone import api
+from plone.restapi.services import Service
 
 
 class SitemapGet(Service):

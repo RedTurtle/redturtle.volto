@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 from plone.app.contenttypes.interfaces import ILink
 from plone.app.contenttypes.utils import replace_link_variables_by_paths
+from plone.app.dexterity.behaviors.metadata import IPublication
+from plone.dexterity.interfaces import IDexterityContent
 from plone.outputfilters.browser.resolveuid import uuidToURL
+from plone.restapi.interfaces import IFieldSerializer
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.serializer.dxfields import DefaultFieldSerializer
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getMultiAdapter
-from zope.schema.interfaces import ITextLine
-from plone.dexterity.interfaces import IDexterityContent
-from plone.restapi.interfaces import IFieldSerializer
 from zope.interface import implementer
 from zope.schema.interfaces import IDatetime
-from plone.app.dexterity.behaviors.metadata import IPublication
+from zope.schema.interfaces import ITextLine
 
 import re
+
 
 RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 

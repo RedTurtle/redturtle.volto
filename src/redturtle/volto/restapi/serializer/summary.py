@@ -6,15 +6,14 @@ from plone.outputfilters.browser.resolveuid import uuidToURL
 from plone.restapi.deserializer import json_body
 from plone.restapi.imaging import get_scale_infos
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.serializer.summary import (
-    DefaultJSONSummarySerializer as BaseSerializer,
-)
+from plone.restapi.serializer.summary import DefaultJSONSummarySerializer as BaseSerializer
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
 
 import re
+
 
 RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 

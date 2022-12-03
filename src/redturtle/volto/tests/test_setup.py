@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING  # noqa: E501
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING  # noqa: E501
 
 import unittest
 
@@ -33,8 +33,8 @@ class TestSetup(unittest.TestCase):
 
     def test_browserlayer(self):
         """Test that IRedturtleVoltoLayer is registered."""
-        from redturtle.volto.interfaces import IRedturtleVoltoLayer
         from plone.browserlayer import utils
+        from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
         self.assertIn(IRedturtleVoltoLayer, utils.registered_layers())
 
@@ -71,7 +71,7 @@ class TestUninstall(unittest.TestCase):
 
     def test_browserlayer_removed(self):
         """Test that IRedturtleVoltoLayer is removed."""
-        from redturtle.volto.interfaces import IRedturtleVoltoLayer
         from plone.browserlayer import utils
+        from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
         self.assertNotIn(IRedturtleVoltoLayer, utils.registered_layers())

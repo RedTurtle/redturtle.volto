@@ -13,6 +13,7 @@ jobs:
       matrix:
         python: ["3.7", "3.8"]
         plone: ["52"]
+        tz: ["UTC", "Europe/Rome"]
         # exclude:
         #   - python: "3.7"
         #     plone: "51"
@@ -39,4 +40,4 @@ jobs:
           bin/code-analysis
       - name: Run tests
         run: |
-          bin/test
+          TZ=${{ matrix.tz }} bin/test

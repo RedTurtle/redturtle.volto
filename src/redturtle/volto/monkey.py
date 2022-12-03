@@ -3,9 +3,9 @@ from Acquisition import aq_base
 from lxml import etree
 from lxml import html
 from lxml.html.clean import Cleaner
+from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day
 from plone.app.event.recurrence import Occurrence
-from plone.app.caching import purge
 from plone.event.interfaces import IEventAccessor
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
