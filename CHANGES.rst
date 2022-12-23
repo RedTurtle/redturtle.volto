@@ -4,7 +4,8 @@ Changelog
 4.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Upgrade-step to remove etags list from p.a.caching terseCaching (in old Plone sites).
+  [cekk]
 
 
 4.1.0 (2022-11-22)
