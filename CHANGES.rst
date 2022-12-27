@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.1.2 (unreleased)
+4.1.2 (2022-12-27)
 ------------------
 
 - Customized voltobackendwarning viewlet because is broken in plone 5.2.
