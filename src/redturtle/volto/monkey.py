@@ -200,7 +200,6 @@ except ImportError:
     pass
 
 
-
 # BACKPORT https://github.com/plone/plone.volto/pull/83
 if not hasattr(VoltoImageScalingFactory, "get_original_value"):
 
@@ -219,5 +218,5 @@ if not hasattr(VoltoImageScalingFactory, "get_original_value"):
             return
         self.fieldname = primary.fieldname
         return primary.value
-    
+
     VoltoImageScalingFactory.get_original_value = VoltoImageScalingFactory_get_original_value

@@ -2,7 +2,6 @@ from DateTime import DateTime
 from OFS.SimpleItem import SimpleItem
 from plone.app.contenttypes.interfaces import IImage
 from plone.namedfile.scaling import ImageScaling
-from plone.namedfile.tests.test_scaling import DummyContent
 from plone.namedfile.tests.test_scaling import getFile
 from plone.namedfile.tests.test_scaling import MockNamedImage
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
