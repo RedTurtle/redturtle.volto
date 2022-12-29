@@ -451,3 +451,10 @@ def to_4000(context):
             "File",
             "Link",
         )
+
+
+def to_4100(context):
+    logger.info("Remove etags from p.a.caching terseCaching config")
+    api.portal.set_registry_record(
+        "plone.app.caching.terseCaching.plone.content.dynamic.etags", ()
+    )

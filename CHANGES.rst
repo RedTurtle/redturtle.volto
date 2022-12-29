@@ -2,10 +2,25 @@ Changelog
 =========
 
 5.0.0 (unreleased)
+4.1.3 (unreleased)
 ------------------
 
 - https://github.com/plone/Products.CMFPlone/pull/3521 backport #62
   [mamico]
+
+
+4.1.2 (2022-12-27)
+------------------
+
+- Customized voltobackendwarning viewlet because is broken in plone 5.2.
+  [cekk]
+
+
+4.1.1 (2022-12-23)
+------------------
+
+- Upgrade-step to remove etags list from p.a.caching terseCaching (in old Plone sites).
+  [cekk]
 
 
 4.1.0 (2022-11-22)

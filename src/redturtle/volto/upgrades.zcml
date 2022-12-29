@@ -160,4 +160,14 @@
     profile="redturtle.volto:default"
     handler=".upgrades.to_4000"
     />
+  
+  <genericsetup:upgradeStep
+    source="4000"
+    destination="4100"
+    title="Remove unused etags from p.a.caching config"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_4100"
+  />
+
 </configure>
