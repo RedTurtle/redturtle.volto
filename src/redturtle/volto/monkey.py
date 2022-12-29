@@ -10,6 +10,8 @@ from plone.event.interfaces import IEventAccessor
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
 from plone.registry.interfaces import IRegistry
+from plone.rfc822.interfaces import IPrimaryFieldInfo
+from plone.volto.scaling import VoltoImageScalingFactory
 from Products.CMFPlone.interfaces import IConstrainTypes
 from Products.CMFPlone.interfaces import IFilterSchema
 from Products.CMFPlone.utils import safe_encode
@@ -196,3 +198,26 @@ try:
     ]
 except ImportError:
     pass
+
+
+
+# BACKPORT https://github.com/plone/plone.volto/pull/83
+if not hasattr(VoltoImageScalingFactory, "get_original_value"):
+
+    def VoltoImageScalingFactory_get_original_value(self, fieldname=None):
+        """Get the image value.
+        In most cases this will be a NamedBlobImage field.
+        """
+        fieldname = fieldname or self.fieldname
+        if fieldname is not None:
+            return getattr(self.context, fieldname, None)
+        try:
+            primary = IPrimaryFieldInfo(self.context, None)
+        except TypeError:
+            return
+        if primary is None:
+            return
+        self.fieldname = primary.fieldname
+        return primary.value
+    
+    VoltoImageScalingFactory.get_original_value = VoltoImageScalingFactory_get_original_value

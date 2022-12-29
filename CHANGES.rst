@@ -2,10 +2,11 @@ Changelog
 =========
 
 5.0.0 (unreleased)
-4.1.3 (unreleased)
 ------------------
 
-- https://github.com/plone/Products.CMFPlone/pull/3521 backport #62
+- https://github.com/plone/Products.CMFPlone/pull/3521
+  https://github.com/plone/plone.volto/pull/8
+  backports #62
   [mamico]
 
 
