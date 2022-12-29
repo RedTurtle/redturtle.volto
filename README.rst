@@ -255,6 +255,25 @@ There is a new stringinterp adapter that can be used for example in content rule
 
 This adapter will remove "/api" from the content's absolute_url.
 
+
+Sitemap.xml.gz view customization
+=================================
+
+There is a custom view **sitemap.xml.gz** that will return a sitemap.xml.gz file.
+
+This is a copy of the original view from plone.app.layout.sitemap.sitemap
+
+The only difference is that:
+    
+    * we restrict level of depth to `plone.sitemap_depth` registry setting (default 3)
+    
+    * we add content modified in the last week
+
+With Volto, for serve this file, we need to add a line like this in apache config::
+
+    RewriteRule ^/+(sitemap.xml.gz) http://127.0.0.1:8080/VirtualHostBase/https/%{SERVER_NAME}:443/Plone/VirtualHostRoot/$1 [L,P]
+
+
 Installation
 ============
 
