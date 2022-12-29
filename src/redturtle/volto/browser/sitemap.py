@@ -12,7 +12,7 @@ class SiteMapView(LayoutSiteMapView):
 
     def objects(self):
         """Returns the data to create the sitemap.
-        
+
         This is a copy of the original method from plone.app.layout.sitemap.sitemap
 
         The only difference is that:
@@ -32,7 +32,7 @@ class SiteMapView(LayoutSiteMapView):
         # if not is_plone_site_root:
         #     query["path"] = "/".join(self.context.getPhysicalPath())
         query["path"] = {
-            "query": "/".join(self.context.getPhysicalPath()), 
+            "query": "/".join(self.context.getPhysicalPath()),
             "depth": registry.get("plone.sitemap_depth", 3)
         }
 
