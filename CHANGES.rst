@@ -1,10 +1,11 @@
 Changelog
 =========
 
-4.1.3 (unreleased)
+5.0.0a1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- pip compatible.
+  [cekk]
 
 
 4.1.2 (2022-12-27)
