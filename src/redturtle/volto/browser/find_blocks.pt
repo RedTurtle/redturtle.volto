@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/@@main_template/macros/master"
+      i18n:domain="redturtle.volto">
+
+<body>
+    <metal:content-title fill-slot="content-title">
+        <a class="link-parent" href="${context/portal_url}/@@fix-links">Fix links</a>
+        <h1>Find blocks</h1>
+    </metal:content-title>
+    <metal:content-description fill-slot="content-description">
+    </metal:content-description>
+    <metal:content-core fill-slot="content-core"
+        tal:define="data view/results;
+                    block_types view/block_types">
+        <div class="form">
+            <form action="${context/portal_url}/find-blocks" method="POST">
+                <div class="field"
+                     tal:define="pattern request/form/pattern|nothing">
+                    <label for="pattern">Text</label>
+                    <div class="formHelp">
+                        Find items with this pattern into one block.
+                    </div>
+                    <input type="text" name="pattern" value="${pattern}">
+                </div>
+                <div class="field">
+                    <label for="block_type">
+                        Block type
+                    </label>
+                    <div class="formHelp">
+                        Select a block type to search.
+                    </div>
+                    <select id="block_type"
+                              name="block_type"
+                              tal:define="block_type request/form/block_type|nothing">
+                        <option value=""
+                                tal:attributes="selected python:block_type == '' and 'selected' or ''">
+                            -- select a block type --
+                        </option>
+                        <tal:options repeat="type block_types">
+                            <option value="${type/id}"
+                                    tal:attributes="selected python:block_type == type['id'] and 'selected' or ''">
+                                ${type/title}
+                            </option>
+                        </tal:options>
+                    </select>
+                </div>
+                <div class="field"
+                     tal:define="custom_block_type request/form/custom_block_type|nothing">
+                    <label for="custom_block_type">Custom block type</label>
+                    <div class="formHelp">
+                        Insert a custom block type, if not present in previous list.
+                    </div>
+                    <input type="text" name="custom_block_type" value="${custom_block_type}">
+                </div>
+                <div class="formControls">
+                    <input id="search"
+                           name="search"
+                           class="submit-widget button-field context"
+                           value="Search"
+                           type="submit">
+                </div>
+            </form>
+        </div>
+        <tal:results condition="data">
+            <div tal:define="results python:data.get('found', []);
+                             tot_results python:len(results)">
+                <h2>Found ${tot_results} items</h2>
+                <ul>
+                    <li tal:repeat="item results">
+                        <a href="${item/url}" title="${item/title}">${item/title}</a>
+                    </li>
+                </ul>
+                
+            </div>
+        </tal:results>
+    </metal:content-core>
+</body>
+
+</html>

@@ -1,10 +1,54 @@
 Changelog
 =========
 
-3.12.3 (unreleased)
--------------------
+4.1.3 (unreleased)
+------------------
 
 - Nothing changed yet.
+
+
+4.1.2 (2022-12-27)
+------------------
+
+- Customized voltobackendwarning viewlet because is broken in plone 5.2.
+  [cekk]
+
+
+4.1.1 (2022-12-23)
+------------------
+
+- Upgrade-step to remove etags list from p.a.caching terseCaching (in old Plone sites).
+  [cekk]
+
+
+4.1.0 (2022-11-22)
+------------------
+
+- Add new utility view `@@find-blocks`.
+  [cekk]
+
+
+4.0.2 (2022-08-29)
+------------------
+
+- Patch for plone.volto upgrade-step (https://github.com/plone/plone.volto/pull/86).
+  [cekk]
+
+
+4.0.1 (2022-08-12)
+------------------
+
+- Fix upgrade-step.
+  [cekk]
+- Allow add Document into News Item and Event.
+  [cekk]
+
+
+4.0.0 (2022-08-12)
+------------------
+
+- Remove content-types customizations to be aligned with plone.volto configs.
+  [cekk] 
 
 
 3.12.2 (2022-05-19)

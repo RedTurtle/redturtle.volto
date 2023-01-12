@@ -26,11 +26,7 @@ Features
 Content-types
 -------------
 
-- Disabled **Collection**
-- **Document**, **News Item** and **Event** are folderish types (thanks to collective.folderishtypes.dx)
 - News Item and Event can only contain **Links**, **Images** and **Files**
-- **Plone Site** is a DX content
-- Revert **News Item** and **Event** to be non-folderish (collective.folderishtypes.dx makes them folderish)
 
 Blocks
 ------
@@ -245,6 +241,11 @@ Fix internal links
 
 There is a view **@@fix-links** that will check internal links into blocks and fix some links that refs to a staging
 or local development environment.
+
+Find blocks
+===========
+
+There is a view **@@find-blocks** that will return contents that have at least one block of the given type.
 
 
 Stringinterp adapters

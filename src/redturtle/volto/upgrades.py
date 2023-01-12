@@ -434,3 +434,26 @@ def to_3100(context):
             logger.info("Progress: {}/{}".format(i, tot))
         obj = brain.getObject()
         catalog.catalog_object(obj)
+
+
+def to_4000(context):
+    portal_types = api.portal.get_tool(name="portal_types")
+    fti = portal_types["Folder"]
+    fti.global_allow = True
+
+    for ptype in ["Event", "News Item"]:
+        fti = portal_types[ptype]
+        fti.filter_content_types = True
+        fti.allowed_content_types = (
+            "Document",
+            "Image",
+            "File",
+            "Link",
+        )
+
+
+def to_4100(context):
+    logger.info("Remove etags from p.a.caching terseCaching config")
+    api.portal.set_registry_record(
+        "plone.app.caching.terseCaching.plone.content.dynamic.etags", ()
+    )

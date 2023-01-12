@@ -7,7 +7,6 @@ from plone.app.testing import PloneSandboxLayer
 from plone.restapi.testing import PloneRestApiDXLayer
 from plone.testing import z2
 
-import collective.folderishtypes
 import collective.volto.cookieconsent
 import kitconcept.seo
 import plone.app.caching
@@ -24,7 +23,6 @@ class RedturtleVoltoLayer(PloneSandboxLayer):
         # Load any other ZCML that is required for your tests.
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
-        self.loadZCML(package=collective.folderishtypes)
         self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
@@ -59,7 +57,6 @@ class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
     def setUpZope(self, app, configurationContext):
         super(RedturtleVoltoRestApiLayer, self).setUpZope(app, configurationContext)
 
-        self.loadZCML(package=collective.folderishtypes)
         self.loadZCML(package=collective.volto.cookieconsent)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=plone.volto)
