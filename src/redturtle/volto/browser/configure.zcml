@@ -35,4 +35,13 @@
         permission="cmf.ManagePortal"
         layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
         />
+
+    <browser:page
+        name="sitemap.xml.gz"
+        for="plone.app.layout.navigation.interfaces.INavigationRoot"
+        class=".sitemap.SiteMapView"
+        layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+        permission="zope2.Public"
+        />
+
 </configure>

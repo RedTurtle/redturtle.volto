@@ -4,7 +4,8 @@ Changelog
 4.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- sitemap.xml.gz customization.
+  [mamico]
 
 
 4.1.2 (2022-12-27)
