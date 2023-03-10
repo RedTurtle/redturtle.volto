@@ -58,9 +58,10 @@ class SearchHandler(OriginalHandler):
             queries = []
             term = query.get("SearchableText")
             for key, value in query.items():
+                # TODO: this must be dynamic
                 if key in ("SearchableText", "Title", "Description"):
                     queries.append(Eq(key, value))
-                elif key in ("Subject", "portal_type"):
+                elif key in ("Subject", "portal_type", "tassonomia_argomenti"):
                     if isinstance(value, str):
                         value = [value]
                     queries.append(In(key, value))
