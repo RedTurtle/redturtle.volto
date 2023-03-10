@@ -11,20 +11,22 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python: ["3.7"]
-        plone: ["52"]
-        # exclude:
-        #   - python: "3.7"
-        #     plone: "51"
+        python: ["3.8", "3.9", "3.10", "3.11"]
+        plone: ["52", "60"]
+        exclude:
+          - python: "3.10"
+            plone: "52"
+          - python: "3.11"
+            plone: "52"
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Cache eggs
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: eggs
           key: ${{ runner.OS }}-build-python${{ matrix.python }}-${{ matrix.plone }}
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python }}
       - name: Install dependencies
@@ -39,4 +41,4 @@ jobs:
           bin/code-analysis
       - name: Run tests
         run: |
-          bin/test
+          bin/test-coverage
