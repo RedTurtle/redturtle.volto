@@ -10,7 +10,8 @@ from zope.component import getMultiAdapter
 # print the id and the normalized rank
 try:
     from Products.AdvancedQuery import RankByQueries_Sum
-    from Products.AdvancedQuery import Eq, In
+    from Products.AdvancedQuery import Eq
+    # from Products.AdvancedQuery import In
 
     HAS_ADVANCEDQUERY = True
 except ImportError:
