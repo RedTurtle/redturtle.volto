@@ -18,6 +18,7 @@ import unittest
 
 class TestBlocksSerializer(unittest.TestCase):
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
+    maxDiff = None
 
     def setUp(self):
         tz = os.environ.get("TZ", "UTC")

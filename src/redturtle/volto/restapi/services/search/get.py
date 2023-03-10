@@ -78,6 +78,7 @@ class SearchHandler(OriginalHandler):
                     # return super(SearchHandler, self).search(query)
             # term = query.pop("SearchableText")
             # TODO: mettere i parametri di ranking in registry
+            # XXX: il default sul subject ha senso ? (probabilmente no), rivedere eventualmente anche i test
             rs = RankByQueries_Sum(
                 (Eq("Subject", term), 16),
                 (Eq("Title", term), 8),
