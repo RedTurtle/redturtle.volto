@@ -71,7 +71,7 @@ class SearchHandler(OriginalHandler):
                     else:  # list/tuple ?
                         queries.append(Eq(key, value["query"]))
                 elif key in ("b_start", "b_size"):
-                     continue
+                    continue
                 else:
                     # TODO: skipNull, show_inactive False
                     logger.warning("Unsupported query parameter: %s %s", key, value)
