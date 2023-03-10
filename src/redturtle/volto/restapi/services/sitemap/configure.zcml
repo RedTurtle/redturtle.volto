@@ -6,16 +6,23 @@
     >
 
   <plone:service
-      method="GET"
-      factory=".get.SitemapGet"
-      for="zope.interface.Interface"
-      permission="zope2.View"
-      name="@sitemap-settings"
-      />
+    method="GET"
+    for="zope.interface.Interface"
+    factory=".get.SitemapSettingsGet"
+    name="@sitemap-settings"
+    permission="zope2.View"
+    />
 
-  <cache:ruleset
-      for=".get.SitemapGet"
-      ruleset="plone.content.dynamic"
-      />
+  <cache:ruleset ruleset="plone.content.dynamic" for=".get.SitemapSettingsGet" />
+
+  <plone:service
+    method="GET"
+    for="zope.interface.Interface"
+    factory=".get.SitemapGet"
+    name="@sitemap"
+    permission="zope2.View"
+    />
+
+  <cache:ruleset ruleset="plone.content.dynamic" for=".get.SitemapGet" />
 
 </configure>

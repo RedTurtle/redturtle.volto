@@ -14,6 +14,13 @@ Changelog
   [cekk]
 
 
+4.1.3 (2023-02-12)
+------------------
+
+- sitemap.xml.gz customization.
+  [mamico]
+
+
 4.1.2 (2022-12-27)
 ------------------
 
