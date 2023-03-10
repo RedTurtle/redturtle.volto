@@ -67,7 +67,7 @@ class SearchHandler(OriginalHandler):
                     queries.append(Eq(key, value["query"]))
                 else:
                     logger.warning("Unsupported query parameter: %s %s", key, value)
-                    return super(SearchHandler, self).search(query)
+                    # return super(SearchHandler, self).search(query)
             # term = query.pop("SearchableText")
             # TODO: mettere i parametri di ranking in registry
             rs = RankByQueries_Sum(
