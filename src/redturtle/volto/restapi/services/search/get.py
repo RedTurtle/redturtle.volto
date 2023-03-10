@@ -70,6 +70,9 @@ class SearchHandler(OriginalHandler):
                         queries.append(Or(*[Eq(key, p) for p in value["query"]]))
                     else:  # list/tuple ?
                         queries.append(Eq(key, value["query"]))
+                elif key in ("b_start", "b_size"):
+                     continue
+                # TODO: skipNull, show_inactive False
                 else:
                     logger.warning("Unsupported query parameter: %s %s", key, value)
                     # return super(SearchHandler, self).search(query)
