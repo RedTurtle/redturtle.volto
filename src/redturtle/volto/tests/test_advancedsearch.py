@@ -4,18 +4,15 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
-from plone.registry.interfaces import IRegistry
 from plone.restapi.testing import RelativeSession
-from Products.CMFPlone.interfaces import ISearchSchema
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
-from zope.component import getUtility
 
 import unittest
 
 
 class AdvancedSearchTest(unittest.TestCase):
-    # TODO: definire un layer specifico per il test
+
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
     def setUp(self):
