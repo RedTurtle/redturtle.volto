@@ -14,6 +14,7 @@ try:
     from Products.AdvancedQuery import Eq
     from Products.AdvancedQuery import In
     from Products.AdvancedQuery import And
+    from Products.AdvancedQuery import Or
 
     HAS_ADVANCEDQUERY = True
 except ImportError:
@@ -64,7 +65,10 @@ class SearchHandler(OriginalHandler):
                         value = [value]
                     queries.append(In(key, value))
                 elif key == "path" and isinstance(value, dict):
-                    queries.append(Eq(key, value["query"]))
+                    if isinstance(value["query"], list):
+                        queries.append(Or(*[Eq(key, p) for p in value["query"]]))
+                    else:  # list/tuple ?
+                        queries.append(Eq(key, value["query"]))
                 else:
                     logger.warning("Unsupported query parameter: %s %s", key, value)
                     # return super(SearchHandler, self).search(query)
