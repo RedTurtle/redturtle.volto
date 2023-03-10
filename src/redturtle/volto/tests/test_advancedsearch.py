@@ -98,3 +98,12 @@ class AdvancedSearchTest(unittest.TestCase):
         self.assertEqual(
             ["d1", "e1", "f1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
+
+    def test_search_document(self):
+        response = self.api_session.get("/@search", params={"SearchableText": "bar", "portal_type": ["Document"]})
+        self.assertEqual(response.status_code, 200)
+        result = response.json()
+        self.assertEqual(result["items_total"], 1)
+        self.assertEqual(
+            ["d1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
