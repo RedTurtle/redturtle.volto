@@ -57,6 +57,9 @@ setup(
         "plone.restapi>=8.16.1",
     ],
     extras_require={
+        "advancedquery": [
+            "dm.plone.advancedquery",
+        ],
         "test": [
             "plone.app.testing",
             # Plone KGS does not use this version, because it would break
