@@ -72,8 +72,8 @@ class SearchHandler(OriginalHandler):
                         queries.append(Eq(key, value["query"]))
                 elif key in ("b_start", "b_size"):
                      continue
-                # TODO: skipNull, show_inactive False
                 else:
+                    # TODO: skipNull, show_inactive False
                     logger.warning("Unsupported query parameter: %s %s", key, value)
                     # return super(SearchHandler, self).search(query)
             # term = query.pop("SearchableText")
