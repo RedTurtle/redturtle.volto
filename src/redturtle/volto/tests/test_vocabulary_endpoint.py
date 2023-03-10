@@ -12,7 +12,6 @@ from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
 
 class TestVocabularyEndpoint(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
     def setUp(self):

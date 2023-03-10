@@ -47,7 +47,7 @@ class AccordionBlockSearchableText:
         for subblock in value.get("subblocks", []):
             text.append(_extract_text(subblock.get("text", {})))
             text.append(_extract_text(subblock.get("title", {})))
-        return u" ".join([s for s in text])
+        return " ".join([s for s in text])
 
 
 @implementer(IBlockSearchableText)

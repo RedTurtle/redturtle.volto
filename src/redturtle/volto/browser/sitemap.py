@@ -9,7 +9,6 @@ import datetime
 
 
 class SiteMapView(LayoutSiteMapView):
-
     def objects(self):
         """Returns the data to create the sitemap.
 
@@ -33,7 +32,7 @@ class SiteMapView(LayoutSiteMapView):
         #     query["path"] = "/".join(self.context.getPhysicalPath())
         query["path"] = {
             "query": "/".join(self.context.getPhysicalPath()),
-            "depth": registry.get("plone.sitemap_depth", 3)
+            "depth": registry.get("plone.sitemap_depth", 3),
         }
 
         query["is_default_page"] = True
@@ -83,7 +82,10 @@ class SiteMapView(LayoutSiteMapView):
 
         # query for last modified pages. No problem if they are already in the sitemap (?)
         query["path"]["depth"] = -1
-        query["modified"] = {"query": datetime.datetime.now() - datetime.timedelta(days=7), "range": "min"}
+        query["modified"] = {
+            "query": datetime.datetime.now() - datetime.timedelta(days=7),
+            "range": "min",
+        }
         for item in catalog.searchResults(query):
             loc = item.getURL()
             date = item.modified

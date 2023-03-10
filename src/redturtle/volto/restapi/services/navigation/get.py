@@ -32,7 +32,6 @@ class ContextNavigation(object):
         root = self.context
 
         class Strategy(NavtreeStrategyBase):
-
             rootPath = "/".join(root.getPhysicalPath())
             showAllParents = False
 

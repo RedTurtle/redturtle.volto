@@ -16,7 +16,6 @@ import unittest
 
 
 class TestBlocksSerializer(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -48,7 +47,6 @@ class TestBlocksSerializer(unittest.TestCase):
         self.api_session.close()
 
     def test_blocks_internal_refs_with_uid_get_serialized_as_summary(self):
-
         self.page_a.blocks = {
             "foo": {
                 "@type": "custom_block",
@@ -67,7 +65,6 @@ class TestBlocksSerializer(unittest.TestCase):
         )
 
     def test_blocks_internal_refs_dont_generate_recursion_depth(self):
-
         self.page_a.blocks = {
             "foo": {
                 "@type": "custom_block",

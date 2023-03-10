@@ -15,7 +15,6 @@ logger = logging.getLogger(__name__)
 
 
 class View(BrowserView):
-
     results = {}
 
     def __call__(self):

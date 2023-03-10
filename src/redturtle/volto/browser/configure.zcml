@@ -23,29 +23,29 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
 
-    <browser:page
-        for="*"
-        name="fix-links"
-        class=".fix_links.View"
-        template="fix_links.pt"
-        permission="cmf.ManagePortal"
-        layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
-        />
-    <browser:page
-        for="*"
-        name="find-blocks"
-        class=".find_blocks.View"
-        template="find_blocks.pt"
-        permission="cmf.ManagePortal"
-        layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
-        />
+  <browser:page
+      name="fix-links"
+      for="*"
+      class=".fix_links.View"
+      template="fix_links.pt"
+      permission="cmf.ManagePortal"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
+  <browser:page
+      name="find-blocks"
+      for="*"
+      class=".find_blocks.View"
+      template="find_blocks.pt"
+      permission="cmf.ManagePortal"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
 
-    <browser:page
-        name="sitemap.xml.gz"
-        for="plone.app.layout.navigation.interfaces.INavigationRoot"
-        class=".sitemap.SiteMapView"
-        layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
-        permission="zope2.Public"
-        />
+  <browser:page
+      name="sitemap.xml.gz"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class=".sitemap.SiteMapView"
+      permission="zope2.Public"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
 
 </configure>
