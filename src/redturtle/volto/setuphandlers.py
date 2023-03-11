@@ -463,14 +463,14 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
-    portal = api.portal.get()
-
-    is_pam_installed = get_installer(
-        portal, context.REQUEST
-    ).isProductInstalled("plone.app.multilingual")
-
     create_root_homepage()
 
+    portal = api.portal.get()
+    installer = get_installer(portal, context.REQUEST)
+    if hasattr(installer, "is_product_installed"):
+        is_pam_installed = installer.is_product_installed("plone.app.multilingual")
+    else:
+        is_pam_installed = installer.isProductInstalled("plone.app.multilingual")
     if is_pam_installed:
         create_lrf_homepages()
 

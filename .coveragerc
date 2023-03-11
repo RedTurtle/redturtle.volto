@@ -3,4 +3,4 @@ include =
     src/redturtle/*
 omit =
     */test*
-    */upgrades/*
+    */upgrades*

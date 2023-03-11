@@ -41,12 +41,13 @@ class SiteSearchTest(unittest.TestCase):
     def test_types_not_searched(self):
         registry = getUtility(IRegistry)
         search_settings = registry.forInterface(ISearchSchema, prefix="plone")
-        search_settings.types_not_searched = ("Folder",)
+        search_settings.types_not_searched = ("Folder", "Plone Site", )
         commit()
 
         response = self.api_session.get("/@site-search")
-        result = response.json()
+        self.assertEqual(response.status_code, 200)
 
+        result = response.json()
         self.assertEqual(result["items_total"], 2)
         titles = [x["title"] for x in result["items"]]
         self.assertEqual(["Foo document", "Foo event"], titles)
