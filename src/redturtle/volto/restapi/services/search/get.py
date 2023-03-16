@@ -89,7 +89,7 @@ class SearchHandler(OriginalHandler):
                     continue
                 else:
                     logger.warning(
-                        f"Unsupported query parameter: {key} {value}. Using standard query."
+                        f"Unsupported query parameter: {key} {index_type} {value}. Fall back to the standard query."
                     )
                     return super(SearchHandler, self).search(query)
 
