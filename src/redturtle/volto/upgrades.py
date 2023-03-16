@@ -457,3 +457,9 @@ def to_4100(context):
     api.portal.set_registry_record(
         "plone.app.caching.terseCaching.plone.content.dynamic.etags", ()
     )
+
+
+def to_4200(context):
+    logger.info("Add redturtle.volto controlpanel")
+    update_registry(context)
+    update_controlpanel(context)

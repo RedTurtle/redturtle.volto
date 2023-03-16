@@ -60,7 +60,9 @@ class TestPublicationFieldsFixes(unittest.TestCase):
             },
         )
         commit()
+        import pdb
 
+        pdb.set_trace()
         self.assertEqual(
             self.portal["mydocument"].effective().strftime("%d-%m-%Y %H:%M"),
             effective.strftime("%d-%m-%Y %H:%M"),
