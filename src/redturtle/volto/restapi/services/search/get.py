@@ -27,6 +27,14 @@ except ImportError:
 
 
 class SearchHandler(OriginalHandler):
+    def get_indexes_mapping(self):
+        indexes = api.portal.get_tool("portal_catalog").getIndexObjects()
+        res = {}
+        for index in indexes:
+            index_type = index.meta_type
+            res[index.getId()] = index_type
+        return res
+
     def is_advanced_query(self, query):
         if not query:
             return False
@@ -61,15 +69,18 @@ class SearchHandler(OriginalHandler):
             query = self._parse_query(query)
             queries = []
             term = query.get("SearchableText")
+            indexes_mapping = self.get_indexes_mapping()
+
             for key, value in query.items():
-                # TODO: this must be dynamic
-                if key in ("SearchableText", "Title", "Description"):
+                index_type = indexes_mapping.get(key, None)
+                if index_type == "ZCTextIndex":
+                    # SearchableText, Title, Description
                     queries.append(Eq(key, value))
-                elif key in ("Subject", "portal_type", "tassonomia_argomenti"):
+                elif index_type in ["KeywordIndex", "FieldIndex"]:
                     if isinstance(value, str):
                         value = [value]
                     queries.append(In(key, value))
-                elif key == "path" and isinstance(value, dict):
+                elif index_type == "ExtendedPathIndex":
                     if isinstance(value["query"], list):
                         queries.append(Or(*[Eq(key, p) for p in value["query"]]))
                     else:  # list/tuple ?
@@ -77,9 +88,11 @@ class SearchHandler(OriginalHandler):
                 elif key in ("b_start", "b_size"):
                     continue
                 else:
-                    # TODO: skipNull, show_inactive False
-                    logger.warning("Unsupported query parameter: %s %s", key, value)
-                    # return super(SearchHandler, self).search(query)
+                    logger.warning(
+                        f"Unsupported query parameter: {key} {index_type} {value}. Fall back to the standard query."
+                    )
+                    return super(SearchHandler, self).search(query)
+
             # term = query.pop("SearchableText")
             # TODO: mettere i parametri di ranking in registry
             # XXX: il default sul subject ha senso ? (probabilmente no), rivedere eventualmente anche i test

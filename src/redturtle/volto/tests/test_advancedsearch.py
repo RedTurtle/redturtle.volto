@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from DateTime import DateTime
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -147,6 +148,22 @@ class AdvancedSearchTest(BaseTest):
         self.assertEqual(result["items_total"], 2)
         self.assertEqual(
             ["d1", "f1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
+
+    def test_search_by_not_handled_index_type_return_standard_order(self):
+        response = self.api_session.get(
+            "/@search",
+            params={
+                "SearchableText": "foo",
+                "created.query": f"{DateTime().Date()}:00:00",
+                "created.range": "min",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        result = response.json()
+        self.assertEqual(result["items_total"], 3)
+        self.assertEqual(
+            ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
 
