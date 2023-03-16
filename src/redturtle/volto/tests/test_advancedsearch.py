@@ -5,14 +5,14 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
 
 import unittest
 
 
-class AdvancedSearchTest(unittest.TestCase):
-
+class BaseTest(unittest.TestCase):
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -58,6 +58,22 @@ class AdvancedSearchTest(unittest.TestCase):
         self.api_session.headers.update({"Accept": "application/json"})
         self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
 
+
+class AdvancedSearchTest(BaseTest):
+    def setUp(self):
+        super().setUp()
+        # by default is disabled, so we need to enable it
+        api.portal.set_registry_record(
+            "enable_advanced_query_ranking", True, interface=IRedTurtleVoltoSettings
+        )
+        commit()
+
+    def tearDown(self):
+        api.portal.set_registry_record(
+            "enable_advanced_query_ranking", False, interface=IRedTurtleVoltoSettings
+        )
+        commit()
+
     def test_simplesearch(self):
         response = self.api_session.get(
             "/@search", params={"SearchableText": "foo", "SimpleQuery.": True}
@@ -100,7 +116,9 @@ class AdvancedSearchTest(unittest.TestCase):
         )
 
     def test_search_document(self):
-        response = self.api_session.get("/@search", params={"SearchableText": "bar", "portal_type": ["Document"]})
+        response = self.api_session.get(
+            "/@search", params={"SearchableText": "bar", "portal_type": ["Document"]}
+        )
         self.assertEqual(response.status_code, 200)
         result = response.json()
         self.assertEqual(result["items_total"], 1)
@@ -109,7 +127,9 @@ class AdvancedSearchTest(unittest.TestCase):
         )
 
     def test_search_by_path(self):
-        response = self.api_session.get("/@search", params={"SearchableText": "bar", "path": "/plone/d1"})
+        response = self.api_session.get(
+            "/@search", params={"SearchableText": "bar", "path": "/plone/d1"}
+        )
         self.assertEqual(response.status_code, 200)
         result = response.json()
         self.assertEqual(result["items_total"], 1)
@@ -118,10 +138,38 @@ class AdvancedSearchTest(unittest.TestCase):
         )
 
     def test_search_by_paths(self):
-        response = self.api_session.get("/@search", params={"SearchableText": "bar", "path": ["/plone/d1", "/plone/f1"]})
+        response = self.api_session.get(
+            "/@search",
+            params={"SearchableText": "bar", "path": ["/plone/d1", "/plone/f1"]},
+        )
         self.assertEqual(response.status_code, 200)
         result = response.json()
         self.assertEqual(result["items_total"], 2)
         self.assertEqual(
             ["d1", "f1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
+
+
+class AdvancedSearchWithFlagTest(BaseTest):
+    def test_by_default_flag_is_disabled(self):
+        response = self.api_session.get("/@search", params={"SearchableText": "foo"})
+        self.assertEqual(response.status_code, 200)
+        result = response.json()
+        self.assertEqual(result["items_total"], 3)
+        # explain why the order is different from the one in the test above
+        self.assertEqual(
+            ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
+
+    def test_enabling_flag_return_custom_order(self):
+        api.portal.set_registry_record(
+            "enable_advanced_query_ranking", True, interface=IRedTurtleVoltoSettings
+        )
+        commit()
+        response = self.api_session.get("/@search", params={"SearchableText": "foo"})
+        self.assertEqual(response.status_code, 200)
+        result = response.json()
+        self.assertEqual(result["items_total"], 3)
+        self.assertEqual(
+            ["d1", "f1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )

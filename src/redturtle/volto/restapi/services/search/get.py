@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.search.handler import SearchHandler as OriginalHandler
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.services import Service
-from zope.component import getMultiAdapter
+from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from redturtle.volto import logger
+from zope.component import getMultiAdapter
 
 # search for 'ranking' in 'SearchableText' and rank very high
 # when the term is in 'Subject' and high when it is in 'Title'.
@@ -32,13 +34,15 @@ class SearchHandler(OriginalHandler):
             return False
         if query.get("SimpleQuery", None):
             return False
-        # TODO: aggiungere un parametro in registry per abilitare/disabilitare
-        if HAS_ADVANCEDQUERY and "SearchableText" in query:
+        custom_ranking_enabled = api.portal.get_registry_record(
+            "enable_advanced_query_ranking", interface=IRedTurtleVoltoSettings
+        )
+        if HAS_ADVANCEDQUERY and "SearchableText" in query and custom_ranking_enabled:
             return True
         return False
 
     # XXX: sarebbe meglio una monkeypatch a catalog.searchResults ? eviterebbe di
-    #      ripotare tutto il codice di search qui
+    #      riportare tutto il codice di search qui
     def search(self, query=None):
         query = self.request.form.copy()
         query = unflatten_dotted_dict(query)
@@ -87,7 +91,8 @@ class SearchHandler(OriginalHandler):
 
             lazy_resultset = self.catalog.evalAdvancedQuery(
                 # Eq("SearchableText", term), (rs,), **query
-                And(*queries), (rs,),
+                And(*queries),
+                (rs,),
             )
             # DEBUG: TODO: potrebbe essere utile mettere i ranking nella risposta ?
             # norm = 1 + rs.getQueryValueSum()
