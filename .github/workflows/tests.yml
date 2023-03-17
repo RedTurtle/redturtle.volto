@@ -43,3 +43,17 @@ jobs:
       - name: Run tests
         run: |
           TZ=${{ matrix.tz }} bin/test-coverage
+      - name: Coveralls
+        uses: AndreMiras/coveralls-python-action@v20201129
+        with:
+          parallel: true
+          flag-name: ${{ matrix.config[1] }}
+
+  coveralls_finish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: AndreMiras/coveralls-python-action@v20201129
+      with:
+        parallel-finished: true
