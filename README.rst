@@ -9,7 +9,7 @@ redturtle.volto
 This is an helper package that setup a RedTurtle's Plone site ready to work with Volto.
 
 
-|python| |version| |ci|
+|python| |version| |ci| |coverage| |downloads| |license|
 
 .. |python| image:: https://img.shields.io/pypi/pyversions/redturtle.volto.svg
   :target: https://pypi.python.org/pypi/redturtle.volto/
@@ -20,6 +20,17 @@ This is an helper package that setup a RedTurtle's Plone site ready to work with
 .. |ci| image:: https://github.com/RedTurtle/redturtle.volto/actions/workflows/tests.yml/badge.svg
   :target: https://github.com/RedTurtle/redturtle.volto/actions
 
+.. |downloads| image:: https://img.shields.io/pypi/dm/redturtle.volto.svg
+   :target: https://pypi.org/project/redturtle.volto/
+
+.. |license| image:: https://img.shields.io/pypi/l/redturtle.volto.svg
+    :target: https://pypi.org/project/redturtle.volto/
+    :alt: License
+
+.. |coverage| image:: https://coveralls.io/repos/github/redturtle/redturtle.volto/badge.svg?branch=master
+    :target: https://coveralls.io/github/redturtle/redturtle.volto?branch=master
+    :alt: Coverage
+    
 Features
 ========
 
