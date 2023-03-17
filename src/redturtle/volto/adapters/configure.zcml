@@ -1,19 +1,20 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser">
-
-   <adapter
-       for="*"
-       provides="plone.stringinterp.interfaces.IStringSubstitution"
-       factory=".stringinterp.VoltoUrlSubstitution"
-       name="volto_url"
-       />
+    xmlns:browser="http://namespaces.zope.org/browser"
+    >
 
   <adapter
-       for="*"
-       provides="plone.stringinterp.interfaces.IStringSubstitution"
-       factory=".stringinterp.VoltoParentUrlSubstitution"
-       name="volto_parent_url"
-       />
+      factory=".stringinterp.VoltoUrlSubstitution"
+      provides="plone.stringinterp.interfaces.IStringSubstitution"
+      for="*"
+      name="volto_url"
+      />
+
+  <adapter
+      factory=".stringinterp.VoltoParentUrlSubstitution"
+      provides="plone.stringinterp.interfaces.IStringSubstitution"
+      for="*"
+      name="volto_parent_url"
+      />
 
 </configure>

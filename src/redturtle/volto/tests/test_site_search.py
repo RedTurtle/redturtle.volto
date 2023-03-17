@@ -15,7 +15,6 @@ import unittest
 
 
 class SiteSearchTest(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -41,7 +40,10 @@ class SiteSearchTest(unittest.TestCase):
     def test_types_not_searched(self):
         registry = getUtility(IRegistry)
         search_settings = registry.forInterface(ISearchSchema, prefix="plone")
-        search_settings.types_not_searched = ("Folder", "Plone Site", )
+        search_settings.types_not_searched = (
+            "Folder",
+            "Plone Site",
+        )
         commit()
 
         response = self.api_session.get("/@site-search")

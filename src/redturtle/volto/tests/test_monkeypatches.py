@@ -10,7 +10,6 @@ from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING
 
 
 class TestRespectLocallyAllowedTypes(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_FUNCTIONAL_TESTING
 
     def setUp(self):

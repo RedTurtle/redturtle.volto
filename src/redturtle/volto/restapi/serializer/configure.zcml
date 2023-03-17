@@ -1,20 +1,29 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:zcml="http://namespaces.zope.org/zcml"
-    i18n_domain="plone.restapi">
+    i18n_domain="plone.restapi"
+    >
 
-  <subscriber factory=".blocks.GenericResolveUIDSerializerContents"
-    provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
-  <subscriber factory=".blocks.GenericResolveUIDSerializerRoot"
-    provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
-  <subscriber factory=".blocks.TableResolveUIDSerializerContents"
-    provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
-  <subscriber factory=".blocks.TableResolveUIDSerializerRoot"
-    provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"/>
-  
+  <subscriber
+      factory=".blocks.GenericResolveUIDSerializerContents"
+      provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
+      />
+  <subscriber
+      factory=".blocks.GenericResolveUIDSerializerRoot"
+      provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
+      />
+  <subscriber
+      factory=".blocks.TableResolveUIDSerializerContents"
+      provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
+      />
+  <subscriber
+      factory=".blocks.TableResolveUIDSerializerRoot"
+      provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
+      />
+
   <adapter factory=".dxfields.DateTimeFieldSerializer" />
   <adapter factory=".dxfields.TextLineFieldSerializer" />
-  
+
   <adapter factory=".summary.DefaultJSONSummarySerializer" />
-  
+
 </configure>

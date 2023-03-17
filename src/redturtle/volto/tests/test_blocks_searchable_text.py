@@ -10,7 +10,6 @@ import unittest
 
 
 class TestBlocksSearchable(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -27,7 +26,6 @@ class TestBlocksSearchable(unittest.TestCase):
         commit()
 
     def test_accordion_block_indexed(self):
-
         self.assertEqual(len(api.content.find(SearchableText="textcordion")), 0)
 
         self.document.blocks = {
@@ -57,7 +55,6 @@ class TestBlocksSearchable(unittest.TestCase):
             )
 
     def test_alert_block_indexed(self):
-
         self.assertEqual(len(api.content.find(SearchableText="alert")), 0)
 
         self.document.blocks = {
@@ -73,7 +70,6 @@ class TestBlocksSearchable(unittest.TestCase):
         )
 
     def test_simple_card_block_indexed(self):
-
         self.assertEqual(len(api.content.find(SearchableText="simpletitle")), 0)
 
         self.document.blocks = {
@@ -98,7 +94,6 @@ class TestBlocksSearchable(unittest.TestCase):
         )
 
     def test_card_with_image_block_indexed(self):
-
         self.assertEqual(len(api.content.find(SearchableText="imagetitle")), 0)
 
         self.document.blocks = {

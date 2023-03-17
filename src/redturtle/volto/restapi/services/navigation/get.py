@@ -23,9 +23,7 @@ class ContextNavigation(object):
             depth = 1
         result = {
             "navigation": {
-                "@id": "{}/@context-navigation".format(
-                    self.context.absolute_url()
-                )
+                "@id": "{}/@context-navigation".format(self.context.absolute_url())
             }
         }
         if not expand:
@@ -34,35 +32,34 @@ class ContextNavigation(object):
         root = self.context
 
         class Strategy(NavtreeStrategyBase):
-
-            rootPath = '/'.join(root.getPhysicalPath())
+            rootPath = "/".join(root.getPhysicalPath())
             showAllParents = False
 
         strategy = Strategy()
         query = {
-            'path': {
-                'query': '/'.join(root.getPhysicalPath()),
-                'depth': depth,
+            "path": {
+                "query": "/".join(root.getPhysicalPath()),
+                "depth": depth,
             },
-            'is_folderish': True,
-            'sort_on': 'getObjPositionInParent',
+            "is_folderish": True,
+            "sort_on": "getObjPositionInParent",
         }
 
         navtree = buildFolderTree(self, query=query, strategy=strategy)
         items = {
-            '@id': self.context.absolute_url(),
-            'items': [self.generateNode(x) for x in navtree['children']],
+            "@id": self.context.absolute_url(),
+            "items": [self.generateNode(x) for x in navtree["children"]],
         }
         return items
 
     def generateNode(self, root):
-        item = root['item']
+        item = root["item"]
         res = {
             "title": item.Title,
             "@id": item.getURL(),
             "description": item.Description,
         }
-        children = root.get('children', [])
+        children = root.get("children", [])
         if children:
             res["items"] = [self.generateNode(x) for x in children]
         return res

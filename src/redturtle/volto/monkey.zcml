@@ -1,42 +1,43 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:monkey="http://namespaces.plone.org/monkey"
-    i18n_domain="collective.monkeypatcher">
+    i18n_domain="collective.monkeypatcher"
+    >
 
-    <include package="collective.monkeypatcher" />
+  <include package="collective.monkeypatcher" />
 
-    <monkey:patch
-        description="This works around issue https://github.com/plone/Products.PortalTransforms/pull/43"
-        class="Products.PortalTransforms.transforms.safe_html.SafeHTML"
-        original="scrub_html"
-        replacement=".monkey.scrub_html"
-        />
+  <monkey:patch
+      original="scrub_html"
+      replacement=".monkey.scrub_html"
+      class="Products.PortalTransforms.transforms.safe_html.SafeHTML"
+      description="This works around issue https://github.com/plone/Products.PortalTransforms/pull/43"
+      />
 
-    <monkey:patch
-        description="This fix the problem with Events recurrences"
-        class="plone.app.event.recurrence.RecurrenceSupport"
-        original="occurrences"
-        replacement=".monkey.occurrences"
-        />
+  <monkey:patch
+      original="occurrences"
+      replacement=".monkey.occurrences"
+      class="plone.app.event.recurrence.RecurrenceSupport"
+      description="This fix the problem with Events recurrences"
+      />
 
-    <monkey:patch
-        description="Patch for disallow paste object also for locally filters"
-        class="plone.dexterity.content.PasteBehaviourMixin"
-        original="_verifyObjectPaste"
-        preserveOriginal="True"
-        replacement=".monkey._verifyObjectPaste"
-        />
-    
-    <monkey:patch
-        description="Patch for disallow plone.volto deserialization"
-        class="plone.volto.transforms.NestedResolveUIDDeserializerBase"
-        original="__call__"
-        replacement=".monkey.plone_volto_deserializer_call"
-        />
-    <monkey:patch
-        description="Patch for disallow plone.volto serialization"
-        class="plone.volto.transforms.NestedResolveUIDSerializerBase"
-        original="__call__"
-        replacement=".monkey.plone_volto_serializer_call"
-        />
+  <monkey:patch
+      original="_verifyObjectPaste"
+      replacement=".monkey._verifyObjectPaste"
+      class="plone.dexterity.content.PasteBehaviourMixin"
+      description="Patch for disallow paste object also for locally filters"
+      preserveOriginal="True"
+      />
+
+  <monkey:patch
+      original="__call__"
+      replacement=".monkey.plone_volto_deserializer_call"
+      class="plone.volto.transforms.NestedResolveUIDDeserializerBase"
+      description="Patch for disallow plone.volto deserialization"
+      />
+  <monkey:patch
+      original="__call__"
+      replacement=".monkey.plone_volto_serializer_call"
+      class="plone.volto.transforms.NestedResolveUIDSerializerBase"
+      description="Patch for disallow plone.volto serialization"
+      />
 </configure>

@@ -8,11 +8,10 @@ from redturtle.volto import _
 
 @adapter(IContentish)
 class VoltoUrlSubstitution(BaseSubstitution):
-
-    category = stringinterp_mf(u"All Content")
+    category = stringinterp_mf("All Content")
     description = _(
         "stringinterp_volto_url",
-        default=u'Volto URL: Content url without "/api".',
+        default='Volto URL: Content url without "/api".',
     )
 
     def safe_call(self):
@@ -26,11 +25,10 @@ class VoltoUrlSubstitution(BaseSubstitution):
 
 @adapter(IContentish)
 class VoltoParentUrlSubstitution(BaseSubstitution):
-
-    category = stringinterp_mf(u"All Content")
+    category = stringinterp_mf("All Content")
     description = _(
         "stringinterp_volto_parent_url",
-        default=u'Volto Parent URL: Content url without "/api".',
+        default='Volto Parent URL: Content url without "/api".',
     )
 
     def safe_call(self):

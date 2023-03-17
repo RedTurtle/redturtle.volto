@@ -80,9 +80,7 @@ homepage_en = {
                     "1": {
                         "type": "LINK",
                         "mutability": "MUTABLE",
-                        "data": {
-                            "url": "https://github.com/plone/plone.restapi"
-                        },
+                        "data": {"url": "https://github.com/plone/plone.restapi"},
                     },
                 },
             },
@@ -132,9 +130,7 @@ homepage_en = {
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
-                        "entityRanges": [
-                            {"offset": 36, "length": 10, "key": 0}
-                        ],
+                        "entityRanges": [{"offset": 36, "length": 10, "key": 0}],
                         "data": {},
                     }
                 ],
@@ -176,9 +172,7 @@ homepage_en = {
                         "type": "unstyled",
                         "depth": 0,
                         "inlineStyleRanges": [],
-                        "entityRanges": [
-                            {"offset": 39, "length": 36, "key": 0}
-                        ],
+                        "entityRanges": [{"offset": 39, "length": 36, "key": 0}],
                         "data": {},
                     }
                 ],
@@ -359,9 +353,7 @@ homepage_it = {
                     {
                         "data": {},
                         "depth": 0,
-                        "entityRanges": [
-                            {"key": 0, "length": 10, "offset": 36}
-                        ],
+                        "entityRanges": [{"key": 0, "length": 10, "offset": 36}],
                         "inlineStyleRanges": [],
                         "key": "9ngcf",
                         "text": "Volto supporta anche altre API come Guillotina, un sistema di gestione delle risorse Python, ispirato a Plone e che utilizza gli stessi concetti di base come traversing, tipi di contenuto e modello di autorizzazioni.",
@@ -481,16 +473,14 @@ def uninstall(context):
 
 
 def create_root_homepage():
-    """ create default homepage """
+    """create default homepage"""
     portal = api.portal.get()
 
     portal.setTitle("Benvenuto in Volto!")
     portal.setDescription("Il sistema di gestione contenuti basato su React")
 
     if not getattr(portal, "blocks", False):
-        portal.manage_addProperty(
-            "blocks", json.dumps(homepage_it["blocks"]), "string"
-        )
+        portal.manage_addProperty("blocks", json.dumps(homepage_it["blocks"]), "string")
 
     if not getattr(portal, "blocks_layout", False):
         portal.manage_addProperty(
@@ -504,9 +494,7 @@ def create_lrf_homepages():
     portal.it.blocks = homepage_it["blocks"]
     portal.it.blocks_layout = homepage_it["blocks_layout"]
     portal.it.setTitle("Benvenuto in Volto!")
-    portal.it.setDescription(
-        "Il sistema di gestione contenuti basato su React"
-    )
+    portal.it.setDescription("Il sistema di gestione contenuti basato su React")
 
     portal.en.blocks = homepage_en["blocks"]
     portal.en.blocks_layout = homepage_en["blocks_layout"]

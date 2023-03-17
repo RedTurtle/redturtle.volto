@@ -15,7 +15,6 @@ class IRedTurtleVoltoSettingsControlpanel(IControlpanel):
 
 
 class IRedTurtleVoltoSettings(Interface):
-
     enable_advanced_query_ranking = Bool(
         title=_(
             "enable_advanced_query_ranking_label",

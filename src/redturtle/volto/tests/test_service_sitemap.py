@@ -14,7 +14,6 @@ import unittest
 
 
 class TestServicesSitemap(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
     def setUp(self):

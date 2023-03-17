@@ -16,7 +16,6 @@ import os
 
 
 class TestSummaryCustomization(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -43,7 +42,7 @@ class TestSummaryCustomization(unittest.TestCase):
             description="",
         )
 
-        filename = os.path.join(os.path.dirname(__file__), u"logo.png")
+        filename = os.path.join(os.path.dirname(__file__), "logo.png")
         self.news_with_image.image = NamedBlobImage(
             data=open(filename, "rb").read(),
             filename="logo.png",
@@ -69,7 +68,9 @@ class TestSummaryCustomization(unittest.TestCase):
         self.assertNotIn("image", res["items"][1])
 
     def test_summary_return_image_scales_if_requested(self):
-        response = self.api_session.get("/@search?metadata_fields=_all", params={"portal_type": "News Item"})
+        response = self.api_session.get(
+            "/@search?metadata_fields=_all", params={"portal_type": "News Item"}
+        )
         self.assertEqual(response.status_code, 200)
         res = response.json()
 

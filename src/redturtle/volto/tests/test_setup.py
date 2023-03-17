@@ -42,7 +42,6 @@ class TestSetup(unittest.TestCase):
         self.assertIn(IRedturtleVoltoLayer, utils.registered_layers())
 
     def test_customized_restapi_permission(self):
-
         roles = self.portal.rolesOfPermission(
             "plone.restapi: Access Plone vocabularies"
         )
@@ -54,7 +53,6 @@ class TestSetup(unittest.TestCase):
 
 
 class TestUninstall(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_INTEGRATION_TESTING
 
     def setUp(self):

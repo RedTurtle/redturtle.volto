@@ -3,38 +3,38 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="redturtle.volto"
     >
-    
 
-    <adapter
+
+  <adapter
       factory=".indexers.open_end"
       name="open_end"
       />
-    <adapter
+  <adapter
       factory=".indexers.whole_day"
       name="whole_day"
       />
-    <adapter
+  <adapter
       factory=".indexers.recurrence"
       name="recurrence"
       />
 
-    <!-- make some block indexable -->
-    <adapter
-        factory=".indexers.AccordionBlockSearchableText"
-        name="accordion"
-        />
-    <adapter
-        factory=".indexers.AlertBlockSearchableText"
-        name="alert"
-        />
-    <adapter
-        factory=".indexers.SimpleCardBlockSearchableText"
-        name="testo_riquadro_semplice"
-        />
-    <adapter
-        factory=".indexers.CardWithImageBlockSearchableText"
-        name="testo_riquadro_immagine"
-        />
-    
+  <!-- make some block indexable -->
+  <adapter
+      factory=".indexers.AccordionBlockSearchableText"
+      name="accordion"
+      />
+  <adapter
+      factory=".indexers.AlertBlockSearchableText"
+      name="alert"
+      />
+  <adapter
+      factory=".indexers.SimpleCardBlockSearchableText"
+      name="testo_riquadro_semplice"
+      />
+  <adapter
+      factory=".indexers.CardWithImageBlockSearchableText"
+      name="testo_riquadro_immagine"
+      />
+
 
 </configure>
