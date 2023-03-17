@@ -3,10 +3,7 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
-  <include
-      package="Products.GenericSetup"
-      file="meta.zcml"
-      />
+  <include package="Products.GenericSetup" file="meta.zcml" />
   <include package="Products.GenericSetup" />
 
   <include package="collective.volto.cookieconsent" />
@@ -14,5 +11,7 @@
   <include package="collective.purgebyid" />
   <include package="kitconcept.seo" />
   <include package="plone.volto" />
+
+  <include zcml:condition="installed dm.plone.advancedquery" package="dm.plone.advancedquery" />
 
 </configure>

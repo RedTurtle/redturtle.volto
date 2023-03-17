@@ -9,4 +9,10 @@
   <include package=".sitemap" />
   <include package=".search" />
 
+  <adapter
+    factory=".controlpanel.RedTurtleVoltoSettings"
+    provides="redturtle.volto.interfaces.IRedTurtleVoltoSettingsControlpanel"
+    name="redturtle-volto-settings"
+    />
+
 </configure>

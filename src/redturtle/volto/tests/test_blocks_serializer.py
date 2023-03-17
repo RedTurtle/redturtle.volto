@@ -1,25 +1,35 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.app.testing import (
-    SITE_OWNER_NAME,
-    SITE_OWNER_PASSWORD,
-    TEST_USER_ID,
-    setRoles,
-)
+from plone.app.testing import setRoles
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
+from plone.app.testing import TEST_USER_ID
+from plone.registry.interfaces import IRegistry
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
-from plone.restapi.interfaces import ISerializeToJsonSummary
 from zope.component import getMultiAdapter
+from zope.component import getUtility
 
+import os
 import unittest
 
 
 class TestBlocksSerializer(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
+    maxDiff = None
 
     def setUp(self):
+        tz = os.environ.get("TZ", "UTC")
+        registry = getUtility(IRegistry)
+        self._orig_tz = (
+            registry["plone.portal_timezone"],
+            registry["plone.available_timezones"],
+        )
+        registry["plone.portal_timezone"] = tz
+        registry["plone.available_timezones"] = [tz]
+
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
@@ -46,9 +56,11 @@ class TestBlocksSerializer(unittest.TestCase):
 
     def tearDown(self):
         self.api_session.close()
+        registry = getUtility(IRegistry)
+        registry["plone.portal_timezone"] = self._orig_tz[0]
+        registry["plone.available_timezones"] = self._orig_tz[1]
 
     def test_blocks_internal_refs_with_uid_get_serialized_as_summary(self):
-
         self.page_a.blocks = {
             "foo": {
                 "@type": "custom_block",
@@ -67,7 +79,6 @@ class TestBlocksSerializer(unittest.TestCase):
         )
 
     def test_blocks_internal_refs_dont_generate_recursion_depth(self):
-
         self.page_a.blocks = {
             "foo": {
                 "@type": "custom_block",

@@ -17,7 +17,6 @@ import redturtle.volto
 
 
 class RedturtleVoltoLayer(PloneSandboxLayer):
-
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
@@ -62,7 +61,6 @@ REDTURTLE_VOLTO_ACCEPTANCE_TESTING = FunctionalTesting(
 
 
 class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
-
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):

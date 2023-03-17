@@ -170,4 +170,14 @@
     handler=".upgrades.to_4100"
   />
 
+  <genericsetup:upgradeStep
+    source="4100"
+    destination="4200"
+    title="Add controlpanel"
+    description=""
+    profile="redturtle.volto:default"
+    handler=".upgrades.to_4200"
+    />
+
+
 </configure>

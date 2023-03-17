@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-04-01 14:13+0000\n"
+"POT-Creation-Date: 2023-03-16 14:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,11 @@ msgstr ""
 #: redturtle/volto/profiles/default/registry/criteria.xml
 msgid "Metadata"
 msgstr ""
+
+#: redturtle/volto/browser/controlpanel.py:11
+#: redturtle/volto/profiles/default/controlpanel.xml
+msgid "RedTurtle Volto Settings"
+msgstr "Impostazioni RedTurtle Volto"
 
 #: redturtle/volto/configure.zcml:28
 msgid "RedTurtle: Volto"
@@ -42,10 +47,25 @@ msgstr "Elementi omessi dalla navigazione"
 msgid "Uninstalls the redturtle.volto add-on."
 msgstr ""
 
+#. Default: "If enabled, a custom ranking for SearchableText searches will be used."
+#: redturtle/volto/interfaces.py:24
+msgid "enable_advanced_query_ranking_help"
+msgstr "Se abilitato, verrà utilizzato un ranking custom per la ricerca testuale."
+
+#. Default: "Enable AdvancedQuery ranking"
+#: redturtle/volto/interfaces.py:20
+msgid "enable_advanced_query_ranking_label"
+msgstr "Abilita ranking custom con AdvancedQuery"
+
 #. Default: "Insert an external link directly into the field,or select an internal link clicking on the icon."
 #: redturtle/volto/types/adapters.py:25
 msgid "remoteUrl_restapi_label"
 msgstr "Inserisci un link esterno direttamente nel campo, oppure seleziona un collegamento ad un contenuto del sito cliccando sull'icona accanto."
+
+#. Default: "Volto Parent URL: Content url without \"/api\"."
+#: redturtle/volto/adapters/stringinterp.py:31
+msgid "stringinterp_volto_parent_url"
+msgstr ""
 
 #. Default: "Volto URL: Content url without \"/api\"."
 #: redturtle/volto/adapters/stringinterp.py:13

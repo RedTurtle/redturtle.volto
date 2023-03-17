@@ -9,6 +9,13 @@
         directory="overrides"
         layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
         />
+    
+    <browser:page
+        name="redturtle-volto-settings"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.RedturtleVoltoSettingsView"
+        permission="cmf.ManagePortal" />
+
 
     <!-- Add noindex head tag: https://developers.google.com/search/docs/advanced/crawling/block-indexing?visit_id=637489966041845317-1328107746&rd=1 -->
     <browser:viewlet

@@ -4,8 +4,11 @@ Changelog
 4.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle custom search ranking with AdvancedQuery.
+  [mamico]
 
+- Add controlpanel for redturtle.volto settings.
+  [cekk]
 
 4.1.3 (2023-02-12)
 ------------------

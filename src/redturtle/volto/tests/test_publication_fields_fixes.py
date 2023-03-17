@@ -13,31 +13,20 @@ from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
 import unittest
-import time
 import os
 
 
 class TestPublicationFieldsFixes(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
     def setUp(self):
-        tz = "Europe/Rome"
-        os.environ["TZ"] = tz
-        time.tzset()
-
-        # Patch DateTime's timezone for deterministic behavior.
-        self.DT_orig_localZone = DateTime.localZone
-        DateTime.localZone = lambda cls=None, ltm=None: tz
-
-        from plone.dexterity import content
-
-        content.FLOOR_DATE = DateTime(1970, 0)
-        content.CEILING_DATE = DateTime(2500, 0)
-        self._orig_content_zone = content._zone
-        content._zone = "GMT+2"
+        tz = os.environ.get("TZ", "UTC")
 
         registry = getUtility(IRegistry)
+        self._orig_tz = (
+            registry["plone.portal_timezone"],
+            registry["plone.available_timezones"],
+        )
         registry["plone.portal_timezone"] = tz
         registry["plone.available_timezones"] = [tz]
         self.app = self.layer["app"]
@@ -53,24 +42,9 @@ class TestPublicationFieldsFixes(unittest.TestCase):
 
     def tearDown(self):
         self.api_session.close()
-
-        if "TZ" in os.environ:
-            del os.environ["TZ"]
-        time.tzset()
-
-        from DateTime import DateTime
-
-        DateTime.localZone = self.DT_orig_localZone
-
-        from plone.dexterity import content
-
-        content._zone = self._orig_content_zone
-        content.FLOOR_DATE = DateTime(1970, 0)
-        content.CEILING_DATE = DateTime(2500, 0)
-
         registry = getUtility(IRegistry)
-        registry["plone.portal_timezone"] = "UTC"
-        registry["plone.available_timezones"] = ["UTC"]
+        registry["plone.portal_timezone"] = self._orig_tz[0]
+        registry["plone.available_timezones"] = self._orig_tz[1]
 
     def test_set_effective_date_store_right_value_in_plone(self):
         effective = DateTime()
@@ -86,7 +60,9 @@ class TestPublicationFieldsFixes(unittest.TestCase):
             },
         )
         commit()
+        import pdb
 
+        pdb.set_trace()
         self.assertEqual(
             self.portal["mydocument"].effective().strftime("%d-%m-%Y %H:%M"),
             effective.strftime("%d-%m-%Y %H:%M"),

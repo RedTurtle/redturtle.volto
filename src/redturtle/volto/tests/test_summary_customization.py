@@ -58,7 +58,7 @@ class TestSummaryCustomization(unittest.TestCase):
         self.api_session.close()
 
     def test_summary_does_not_return_image_scales_if_not_requested(self):
-        response = self.api_session.get("/@search")
+        response = self.api_session.get("/@search", params={"portal_type": "News Item"})
         self.assertEqual(response.status_code, 200)
         res = response.json()
 
@@ -69,7 +69,7 @@ class TestSummaryCustomization(unittest.TestCase):
         self.assertNotIn("image", res["items"][1])
 
     def test_summary_return_image_scales_if_requested(self):
-        response = self.api_session.get("/@search?metadata_fields=_all")
+        response = self.api_session.get("/@search?metadata_fields=_all", params={"portal_type": "News Item"})
         self.assertEqual(response.status_code, 200)
         res = response.json()
 

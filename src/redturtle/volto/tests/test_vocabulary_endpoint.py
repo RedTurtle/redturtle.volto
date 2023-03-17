@@ -25,20 +25,20 @@ class TestVocabularyEndpoint(unittest.TestCase):
         api.user.create(
             username="member",
             email="member@example.org",
-            password="secret",
+            password="secret!!!",
             roles=("Member",),
         )
         api.user.create(
             username="contributor",
             email="contributor@example.org",
-            password="secret",
+            password="secret!!!",
             roles=("Member", "Contributor"),
         )
 
         api.user.create(
             username="editor",
             email="editor@example.org",
-            password="secret",
+            password="secret!!!",
             roles=("Member", "Editor", "Reviewer"),
         )
 
@@ -69,17 +69,17 @@ class TestVocabularyEndpoint(unittest.TestCase):
     def test_users_can_get_list_of_vocabularies(self):
         api_session = RelativeSession(self.portal_url)
         api_session.headers.update({"Accept": "application/json"})
-        api_session.auth = ("member", "secret")
+        api_session.auth = ("member", "secret!!!")
         response = api_session.get("/@vocabularies")
 
         self.assertEqual(response.status_code, 200)
 
-        api_session.auth = ("contributor", "secret")
+        api_session.auth = ("contributor", "secret!!!")
         response = api_session.get("/@vocabularies")
 
         self.assertEqual(response.status_code, 200)
 
-        api_session.auth = ("editor", "secret")
+        api_session.auth = ("editor", "secret!!!")
         response = api_session.get("/@vocabularies")
 
         self.assertEqual(response.status_code, 200)
@@ -103,7 +103,7 @@ class TestVocabularyEndpoint(unittest.TestCase):
         api_session.headers.update({"Accept": "application/json"})
 
         for username in ["member", "contributor", "editor"]:
-            api_session.auth = (username, "secret")
+            api_session.auth = (username, "secret!!!")
             response = api_session.get("/@vocabularies/plone.app.vocabularies.Keywords")
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["items_total"], 2)
@@ -125,7 +125,7 @@ class TestVocabularyEndpoint(unittest.TestCase):
         api_session = RelativeSession(self.portal_url)
         api_session.headers.update({"Accept": "application/json"})
 
-        api_session.auth = ("member", "secret")
+        api_session.auth = ("member", "secret!!!")
         response = api_session.get("/@vocabularies/plone.app.vocabularies.Users")
 
         self.assertEqual(response.status_code, 403)
