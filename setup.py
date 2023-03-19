@@ -60,7 +60,7 @@ setup(
         "kitconcept.seo>=2.0.0",
         "plone.volto>=4.0.0",
         "plone.restapi>=8.16.1",
-        "Products.PortalTransform>=3.2.0",
+        "Products.PortalTransforms>=3.2.0",
     ],
     extras_require={
         "advancedquery": [
