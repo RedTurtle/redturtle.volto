@@ -43,6 +43,13 @@ jobs:
       - name: Run tests
         run: |
           TZ=${{ matrix.tz }} bin/test-coverage
+      - name: git workaround
+        # Git >= 2.35.2 stops directory traversals when ownership
+        # changes from the current user (in response to CVE-2022-24765). 
+        # This prevents errors on nested repos that might have
+        # different file owner.
+        run: |
+          git config --global --add safe.directory "/github/workspace"
       - name: Coveralls
         uses: AndreMiras/coveralls-python-action@v20201129
         with:
