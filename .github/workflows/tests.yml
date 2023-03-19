@@ -49,12 +49,12 @@ jobs:
         # This prevents errors on nested repos that might have
         # different file owner.
         run: |
-          git config --global --add safe.directory "/github/workspace"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Coveralls
         uses: AndreMiras/coveralls-python-action@v20201129
         with:
           parallel: true
-          flag-name: ${{ matrix.config[1] }}
+          flag-name: ${{ matrix.python }}-${{ matrix.plone }}-${{ matrix.tz }}
 
   coveralls_finish:
     needs: build
