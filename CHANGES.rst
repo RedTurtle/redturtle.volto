@@ -4,6 +4,9 @@ Changelog
 4.1.4 (unreleased)
 ------------------
 
+- Remove Patch for folderish types migration https://github.com/plone/plone.volto/pull/86
+  [mamico]
+
 - Handle custom search ranking with AdvancedQuery.
   [mamico]
 
