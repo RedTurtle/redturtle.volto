@@ -43,24 +43,40 @@ jobs:
       - name: Run tests
         run: |
           TZ=${{ matrix.tz }} bin/test-coverage
-      - name: git workaround
-        # Git >= 2.35.2 stops directory traversals when ownership
-        # changes from the current user (in response to CVE-2022-24765). 
-        # This prevents errors on nested repos that might have
-        # different file owner.
+      # - name: git workaround
+      #   # Git >= 2.35.2 stops directory traversals when ownership
+      #   # changes from the current user (in response to CVE-2022-24765). 
+      #   # This prevents errors on nested repos that might have
+      #   # different file owner.
+      #   run: |
+      #     git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      # - name: Coveralls
+      #   uses: AndreMiras/coveralls-python-action@v20201129
+      #   with:
+      #     parallel: true
+      #     flag-name: py${{ matrix.python }}-plone${{ matrix.plone }}-tz${{ matrix.tz }}
+      - name: Upload coverage data to coveralls.io
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Coveralls
-        uses: AndreMiras/coveralls-python-action@v20201129
-        with:
-          parallel: true
-          flag-name: ${{ matrix.python }}-${{ matrix.plone }}-${{ matrix.tz }}
+          pip install coveralls
+          coveralls --service=github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_FLAG_NAME: py${{ matrix.python }}-plone${{ matrix.plone }}-tz${{ matrix.tz }}
+          COVERALLS_PARALLEL: true
 
   coveralls_finish:
     needs: build
     runs-on: ubuntu-latest
+    # steps:
+    # - name: Coveralls Finished
+    #   uses: AndreMiras/coveralls-python-action@v20201129
+    #   with:
+    #     parallel-finished: true
+    # container: python:3-slim
     steps:
-    - name: Coveralls Finished
-      uses: AndreMiras/coveralls-python-action@v20201129
-      with:
-        parallel-finished: true
+    - name: Finished
+      run: |
+        pip install --upgrade coveralls
+        coveralls --service=github --finish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
