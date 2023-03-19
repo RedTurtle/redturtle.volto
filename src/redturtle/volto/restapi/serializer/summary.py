@@ -16,6 +16,7 @@ from zope.interface import Interface
 
 import re
 
+
 RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 
 EMPTY_STRINGS = ["None"]

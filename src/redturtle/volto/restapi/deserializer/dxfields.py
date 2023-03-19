@@ -7,7 +7,11 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.deserializer.blocks import path2uid
 from plone.restapi.deserializer.dxfields import (
     DatetimeFieldDeserializer as DefaultDatetimeFieldDeserializer,
+)
+from plone.restapi.deserializer.dxfields import (
     RichTextFieldDeserializer as BaseRichTextDeserializer,
+)
+from plone.restapi.deserializer.dxfields import (
     TextLineFieldDeserializer as BaseTextLineDeserializer,
 )
 from plone.restapi.interfaces import IFieldDeserializer

@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-from Products.Five import BrowserView
-from plone import api
 from Acquisition import aq_base
+from plone import api
 from plone.dexterity.utils import iterSchemata
-from zope.schema import getFieldsInOrder
 from plone.restapi.interfaces import IFieldDeserializer
+from Products.Five import BrowserView
 from zope.component import queryMultiAdapter
+from zope.schema import getFieldsInOrder
 
+import json
 import logging
 import re
-import json
+
 
 logger = logging.getLogger(__name__)
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFPlone.utils import get_installer
-from plone import api
 from zope.interface import implementer
 
 import json

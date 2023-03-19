@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """Init and utils."""
-from zope.i18nmessageid import MessageFactory
 from plone.app.content.browser.vocabulary import PERMISSIONS
+from zope.i18nmessageid import MessageFactory
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 
