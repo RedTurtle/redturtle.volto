@@ -4,6 +4,8 @@ Changelog
 4.1.4 (unreleased)
 ------------------
 
+- Plone 6.0 support
+
 - Handle custom search ranking with AdvancedQuery.
   [mamico]
 
