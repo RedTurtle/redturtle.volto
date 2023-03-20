@@ -43,18 +43,6 @@ jobs:
       - name: Run tests
         run: |
           TZ=${{ matrix.tz }} bin/test-coverage
-      # - name: git workaround
-      #   # Git >= 2.35.2 stops directory traversals when ownership
-      #   # changes from the current user (in response to CVE-2022-24765). 
-      #   # This prevents errors on nested repos that might have
-      #   # different file owner.
-      #   run: |
-      #     git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      # - name: Coveralls
-      #   uses: AndreMiras/coveralls-python-action@v20201129
-      #   with:
-      #     parallel: true
-      #     flag-name: py${{ matrix.python }}-plone${{ matrix.plone }}-tz${{ matrix.tz }}
       - name: Upload coverage data to coveralls.io
         run: |
           pip install coveralls
@@ -67,12 +55,6 @@ jobs:
   coveralls_finish:
     needs: build
     runs-on: ubuntu-latest
-    # steps:
-    # - name: Coveralls Finished
-    #   uses: AndreMiras/coveralls-python-action@v20201129
-    #   with:
-    #     parallel-finished: true
-    # container: python:3-slim
     steps:
     - name: Finished
       run: |
