@@ -2,8 +2,15 @@
 from plone.stringinterp import _ as stringinterp_mf
 from plone.stringinterp.adapters import BaseSubstitution
 from Products.CMFCore.interfaces import IContentish
+from zope.component import adapter
 from redturtle.volto import _
 from zope.component import adapter
+
+try:
+    from plone.stringinterp import _ as stringinterp_mf
+except ImportError:
+    # plone 6
+    from plone.base import PloneMessageFactory as stringinterp_mf
 
 
 @adapter(IContentish)

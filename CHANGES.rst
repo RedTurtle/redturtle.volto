@@ -1,8 +1,17 @@
 Changelog
 =========
 
-4.1.4 (unreleased)
-------------------
+5.0.0rc2 (unreleased)
+---------------------
+
+- Remove unused default text in homepage.
+  [cekk]
+
+
+5.0.0rc1 (2023-03-20)
+---------------------
+
+- Plone 6.0 support
 
 - Remove Patch to avoid auto-closed tags in portal transforms: https://github.com/plone/Products.PortalTransforms/pull/43
   [mamico]
