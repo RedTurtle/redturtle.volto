@@ -60,7 +60,6 @@ setup(
         "kitconcept.seo>=2.0.0",
         "plone.volto>3.1.0",
         "plone.restapi>=8.16.1",
-        "plone.stringinterp<2.0.0",
     ],
     extras_require={
         "advancedquery": [
@@ -75,7 +74,7 @@ setup(
             "plone.app.contenttypes",
             "plone.app.robotframework[debug]",
             "collective.MockMailHost",
-        ]
+        ],
     },
     entry_points="""
     [z3c.autoinclude.plugin]
