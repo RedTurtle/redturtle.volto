@@ -74,7 +74,7 @@ setup(
             "plone.app.contenttypes",
             "plone.app.robotframework[debug]",
             "collective.MockMailHost",
-        ]
+        ],
     },
     entry_points="""
     [z3c.autoinclude.plugin]
