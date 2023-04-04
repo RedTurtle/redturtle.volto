@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.0.0rc2 (unreleased)
----------------------
+5.0.0 (2023-04-04)
+------------------
 
 - Remove unused default text in homepage.
   [cekk]
