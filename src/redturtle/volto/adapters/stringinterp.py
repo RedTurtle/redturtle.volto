@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from plone.stringinterp import _ as stringinterp_mf
 from plone.stringinterp.adapters import BaseSubstitution
 from Products.CMFCore.interfaces import IContentish
-from zope.component import adapter
 from redturtle.volto import _
 from zope.component import adapter
 
