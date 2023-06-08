@@ -169,7 +169,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
                 # If we have recurrence we should consider that start date and end
                 # date are taken from metadata in catalog.
                 # so these values are updated only when the object is reindexd.
-                if result["recurrence"]:
+                if result.get("recurrence"):
                     rrule_obj = rrule.rrulestr(result["recurrence"])
                     now = datetime.now().replace(
                         hour=0, minute=0, second=0, microsecond=0
