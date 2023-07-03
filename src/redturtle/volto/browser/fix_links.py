@@ -105,7 +105,7 @@ class View(BrowserView):
                     return value
                 if obj:
                     if is_link:
-                        return "${self.portal_url}/resolveuid/" + obj.UID()
+                        return "${portal_url}/resolveuid/" + obj.UID()
                     else:
                         return obj.UID()
         return value
