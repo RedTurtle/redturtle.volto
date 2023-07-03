@@ -28,7 +28,20 @@
                     <textarea id="to_replace"
                               name="to_replace"
                               tal:define="to_replace request/form/to_replace|nothing"
+                              style="width:100%"
                               class="textarea-widget text-field">${to_replace}</textarea>
+                </div>
+                <div class="field">
+                    <span class="option">
+                        <input id="portal_url"
+                            name="portal_url"
+                            style="width:100%"
+                            tal:attributes="value view/portal_url|nothing"
+                            type="text">
+                        <label for="portal_url" class="horizontal focus">
+                            current portal url
+                        </label>
+                    </span>
                 </div>
                 <div class="field">
                     <span class="option">
@@ -66,7 +79,7 @@
                             </div>
                             <a href="#modal-fixed-${repeat/res/index}"
                             class="plone-btn plone-btn-large plone-btn-primary pat-plone-modal"
-                            data-pat-plone-modal="">See changes</a>
+                            data-pat-plone-modal="width: 2000px; margin: 0">See changes</a>
                                 <div id="modal-fixed-${repeat/res/index}" style="display: none">
                                     <div style="display:flex;gap: 10px;justify-content: center;">
                                         <div style="width:50%;">

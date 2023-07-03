@@ -4,7 +4,8 @@ Changelog
 5.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Custom portal url in @@fix-links
+  [mamico]
 
 
 5.0.0 (2023-04-04)

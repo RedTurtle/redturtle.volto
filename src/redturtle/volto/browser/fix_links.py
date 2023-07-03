@@ -20,6 +20,7 @@ class View(BrowserView):
     def __call__(self):
         submitted = self.request.form.get("confirm", None)
         dry_mode = self.request.form.get("dry_mode", False)
+        self.portal_url = self.request.form.get("portal_url", self.context.portal_url())
         to_replace = self.request.form.get("to_replace", "")
         if not submitted and not to_replace:
             return super().__call__()
@@ -118,11 +119,10 @@ class View(BrowserView):
         if self.check_pattern(value=data):
             res["ok"] = False
             res["fixed"] = True
-            portal_url = self.context.portal_url()
             # convert broken links to current site ulr and then deserialize all
             # blocks to have the right values
             for url in self.request.form.get("to_replace", "").split():
-                data = data.replace(url, portal_url)
+                data = data.replace(url, self.portal_url)
             deserializer = queryMultiAdapter(
                 (field, context, self.request), IFieldDeserializer
             )
