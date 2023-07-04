@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.1 (unreleased)
+5.0.1 (2023-07-04)
 ------------------
 
 - Custom portal url in @@fix-links
