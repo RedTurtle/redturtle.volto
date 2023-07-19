@@ -42,4 +42,9 @@
       name="redturtle.volto-hiddenprofiles"
       />
 
+  <subscriber
+    for="ZPublisher.interfaces.IPubStart"
+    handler=".events.manage_auth_token"
+    />
+
 </configure>
