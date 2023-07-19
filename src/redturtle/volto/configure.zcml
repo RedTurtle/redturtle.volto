@@ -43,8 +43,8 @@
       />
 
   <subscriber
-    for="ZPublisher.interfaces.IPubStart"
-    handler=".events.manage_auth_token"
-    />
+      for="ZPublisher.interfaces.IPubStart"
+      handler=".events.manage_auth_token"
+      />
 
 </configure>

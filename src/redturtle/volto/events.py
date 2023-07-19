@@ -1,9 +1,8 @@
-
 def manage_auth_token(event):
     """
     set authorization header from cookie
-    
-    see: 
+
+    see:
         https://github.com/plone/plone.restapi/issues/148
         https://github.com/plone/plone.restapi/pull/1303
     """
