@@ -4,19 +4,20 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.search.handler import SearchHandler as OriginalHandler
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.services import Service
-from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from redturtle.volto import logger
+from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from zope.component import getMultiAdapter
+
 
 # search for 'ranking' in 'SearchableText' and rank very high
 # when the term is in 'Subject' and high when it is in 'Title'.
 # print the id and the normalized rank
 try:
-    from Products.AdvancedQuery import RankByQueries_Sum
+    from Products.AdvancedQuery import And
     from Products.AdvancedQuery import Eq
     from Products.AdvancedQuery import In
-    from Products.AdvancedQuery import And
     from Products.AdvancedQuery import Or
+    from Products.AdvancedQuery import RankByQueries_Sum
 
     HAS_ADVANCEDQUERY = True
 except ImportError:

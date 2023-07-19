@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
-from plone.app.testing import (
-    SITE_OWNER_NAME,
-    SITE_OWNER_PASSWORD,
-    TEST_USER_ID,
-    setRoles,
-)
+from DateTime import DateTime
+from plone.app.testing import setRoles
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
+from plone.app.testing import TEST_USER_ID
+from plone.registry.interfaces import IRegistry
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
-from DateTime import DateTime
 from transaction import commit
-from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
-import unittest
 import os
+import unittest
 
 
 class TestPublicationFieldsFixes(unittest.TestCase):

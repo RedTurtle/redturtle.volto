@@ -2,8 +2,8 @@
 from plone.restapi.controlpanels.interfaces import IControlpanel
 from redturtle.volto import _
 from zope.interface import Interface
-from zope.schema import Bool
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+from zope.schema import Bool
 
 
 class IRedturtleVoltoLayer(IDefaultBrowserLayer):

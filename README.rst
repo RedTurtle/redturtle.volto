@@ -27,8 +27,8 @@ This is an helper package that setup a RedTurtle's Plone site ready to work with
     :target: https://pypi.org/project/redturtle.volto/
     :alt: License
 
-.. |coverage| image:: https://coveralls.io/repos/github/redturtle/redturtle.volto/badge.svg?branch=master
-    :target: https://coveralls.io/github/redturtle/redturtle.volto?branch=master
+.. |coverage| image:: https://coveralls.io/repos/github/RedTurtle/redturtle.volto/badge.svg?branch=master
+    :target: https://coveralls.io/github/RedTurtle/redturtle.volto?branch=master
     :alt: Coverage
     
 Features

@@ -12,6 +12,7 @@ from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
+
 EXCLUDE_KEYS = ["@type"]
 EXCLUDE_TYPES = ["title", "listing"]
 
