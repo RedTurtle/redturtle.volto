@@ -206,6 +206,13 @@ Default ISerializeToJsonSummary adapter
 
 This is a patch for backward compatibility for old volto templates that need a full image scales object.
 
+Authentication Header
+---------------------
+
+There is a custom event handler for IPubStart that set authorization bearer header from auth_token cookie.
+For details see the `pull-request <https://github.com/RedTurtle/redturtle.volto/pull/69>`_.
+
+This patch is not enabled by default. You need to set an environment variable to `true`: *PROXY_BEARER_AUTH*.
 
 New Criteria
 ============
