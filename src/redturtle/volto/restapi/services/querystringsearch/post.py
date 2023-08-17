@@ -4,7 +4,6 @@ from DateTime import DateTime
 from plone.app.event.base import get_events
 from plone.app.querystring import queryparser
 from plone.restapi.batching import HypermediaBatch
-from plone.restapi.bbb import IPloneSiteRoot
 from plone.restapi.deserializer import json_body
 from plone.restapi.exceptions import DeserializationError
 from plone.restapi.interfaces import ISerializeToJson
