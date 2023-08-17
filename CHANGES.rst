@@ -4,7 +4,8 @@ Changelog
 5.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add catalog and search patches to limit results.
+  [cekk]
 
 
 5.1.0 (2023-08-17)

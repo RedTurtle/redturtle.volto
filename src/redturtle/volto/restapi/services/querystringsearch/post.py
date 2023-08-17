@@ -4,10 +4,13 @@ from DateTime import DateTime
 from plone.app.event.base import get_events
 from plone.app.querystring import queryparser
 from plone.restapi.batching import HypermediaBatch
+from plone.restapi.bbb import IPloneSiteRoot
 from plone.restapi.deserializer import json_body
+from plone.restapi.exceptions import DeserializationError
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services.querystringsearch.get import QuerystringSearchPost
+from zExceptions import BadRequest
 from zope.component import getMultiAdapter
 
 import logging
@@ -15,11 +18,100 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# default: 1000
+MAX_LIMIT = 200
+
 
 class RTQuerystringSearchPost(QuerystringSearchPost):
     """
     Perform a custom search if we are searching events
     """
+
+    def __call__(self):
+        try:
+            data = json_body(self.request)
+        except DeserializationError as err:
+            raise BadRequest(str(err))
+
+        query = data.get("query", None)
+        try:
+            b_start = int(data.get("b_start", 0))
+        except ValueError:
+            raise BadRequest("Invalid b_start")
+        try:
+            b_size = int(data.get("b_size", 25))
+        except ValueError:
+            raise BadRequest("Invalid b_size")
+        sort_on = data.get("sort_on", None)
+        sort_order = data.get("sort_order", None)
+
+        # LIMIT PATCH
+        if not query:
+            raise BadRequest("No query supplied")
+        limit = self.get_limit(data=data)
+        # END OF LIMIT PATCH
+
+        fullobjects = bool(data.get("fullobjects", False))
+
+        if sort_order:
+            sort_order = "descending" if sort_order == "descending" else "ascending"
+
+        querybuilder = getMultiAdapter(
+            (self.context, self.request), name="querybuilderresults"
+        )
+
+        querybuilder_parameters = dict(
+            query=query,
+            brains=True,
+            b_start=b_start,
+            b_size=b_size,
+            sort_on=sort_on,
+            sort_order=sort_order,
+            limit=limit,
+        )
+
+        # PATCH: we disable this query to boost performances on big sites
+        # Exclude "self" content item from the results when ZCatalog supports NOT UUID
+        # queries and it is called on a content object.
+        # if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
+        #     querybuilder_parameters.update(
+        #         dict(custom_query={"UID": {"not": self.context.UID()}})
+        #     )
+        # END OF PATCH
+
+        try:
+            results = querybuilder(**querybuilder_parameters)
+        except KeyError:
+            # This can happen if the query has an invalid operation,
+            # but plone.app.querystring doesn't raise an exception
+            # with specific info.
+            raise BadRequest("Invalid query.")
+
+        results = getMultiAdapter((results, self.request), ISerializeToJson)(
+            fullobjects=fullobjects
+        )
+        return results
+
+    def get_limit(self, data):
+        """
+        If limit is <= 0 or higher than MAX_LIMIT, set it to MAX_LIMIT
+        """
+        try:
+            limit = int(data.get("limit", MAX_LIMIT))
+        except ValueError:
+            raise BadRequest("Invalid limit")
+
+        if "limit" in data and limit <= 0:
+            del data["limit"]
+            limit = MAX_LIMIT
+        if limit > MAX_LIMIT:
+            logger.warning(
+                '[wrong query] limit is too high: "{}". Set to default ({}).'.format(
+                    data["query"], MAX_LIMIT
+                )
+            )
+            limit = MAX_LIMIT
+        return limit
 
     def reply(self):
         if self.is_event_search():
@@ -52,7 +144,7 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
         b_size = data.get("b_size", None)
         b_start = data.get("b_start", 0)
         query = {k: v for k, v in parsed_query.items() if k not in ["start", "end"]}
-        limit = int(data.get("limit", 1000))
+        limit = int(self.get_limit(data=data))
         sort = "start"
         sort_reverse = False
         start, end = self.parse_event_dates(parsed_query)
