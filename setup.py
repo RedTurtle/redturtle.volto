@@ -61,7 +61,6 @@ setup(
         "plone.volto>=4.0.0",
         "plone.restapi>=8.16.1",
         "Products.PortalTransforms>=3.2.0",
-        "experimental.catalogplan",
     ],
     extras_require={
         "advancedquery": [

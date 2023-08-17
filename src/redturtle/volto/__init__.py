@@ -4,7 +4,7 @@ from plone.app.content.browser.vocabulary import PERMISSIONS
 from plone.folder.nogopip import GopipIndex
 from Products.ZCatalog.Catalog import Catalog
 from Products.ZCatalog.plan import CatalogPlan
-from redturtle.volto.catalogplan import CatalogPlan_plan, Catalog_sorted_search_indexes
+from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
 from zope.i18nmessageid import MessageFactory
 from ZTUtils.Lazy import LazyCat
 from ZTUtils.Lazy import LazyMap
@@ -21,11 +21,6 @@ _ = MessageFactory("redturtle.volto")
 PERMISSIONS["plone.app.vocabularies.Keywords"] = "View"
 
 # CATALOG PATCHES
-
-logger.info(
-    "install monkey patch for Products.ZCatalog.plan.CatalogPlan.plan #### WORK IN PROGRESS ####"
-)
-CatalogPlan.plan = CatalogPlan_plan
 
 logger.info(
     "install monkey patch for Products.ZCatalog.Catalog.Catalog._sorted_search_indexes #### WORK IN PROGRESS ####"

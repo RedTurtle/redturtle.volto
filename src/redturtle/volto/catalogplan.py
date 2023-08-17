@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
-from Products.ZCatalog.plan import PriorityMap
-
 CUSTOM = {
     "allowedRolesAndUsers": 80,
     "effectiveRange": 100,
 }
 
 
-# TODO: move to experimental.catalogplan
 def rank_index(index, query):
     if (
         index == "UID"
@@ -16,21 +13,6 @@ def rank_index(index, query):
     ):
         return 100
     return CUSTOM.get(index, 0)
-
-
-def CatalogPlan_plan(self, benchmark=None):
-    benchmark = PriorityMap.get_entry(self.cid, self.key)
-    if not benchmark:
-        return None
-    # sort indexes on (limited result index, mean search time)
-    # skip internal ('#') bookkeeping records
-    ranking = [
-        ((value.limit, rank_index(name, self.query), value.duration), name)
-        for name, value in benchmark.items()
-        if "#" not in name
-    ]
-    ranking.sort()
-    return [r[1] for r in ranking]
 
 
 def Catalog_sorted_search_indexes(self, query):
