@@ -43,9 +43,9 @@ jobs:
       - name: Run tests
         run: |
           bin/test-coverage
-          env:
-            PROXY_BEARER_AUTH: on
-            TZ: ${{ matrix.tz }}
+        env:
+          PROXY_BEARER_AUTH: on
+          TZ: ${{ matrix.tz }}
       - name: Upload coverage data to coveralls.io
         run: |
           pip install coveralls
