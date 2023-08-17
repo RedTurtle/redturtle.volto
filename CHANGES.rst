@@ -7,6 +7,12 @@ Changelog
 - set authorization bearer header from auth_token cookie
   [mamico]
 
+- Remove Patch to avoid auto-closed tags in portal transforms: https://github.com/plone/Products.PortalTransforms/pull/43
+  [mamico]
+
+- Remove Patch for folderish types migration https://github.com/plone/plone.volto/pull/86
+  [mamico]
+
 
 5.0.1 (2023-07-04)
 ------------------
@@ -26,12 +32,6 @@ Changelog
 ---------------------
 
 - Plone 6.0 support
-
-- Remove Patch to avoid auto-closed tags in portal transforms: https://github.com/plone/Products.PortalTransforms/pull/43
-  [mamico]
-
-- Remove Patch for folderish types migration https://github.com/plone/plone.volto/pull/86
-  [mamico]
 
 - Handle custom search ranking with AdvancedQuery.
   [mamico]
