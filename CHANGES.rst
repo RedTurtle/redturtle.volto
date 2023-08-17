@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.2 (unreleased)
+5.1.0 (2023-08-17)
 ------------------
 
 - set authorization bearer header from auth_token cookie
