@@ -3,7 +3,6 @@
 from plone.app.content.browser.vocabulary import PERMISSIONS
 from plone.folder.nogopip import GopipIndex
 from Products.ZCatalog.Catalog import Catalog
-from Products.ZCatalog.plan import CatalogPlan
 from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
 from zope.i18nmessageid import MessageFactory
 from ZTUtils.Lazy import LazyCat
