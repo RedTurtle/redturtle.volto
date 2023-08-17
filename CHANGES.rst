@@ -4,7 +4,8 @@ Changelog
 5.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- set authorization bearer header from auth_token cookie
+  [mamico]
 
 
 5.0.1 (2023-07-04)
