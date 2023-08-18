@@ -10,8 +10,8 @@
       factory=".get.QuerystringSearchPost"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       permission="zope2.View"
-      name="@querystring-search"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@querystring-search"
       />
 
   <plone:service
@@ -19,8 +19,8 @@
       factory=".get.QuerystringSearchPost"
       for="Products.CMFCore.interfaces.IContentish"
       permission="zope2.View"
-      name="@querystring-search"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@querystring-search"
       />
 
   <plone:service
@@ -28,8 +28,8 @@
       factory=".get.QuerystringSearchGet"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       permission="zope2.View"
-      name="@querystring-search"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@querystring-search"
       />
 
   <plone:service
@@ -37,8 +37,8 @@
       factory=".get.QuerystringSearchGet"
       for="Products.CMFCore.interfaces.IContentish"
       permission="zope2.View"
-      name="@querystring-search"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@querystring-search"
       />
 
   <cache:ruleset
