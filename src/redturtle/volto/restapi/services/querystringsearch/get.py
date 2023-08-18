@@ -8,7 +8,11 @@ from plone.restapi.deserializer import json_body
 from plone.restapi.exceptions import DeserializationError
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.services.querystringsearch.get import QuerystringSearchPost
+from plone.restapi.services import Service
+from plone.restapi.services.querystringsearch.get import (
+    QuerystringSearch as BaseQuerystringSearch,
+)
+from urllib import parse
 from zExceptions import BadRequest
 from zope.component import getMultiAdapter
 
@@ -21,11 +25,7 @@ logger = logging.getLogger(__name__)
 MAX_LIMIT = 200
 
 
-class RTQuerystringSearchPost(QuerystringSearchPost):
-    """
-    Perform a custom search if we are searching events
-    """
-
+class QuerystringSearch(BaseQuerystringSearch):
     def __call__(self):
         try:
             data = json_body(self.request)
@@ -33,6 +33,9 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             raise BadRequest(str(err))
 
         query = data.get("query", None)
+        if self.is_event_search(query=query):
+            return self.reply_events()
+
         try:
             b_start = int(data.get("b_start", 0))
         except ValueError:
@@ -112,16 +115,10 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
             limit = MAX_LIMIT
         return limit
 
-    def reply(self):
-        if self.is_event_search():
-            return self.reply_events()
-        return super().reply()
-
-    def is_event_search(self):
+    def is_event_search(self, query):
         """
         Check if we need to perform a custom search with p.a.events method
         """
-        query = json_body(self.request).get("query", [])
         indexes = [x["i"] for x in query]
 
         portal_type_check = False
@@ -258,3 +255,26 @@ class RTQuerystringSearchPost(QuerystringSearchPost):
                 results["items"].append(result)
 
         return results
+
+
+class QuerystringSearchPost(Service):
+    """Copied from plone.restapi == 8.42.0"""
+
+    def reply(self):
+        querystring_search = QuerystringSearch(self.context, self.request)
+        return querystring_search()
+
+
+class QuerystringSearchGet(Service):
+    """Copied from plone.restapi == 8.42.0"""
+
+    def reply(self):
+        # We need to copy the JSON query parameters from the querystring
+        # into the request body, because that's where other code expects to find them
+        self.request["BODY"] = parse.unquote(
+            self.request.form.get("query", "{}")
+        ).encode(self.request.charset)
+        # unset the get parameters
+        self.request.form = {}
+        querystring_search = QuerystringSearch(self.context, self.request)
+        return querystring_search()
