@@ -5,10 +5,12 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from redturtle.volto.restapi.services.search.get import MAX_LIMIT
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
-from redturtle.volto.restapi.services.search.get import MAX_LIMIT
+from urllib.parse import quote
 
+import json
 import unittest
 
 
@@ -64,8 +66,19 @@ class CatalogLimitPatches(unittest.TestCase):
         self.assertEqual(result["items_total"], MAX_LIMIT)
 
     def test_querystringsearch_get_limit_200(self):
+        query = {
+            "query": [
+                {
+                    "i": "portal_type",
+                    "o": "plone.app.querystring.operation.selection.any",
+                    "v": ["Document"],
+                }
+            ],
+            "b_size": 2000,
+            "limit": 2000,
+        }
         response = self.api_session.get(
-            "/@querystring-search?query=%7B%22query%22%3A%20%5B%7B%22i%22%3A%20%22portal_type%22%2C%20%22o%22%3A%20%22plone.app.querystring.operation.selection.any%22%2C%20%22v%22%3A%20%5B%22Document%22%5D%7D%5D%2C%20%22b_size%22%3A%202000%2C%20%22limit%22%3A%202000%7D",
+            f"/@querystring-search?query={quote(json.dumps(query))}",
         )
         result = response.json()
         self.assertEqual(len(result["items"]), MAX_LIMIT)
