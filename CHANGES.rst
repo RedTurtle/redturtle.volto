@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.1.1 (unreleased)
+5.2.0 (2023-08-21)
 ------------------
 
 - Add catalog and search patches to limit results.
