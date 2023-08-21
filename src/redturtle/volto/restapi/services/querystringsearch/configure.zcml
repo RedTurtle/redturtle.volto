@@ -2,11 +2,12 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:cache="http://namespaces.zope.org/cache"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
   <plone:service
       method="POST"
-      factory=".post.RTQuerystringSearchPost"
+      factory=".get.QuerystringSearchPost"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       permission="zope2.View"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
@@ -15,7 +16,25 @@
 
   <plone:service
       method="POST"
-      factory=".post.RTQuerystringSearchPost"
+      factory=".get.QuerystringSearchPost"
+      for="Products.CMFCore.interfaces.IContentish"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@querystring-search"
+      />
+
+  <plone:service
+      method="GET"
+      factory=".get.QuerystringSearchGet"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@querystring-search"
+      />
+
+  <plone:service
+      method="GET"
+      factory=".get.QuerystringSearchGet"
       for="Products.CMFCore.interfaces.IContentish"
       permission="zope2.View"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
@@ -23,8 +42,9 @@
       />
 
   <cache:ruleset
-      for=".post.RTQuerystringSearchPost"
+      for=".get.QuerystringSearchGet"
       ruleset="plone.content.dynamic"
+      zcml:condition="have plone-app-caching-3"
       />
 
 </configure>

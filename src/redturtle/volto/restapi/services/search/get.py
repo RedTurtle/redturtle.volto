@@ -23,6 +23,8 @@ try:
 except ImportError:
     HAS_ADVANCEDQUERY = False
 
+# default: 1000
+MAX_LIMIT = 200
 
 # custom search handler
 
@@ -118,6 +120,29 @@ class SearchHandler(OriginalHandler):
             return results
         else:
             return super(SearchHandler, self).search(query)
+
+    def _parse_query(self, query):
+        query = super()._parse_query(query)
+        for idx in ["sort_limit", "b_size"]:
+            if idx not in query:
+                continue
+            value = query.get(idx, MAX_LIMIT)
+            if value <= 0:
+                logger.warning(
+                    '[wrong query] {} is wrong: "{}". Set to default ({}).'.format(
+                        idx, query, MAX_LIMIT
+                    )
+                )
+                query[idx] = MAX_LIMIT
+
+            if value > MAX_LIMIT:
+                logger.warning(
+                    '[wrong query] {} is too high: "{}". Set to default ({}).'.format(
+                        idx, query, MAX_LIMIT
+                    )
+                )
+                query[idx] = MAX_LIMIT
+        return query
 
 
 class SearchGet(Service):
