@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
-from DateTime import DateTime
 from plone import api
 from plone.app.testing import setRoles
-from plone.app.testing import SITE_OWNER_NAME
-from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.serializer.utils import uid_to_url
-from plone.restapi.testing import RelativeSession
-from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING
-from transaction import commit
 
 import unittest
 

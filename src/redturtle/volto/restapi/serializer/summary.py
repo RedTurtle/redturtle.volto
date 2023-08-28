@@ -2,27 +2,18 @@
 from plone import api
 from plone.app.contenttypes.interfaces import ILink
 from plone.app.contenttypes.utils import replace_link_variables_by_paths
-from plone.outputfilters.browser.resolveuid import uuidToURL
 from plone.restapi.deserializer import json_body
 from plone.restapi.imaging import get_scale_infos
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.summary import (
     DefaultJSONSummarySerializer as BaseSerializer,
 )
+from plone.restapi.serializer.utils import uid_to_url
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
-from plone.app.uuid.utils import uuidToCatalogBrain
-from plone.restapi.interfaces import IObjectPrimaryFieldTarget
-from zope.component import queryMultiAdapter
-from plone.restapi.serializer.utils import uid_to_url
 
-
-import re
-
-
-RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 
 EMPTY_STRINGS = ["None"]
 
