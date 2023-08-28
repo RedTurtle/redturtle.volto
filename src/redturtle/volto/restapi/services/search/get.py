@@ -55,7 +55,7 @@ class SearchHandler(OriginalHandler):
     # XXX: sarebbe meglio una monkeypatch a catalog.searchResults ? eviterebbe di
     #      riportare tutto il codice di search qui
     def search(self, query=None):
-        original_query = self.request.form.copy()
+        query = self.request.form.copy()
         query = unflatten_dotted_dict(query)
         if self.is_advanced_query(query):
             if "fullobjects" in query:
@@ -97,6 +97,8 @@ class SearchHandler(OriginalHandler):
                     logger.warning(
                         f"Unsupported query parameter: {key} {index_type} {value}. Fall back to the standard query."
                     )
+                    query = self.request.form.copy()
+                    query = unflatten_dotted_dict(query)
                     return super(SearchHandler, self).search(query)
 
             # term = query.pop("SearchableText")
@@ -121,8 +123,7 @@ class SearchHandler(OriginalHandler):
             )
 
             return results
-        else:
-            return super(SearchHandler, self).search(query)
+        return super(SearchHandler, self).search(query)
 
     def _parse_query(self, query):
         query = super()._parse_query(query)
