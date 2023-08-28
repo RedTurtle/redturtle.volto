@@ -4,7 +4,8 @@ Changelog
 5.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use plone.volto uid_to_url method to convert resolveuid links in summary.
+  [cekk]
 
 
 5.2.0 (2023-08-21)
