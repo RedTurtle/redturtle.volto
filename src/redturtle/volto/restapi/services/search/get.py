@@ -55,7 +55,7 @@ class SearchHandler(OriginalHandler):
     # XXX: sarebbe meglio una monkeypatch a catalog.searchResults ? eviterebbe di
     #      riportare tutto il codice di search qui
     def search(self, query=None):
-        query = self.request.form.copy()
+        original_query = self.request.form.copy()
         query = unflatten_dotted_dict(query)
         if self.is_advanced_query(query):
             if "fullobjects" in query:
@@ -89,6 +89,9 @@ class SearchHandler(OriginalHandler):
                     else:  # list/tuple ?
                         queries.append(Eq(key, value["query"]))
                 elif key in ("b_start", "b_size"):
+                    continue
+                elif index_type is None:
+                    # skip, non-existent index
                     continue
                 else:
                     logger.warning(
