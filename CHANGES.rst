@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.2.2 (unreleased)
+5.2.2 (2023-08-29)
 ------------------
 
 - Fix RESOLVEUID_RE regexp.
