@@ -166,6 +166,34 @@ class AdvancedSearchTest(BaseTest):
             ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
+    def test_search_ignore_non_existent_indexes_and_return_custom_order_if_possible(
+        self,
+    ):
+        response = self.api_session.get(
+            "/@search", params={"SearchableText": "foo", "xxx": True}
+        )
+        result = response.json()
+        self.assertEqual(result["items_total"], 3)
+        self.assertEqual(
+            ["d1", "f1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
+
+        # now repeat query with not handled index, and return standard order
+        response = self.api_session.get(
+            "/@search",
+            params={
+                "SearchableText": "foo",
+                "created.query": f"{DateTime().Date()}:00:00",
+                "created.range": "min",
+                "xxx": True,
+            },
+        )
+        result = response.json()
+        self.assertEqual(result["items_total"], 3)
+        self.assertEqual(
+            ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
+
 
 class AdvancedSearchWithFlagTest(BaseTest):
     def test_by_default_flag_is_disabled(self):
