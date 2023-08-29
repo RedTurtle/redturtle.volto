@@ -78,4 +78,4 @@ Catalog._orig_sortResults = Catalog.sortResults
 Catalog.sortResults = Catalog_sortResults
 
 # patch plone.restapi regexp to catch also other
-utils.RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
+utils.RESOLVEUID_RE = re.compile("^(?:|.*/)resolve[Uu]id/([^/]*)/?(.*)$")

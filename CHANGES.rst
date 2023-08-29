@@ -4,7 +4,8 @@ Changelog
 5.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix RESOLVEUID_RE regexp.
+  [cekk]
 
 
 5.2.1 (2023-08-29)
