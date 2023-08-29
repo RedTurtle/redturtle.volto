@@ -4,7 +4,8 @@ Changelog
 5.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Ignore non-existing indexes in custom ranking.
+  [cekk]
 
 
 5.2.0 (2023-08-21)

@@ -90,10 +90,15 @@ class SearchHandler(OriginalHandler):
                         queries.append(Eq(key, value["query"]))
                 elif key in ("b_start", "b_size"):
                     continue
+                elif index_type is None:
+                    # skip, non-existent index
+                    continue
                 else:
                     logger.warning(
                         f"Unsupported query parameter: {key} {index_type} {value}. Fall back to the standard query."
                     )
+                    query = self.request.form.copy()
+                    query = unflatten_dotted_dict(query)
                     return super(SearchHandler, self).search(query)
 
             # term = query.pop("SearchableText")
@@ -118,8 +123,7 @@ class SearchHandler(OriginalHandler):
             )
 
             return results
-        else:
-            return super(SearchHandler, self).search(query)
+        return super(SearchHandler, self).search(query)
 
     def _parse_query(self, query):
         query = super()._parse_query(query)
