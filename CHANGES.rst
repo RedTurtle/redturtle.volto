@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.2.1 (unreleased)
+5.2.1 (2023-08-29)
 ------------------
 
 - Use plone.volto uid_to_url method to convert resolveuid links in summary.
