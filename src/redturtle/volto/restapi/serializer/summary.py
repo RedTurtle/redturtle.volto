@@ -2,22 +2,18 @@
 from plone import api
 from plone.app.contenttypes.interfaces import ILink
 from plone.app.contenttypes.utils import replace_link_variables_by_paths
-from plone.outputfilters.browser.resolveuid import uuidToURL
 from plone.restapi.deserializer import json_body
 from plone.restapi.imaging import get_scale_infos
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.summary import (
     DefaultJSONSummarySerializer as BaseSerializer,
 )
+from plone.restapi.serializer.utils import uid_to_url
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
 
-import re
-
-
-RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 
 EMPTY_STRINGS = ["None"]
 
@@ -89,19 +85,13 @@ class DefaultJSONSummarySerializer(BaseSerializer):
             # it isn't an internal link, so we can return it
             return value
         path = replace_link_variables_by_paths(context=self.context, url=value)
-        match = RESOLVEUID_RE.match(path)
-        if match:
-            uid, suffix = match.groups()
-            return uuidToURL(uid)
-        else:
-            portal = api.portal.get()
-            try:
-                ref_obj = portal.restrictedTraverse(path, None)
-                if ref_obj:
-                    return ref_obj.absolute_url()
-            except Exception:
-                return ""
-        return ""
+
+        url = uid_to_url(path)
+
+        if url == path:
+            # something wrong with the path, maybe a missing object?
+            return ""
+        return url
 
     def __call__(self, force_all_metadata=False):
         if force_all_metadata:

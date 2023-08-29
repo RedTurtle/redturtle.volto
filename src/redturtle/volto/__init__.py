@@ -7,10 +7,10 @@ from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
 from zope.i18nmessageid import MessageFactory
 from ZTUtils.Lazy import LazyCat
 from ZTUtils.Lazy import LazyMap
-
+from plone.restapi.serializer import utils
 
 import logging
-
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -76,3 +76,6 @@ def Catalog_sortResults(
 logger.info("install monkey patch for Products.ZCatalog.Catalog.Catalog.sortResults")
 Catalog._orig_sortResults = Catalog.sortResults
 Catalog.sortResults = Catalog_sortResults
+
+# patch plone.restapi regexp to catch also other
+utils.RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")

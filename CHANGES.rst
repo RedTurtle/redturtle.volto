@@ -4,9 +4,13 @@ Changelog
 5.2.1 (unreleased)
 ------------------
 
+- Use plone.volto uid_to_url method to convert resolveuid links in summary.
+  [cekk]
+- Patch plone.restapi RESOLVEUID_RE regexp to catch more urls.
+  [cekk]
 - Ignore non-existing indexes in custom ranking.
   [cekk]
-
+  
 
 5.2.0 (2023-08-21)
 ------------------
