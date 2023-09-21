@@ -13,7 +13,6 @@ from zope.interface import implementer
 from zope.schema.interfaces import IDatetime
 from zope.schema.interfaces import ITextLine
 
-
 import re
 
 

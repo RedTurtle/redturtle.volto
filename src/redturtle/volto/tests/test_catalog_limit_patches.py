@@ -24,7 +24,7 @@ class CatalogLimitPatches(unittest.TestCase):
 
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
-        for i in range(210):
+        for i in range(MAX_LIMIT + 1):
             api.content.create(
                 container=self.portal,
                 type="Document",
@@ -39,14 +39,14 @@ class CatalogLimitPatches(unittest.TestCase):
     def tearDown(self):
         self.api_session.close()
 
-    def test_search_b_size_to_200(self):
+    def test_search_b_size_default_to_500(self):
         response = self.api_session.get(
             "/@search", params={"portal_type": "Document", "b_size": 1000}
         )
         result = response.json()
         self.assertEqual(len(result["items"]), MAX_LIMIT)
 
-    def test_querystringsearch_post_limit_200(self):
+    def test_querystringsearch_post_default_limit_500(self):
         response = self.api_session.post(
             "/@querystring-search",
             json={
@@ -65,7 +65,7 @@ class CatalogLimitPatches(unittest.TestCase):
         self.assertEqual(len(result["items"]), MAX_LIMIT)
         self.assertEqual(result["items_total"], MAX_LIMIT)
 
-    def test_querystringsearch_get_limit_200(self):
+    def test_querystringsearch_get_default_limit_500(self):
         query = {
             "query": [
                 {
@@ -80,6 +80,7 @@ class CatalogLimitPatches(unittest.TestCase):
         response = self.api_session.get(
             f"/@querystring-search?query={quote(json.dumps(query))}",
         )
+
         result = response.json()
         self.assertEqual(len(result["items"]), MAX_LIMIT)
         self.assertEqual(result["items_total"], MAX_LIMIT)
