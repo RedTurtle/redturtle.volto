@@ -5,7 +5,9 @@ from plone.app.contenttypes.utils import replace_link_variables_by_paths
 from plone.restapi.deserializer import json_body
 from plone.restapi.imaging import get_scale_infos
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.serializer.summary import DefaultJSONSummarySerializer as BaseSerializer
+from plone.restapi.serializer.summary import (
+    DefaultJSONSummarySerializer as BaseSerializer,
+)
 from plone.restapi.serializer.utils import uid_to_url
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter

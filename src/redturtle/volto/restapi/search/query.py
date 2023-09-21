@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from plone.restapi.interfaces import IIndexQueryParser
-from plone.restapi.search.query import ZCTextIndexQueryParser as BaseZCTextIndexQueryParser
+from plone.restapi.search.query import (
+    ZCTextIndexQueryParser as BaseZCTextIndexQueryParser,
+)
 from Products.ZCTextIndex.ZCTextIndex import ZCTextIndex
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter

@@ -9,7 +9,9 @@ from plone.restapi.exceptions import DeserializationError
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services import Service
-from plone.restapi.services.querystringsearch.get import QuerystringSearch as BaseQuerystringSearch
+from plone.restapi.services.querystringsearch.get import (
+    QuerystringSearch as BaseQuerystringSearch,
+)
 from redturtle.volto.config import MAX_LIMIT
 from urllib import parse
 from zExceptions import BadRequest
