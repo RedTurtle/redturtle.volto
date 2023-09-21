@@ -167,7 +167,7 @@ There is a custom viewlet that add a <meta> tag in the <head> section to prevent
 
 For reference: https://developers.google.com/search/docs/advanced/crawling/block-indexing?visit_id=637489966041845317-1328107746&rd=1
 
-Restapi Seach Limits
+Restapi Search Limits
 --------------------
 
 Search results length is limited to 500 items by default, but you can change this limit
