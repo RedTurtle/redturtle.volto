@@ -3,7 +3,6 @@ from plone import api
 from plone.app.contenttypes.interfaces import ILink
 from plone.app.contenttypes.utils import replace_link_variables_by_paths
 from plone.restapi.deserializer import json_body
-from plone.restapi.imaging import get_scale_infos
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.summary import (
     DefaultJSONSummarySerializer as BaseSerializer,
