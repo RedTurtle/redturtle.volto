@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.2.3 (unreleased)
+5.2.3 (2023-09-21)
 ------------------
 
 - Max search limit became configurable by env var 'REDTURTLE_VOLTO_MAX_LIMIT_SEARCH', 500 by default.
