@@ -5,6 +5,7 @@ from plone.restapi.search.handler import SearchHandler as OriginalHandler
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.services import Service
 from redturtle.volto import logger
+from redturtle.volto.config import MAX_LIMIT
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from zope.component import getMultiAdapter
 
@@ -22,9 +23,6 @@ try:
     HAS_ADVANCEDQUERY = True
 except ImportError:
     HAS_ADVANCEDQUERY = False
-
-# default: 1000
-MAX_LIMIT = 200
 
 # custom search handler
 

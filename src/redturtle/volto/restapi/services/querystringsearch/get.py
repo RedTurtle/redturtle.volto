@@ -12,6 +12,7 @@ from plone.restapi.services import Service
 from plone.restapi.services.querystringsearch.get import (
     QuerystringSearch as BaseQuerystringSearch,
 )
+from redturtle.volto.config import MAX_LIMIT
 from urllib import parse
 from zExceptions import BadRequest
 from zope.component import getMultiAdapter
@@ -20,9 +21,6 @@ import logging
 
 
 logger = logging.getLogger(__name__)
-
-# default: 1000
-MAX_LIMIT = 200
 
 
 class QuerystringSearch(BaseQuerystringSearch):

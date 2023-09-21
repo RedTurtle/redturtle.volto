@@ -30,7 +30,7 @@ This is an helper package that setup a RedTurtle's Plone site ready to work with
 .. |coverage| image:: https://coveralls.io/repos/github/RedTurtle/redturtle.volto/badge.svg?branch=master
     :target: https://coveralls.io/github/RedTurtle/redturtle.volto?branch=master
     :alt: Coverage
-    
+
 Features
 ========
 
@@ -167,6 +167,12 @@ There is a custom viewlet that add a <meta> tag in the <head> section to prevent
 
 For reference: https://developers.google.com/search/docs/advanced/crawling/block-indexing?visit_id=637489966041845317-1328107746&rd=1
 
+Restapi Search Limits
+---------------------
+
+Search results length is limited to 500 items by default, but you can change this limit
+using the environment variable `REDTURTLE_VOLTO_MAX_LIMIT_SEARCH`
+
 Patches
 =======
 
@@ -224,7 +230,7 @@ Caching controlpanel
 ====================
 
 After installation the caching control panel is populated with custom policies while caching is globally enabled by default. Please, set the caching proxies properly.
- 
+
 
 @vocabularies permissions
 =========================
@@ -282,9 +288,9 @@ There is a custom view **sitemap.xml.gz** that will return a sitemap.xml.gz file
 This is a copy of the original view from plone.app.layout.sitemap.sitemap
 
 The only difference is that:
-    
+
     * we restrict level of depth to `plone.sitemap_depth` registry setting (default 3)
-    
+
     * we add content modified in the last week
 
 With Volto, for serve this file, we need to add a line like this in apache config::

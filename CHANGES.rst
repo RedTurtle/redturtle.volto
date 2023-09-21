@@ -4,7 +4,8 @@ Changelog
 5.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Max search limit became configurable by env var 'REDTURTLE_VOLTO_MAX_LIMIT_SEARCH', 500 by default.
+  [folix-01]
 
 
 5.2.2 (2023-08-29)
@@ -23,7 +24,7 @@ Changelog
   [cekk]
 - Ignore non-existing indexes in custom ranking.
   [cekk]
-  
+
 
 5.2.0 (2023-08-21)
 ------------------
@@ -118,7 +119,7 @@ Changelog
 ------------------
 
 - Remove content-types customizations to be aligned with plone.volto configs.
-  [cekk] 
+  [cekk]
 
 
 3.12.2 (2022-05-19)
