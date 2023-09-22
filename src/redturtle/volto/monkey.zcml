@@ -37,7 +37,7 @@
   <monkey:patch
       original="getPotentialMembers"
       replacement=".monkey.getPotentialMembers"
-      class="Products.CMFPlone.controlpanel.browser.usergroups_groupmembership,GroupMembershipControlPanel"
+      class="Products.CMFPlone.controlpanel.browser.usergroups_groupmembership.GroupMembershipControlPanel"
       description="Patch for disallow search all users in group"
       preserveOriginal="True"
       />
