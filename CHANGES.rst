@@ -4,8 +4,9 @@ Changelog
 5.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- backport https://github.com/plone/Products.CMFPlone/pull/3845
+  fix: avoid searching all users when many_users is flagged
+  [mamico]
 
 5.2.3 (2023-09-21)
 ------------------

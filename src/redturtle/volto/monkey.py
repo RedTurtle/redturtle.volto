@@ -123,3 +123,15 @@ try:
     ]
 except ImportError:
     pass
+
+
+# https://github.com/plone/Products.CMFPlone/pull/3845
+def getPotentialMembers(self, searchString):
+    form = self.request.form
+    findAll = (
+        form.get("form.button.FindAll", None) is not None
+        and not self.many_users
+    )
+    if findAll or searchString:
+        return self._old__getPotentialMembers(searchString)
+    return []
