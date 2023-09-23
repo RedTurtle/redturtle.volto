@@ -117,6 +117,9 @@ class QuerystringSearch(BaseQuerystringSearch):
         """
         Check if we need to perform a custom search with p.a.events method
         """
+        if not query:
+            return False
+
         indexes = [x["i"] for x in query]
 
         portal_type_check = False

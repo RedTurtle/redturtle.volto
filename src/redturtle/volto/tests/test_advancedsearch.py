@@ -166,6 +166,10 @@ class AdvancedSearchTest(BaseTest):
             ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
+    def test_search_no_query(self):
+        response = self.api_session.post("/@querystring-search")
+        self.assertEqual(response.status_code, 400)
+
     def test_search_ignore_non_existent_indexes_and_return_custom_order_if_possible(
         self,
     ):
