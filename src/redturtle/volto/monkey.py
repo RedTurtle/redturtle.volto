@@ -3,6 +3,7 @@ from Acquisition import aq_base
 from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day
 from plone.app.event.recurrence import Occurrence
+from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
@@ -132,3 +133,14 @@ def getPotentialMembers(self, searchString):
     if findAll or searchString:
         return self._old_getPotentialMembers(searchString)
     return []
+
+
+def plone_restapi_pam_translations_get(self, expand=False):
+    """If plone.app.multilingual is not installed get_restricted_translations will
+    search for the translations in the portal catalog with the unexisting index
+    TranslationsGruop. this measn that the method will iterate over the whole
+    catalog. We need to check if the method is available before calling it.
+    """
+    if not IPloneAppMultilingualInstalled.providedBy(self.request):
+        return {"translations": {"@id": f"{self.context.absolute_url()}/@translations"}}
+    return self._old___call__(expand=expand)

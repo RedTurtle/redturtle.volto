@@ -42,4 +42,12 @@
       preserveOriginal="True"
       />
 
+  <monkey:patch
+      original="__call__"
+      replacement=".monkey.plone_restapi_pam_translations_get"
+      class="plone.restapi.services.multilingual.pam.Translations"
+      description="Fix long request in case pam is not installed"
+      preserveOriginal="True"
+      />
+
 </configure>

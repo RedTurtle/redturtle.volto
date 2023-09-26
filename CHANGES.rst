@@ -4,6 +4,12 @@ Changelog
 5.2.4 (unreleased)
 ------------------
 
+- Fix the issue in the @translation GET endpoint: If this
+  endpoint is invoked, possibly by a bot, and plone.app.multilingual 
+  is not installed, the call will result in an empty search query 
+  on the catalog.
+  [lucabel]
+
 - backport https://github.com/plone/Products.CMFPlone/pull/3845
   fix: avoid searching all users when many_users is flagged
   [mamico]
