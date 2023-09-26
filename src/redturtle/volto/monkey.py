@@ -3,16 +3,13 @@ from Acquisition import aq_base
 from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day
 from plone.app.event.recurrence import Occurrence
-from plone.app.multilingual.interfaces import ITranslationManager
+from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
-from plone.restapi.bbb import ILanguage
-from plone.restapi.bbb import IPloneSiteRoot
 from Products.CMFPlone.interfaces import IConstrainTypes
-from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
-from plone.base.utils import get_installer
+
 import datetime
 
 
@@ -139,40 +136,11 @@ def getPotentialMembers(self, searchString):
 
 
 def plone_restapi_pam_translations_get(self, expand=False):
-    result = {"translations": {"@id": f"{self.context.absolute_url()}/@translations"}}
-    if not expand:
-        return result
-
-    translations = []
-    # If plone.app.multilingual is not installed get_restricted_translations will
-    # search for the translations in the portal catalog with the unexisting index
-    # TranslationsGruop. this measn that the method will iterate over the whole
-    # catalog. We need to check if the method is available before calling it.
-    if get_installer(self.context).is_product_installed("plone.app.multilingual"):
-        manager = ITranslationManager(self.context)
-        for language, translation in manager.get_restricted_translations().items():
-            if language != ILanguage(self.context).get_language():
-                translations.append(
-                    {"@id": translation.absolute_url(), "language": language}
-                )
-
-    portal_state = getMultiAdapter(
-        (self.context, self.request), name="plone_portal_state"
-    )
-    current_lang_nav_root = portal_state.navigation_root()
-
-    if IPloneSiteRoot.providedBy(current_lang_nav_root):
-        # We are not inside a LRF, bail off
-        return result
-
-    nav_root_manager = ITranslationManager(current_lang_nav_root)
-    nav_root_translations = {}
-    for (
-        language,
-        translation,
-    ) in nav_root_manager.get_restricted_translations().items():
-        nav_root_translations[language] = translation.absolute_url()
-
-    result["translations"]["items"] = translations
-    result["translations"]["root"] = nav_root_translations
-    return result
+    """If plone.app.multilingual is not installed get_restricted_translations will
+    search for the translations in the portal catalog with the unexisting index
+    TranslationsGruop. this measn that the method will iterate over the whole
+    catalog. We need to check if the method is available before calling it.
+    """
+    if not IPloneAppMultilingualInstalled.providedBy(self.request):
+        return {"translations": {"@id": f"{self.context.absolute_url()}/@translations"}}
+    return self._old___call__(expand=expand)
