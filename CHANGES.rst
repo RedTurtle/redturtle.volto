@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.2.4 (unreleased)
+5.2.4 (2023-09-26)
 ------------------
 
 - Fix the issue in the @translation GET endpoint: If this
