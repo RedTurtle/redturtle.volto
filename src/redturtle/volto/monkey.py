@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import os
 
 from Acquisition import aq_base
 from plone.app.caching import purge
@@ -11,8 +12,6 @@ from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
 from zope.globalrequest import getRequest
-
-import os
 
 
 def occurrences(self, range_start=None, range_end=None):
@@ -131,10 +130,7 @@ except ImportError:
 # https://github.com/plone/Products.CMFPlone/pull/3845
 def getPotentialMembers(self, searchString):
     form = self.request.form
-    findAll = (
-        form.get("form.button.FindAll", None) is not None
-        and not self.many_users
-    )
+    findAll = form.get("form.button.FindAll", None) is not None and not self.many_users
     if findAll or searchString:
         return self._old_getPotentialMembers(searchString)
     return []
@@ -147,11 +143,7 @@ def plone_restapi_pam_translations_get(self, expand=False):
     catalog. We need to check if the method is available before calling it.
     """
     if not IPloneAppMultilingualInstalled.providedBy(self.request):
-        return {
-            "translations": {
-                "@id": f"{self.context.absolute_url()}/@translations"
-            }
-        }
+        return {"translations": {"@id": f"{self.context.absolute_url()}/@translations"}}
     return self._old___call__(expand=expand)
 
 
@@ -161,9 +153,7 @@ def search_for_similar(*args, **kwargs):
     original_obj = args and args[0] or None
 
     if (
-        os.environ.get(
-            "REDTURTLE_VOLTO_ENABLE_SEARCH_FOR_SIMILAR", default=None
-        )
+        os.environ.get("REDTURTLE_VOLTO_ENABLE_SEARCH_FOR_SIMILAR", default=None)
         and original_obj
     ):
         return original_obj._old_search_for_similar()
