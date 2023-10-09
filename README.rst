@@ -220,7 +220,7 @@ For details see the `pull-request <https://github.com/RedTurtle/redturtle.volto/
 
 This patch is not enabled by default. You need to set an environment variable to `true`: *PROXY_BEARER_AUTH*.
 
-Conditionally seach for similar if nonexistent site path passed
+Conditionally search for similar if nonexistent site path passed
 ---------------------------------------------------------------
 
 plone.app.redirector.FourOhFourView.search_for_similar method patched to return an empty list if
