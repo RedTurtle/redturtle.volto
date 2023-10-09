@@ -4,7 +4,11 @@ Changelog
 5.2.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix: the 'fix-link' view has a bug that corrupts links by replacing
+  the current external URL with a URL that is always relative to the
+  site, even when requesting replacement with a link from a different
+  website.
+  [lucabel].
 
 
 5.2.4 (2023-09-26)
