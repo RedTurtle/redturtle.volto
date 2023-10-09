@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-from Products.CMFPlone.interfaces import ISelectableConstrainTypes
-from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING
-
 import unittest
+
+from plone import api
+from plone.app.testing import TEST_USER_ID, setRoles
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+
+from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING
 
 
 class TestRespectLocallyAllowedTypes(unittest.TestCase):

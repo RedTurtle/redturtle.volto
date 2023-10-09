@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 from BTrees.OOBTree import OOBTree
 from plone.app.layout.sitemap.sitemap import SiteMapView as LayoutSiteMapView
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from zope.component import getUtility
-
-import datetime
 
 
 class SiteMapView(LayoutSiteMapView):

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re
+
 from plone.app.contenttypes.interfaces import ILink
 from plone.app.contenttypes.utils import replace_link_variables_by_paths
 from plone.app.dexterity.behaviors.metadata import IPublication
@@ -7,14 +9,11 @@ from plone.restapi.interfaces import IFieldSerializer
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.serializer.dxfields import DefaultFieldSerializer
 from plone.restapi.serializer.utils import uid_to_url
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
-from zope.schema.interfaces import IDatetime
-from zope.schema.interfaces import ITextLine
+from zope.schema.interfaces import IDatetime, ITextLine
 
-import re
-
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
 RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 

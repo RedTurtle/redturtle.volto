@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+import json
+import logging
+import re
+
 from Acquisition import aq_base
 from plone import api
 from plone.dexterity.utils import iterSchemata
@@ -6,11 +10,6 @@ from plone.restapi.interfaces import IFieldDeserializer
 from Products.Five import BrowserView
 from zope.component import queryMultiAdapter
 from zope.schema import getFieldsInOrder
-
-import json
-import logging
-import re
-
 
 logger = logging.getLogger(__name__)
 

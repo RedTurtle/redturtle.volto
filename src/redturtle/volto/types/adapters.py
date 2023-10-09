@@ -2,13 +2,13 @@
 """JsonSchema providers."""
 from plone.restapi.types.adapters import TextLineJsonSchemaProvider as Base
 from plone.restapi.types.interfaces import IJsonSchemaProvider
-from redturtle.volto import _
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.i18n import translate
-from zope.interface import implementer
-from zope.interface import Interface
+from zope.interface import Interface, implementer
 from zope.schema.interfaces import ITextLine
+
+from redturtle.volto import _
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
 
 @adapter(ITextLine, Interface, IRedturtleVoltoLayer)
