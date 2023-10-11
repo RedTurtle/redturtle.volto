@@ -9,14 +9,17 @@ Changelog
   site, even when requesting replacement with a link from a different
   website.
   [lucabel].
+- plone.app.redirector.FourOhFourView.search_for_similar patch to enable conditionally
+  the search for similar
+  [folix-01]
 
 
 5.2.4 (2023-09-26)
 ------------------
 
 - Fix the issue in the @translation GET endpoint: If this
-  endpoint is invoked, possibly by a bot, and plone.app.multilingual 
-  is not installed, the call will result in an empty search query 
+  endpoint is invoked, possibly by a bot, and plone.app.multilingual
+  is not installed, the call will result in an empty search query
   on the catalog.
   [lucabel]
 

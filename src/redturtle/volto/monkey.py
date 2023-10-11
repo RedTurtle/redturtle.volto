@@ -11,6 +11,7 @@ from Products.CMFPlone.interfaces import IConstrainTypes
 from zope.globalrequest import getRequest
 
 import datetime
+import os
 
 
 def occurrences(self, range_start=None, range_end=None):
@@ -144,3 +145,17 @@ def plone_restapi_pam_translations_get(self, expand=False):
     if not IPloneAppMultilingualInstalled.providedBy(self.request):
         return {"translations": {"@id": f"{self.context.absolute_url()}/@translations"}}
     return self._old___call__(expand=expand)
+
+
+def search_for_similar(*args, **kwargs):
+    """plone.app.redirector.browser.FourOhFourView.search_for_similar patch"""
+
+    original_obj = args and args[0] or None
+
+    if (
+        os.environ.get("REDTURTLE_VOLTO_ENABLE_SEARCH_FOR_SIMILAR", default=None)
+        and original_obj  # noqa
+    ):
+        return original_obj._old_search_for_similar()
+
+    return []

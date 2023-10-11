@@ -49,5 +49,12 @@
       description="Fix long request in case pam is not installed"
       preserveOriginal="True"
       />
+  <monkey:patch
+      original="search_for_similar"
+      replacement=".monkey.search_for_similar"
+      class="plone.app.redirector.browser.FourOhFourView"
+      description="Cancel the seach_for_similiar call when usin volto frontend"
+      preserveOriginal="True"
+      />
 
 </configure>
