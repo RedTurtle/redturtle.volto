@@ -4,6 +4,11 @@ Changelog
 5.2.5 (unreleased)
 ------------------
 
+- Fix: the 'fix-link' view has a bug that corrupts links by replacing
+  the current external URL with a URL that is always relative to the
+  site, even when requesting replacement with a link from a different
+  website.
+  [lucabel].
 - plone.app.redirector.FourOhFourView.search_for_similar patch to enable conditionally
   the search for similar
   [folix-01]
