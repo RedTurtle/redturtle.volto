@@ -124,26 +124,30 @@ class SearchHandler(OriginalHandler):
         return super(SearchHandler, self).search(query)
 
     def _parse_query(self, query):
+        """
+        set a max limit for anonymous calls
+        """
         query = super()._parse_query(query)
-        for idx in ["sort_limit", "b_size"]:
-            if idx not in query:
-                continue
-            value = query.get(idx, MAX_LIMIT)
-            if value <= 0:
-                logger.warning(
-                    '[wrong query] {} is wrong: "{}". Set to default ({}).'.format(
-                        idx, query, MAX_LIMIT
+        if api.user.is_anonymous():
+            for idx in ["sort_limit", "b_size"]:
+                if idx not in query:
+                    continue
+                value = query.get(idx, MAX_LIMIT)
+                if value <= 0:
+                    logger.warning(
+                        '[wrong query] {} is wrong: "{}". Set to default ({}).'.format(
+                            idx, query, MAX_LIMIT
+                        )
                     )
-                )
-                query[idx] = MAX_LIMIT
+                    query[idx] = MAX_LIMIT
 
-            if value > MAX_LIMIT:
-                logger.warning(
-                    '[wrong query] {} is too high: "{}". Set to default ({}).'.format(
-                        idx, query, MAX_LIMIT
+                if value > MAX_LIMIT:
+                    logger.warning(
+                        '[wrong query] {} is too high: "{}". Set to default ({}).'.format(
+                            idx, query, MAX_LIMIT
+                        )
                     )
-                )
-                query[idx] = MAX_LIMIT
+                    query[idx] = MAX_LIMIT
         return query
 
 

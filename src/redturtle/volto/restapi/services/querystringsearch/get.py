@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from DateTime import DateTime
+from plone import api
 from plone.app.event.base import get_events
 from plone.app.querystring import queryparser
 from plone.restapi.batching import HypermediaBatch
@@ -96,21 +97,25 @@ class QuerystringSearch(BaseQuerystringSearch):
         """
         If limit is <= 0 or higher than MAX_LIMIT, set it to MAX_LIMIT
         """
+        is_anon = api.user.is_anonymous()
+        default_value = is_anon and MAX_LIMIT or max(1000, MAX_LIMIT)
+        if "limit" not in data:
+            return default_value
         try:
-            limit = int(data.get("limit", MAX_LIMIT))
-        except ValueError:
-            raise BadRequest("Invalid limit")
+            limit = int(data.get("limit", default_value))
+        except ValueError as exc:
+            raise BadRequest("Invalid limit") from exc
 
-        if "limit" in data and limit <= 0:
+        if limit <= 0:
             del data["limit"]
-            limit = MAX_LIMIT
-        if limit > MAX_LIMIT:
+            limit = default_value
+        if limit > default_value:
             logger.warning(
                 '[wrong query] limit is too high: "{}". Set to default ({}).'.format(
-                    data["query"], MAX_LIMIT
+                    data["query"], default_value
                 )
             )
-            limit = MAX_LIMIT
+            limit = default_value
         return limit
 
     def is_event_search(self, query):
