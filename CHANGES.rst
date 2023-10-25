@@ -18,6 +18,9 @@ Changelog
   Auth users can need to perform an higher query (in contents view for example).
   [cekk]
 
+- Re-apply context UID filter in querystringsearch service (as it is in plone.restapi).
+  [cekk]
+
 5.2.4 (2023-09-26)
 ------------------
 
