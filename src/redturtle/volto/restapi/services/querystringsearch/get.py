@@ -5,6 +5,7 @@ from plone import api
 from plone.app.event.base import get_events
 from plone.app.querystring import queryparser
 from plone.restapi.batching import HypermediaBatch
+from plone.restapi.bbb import IPloneSiteRoot
 from plone.restapi.deserializer import json_body
 from plone.restapi.exceptions import DeserializationError
 from plone.restapi.interfaces import ISerializeToJson
@@ -13,6 +14,7 @@ from plone.restapi.services import Service
 from plone.restapi.services.querystringsearch.get import (
     QuerystringSearch as BaseQuerystringSearch,
 )
+from plone.restapi.services.querystringsearch.get import SUPPORT_NOT_UUID_QUERIES
 from redturtle.volto.config import MAX_LIMIT
 from urllib import parse
 from zExceptions import BadRequest
@@ -71,14 +73,12 @@ class QuerystringSearch(BaseQuerystringSearch):
             limit=limit,
         )
 
-        # PATCH: we disable this query to boost performances on big sites
         # Exclude "self" content item from the results when ZCatalog supports NOT UUID
         # queries and it is called on a content object.
-        # if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
-        #     querybuilder_parameters.update(
-        #         dict(custom_query={"UID": {"not": self.context.UID()}})
-        #     )
-        # END OF PATCH
+        if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
+            querybuilder_parameters.update(
+                dict(custom_query={"UID": {"not": self.context.UID()}})
+            )
 
         try:
             results = querybuilder(**querybuilder_parameters)
