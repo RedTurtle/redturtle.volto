@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.2.5 (unreleased)
+5.3.0 (2023-10-25)
 ------------------
 
 - Fix: the 'fix-link' view has a bug that corrupts links by replacing
