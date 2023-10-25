@@ -9,10 +9,14 @@ Changelog
   site, even when requesting replacement with a link from a different
   website.
   [lucabel].
+
 - plone.app.redirector.FourOhFourView.search_for_similar patch to enable conditionally
   the search for similar
   [folix-01]
 
+- Set search/querystring-search limit patch only for anonymous users.
+  Auth users can need to perform an higher query (in contents view for example).
+  [cekk]
 
 5.2.4 (2023-09-26)
 ------------------
