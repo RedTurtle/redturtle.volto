@@ -472,7 +472,7 @@ def upgrade_robots_txt(context):
 
     googlebot_user_agent = "User-Agent: Googlebot"
     # I saw this writed also as googlebot, so:
-    normalized_google_bot_user_agent = googlebot_user_agent.lower().replace(" ","")
+    normalized_google_bot_user_agent = googlebot_user_agent.lower().replace(" ", "")
 
     useragent_string = "User-Agent: "
     normalized_useragent_string = useragent_string.lower().replace(" ", "")
@@ -482,23 +482,24 @@ def upgrade_robots_txt(context):
     googlebot_index = -1
     allow_rule_present = False
     for i, line in enumerate(lines):
-        if line.lower().replace(" ","") == normalized_google_bot_user_agent:
+        if line.lower().replace(" ", "") == normalized_google_bot_user_agent:
             googlebot_index = i
-        elif (googlebot_index != -1 and
-            line.strip().lower() == googlebot_allow_rule.lower()):
+        elif (
+            googlebot_index != -1
+            and line.strip().lower() == googlebot_allow_rule.lower()
+        ):
             allow_rule_present = True
 
     if googlebot_index != -1 and not allow_rule_present:
         # Trova l'indice della fine della sezione User-Agent: Googlebot
         end_googlebot_index = googlebot_index + 1
-        while (end_googlebot_index < len(lines) and 
-            not lines[end_googlebot_index]
-             .lower().replace(" ", "")
-             .startswith(normalized_useragent_string)):
+        while end_googlebot_index < len(lines) and not lines[
+            end_googlebot_index
+        ].lower().replace(" ", "").startswith(normalized_useragent_string):
             end_googlebot_index += 1
 
         # Aggiungi Allow: /*?expand* alla fine della sezione User-Agent: Googlebot
-        if lines[end_googlebot_index -1] == "":
+        if lines[end_googlebot_index - 1] == "":
             end_googlebot_index -= 1
         lines.insert(end_googlebot_index, googlebot_allow_rule)
 
@@ -506,5 +507,6 @@ def upgrade_robots_txt(context):
         api.portal.set_registry_record("plone.robots_txt", lines)
         logger.info("Upgrade robots.txt with rule for googlebot")
     else:
-        logger.info("Rule for Googlebot already present in robots.txt, no action needed")
-
+        logger.info(
+            "Rule for Googlebot already present in robots.txt, no action needed"
+        )
