@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
+from redturtle.volto.upgrades import upgrade_robots_txt
 
 
 @implementer(INonInstallable)
@@ -12,6 +13,7 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
+    upgrade_robots_txt(context)
 
 
 def uninstall(context):
