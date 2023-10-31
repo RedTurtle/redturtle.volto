@@ -181,12 +181,12 @@
       />
 
   <genericsetup:upgradeStep
-      title="Add controlpanel"
+      title="Update robots"
       description=""
       profile="redturtle.volto:default"
       source="4200"
       destination="4300"
-      handler=".upgrades.upgrade_robots_txt"
+      handler=".setuphandlers.upgrade_robots_txt"
       />
 
 </configure>
