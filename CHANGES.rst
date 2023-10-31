@@ -3,6 +3,9 @@ Changelog
 
 5.2.5 (unreleased)
 ------------------
+- Add upgrade step and setuphandler to fix robots.txt
+  original rules adding 'Allow: /*?expand*'
+  [lucabel]
 
 - plone.app.redirector.FourOhFourView.search_for_similar patch to enable conditionally
   the search for similar
