@@ -486,7 +486,8 @@ def upgrade_robots_txt(context):
             googlebot_index = i
         elif (
             googlebot_index != -1
-            and line.strip().lower() == googlebot_allow_rule.lower()
+            and line.replace(" ", "").lower()  # noqa
+            == googlebot_allow_rule.replace(" ", "").lower()  # noqa
         ):
             allow_rule_present = True
 
