@@ -464,4 +464,3 @@ def to_4200(context):
     logger.info("Add redturtle.volto controlpanel")
     update_registry(context)
     update_controlpanel(context)
-
