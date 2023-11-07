@@ -3,11 +3,13 @@ Changelog
 
 5.3.1 (unreleased)
 ------------------
+
+- Return error instead of raise Excpetion for BadRequest in querystringsearch
+  [mamico]
+
 - Add upgrade step and setuphandler to fix robots.txt
   original rules adding 'Allow: /*?expand*'
   [lucabel]
-
-- Nothing changed yet.
 
 
 5.3.0 (2023-10-25)
