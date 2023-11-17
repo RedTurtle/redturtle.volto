@@ -3,13 +3,12 @@ from copy import deepcopy
 
 from plone import api
 from plone.restapi.behaviors import IBlocks
-from plone.restapi.interfaces import (
-    IBlockFieldSerializationTransformer,
-    ISerializeToJsonSummary,
-)
+from plone.restapi.interfaces import IBlockFieldSerializationTransformer
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.blocks import uid_to_url
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from zope.component import adapter, getMultiAdapter
+from zope.component import adapter
+from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 

@@ -10,7 +10,8 @@ from plone.restapi.serializer.summary import (
 )
 from plone.restapi.serializer.utils import uid_to_url
 from zope.component import adapter
-from zope.interface import Interface, implementer
+from zope.interface import Interface
+from zope.interface import implementer
 
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 

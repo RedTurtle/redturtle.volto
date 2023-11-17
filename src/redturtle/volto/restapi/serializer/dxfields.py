@@ -11,7 +11,8 @@ from plone.restapi.serializer.dxfields import DefaultFieldSerializer
 from plone.restapi.serializer.utils import uid_to_url
 from zope.component import adapter
 from zope.interface import implementer
-from zope.schema.interfaces import IDatetime, ITextLine
+from zope.schema.interfaces import IDatetime
+from zope.schema.interfaces import ITextLine
 
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 

@@ -14,7 +14,11 @@ from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 # when the term is in 'Subject' and high when it is in 'Title'.
 # print the id and the normalized rank
 try:
-    from Products.AdvancedQuery import And, Eq, In, Or, RankByQueries_Sum
+    from Products.AdvancedQuery import And
+    from Products.AdvancedQuery import Eq
+    from Products.AdvancedQuery import In
+    from Products.AdvancedQuery import Or
+    from Products.AdvancedQuery import RankByQueries_Sum
 
     HAS_ADVANCEDQUERY = True
 except ImportError:
@@ -120,26 +124,30 @@ class SearchHandler(OriginalHandler):
         return super(SearchHandler, self).search(query)
 
     def _parse_query(self, query):
+        """
+        set a max limit for anonymous calls
+        """
         query = super()._parse_query(query)
-        for idx in ["sort_limit", "b_size"]:
-            if idx not in query:
-                continue
-            value = query.get(idx, MAX_LIMIT)
-            if value <= 0:
-                logger.warning(
-                    '[wrong query] {} is wrong: "{}". Set to default ({}).'.format(
-                        idx, query, MAX_LIMIT
+        if api.user.is_anonymous():
+            for idx in ["sort_limit", "b_size"]:
+                if idx not in query:
+                    continue
+                value = query.get(idx, MAX_LIMIT)
+                if value <= 0:
+                    logger.warning(
+                        '[wrong query] {} is wrong: "{}". Set to default ({}).'.format(
+                            idx, query, MAX_LIMIT
+                        )
                     )
-                )
-                query[idx] = MAX_LIMIT
+                    query[idx] = MAX_LIMIT
 
-            if value > MAX_LIMIT:
-                logger.warning(
-                    '[wrong query] {} is too high: "{}". Set to default ({}).'.format(
-                        idx, query, MAX_LIMIT
+                if value > MAX_LIMIT:
+                    logger.warning(
+                        '[wrong query] {} is too high: "{}". Set to default ({}).'.format(
+                            idx, query, MAX_LIMIT
+                        )
                     )
-                )
-                query[idx] = MAX_LIMIT
+                    query[idx] = MAX_LIMIT
         return query
 
 

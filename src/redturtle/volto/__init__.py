@@ -8,7 +8,8 @@ from plone.folder.nogopip import GopipIndex
 from plone.restapi.serializer import utils
 from Products.ZCatalog.Catalog import Catalog
 from zope.i18nmessageid import MessageFactory
-from ZTUtils.Lazy import LazyCat, LazyMap
+from ZTUtils.Lazy import LazyCat
+from ZTUtils.Lazy import LazyMap
 
 from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
 

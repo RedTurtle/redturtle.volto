@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from plone.app.registry.browser.controlpanel import (
-    ControlPanelFormWrapper,
-    RegistryEditForm,
-)
+from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
+from plone.app.registry.browser.controlpanel import RegistryEditForm
 
 from redturtle.volto import _
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings

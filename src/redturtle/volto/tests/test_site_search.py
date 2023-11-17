@@ -2,12 +2,10 @@
 import unittest
 
 from plone import api
-from plone.app.testing import (
-    SITE_OWNER_NAME,
-    SITE_OWNER_PASSWORD,
-    TEST_USER_ID,
-    setRoles,
-)
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from plone.registry.interfaces import IRegistry
 from plone.restapi.testing import RelativeSession
 from Products.CMFPlone.interfaces import ISearchSchema

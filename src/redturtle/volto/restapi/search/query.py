@@ -7,7 +7,8 @@ from plone.restapi.search.query import (
 )
 from Products.ZCTextIndex.ZCTextIndex import ZCTextIndex
 from zope.component import adapter
-from zope.interface import Interface, implementer
+from zope.interface import Interface
+from zope.interface import implementer
 
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 

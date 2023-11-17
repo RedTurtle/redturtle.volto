@@ -154,7 +154,7 @@ def search_for_similar(*args, **kwargs):
 
     if (
         os.environ.get("REDTURTLE_VOLTO_ENABLE_SEARCH_FOR_SIMILAR", default=None)
-        and original_obj
+        and original_obj  # noqa
     ):
         return original_obj._old_search_for_similar()
 

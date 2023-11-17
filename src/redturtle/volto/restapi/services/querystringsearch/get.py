@@ -4,13 +4,17 @@ from datetime import datetime
 from urllib import parse
 
 from DateTime import DateTime
+from plone import api
 from plone.app.event.base import get_events
 from plone.app.querystring import queryparser
 from plone.restapi.batching import HypermediaBatch
+from plone.restapi.bbb import IPloneSiteRoot
 from plone.restapi.deserializer import json_body
 from plone.restapi.exceptions import DeserializationError
-from plone.restapi.interfaces import ISerializeToJson, ISerializeToJsonSummary
+from plone.restapi.interfaces import ISerializeToJson
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services import Service
+from plone.restapi.services.querystringsearch.get import SUPPORT_NOT_UUID_QUERIES
 from plone.restapi.services.querystringsearch.get import (
     QuerystringSearch as BaseQuerystringSearch,
 )
@@ -69,14 +73,12 @@ class QuerystringSearch(BaseQuerystringSearch):
             limit=limit,
         )
 
-        # PATCH: we disable this query to boost performances on big sites
         # Exclude "self" content item from the results when ZCatalog supports NOT UUID
         # queries and it is called on a content object.
-        # if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
-        #     querybuilder_parameters.update(
-        #         dict(custom_query={"UID": {"not": self.context.UID()}})
-        #     )
-        # END OF PATCH
+        if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
+            querybuilder_parameters.update(
+                dict(custom_query={"UID": {"not": self.context.UID()}})
+            )
 
         try:
             results = querybuilder(**querybuilder_parameters)
@@ -95,21 +97,25 @@ class QuerystringSearch(BaseQuerystringSearch):
         """
         If limit is <= 0 or higher than MAX_LIMIT, set it to MAX_LIMIT
         """
+        is_anon = api.user.is_anonymous()
+        default_value = is_anon and MAX_LIMIT or max(1000, MAX_LIMIT)
+        if "limit" not in data:
+            return default_value
         try:
-            limit = int(data.get("limit", MAX_LIMIT))
-        except ValueError:
-            raise BadRequest("Invalid limit")
+            limit = int(data.get("limit", default_value))
+        except ValueError as exc:
+            raise BadRequest("Invalid limit") from exc
 
-        if "limit" in data and limit <= 0:
+        if limit <= 0:
             del data["limit"]
-            limit = MAX_LIMIT
-        if limit > MAX_LIMIT:
+            limit = default_value
+        if limit > default_value:
             logger.warning(
                 '[wrong query] limit is too high: "{}". Set to default ({}).'.format(
-                    data["query"], MAX_LIMIT
+                    data["query"], default_value
                 )
             )
-            limit = MAX_LIMIT
+            limit = default_value
         return limit
 
     def is_event_search(self, query):

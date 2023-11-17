@@ -2,7 +2,8 @@
 import unittest
 
 from plone import api
-from plone.app.testing import TEST_USER_ID, setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from transaction import commit
 
 from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING

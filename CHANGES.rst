@@ -1,13 +1,34 @@
 Changelog
 =========
 
-5.2.5 (unreleased)
+5.3.1 (unreleased)
 ------------------
+- Add upgrade step and setuphandler to fix robots.txt
+  original rules adding 'Allow: /*?expand*'
+  [lucabel]
+
+- Nothing changed yet.
+
+
+5.3.0 (2023-10-25)
+------------------
+
+- Fix: the 'fix-link' view has a bug that corrupts links by replacing
+  the current external URL with a URL that is always relative to the
+  site, even when requesting replacement with a link from a different
+  website.
+  [lucabel].
 
 - plone.app.redirector.FourOhFourView.search_for_similar patch to enable conditionally
   the search for similar
   [folix-01]
 
+- Set search/querystring-search limit patch only for anonymous users.
+  Auth users can need to perform an higher query (in contents view for example).
+  [cekk]
+
+- Re-apply context UID filter in querystringsearch service (as it is in plone.restapi).
+  [cekk]
 
 5.2.4 (2023-09-26)
 ------------------
