@@ -1,15 +1,22 @@
 Changelog
 =========
 
-5.3.1 (unreleased)
+5.4.1 (unreleased)
 ------------------
+
+- Isort
+  [folix-01]
+
+
+5.4.0 (2023-11-14)
+------------------
+
+- Return error instead of raise Excpetion for BadRequest in querystringsearch
+  [mamico]
 
 - Add upgrade step and setuphandler to fix robots.txt
   original rules adding 'Allow: /*?expand*'
   [lucabel]
-
-- Isort
-  [folix-01]
 
 5.3.0 (2023-10-25)
 ------------------

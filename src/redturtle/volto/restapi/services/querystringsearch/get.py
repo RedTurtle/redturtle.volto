@@ -40,17 +40,20 @@ class QuerystringSearch(BaseQuerystringSearch):
         try:
             b_start = int(data.get("b_start", 0))
         except ValueError:
-            raise BadRequest("Invalid b_start")
+            self.request.response.setStatus(400)
+            return dict(error=dict(type="BadRequest", message="Invalid b_start"))
         try:
             b_size = int(data.get("b_size", 25))
         except ValueError:
-            raise BadRequest("Invalid b_size")
+            self.request.response.setStatus(400)
+            return dict(error=dict(type="BadRequest", message="Invalid b_size"))
         sort_on = data.get("sort_on", None)
         sort_order = data.get("sort_order", None)
 
         # LIMIT PATCH
         if not query:
-            raise BadRequest("No query supplied")
+            self.request.response.setStatus(400)
+            return dict(error=dict(type="BadRequest", message="No query supplied"))
         limit = self.get_limit(data=data)
         # END OF LIMIT PATCH
 
@@ -86,7 +89,8 @@ class QuerystringSearch(BaseQuerystringSearch):
             # This can happen if the query has an invalid operation,
             # but plone.app.querystring doesn't raise an exception
             # with specific info.
-            raise BadRequest("Invalid query.")
+            self.request.response.setStatus(400)
+            return dict(error=dict(type="BadRequest", message="Invalid query"))
 
         results = getMultiAdapter((results, self.request), ISerializeToJson)(
             fullobjects=fullobjects
