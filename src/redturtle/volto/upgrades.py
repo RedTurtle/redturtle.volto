@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_base
+import json
+import logging
 from copy import deepcopy
+from uuid import uuid4
+
+from Acquisition import aq_base
 from plone import api
 from plone.app.upgrade.utils import installOrReinstallProduct
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.behaviors import IBlocks
-from uuid import uuid4
 from zope.schema import getFields
-
-import json
-import logging
-
 
 try:
     from collective.volto.blocksfield.field import BlocksField

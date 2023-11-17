@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+import logging
+
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
-from plone import api
-import logging
 
 logger = logging.getLogger(__name__)
 

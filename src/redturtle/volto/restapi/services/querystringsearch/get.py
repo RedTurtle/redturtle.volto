@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+import logging
 from datetime import datetime
+from urllib import parse
+
 from DateTime import DateTime
 from plone import api
 from plone.app.event.base import get_events
@@ -11,17 +14,14 @@ from plone.restapi.exceptions import DeserializationError
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services import Service
+from plone.restapi.services.querystringsearch.get import SUPPORT_NOT_UUID_QUERIES
 from plone.restapi.services.querystringsearch.get import (
     QuerystringSearch as BaseQuerystringSearch,
 )
-from plone.restapi.services.querystringsearch.get import SUPPORT_NOT_UUID_QUERIES
-from redturtle.volto.config import MAX_LIMIT
-from urllib import parse
 from zExceptions import BadRequest
 from zope.component import getMultiAdapter
 
-import logging
-
+from redturtle.volto.config import MAX_LIMIT
 
 logger = logging.getLogger(__name__)
 

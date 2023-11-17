@@ -4,7 +4,8 @@ Changelog
 5.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Isort
+  [folix-01]
 
 
 5.4.0 (2023-11-14)
@@ -16,7 +17,6 @@ Changelog
 - Add upgrade step and setuphandler to fix robots.txt
   original rules adding 'Allow: /*?expand*'
   [lucabel]
-
 
 5.3.0 (2023-10-25)
 ------------------

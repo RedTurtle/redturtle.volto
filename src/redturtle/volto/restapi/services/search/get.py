@@ -4,11 +4,11 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.search.handler import SearchHandler as OriginalHandler
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.services import Service
+from zope.component import getMultiAdapter
+
 from redturtle.volto import logger
 from redturtle.volto.config import MAX_LIMIT
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
-from zope.component import getMultiAdapter
-
 
 # search for 'ranking' in 'SearchableText' and rank very high
 # when the term is in 'Subject' and high when it is in 'Title'.
