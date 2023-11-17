@@ -3,12 +3,13 @@ Changelog
 
 5.3.1 (unreleased)
 ------------------
+
 - Add upgrade step and setuphandler to fix robots.txt
   original rules adding 'Allow: /*?expand*'
   [lucabel]
 
-- Nothing changed yet.
-
+- Isort
+  [folix-01]
 
 5.3.0 (2023-10-25)
 ------------------
