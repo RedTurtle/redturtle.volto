@@ -4,6 +4,8 @@ Changelog
 5.4.1 (unreleased)
 ------------------
 
+- Fix deserializer for relationfield, use UID instead of @id
+  [eikichi18]
 - Isort
   [folix-01]
 
