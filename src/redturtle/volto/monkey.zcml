@@ -13,7 +13,7 @@
       description="This fix the problem with Events recurrences"
       />
 
-    <monkey:patch
+  <monkey:patch
       original="_recurrence_upcoming_event"
       replacement=".monkey._recurrence_upcoming_event"
       class="plone.app.event.dx.behaviors.EventAccessor"

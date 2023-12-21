@@ -8,7 +8,8 @@ from plone.app.event.base import dt_start_of_day
 from plone.app.event.dx.behaviors import IEventBasic
 from plone.app.event.recurrence import Occurrence
 from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
-from plone.event.interfaces import IEventAccessor, IRecurrenceSupport
+from plone.event.interfaces import IEventAccessor
+from plone.event.interfaces import IRecurrenceSupport
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
