@@ -63,6 +63,7 @@ def upgrade_robots_txt(context):
             "Rule for Googlebot already present in robots.txt, no action needed"
         )
 
+
 def remove_custom_googlebot(context):
     robots = api.portal.get_registry_record("plone.robots_txt")
     googlebot_user_agent = "User-Agent: Googlebot".lower().replace(" ", "")
