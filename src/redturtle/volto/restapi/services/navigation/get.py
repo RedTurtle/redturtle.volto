@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from plone.app.layout.navigation.navtree import NavtreeStrategyBase
 from plone.app.layout.navigation.navtree import buildFolderTree
+from plone.app.layout.navigation.navtree import NavtreeStrategyBase
 from plone.dexterity.interfaces import IDexterityContainer
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.services import Service
 from zope.component import adapter
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
 
 
 @implementer(IExpandableElement)

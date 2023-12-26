@@ -4,6 +4,9 @@ Changelog
 5.4.1 (unreleased)
 ------------------
 
+- Upgrade step to remove all custom Googlebot rules from robots.txt
+  [mamico]
+
 - Isort
   [folix-01]
 

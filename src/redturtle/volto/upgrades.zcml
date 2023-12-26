@@ -189,4 +189,13 @@
       handler=".setuphandlers.upgrade_robots_txt"
       />
 
+  <genericsetup:upgradeStep
+      title="Update robots"
+      description=""
+      profile="redturtle.volto:default"
+      source="4300"
+      destination="4301"
+      handler=".setuphandlers.remove_custom_googlebot"
+      />
+
 </configure>
