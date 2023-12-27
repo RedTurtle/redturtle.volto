@@ -1,8 +1,9 @@
-import transaction
 import unittest
 
-from plone.app.testing import TEST_USER_NAME
+import transaction
+
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
 from plone.dexterity.utils import iterSchemata
@@ -30,9 +31,7 @@ class TestDXFieldDeserializer(unittest.TestCase):
         login(self.portal, "user1")
 
         # folders
-        self.portal.invokeFactory(
-            "Folder", id="folder", title="Private Folder"
-        )
+        self.portal.invokeFactory("Folder", id="folder", title="Private Folder")
         self.portal.folder.invokeFactory(
             "Folder", id="otherfolder", title="Other Folder"
         )
