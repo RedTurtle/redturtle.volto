@@ -190,6 +190,9 @@ There is a monkeypatch for Events recurrences that fix their duration.
 
 If it works well, we can make a pr in p.a.event.
 
+There is another monkeypatch for Events recurrences to change the default behavior of start index serializer.
+Now it keeps all dates even if the single date is already passed.
+
 
 Respect locally allowed types on paste
 --------------------------------------

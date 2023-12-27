@@ -7,6 +7,9 @@ Changelog
 - Isort
   [folix-01]
 
+- Add monkeypatch to fix @scadeziario-day endpoint
+  [eikichi18]
+
 
 5.4.0 (2023-11-14)
 ------------------
