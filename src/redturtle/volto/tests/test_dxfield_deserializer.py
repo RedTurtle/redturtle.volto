@@ -1,7 +1,7 @@
+import transaction
 import unittest
 
 from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import login
 from plone.app.testing import setRoles
@@ -11,8 +11,6 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
-
-import transaction
 
 
 class TestDXFieldDeserializer(unittest.TestCase):
@@ -24,15 +22,17 @@ class TestDXFieldDeserializer(unittest.TestCase):
         self.portal = self.layer["portal"]
 
         self.wftool = getToolByName(self.portal, "portal_workflow")
-        self.acl_users = getToolByName(self.portal, 'acl_users')
+        self.acl_users = getToolByName(self.portal, "acl_users")
 
-        self.acl_users.userFolderAddUser('user1', 'secret', ['Manager'], [])
-        self.acl_users.getUser('user1')
+        self.acl_users.userFolderAddUser("user1", "secret", ["Manager"], [])
+        self.acl_users.getUser("user1")
 
         login(self.portal, "user1")
 
         # folders
-        self.portal.invokeFactory("Folder", id="folder", title="Private Folder")
+        self.portal.invokeFactory(
+            "Folder", id="folder", title="Private Folder"
+        )
         self.portal.folder.invokeFactory(
             "Folder", id="otherfolder", title="Other Folder"
         )
@@ -55,13 +55,17 @@ class TestDXFieldDeserializer(unittest.TestCase):
 
     def test_relationlist_deserialization_broke_with_path(self):
         # documents
-        doc2 = self.portal.folder.otherfolder[self.portal.folder.otherfolder.invokeFactory(
-            "Document", id="doc2", title="Referenceable Document"
-        )]
+        doc2 = self.portal.folder.otherfolder[
+            self.portal.folder.otherfolder.invokeFactory(
+                "Document", id="doc2", title="Referenceable Document"
+            )
+        ]
         self.wftool.doActionFor(self.portal.folder.otherfolder.doc2, "publish")
-        doc3 = self.portal.folder.otherfolder[self.portal.folder.otherfolder.invokeFactory(
-            "Document", id="doc3", title="Referenceable Document"
-        )]
+        doc3 = self.portal.folder.otherfolder[
+            self.portal.folder.otherfolder.invokeFactory(
+                "Document", id="doc3", title="Referenceable Document"
+            )
+        ]
         self.wftool.doActionFor(self.portal.folder.otherfolder.doc3, "publish")
 
         setRoles(self.portal, TEST_USER_ID, ["Member"])
@@ -79,13 +83,17 @@ class TestDXFieldDeserializer(unittest.TestCase):
 
     def test_relationlist_deserialization_correct_with_uid(self):
         # documents
-        doc2 = self.portal.folder.otherfolder[self.portal.folder.otherfolder.invokeFactory(
-            "Document", id="doc2", title="Referenceable Document"
-        )]
+        doc2 = self.portal.folder.otherfolder[
+            self.portal.folder.otherfolder.invokeFactory(
+                "Document", id="doc2", title="Referenceable Document"
+            )
+        ]
         self.wftool.doActionFor(self.portal.folder.otherfolder.doc2, "publish")
-        doc3 = self.portal.folder.otherfolder[self.portal.folder.otherfolder.invokeFactory(
-            "Document", id="doc3", title="Referenceable Document"
-        )]
+        doc3 = self.portal.folder.otherfolder[
+            self.portal.folder.otherfolder.invokeFactory(
+                "Document", id="doc3", title="Referenceable Document"
+            )
+        ]
         self.wftool.doActionFor(self.portal.folder.otherfolder.doc3, "publish")
 
         setRoles(self.portal, TEST_USER_ID, ["Member"])
