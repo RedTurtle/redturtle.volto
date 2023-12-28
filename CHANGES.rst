@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.1 (unreleased)
+5.4.1 (2023-12-28)
 ------------------
 
 - Fix deserializer for relationfield, use UID instead of @id
