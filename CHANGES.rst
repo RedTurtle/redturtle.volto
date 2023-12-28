@@ -6,6 +6,7 @@ Changelog
 
 - Fix deserializer for relationfield, use UID instead of @id
   [eikichi18]
+
 - Isort
   [folix-01]
 
