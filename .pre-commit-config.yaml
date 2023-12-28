@@ -34,7 +34,7 @@ repos:
     hooks:
       - id: isort
         name: isort (python)
-        args: ["--multi-line=3", "--lbt=1", "--trailing-comma", "--force-grid-wrap=0", "--use-parentheses", "--ensure-newline-before-comments", "--line-length=88"]
+#        args: ["--multi-line=3", "--lbt=1", "--trailing-comma", "--force-grid-wrap=0", "--use-parentheses", "--ensure-newline-before-comments", "--line-length=88"]
   - repo: local
     hooks:
       - id: python-check-pdb
