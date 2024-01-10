@@ -38,7 +38,7 @@ class RelationChoiceFieldDeserializer(DefaultFieldDeserializer):
             portal_url = portal.absolute_url()
             if value.startswith(portal_url):
                 # Resolve by URL
-                obj = portal.restrictedTraverse(urlparse(value).path, None)
+                obj = portal.restrictedTraverse(urlparse(value).path.lstrip("/"), None)
                 resolved_by = "URL"
             elif value.startswith("/"):
                 # Resolve by path
