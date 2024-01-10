@@ -4,7 +4,8 @@ Changelog
 5.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix deserializer for relationfield, add lstrip to path object calculation
+  [eikichi18]
 
 
 5.4.1 (2023-12-28)
