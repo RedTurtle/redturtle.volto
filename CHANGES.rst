@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.2 (unreleased)
+5.4.2 (2024-01-11)
 ------------------
 
 - Fix deserializer for relationfield, add lstrip to path object calculation
