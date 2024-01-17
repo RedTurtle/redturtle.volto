@@ -58,14 +58,7 @@ class GenericResolveUIDSerializer(object):
                         new_val.append(fixed_block)
                 block[key] = new_val
             elif isinstance(val, dict):
-                if "entityMap" in val.keys():
-                    entity_map = val.get("entityMap", {})
-                    for entity_map in entity_map.values():
-                        url = entity_map["data"].get("url", "").strip("/")
-                        new = uid_to_url(url)
-                        entity_map["data"]["url"] = new
-                else:
-                    block[key] = self.resolve_uids(block=val)
+                block[key] = self.resolve_uids(block=val)
         return block
 
     def get_item_from_uid(self, block):
@@ -81,28 +74,9 @@ class GenericResolveUIDSerializer(object):
             return {}
         item = items[0]
 
-        adapter = getMultiAdapter((item, getRequest()), ISerializeToJsonSummary)
-        return adapter(force_all_metadata=True)
-
-
-class TableResolveUIDSerializer(object):
-    """ """
-
-    order = 210  # after standard ones
-    block_type = "table"
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
-    def __call__(self, value):
-        for row in value.get("table", {}).get("rows", []):
-            for cell in row.get("cells", []):
-                for entity in cell.get("value", {}).get("entityMap", {}).values():
-                    if entity.get("type") == "LINK":
-                        url = entity.get("data", {}).get("url", "")
-                        entity["data"]["url"] = uid_to_url(url)
-        return value
+        return getMultiAdapter((item, getRequest()), ISerializeToJsonSummary)(
+            force_all_metadata=True
+        )
 
 
 @implementer(IBlockFieldSerializationTransformer)
@@ -114,16 +88,4 @@ class GenericResolveUIDSerializerContents(GenericResolveUIDSerializer):
 @implementer(IBlockFieldSerializationTransformer)
 @adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
 class GenericResolveUIDSerializerRoot(GenericResolveUIDSerializer):
-    """Deserializer for site-root"""
-
-
-@implementer(IBlockFieldSerializationTransformer)
-@adapter(IBlocks, IRedturtleVoltoLayer)
-class TableResolveUIDSerializerContents(TableResolveUIDSerializer):
-    """Deserializer for content-types that implements IBlocks behavior"""
-
-
-@implementer(IBlockFieldSerializationTransformer)
-@adapter(IPloneSiteRoot, IRedturtleVoltoLayer)
-class TableResolveUIDSerializerRoot(TableResolveUIDSerializer):
     """Deserializer for site-root"""
