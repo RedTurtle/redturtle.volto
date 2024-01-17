@@ -20,6 +20,23 @@ _ = MessageFactory("redturtle.volto")
 
 PERMISSIONS["plone.app.vocabularies.Keywords"] = "View"
 
+
+def initialize(context):
+    # Products.* initialization code is Automatically called by Zope
+    from . import index
+
+    context.registerClass(
+        index.DateRangeRecurringIndex,
+        permission="Add Pluggable Index",
+        constructors=(
+            index.manage_addDRRIndexForm,
+            index.manage_addDRRIndex,
+        ),
+        icon="www/index.gif",
+        visibility=None,
+    )
+
+
 # CATALOG PATCHES
 
 logger.info(
