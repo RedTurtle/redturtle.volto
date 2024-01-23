@@ -198,7 +198,7 @@
       handler=".upgrades.to_4301"
       />
 
-    <genericsetup:upgradeStep
+  <genericsetup:upgradeStep
       title="Rendex start index"
       description=""
       profile="redturtle.volto:default"
