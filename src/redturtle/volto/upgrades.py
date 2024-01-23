@@ -480,4 +480,4 @@ def to_4302(context):
 
     for brain in brains:
         event = brain.getObject()
-        event.reindexObject(idxs=["start"])
+        event.reindexObject(idxs=["start", "end"])
