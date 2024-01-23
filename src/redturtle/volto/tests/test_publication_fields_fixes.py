@@ -61,9 +61,9 @@ class TestPublicationFieldsFixes(unittest.TestCase):
         commit()
         self.assertEqual(
             self.portal["mydocument"].effective().strftime("%d-%m-%Y %H:%M"),
-            effective.utcdatetime().strftime("%d-%m-%Y %H:%M"),
+            effective.strftime("%d-%m-%Y %H:%M"),
         )
         self.assertEqual(
             self.portal["mydocument"].expires().strftime("%d-%m-%Y %H:%M"),
-            expires.utcdatetime().strftime("%d-%m-%Y %H:%M"),
+            expires.strftime("%d-%m-%Y %H:%M"),
         )
