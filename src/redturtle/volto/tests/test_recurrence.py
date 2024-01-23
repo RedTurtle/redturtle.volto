@@ -1,4 +1,3 @@
-import datetime
 import unittest
 from unittest import mock
 from unittest.mock import Mock
@@ -6,6 +5,7 @@ from unittest.mock import Mock
 import pytz
 import transaction
 import zope.component
+from datetime import datetime, timedelta
 from OFS.SimpleItem import SimpleItem
 from plone.app.event.base import RET_MODE_ACCESSORS
 from plone.app.event.base import get_events
@@ -33,15 +33,16 @@ from zope.annotation.interfaces import IAnnotations
 from zope.interface import alsoProvides
 from zope.publisher.interfaces.browser import IBrowserView
 
-from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
+from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING
 
 TZNAME = "Europe/Rome"
 
 
 class TestOccurrences(unittest.TestCase):
-    layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
+    layer = REDTURTLE_VOLTO_FUNCTIONAL_TESTING
 
     def setUp(self):
+
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
 
@@ -51,12 +52,12 @@ class TestOccurrences(unittest.TestCase):
 
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
-        self.start_date = patched_now() - datetime.timedelta(weeks=5)
-        self.end_date = self.start_date + datetime.timedelta(hours=1)
+        self.start_date = datetime.strptime("01/01/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
+        self.end_date = self.start_date + timedelta(hours=1)
 
         self.event = createContentInContainer(
             self.portal,
-            "plone.app.event.dx.event",
+            "Event",
             id="test-event",
             title="Test Event",
             start=self.start_date,
@@ -68,15 +69,11 @@ class TestOccurrences(unittest.TestCase):
     def test_get_occurrences_from_catalog(self):
         catalog = self.portal.portal_catalog
 
-        start_date_search = (
-            patched_now() - datetime.timedelta(weeks=4)
-        ) + datetime.timedelta(days=1)
-        end_date_search = start_date_search + datetime.timedelta(hours=1)
+        start_date_search = datetime.strptime("02/01/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
+        end_date_search = start_date_search + timedelta(hours=1)
 
         results = catalog(
-            portal_type="Event", start=start_date_search, end=end_date_search
+            end={"query": (start_date_search, end_date_search), "range": "min:max"}
         )
 
-        import pdb
-
-        pdb.set_trace()
+        self.assertFalse(results)
