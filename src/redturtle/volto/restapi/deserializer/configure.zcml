@@ -28,6 +28,9 @@
   <!-- convert Link widget value in normalized url -->
   <adapter factory=".dxfields.LinkTextLineFieldDeserializer" />
 
+  <!-- convert related string obj to obj -->
+  <adapter factory=".relationfield.RelationChoiceFieldDeserializer" />
+
 
   <adapter factory=".dxfields.DatetimeFieldDeserializer" />
 

@@ -1,7 +1,76 @@
 Changelog
 =========
 
-5.2.3 (unreleased)
+5.4.3 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+5.4.2 (2024-01-11)
+------------------
+
+- Fix deserializer for relationfield, add lstrip to path object calculation
+  [eikichi18]
+
+
+5.4.1 (2023-12-28)
+------------------
+
+- Fix deserializer for relationfield, use UID instead of @id
+  [eikichi18]
+
+- Isort
+  [folix-01]
+
+- Add monkeypatch to fix @scadeziario-day endpoint
+  [eikichi18]
+
+
+5.4.0 (2023-11-14)
+------------------
+
+- Return error instead of raise Excpetion for BadRequest in querystringsearch
+  [mamico]
+
+- Add upgrade step and setuphandler to fix robots.txt
+  original rules adding 'Allow: /*?expand*'
+  [lucabel]
+
+5.3.0 (2023-10-25)
+------------------
+
+- Fix: the 'fix-link' view has a bug that corrupts links by replacing
+  the current external URL with a URL that is always relative to the
+  site, even when requesting replacement with a link from a different
+  website.
+  [lucabel].
+
+- plone.app.redirector.FourOhFourView.search_for_similar patch to enable conditionally
+  the search for similar
+  [folix-01]
+
+- Set search/querystring-search limit patch only for anonymous users.
+  Auth users can need to perform an higher query (in contents view for example).
+  [cekk]
+
+- Re-apply context UID filter in querystringsearch service (as it is in plone.restapi).
+  [cekk]
+
+5.2.4 (2023-09-26)
+------------------
+
+- Fix the issue in the @translation GET endpoint: If this
+  endpoint is invoked, possibly by a bot, and plone.app.multilingual
+  is not installed, the call will result in an empty search query
+  on the catalog.
+  [lucabel]
+
+- backport https://github.com/plone/Products.CMFPlone/pull/3845
+  fix: avoid searching all users when many_users is flagged
+  [mamico]
+
+5.2.3 (2023-09-21)
 ------------------
 
 - Max search limit became configurable by env var 'REDTURTLE_VOLTO_MAX_LIMIT_SEARCH', 500 by default.

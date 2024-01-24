@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
+import datetime
+import os
+
 from Acquisition import aq_base
 from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day
+from plone.app.event.dx.behaviors import IEventBasic
 from plone.app.event.recurrence import Occurrence
+from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
+from plone.event.interfaces import IRecurrenceSupport
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
 from zope.globalrequest import getRequest
-
-import datetime
 
 
 def occurrences(self, range_start=None, range_end=None):
@@ -58,6 +62,7 @@ def occurrences(self, range_start=None, range_end=None):
         else:
             duration = event_end - event_start
         # END OF PATCH
+
     starts = recurrence_sequence_ical(
         event_start,
         recrule=event.recurrence,
@@ -83,6 +88,17 @@ def occurrences(self, range_start=None, range_end=None):
 
     for start in starts:
         yield get_obj(start)
+
+
+def _recurrence_upcoming_event(self):
+    """Return the next upcoming event"""
+    adapter = IRecurrenceSupport(self.context)
+    occs = adapter.occurrences()
+    try:
+        return next(occs)
+    except StopIteration:
+        # No more future occurrences: passed event
+        return IEventBasic(self.context)
 
 
 def _verifyObjectPaste(self, obj, validate_src=True):
@@ -123,3 +139,37 @@ try:
     ]
 except ImportError:
     pass
+
+
+# https://github.com/plone/Products.CMFPlone/pull/3845
+def getPotentialMembers(self, searchString):
+    form = self.request.form
+    findAll = form.get("form.button.FindAll", None) is not None and not self.many_users
+    if findAll or searchString:
+        return self._old_getPotentialMembers(searchString)
+    return []
+
+
+def plone_restapi_pam_translations_get(self, expand=False):
+    """If plone.app.multilingual is not installed get_restricted_translations will
+    search for the translations in the portal catalog with the unexisting index
+    TranslationsGruop. this measn that the method will iterate over the whole
+    catalog. We need to check if the method is available before calling it.
+    """
+    if not IPloneAppMultilingualInstalled.providedBy(self.request):
+        return {"translations": {"@id": f"{self.context.absolute_url()}/@translations"}}
+    return self._old___call__(expand=expand)
+
+
+def search_for_similar(*args, **kwargs):
+    """plone.app.redirector.browser.FourOhFourView.search_for_similar patch"""
+
+    original_obj = args and args[0] or None
+
+    if (
+        os.environ.get("REDTURTLE_VOLTO_ENABLE_SEARCH_FOR_SIMILAR", default=None)
+        and original_obj  # noqa
+    ):
+        return original_obj._old_search_for_similar()
+
+    return []

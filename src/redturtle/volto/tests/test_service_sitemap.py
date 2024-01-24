@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
+import unittest
+
 from plone import api
-from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from plone.restapi.testing import RelativeSession
-from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
 
-import unittest
+from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
 
 class TestServicesSitemap(unittest.TestCase):

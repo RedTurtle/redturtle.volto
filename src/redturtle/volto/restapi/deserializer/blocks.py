@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
+
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.deserializer.blocks import path2uid
 from plone.restapi.interfaces import IBlockFieldDeserializationTransformer
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
 EXCLUDE_KEYS = ["@type", "token", "value", "@id", "query"]
 EXCLUDE_TYPES = ["title", "listing", "calendar", "searchEvents"]

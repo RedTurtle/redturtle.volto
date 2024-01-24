@@ -4,11 +4,11 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.search.handler import SearchHandler as OriginalHandler
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.services import Service
+from zope.component import getMultiAdapter
+
 from redturtle.volto import logger
 from redturtle.volto.config import MAX_LIMIT
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
-from zope.component import getMultiAdapter
-
 
 # search for 'ranking' in 'SearchableText' and rank very high
 # when the term is in 'Subject' and high when it is in 'Title'.
@@ -124,26 +124,30 @@ class SearchHandler(OriginalHandler):
         return super(SearchHandler, self).search(query)
 
     def _parse_query(self, query):
+        """
+        set a max limit for anonymous calls
+        """
         query = super()._parse_query(query)
-        for idx in ["sort_limit", "b_size"]:
-            if idx not in query:
-                continue
-            value = query.get(idx, MAX_LIMIT)
-            if value <= 0:
-                logger.warning(
-                    '[wrong query] {} is wrong: "{}". Set to default ({}).'.format(
-                        idx, query, MAX_LIMIT
+        if api.user.is_anonymous():
+            for idx in ["sort_limit", "b_size"]:
+                if idx not in query:
+                    continue
+                value = query.get(idx, MAX_LIMIT)
+                if value <= 0:
+                    logger.warning(
+                        '[wrong query] {} is wrong: "{}". Set to default ({}).'.format(
+                            idx, query, MAX_LIMIT
+                        )
                     )
-                )
-                query[idx] = MAX_LIMIT
+                    query[idx] = MAX_LIMIT
 
-            if value > MAX_LIMIT:
-                logger.warning(
-                    '[wrong query] {} is too high: "{}". Set to default ({}).'.format(
-                        idx, query, MAX_LIMIT
+                if value > MAX_LIMIT:
+                    logger.warning(
+                        '[wrong query] {} is too high: "{}". Set to default ({}).'.format(
+                            idx, query, MAX_LIMIT
+                        )
                     )
-                )
-                query[idx] = MAX_LIMIT
+                    query[idx] = MAX_LIMIT
         return query
 
 

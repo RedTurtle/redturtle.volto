@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_base
+import json
+import logging
 from copy import deepcopy
+
+from Acquisition import aq_base
 from plone import api
 from plone.dexterity.utils import iterSchemata
 from Products.Five import BrowserView
 from zope.schema import getFieldsInOrder
-
-import json
-import logging
-
 
 logger = logging.getLogger(__name__)
 

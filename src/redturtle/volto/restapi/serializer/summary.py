@@ -8,11 +8,11 @@ from plone.restapi.serializer.summary import (
     DefaultJSONSummarySerializer as BaseSerializer,
 )
 from plone.restapi.serializer.utils import uid_to_url
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
-from zope.interface import implementer
 from zope.interface import Interface
+from zope.interface import implementer
 
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
 EMPTY_STRINGS = ["None"]
 

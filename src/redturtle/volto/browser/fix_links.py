@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+import json
+import logging
+import re
+from urllib.parse import urlparse
+from urllib.parse import urlunparse
+
 from Acquisition import aq_base
 from plone import api
 from plone.dexterity.utils import iterSchemata
@@ -6,11 +12,6 @@ from plone.restapi.interfaces import IFieldDeserializer
 from Products.Five import BrowserView
 from zope.component import queryMultiAdapter
 from zope.schema import getFieldsInOrder
-
-import json
-import logging
-import re
-
 
 logger = logging.getLogger(__name__)
 
@@ -68,6 +69,7 @@ class View(BrowserView):
                         # set the new value anyway because some values could not be transformed,
                         # but they now have the right url anyway.
                         setattr(item, name, res["new_value"])
+                        item.reindexObject()
             i += 1
         logger.info("### END ###")
         logger.info("### {} items fixed ###".format(len(fixed_objects)))
@@ -94,6 +96,10 @@ class View(BrowserView):
                 return True
 
     def replace_pattern(self, value, is_link=False):
+        # obtain data to make link sub evaluation
+        current_host = urlparse(self.request.URL).netloc
+        destination_host = urlparse(self.portal_url).netloc
+
         for url in self.request.form.get("to_replace", "").split():
             match = re.search(r"(?<={}).*".format(url), value)
             if match:
@@ -106,7 +112,11 @@ class View(BrowserView):
                     return value
                 if obj:
                     if is_link:
-                        return "${portal_url}/resolveuid/" + obj.UID()
+                        if current_host != destination_host:
+                            new_url = urlparse(value)._replace(netloc=destination_host)
+                            return urlunparse(new_url)
+                        else:
+                            return "${portal_url}/resolveuid/" + obj.UID()
                     else:
                         return obj.UID()
         return value

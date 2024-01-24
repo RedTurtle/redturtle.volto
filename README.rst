@@ -190,6 +190,9 @@ There is a monkeypatch for Events recurrences that fix their duration.
 
 If it works well, we can make a pr in p.a.event.
 
+There is another monkeypatch for Events recurrences to change the default behavior of start index serializer.
+Now it keeps all dates even if the single date is already passed.
+
 
 Respect locally allowed types on paste
 --------------------------------------
@@ -219,6 +222,12 @@ There is a custom event handler for IPubStart that set authorization bearer head
 For details see the `pull-request <https://github.com/RedTurtle/redturtle.volto/pull/69>`_.
 
 This patch is not enabled by default. You need to set an environment variable to `true`: *PROXY_BEARER_AUTH*.
+
+Conditionally search for similar if nonexistent site path passed
+----------------------------------------------------------------
+
+plone.app.redirector.FourOhFourView.search_for_similar method patched to return an empty list if
+the `REDTURTLE_VOLTO_ENABLE_SEARCH_FOR_SIMILAR` environment variable is set.
 
 New Criteria
 ============

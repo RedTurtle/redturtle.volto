@@ -14,6 +14,13 @@
       />
 
   <monkey:patch
+      original="_recurrence_upcoming_event"
+      replacement=".monkey._recurrence_upcoming_event"
+      class="plone.app.event.dx.behaviors.EventAccessor"
+      description="This fix the problem with Events recurrences"
+      />
+
+  <monkey:patch
       original="_verifyObjectPaste"
       replacement=".monkey._verifyObjectPaste"
       class="plone.dexterity.content.PasteBehaviourMixin"
@@ -33,4 +40,28 @@
       class="plone.volto.transforms.NestedResolveUIDSerializerBase"
       description="Patch for disallow plone.volto serialization"
       />
+
+  <monkey:patch
+      original="getPotentialMembers"
+      replacement=".monkey.getPotentialMembers"
+      class="Products.CMFPlone.controlpanel.browser.usergroups_groupmembership.GroupMembershipControlPanel"
+      description="Patch for disallow search all users in group"
+      preserveOriginal="True"
+      />
+
+  <monkey:patch
+      original="__call__"
+      replacement=".monkey.plone_restapi_pam_translations_get"
+      class="plone.restapi.services.multilingual.pam.Translations"
+      description="Fix long request in case pam is not installed"
+      preserveOriginal="True"
+      />
+  <monkey:patch
+      original="search_for_similar"
+      replacement=".monkey.search_for_similar"
+      class="plone.app.redirector.browser.FourOhFourView"
+      description="Cancel the seach_for_similiar call when usin volto frontend"
+      preserveOriginal="True"
+      />
+
 </configure>
