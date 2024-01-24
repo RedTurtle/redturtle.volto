@@ -7,7 +7,8 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.interfaces import IDexterityItem
 from plone.dexterity.utils import getAdditionalSchemata
-from plone.restapi.blocks import iter_block_transform_handlers, visit_blocks
+from plone.restapi.blocks import iter_block_transform_handlers
+from plone.restapi.blocks import visit_blocks
 from plone.restapi.blocks_linkintegrity import BlocksRetriever as BaseBlocksRetriever
 from plone.restapi.blocks_linkintegrity import (
     GenericBlockLinksRetriever as BaseGenericBlockLinksRetriever,
@@ -19,11 +20,12 @@ from plone.restapi.blocks_linkintegrity import (
     TextBlockLinksRetriever as BaseTextBlockLinksRetriever,
 )
 from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getUtility
 from zope.interface import implementer
 from zope.schema import getFieldsInOrder
+
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
 
 class BaseRTRetriever(BaseBlocksRetriever):
