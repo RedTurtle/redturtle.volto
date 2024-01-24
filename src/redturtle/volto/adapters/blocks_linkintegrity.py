@@ -10,13 +10,13 @@ from plone.dexterity.utils import getAdditionalSchemata
 from plone.restapi.blocks import iter_block_transform_handlers, visit_blocks
 from plone.restapi.blocks_linkintegrity import BlocksRetriever as BaseBlocksRetriever
 from plone.restapi.blocks_linkintegrity import (
-    TextBlockLinksRetriever as BaseTextBlockLinksRetriever,
+    GenericBlockLinksRetriever as BaseGenericBlockLinksRetriever,
 )
 from plone.restapi.blocks_linkintegrity import (
     SlateBlockLinksRetriever as BaseSlateBlockLinksRetriever,
 )
 from plone.restapi.blocks_linkintegrity import (
-    GenericBlockLinksRetriever as BaseGenericBlockLinksRetriever,
+    TextBlockLinksRetriever as BaseTextBlockLinksRetriever,
 )
 from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
