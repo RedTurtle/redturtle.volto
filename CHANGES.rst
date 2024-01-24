@@ -4,7 +4,8 @@ Changelog
 5.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add adapters for link integrity for content-types with BlocksField fields.
+  [cekk]
 
 
 5.4.2 (2024-01-11)

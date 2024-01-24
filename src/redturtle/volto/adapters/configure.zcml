@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
   <adapter
@@ -17,4 +18,23 @@
       name="volto_parent_url"
       />
 
+  <!-- blocks link integrity for contenttypes with BlocksFields -->
+  <configure zcml:condition="installed collective.volto.blocksfield">
+    <adapter factory=".blocks_linkintegrity.BlocksRetrieverContainer" />
+    <adapter factory=".blocks_linkintegrity.BlocksRetrieverItem" />
+
+
+    <subscriber
+        factory=".blocks_linkintegrity.TextBlockLinksRetriever"
+        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+        />
+    <subscriber
+        factory=".blocks_linkintegrity.GenericBlockLinksRetriever"
+        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+        />
+    <subscriber
+        factory=".blocks_linkintegrity.SlateBlockLinksRetriever"
+        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+        />
+  </configure>
 </configure>
