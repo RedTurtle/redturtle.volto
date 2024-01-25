@@ -3,7 +3,6 @@ import os
 import unittest
 from datetime import timedelta
 
-from DateTime import DateTime
 from plone.app.event.base import localized_now
 from plone.app.event.testing import set_env_timezone
 from plone.app.testing import SITE_OWNER_NAME
