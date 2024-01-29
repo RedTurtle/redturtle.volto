@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-import logging
-
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
+
+import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +16,7 @@ class HiddenProfiles(object):
         return ["redturtle.volto:uninstall"]
 
 
+# DEPRECATED
 def upgrade_robots_txt(context):
     robots = api.portal.get_registry_record("plone.robots_txt")
     lines = robots.splitlines()
@@ -62,9 +64,26 @@ def upgrade_robots_txt(context):
         )
 
 
+def remove_custom_googlebot(context):
+    robots = api.portal.get_registry_record("plone.robots_txt")
+    googlebot_user_agent = "User-Agent: Googlebot".lower().replace(" ", "")
+    lines = []
+    googlebot = False
+    for line in robots.splitlines():
+        if line.lower().replace(" ", "") == googlebot_user_agent:
+            googlebot = True
+        elif line.startswith("User-Agent:"):
+            googlebot = False
+        if not googlebot:
+            lines.append(line)
+    lines = "\n".join(lines)
+    api.portal.set_registry_record("plone.robots_txt", lines)
+    logger.info("Upgrade robots.txt removing custom googlebot")
+
+
 def post_install(context):
     """Post install script"""
-    upgrade_robots_txt(context)
+    remove_custom_googlebot(context)
 
 
 def uninstall(context):

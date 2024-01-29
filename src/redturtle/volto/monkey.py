@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
-import os
-
 from Acquisition import aq_base
 from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day
@@ -14,6 +11,9 @@ from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
 from zope.globalrequest import getRequest
+
+import datetime
+import os
 
 
 def occurrences(self, range_start=None, range_end=None):

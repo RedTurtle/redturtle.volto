@@ -190,12 +190,12 @@
       />
 
   <genericsetup:upgradeStep
-      title="Rendex start index"
+      title="Update robots"
       description=""
       profile="redturtle.volto:default"
       source="4300"
       destination="4301"
-      handler=".upgrades.to_4301"
+      handler=".setuphandlers.remove_custom_googlebot"
       />
 
   <genericsetup:upgradeStep
