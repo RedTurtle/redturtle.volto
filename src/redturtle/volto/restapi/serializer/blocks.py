@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
-
 from plone import api
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.blocks import uid_to_url
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
 EXCLUDE_KEYS = ["@type"]
 EXCLUDE_TYPES = ["title", "listing"]

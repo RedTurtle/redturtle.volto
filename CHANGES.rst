@@ -7,6 +7,9 @@ Changelog
 - Add adapters for link integrity for content-types with BlocksField fields.
   [cekk]
 
+- Upgrade step to remove all custom Googlebot rules from robots.txt
+  [mamico]
+
 - Fix: add range_start to function for calculate recurrences in the right way
   [eikichi18]
 

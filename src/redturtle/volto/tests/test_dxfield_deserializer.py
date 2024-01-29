@@ -1,16 +1,15 @@
-import unittest
-
-import transaction
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.interfaces import IFieldDeserializer
 from Products.CMFCore.utils import getToolByName
+from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from zope.component import getMultiAdapter
 
-from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
+import transaction
+import unittest
 
 
 class TestDXFieldDeserializer(unittest.TestCase):

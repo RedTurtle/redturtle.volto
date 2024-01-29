@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-import unittest
-
 from plone import api
-from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.restapi.serializer.utils import uid_to_url
-
 from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING
+
+import unittest
 
 
 class TestRESOLVEUIDREPatch(unittest.TestCase):
