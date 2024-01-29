@@ -2,9 +2,11 @@
 from Acquisition import aq_base
 from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day
+from plone.app.event.dx.behaviors import IEventBasic
 from plone.app.event.recurrence import Occurrence
 from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
+from plone.event.interfaces import IRecurrenceSupport
 from plone.event.recurrence import recurrence_sequence_ical
 from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
@@ -60,6 +62,7 @@ def occurrences(self, range_start=None, range_end=None):
         else:
             duration = event_end - event_start
         # END OF PATCH
+
     starts = recurrence_sequence_ical(
         event_start,
         recrule=event.recurrence,
@@ -85,6 +88,17 @@ def occurrences(self, range_start=None, range_end=None):
 
     for start in starts:
         yield get_obj(start)
+
+
+def _recurrence_upcoming_event(self):
+    """Return the next upcoming event"""
+    adapter = IRecurrenceSupport(self.context)
+    occs = adapter.occurrences(range_start=self.context.start)
+    try:
+        return next(occs)
+    except StopIteration:
+        # No more future occurrences: passed event
+        return IEventBasic(self.context)
 
 
 def _verifyObjectPaste(self, obj, validate_src=True):

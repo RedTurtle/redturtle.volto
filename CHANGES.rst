@@ -1,14 +1,33 @@
 Changelog
 =========
 
-5.4.1 (unreleased)
+5.4.3 (unreleased)
 ------------------
 
 - Upgrade step to remove all custom Googlebot rules from robots.txt
   [mamico]
 
+- Fix: add range_start to function for calculate recurrences in the right way
+  [eikichi18]
+
+5.4.2 (2024-01-11)
+------------------
+
+- Fix deserializer for relationfield, add lstrip to path object calculation
+  [eikichi18]
+
+
+5.4.1 (2023-12-28)
+------------------
+
+- Fix deserializer for relationfield, use UID instead of @id
+  [eikichi18]
+
 - Isort
   [folix-01]
+
+- Add monkeypatch to fix @scadeziario-day endpoint
+  [eikichi18]
 
 
 5.4.0 (2023-11-14)

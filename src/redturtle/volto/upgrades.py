@@ -464,3 +464,21 @@ def to_4200(context):
     logger.info("Add redturtle.volto controlpanel")
     update_registry(context)
     update_controlpanel(context)
+
+
+def to_4301(context):
+    brains = api.content.find(portal_type="Event")
+    logger.info("Reindexing {} Events".format(len(brains)))
+
+    for brain in brains:
+        event = brain.getObject()
+        event.reindexObject(idxs=["start"])
+
+
+def to_4302(context):
+    brains = api.content.find(portal_type="Event")
+    logger.info("Reindexing {} Events".format(len(brains)))
+
+    for brain in brains:
+        event = brain.getObject()
+        event.reindexObject(idxs=["start", "end"])

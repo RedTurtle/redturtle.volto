@@ -198,4 +198,13 @@
       handler=".setuphandlers.remove_custom_googlebot"
       />
 
+  <genericsetup:upgradeStep
+      title="Rendex start index"
+      description=""
+      profile="redturtle.volto:default"
+      source="4301"
+      destination="4302"
+      handler=".upgrades.to_4302"
+      />
+
 </configure>
