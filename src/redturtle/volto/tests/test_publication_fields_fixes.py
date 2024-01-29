@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-import os
 import unittest
 from datetime import timedelta
 
 from plone.app.event.base import localized_now
-from plone.app.event.testing import set_env_timezone
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
