@@ -7,6 +7,8 @@ Changelog
 - Add adapters for link integrity for content-types with BlocksField fields.
   [cekk]
 
+- Fix: add range_start to function for calculate recurrences in the right way
+  [eikichi18]
 
 5.4.2 (2024-01-11)
 ------------------
