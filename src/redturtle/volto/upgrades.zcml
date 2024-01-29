@@ -198,4 +198,13 @@
       handler=".upgrades.to_4301"
       />
 
+  <genericsetup:upgradeStep
+      title="Rendex start index"
+      description=""
+      profile="redturtle.volto:default"
+      source="4301"
+      destination="4302"
+      handler=".upgrades.to_4302"
+      />
+
 </configure>

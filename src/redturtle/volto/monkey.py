@@ -93,7 +93,7 @@ def occurrences(self, range_start=None, range_end=None):
 def _recurrence_upcoming_event(self):
     """Return the next upcoming event"""
     adapter = IRecurrenceSupport(self.context)
-    occs = adapter.occurrences()
+    occs = adapter.occurrences(range_start=self.context.start)
     try:
         return next(occs)
     except StopIteration:
