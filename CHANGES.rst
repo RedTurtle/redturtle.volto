@@ -4,8 +4,8 @@ Changelog
 5.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix: add range_start to function for calculate recurrences in the right way
+  [eikichi18]
 
 5.4.2 (2024-01-11)
 ------------------
