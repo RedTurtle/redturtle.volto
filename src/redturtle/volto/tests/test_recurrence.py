@@ -3,15 +3,11 @@ from datetime import datetime
 from datetime import timedelta
 
 from plone.app.event.testing import set_browserlayer
-from plone.app.event.testing import set_env_timezone
-from plone.app.event.testing import set_timezone
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 from plone.dexterity.utils import createContentInContainer
 
 from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING
-
-TZNAME = "Europe/Rome"
 
 
 class TestOccurrences(unittest.TestCase):
@@ -20,13 +16,8 @@ class TestOccurrences(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
-
         set_browserlayer(self.request)
-        set_env_timezone(TZNAME)
-        set_timezone(TZNAME)
-
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-
         self.start_date = datetime.strptime("01/01/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
         self.end_date = self.start_date + timedelta(hours=1)
 

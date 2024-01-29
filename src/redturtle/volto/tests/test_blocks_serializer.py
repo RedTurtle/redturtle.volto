@@ -40,6 +40,7 @@ class TestBlocksSerializer(unittest.TestCase):
         self.page_c = api.content.create(
             container=self.portal, type="Document", title="Page C"
         )
+
         commit()
 
     def tearDown(self):
