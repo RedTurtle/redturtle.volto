@@ -195,7 +195,7 @@
       profile="redturtle.volto:default"
       source="4300"
       destination="4301"
-      handler=".setuphandlers.remove_custom_googlebot"
+      handler=".upgrades.to_4301"
       />
 
   <genericsetup:upgradeStep

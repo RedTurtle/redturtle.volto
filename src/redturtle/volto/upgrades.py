@@ -5,6 +5,7 @@ from plone import api
 from plone.app.upgrade.utils import installOrReinstallProduct
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.behaviors import IBlocks
+from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
 from zope.schema import getFields
 
@@ -476,6 +477,8 @@ def to_4301(context):
 
 
 def to_4302(context):
+    remove_custom_googlebot(context)
+
     brains = api.content.find(portal_type="Event")
     logger.info("Reindexing {} Events".format(len(brains)))
 
