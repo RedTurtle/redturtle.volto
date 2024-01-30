@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.3 (unreleased)
+5.4.3 (2024-01-30)
 ------------------
 
 - Upgrade step to remove all custom Googlebot rules from robots.txt
