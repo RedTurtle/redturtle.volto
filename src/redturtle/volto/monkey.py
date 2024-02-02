@@ -8,7 +8,8 @@ from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
 from plone.event.interfaces import IRecurrenceSupport
 from plone.event.recurrence import recurrence_sequence_ical
-from plone.event.utils import pydt
+
+# from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
 from zope.globalrequest import getRequest
 
@@ -100,11 +101,7 @@ def occurrences(self, range_start=None, range_end=None):
 def _recurrence_upcoming_event(self):
     """Return the next upcoming event"""
     adapter = IRecurrenceSupport(self.context)
-    # from plone.app.event.base import localized_now
-    from datetime import timedelta
-    # import pdb; pdb.set_trace()
-    # occs_old = adapter.occurrences(range_start=localized_now())
-    occs = adapter.occurrences(range_start=self.context.start) #   + timedelta(days=-1))
+    occs = adapter.occurrences(range_start=self.context.start)
     try:
         return next(occs)
     except StopIteration:
