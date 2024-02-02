@@ -485,3 +485,12 @@ def to_4302(context):
     for brain in brains:
         event = brain.getObject()
         event.reindexObject(idxs=["start", "end"])
+
+
+def to_4303(context):
+    brains = api.content.find(portal_type="Event")
+    logger.info("Reindexing {} Events".format(len(brains)))
+
+    for brain in brains:
+        event = brain.getObject()
+        event.reindexObject(idxs=["start", "end"])

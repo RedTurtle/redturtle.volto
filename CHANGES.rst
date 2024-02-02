@@ -4,7 +4,8 @@ Changelog
 5.4.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix: occurrences indexing
+  [mamico]
 
 
 5.4.3 (2024-01-30)
