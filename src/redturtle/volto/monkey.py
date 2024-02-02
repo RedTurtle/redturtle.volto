@@ -8,7 +8,8 @@ from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
 from plone.event.interfaces import IRecurrenceSupport
 from plone.event.recurrence import recurrence_sequence_ical
-from plone.event.utils import pydt
+
+# from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
 from zope.globalrequest import getRequest
 
@@ -75,13 +76,20 @@ def occurrences(self, range_start=None, range_end=None):
     # but doing it for backwards compatibility as views/templates
     # still rely on acquisition-wrapped objects.
     def get_obj(start):
-        if pydt(event_start.replace(microsecond=0)) == start:
-            # If the occurrence date is the same as the event object, the
-            # occurrence is the event itself. return it as such.
-            # Dates from recurrence_sequence_ical are explicitly without
-            # microseconds, while event.start may contain it. So we have to
-            # remove it for a valid comparison.
-            return self.context
+        # THIS IS THE PATCH
+        #
+        # -- questa parte è stata commentata, altrtimenti se lo start date coincide con la data di inizio dell'evento
+        # -- la funzione ritorna l'evento stesso, invece che la sua occorrenza e l'indice end non contiene
+        # -- tutte le date di end, ma solo quella dell'evento stesso
+        #
+        # if pydt(event_start.replace(microsecond=0)) == start:
+        #     # If the occurrence date is the same as the event object, the
+        #     # occurrence is the event itself. return it as such.
+        #     # Dates from recurrence_sequence_ical are explicitly without
+        #     # microseconds, while event.start may contain it. So we have to
+        #     # remove it for a valid comparison.
+        #     return self.context
+        # END OF PATCH
         return Occurrence(
             id=str(start.date()), start=start, end=start + duration
         ).__of__(self.context)

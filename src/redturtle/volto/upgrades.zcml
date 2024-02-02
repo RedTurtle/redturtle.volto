@@ -199,12 +199,21 @@
       />
 
   <genericsetup:upgradeStep
-      title="Rendex start index"
+      title="Rendex start/end index"
       description=""
       profile="redturtle.volto:default"
       source="4301"
       destination="4302"
       handler=".upgrades.to_4302"
+      />
+
+  <genericsetup:upgradeStep
+      title="Rendex start/end index"
+      description=""
+      profile="redturtle.volto:default"
+      source="4302"
+      destination="4303"
+      handler=".upgrades.to_4303"
       />
 
 </configure>
