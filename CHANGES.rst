@@ -1,12 +1,23 @@
 Changelog
 =========
 
-5.4.3 (unreleased)
+5.4.4 (unreleased)
 ------------------
 
 - Add adapters for link integrity for content-types with BlocksField fields.
   [cekk]
+- Fix: occurrences indexing
+  [mamico]
 
+
+5.4.3 (2024-01-30)
+------------------
+
+- Upgrade step to remove all custom Googlebot rules from robots.txt
+  [mamico]
+
+- Fix: add range_start to function for calculate recurrences in the right way
+  [eikichi18]
 
 5.4.2 (2024-01-11)
 ------------------
