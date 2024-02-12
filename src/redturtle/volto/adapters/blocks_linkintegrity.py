@@ -20,12 +20,11 @@ from plone.restapi.blocks_linkintegrity import (
     TextBlockLinksRetriever as BaseTextBlockLinksRetriever,
 )
 from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getUtility
 from zope.interface import implementer
 from zope.schema import getFieldsInOrder
-
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
 
 class BaseRTRetriever(BaseBlocksRetriever):
