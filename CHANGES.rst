@@ -4,6 +4,8 @@ Changelog
 5.4.4 (unreleased)
 ------------------
 
+- Add adapters for link integrity for content-types with BlocksField fields.
+  [cekk]
 - Fix: occurrences indexing
   [mamico]
 
