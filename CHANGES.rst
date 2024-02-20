@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.4 (unreleased)
+5.4.4 (2024-02-20)
 ------------------
 
 - Add adapters for link integrity for content-types with BlocksField fields.
