@@ -4,8 +4,8 @@ Changelog
 5.4.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Update plone.restapi requirement to 9.6.0 version.
+  [folix-01]
 
 5.4.4 (2024-02-20)
 ------------------
