@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.5 (unreleased)
+5.4.5 (2024-03-05)
 ------------------
 
 - Update plone.restapi requirement to 9.6.0 version.
