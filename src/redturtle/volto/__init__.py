@@ -77,6 +77,3 @@ def Catalog_sortResults(
 logger.info("install monkey patch for Products.ZCatalog.Catalog.Catalog.sortResults")
 Catalog._orig_sortResults = Catalog.sortResults
 Catalog.sortResults = Catalog_sortResults
-
-# patch plone.restapi regexp to catch also other
-utils.RESOLVEUID_RE = re.compile("^(?:|.*/)resolve[Uu]id/([^/]*)/?(.*)$")
