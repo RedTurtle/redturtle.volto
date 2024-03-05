@@ -10,7 +10,9 @@ Changelog
 5.4.5 (2024-03-05)
 ------------------
 
-- Update plone.restapi requirement to 9.6.0 version. Also removed monkeypatch for plone.restartpi.serializer.utils.RESOLVEUID_RE
+- Update plone.restapi requirement to 9.6.0 version
+  [folix-01]
+- Removed monkeypatch for plone.restartpi.serializer.utils.RESOLVEUID_RE
   [folix-01]
 
 5.4.4 (2024-02-20)
