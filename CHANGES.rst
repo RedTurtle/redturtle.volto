@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.6 (unreleased)
+5.4.6 (2024-03-06)
 ------------------
 
 - Added check if value is a dict before using get method.
