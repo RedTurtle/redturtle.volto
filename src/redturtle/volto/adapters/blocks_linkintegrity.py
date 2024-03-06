@@ -55,6 +55,8 @@ class BaseRTRetriever(BaseBlocksRetriever):
                     links |= set(extractLinks(value.raw))
                 elif isinstance(field, BlocksField):
                     value = field.get(self.context)
+                    if not isinstance(value, dict):
+                        continue
                     blocks = value.get("blocks", {})
                     if not blocks:
                         continue

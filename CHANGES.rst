@@ -4,7 +4,8 @@ Changelog
 5.4.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added check if value is a dict before using get method.
+  [eikichi18]
 
 
 5.4.5 (2024-03-05)
