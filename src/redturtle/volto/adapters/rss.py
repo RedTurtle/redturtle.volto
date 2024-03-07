@@ -1,5 +1,6 @@
 from DateTime import DateTime
 from plone.app.contenttypes.interfaces import IEvent
+
 try:
     from plone.base.interfaces.syndication import IFeed
 except ModuleNotFoundError:
