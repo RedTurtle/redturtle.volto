@@ -38,10 +38,18 @@
         />
   </configure>
 
-  <adapter
+  <adapter zcml:condition="have plone-60"
       factory=".rss.EventItem"
       provides="plone.base.interfaces.syndication.IFeedItem"
       for="plone.app.contenttypes.interfaces.IEvent
            plone.base.interfaces.syndication.IFeed"
       />
+
+  <adapter zcml:condition="have plone-52"
+      factory=".rss.EventItem"
+      provides="Products.CMFPlone.interfaces.syndication.IFeedItem"
+      for="plone.app.contenttypes.interfaces.IEvent
+           Products.CMFPlone.interfaces.syndication.IFeed"
+      />
+
 </configure>
