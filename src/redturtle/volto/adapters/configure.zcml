@@ -37,4 +37,11 @@
         provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
         />
   </configure>
+
+  <adapter
+      factory=".rss.EventItem"
+      provides="plone.base.interfaces.syndication.IFeedItem"
+      for="plone.app.contenttypes.interfaces.IEvent
+           plone.base.interfaces.syndication.IFeed"
+      />
 </configure>
