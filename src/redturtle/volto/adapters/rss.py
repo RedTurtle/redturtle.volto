@@ -1,8 +1,8 @@
-from plone.base.interfaces.syndication import IFeed
+from DateTime import DateTime
 from plone.app.contenttypes.interfaces import IEvent
+from plone.base.interfaces.syndication import IFeed
 from Products.CMFPlone.browser.syndication.adapters import DexterityItem
 from zope.component import adapter
-from DateTime import DateTime
 
 
 @adapter(IEvent, IFeed)
