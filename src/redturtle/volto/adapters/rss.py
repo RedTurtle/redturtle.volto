@@ -7,11 +7,10 @@ from DateTime import DateTime
 
 @adapter(IEvent, IFeed)
 class EventItem(DexterityItem):
-
     @property
     def startdate(self):
         """
-        Same format as other dates in 
+        Same format as other dates in
         Products.CMFPlone.browser.syndication.adapters
         """
         date = self.context.start.isoformat()
