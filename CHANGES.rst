@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.7 (unreleased)
+5.4.7 (2024-03-11)
 ------------------
 
 - Add adapter handler for event in rss feed to export
