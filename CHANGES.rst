@@ -4,7 +4,8 @@ Changelog
 5.4.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not try to convert strings in internal paths for *form* blocks.
+  [cekk]
 
 
 5.4.7 (2024-03-11)
