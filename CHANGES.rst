@@ -4,7 +4,9 @@ Changelog
 5.4.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add adapter handler for event in rss feed to export
+  start date instead of publication date
+  [lucabel]
 
 
 5.4.6 (2024-03-06)

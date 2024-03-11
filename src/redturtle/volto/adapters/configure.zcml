@@ -37,4 +37,22 @@
         provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
         />
   </configure>
+
+
+  <adapter
+      factory=".rss.EventItem"
+      provides="plone.base.interfaces.syndication.IFeedItem"
+      for="plone.app.contenttypes.interfaces.IEvent
+           plone.base.interfaces.syndication.IFeed"
+      zcml:condition="have plone-60"
+      />
+
+  <adapter
+      factory=".rss.EventItem"
+      provides="Products.CMFPlone.interfaces.syndication.IFeedItem"
+      for="plone.app.contenttypes.interfaces.IEvent
+           Products.CMFPlone.interfaces.syndication.IFeed"
+      zcml:condition="not-have plone-60"
+      />
+
 </configure>
