@@ -34,6 +34,7 @@ class QuerystringSearch(BaseQuerystringSearch):
             raise BadRequest(str(err))
 
         query = data.get("query", None)
+
         if self.is_event_search(query=query):
             return self.reply_events()
 
@@ -49,6 +50,8 @@ class QuerystringSearch(BaseQuerystringSearch):
             return dict(error=dict(type="BadRequest", message="Invalid b_size"))
         sort_on = data.get("sort_on", None)
         sort_order = data.get("sort_order", None)
+
+        query = self.cleanup_query(query=query, b_size=b_size)
 
         # LIMIT PATCH
         if not query:
@@ -96,6 +99,40 @@ class QuerystringSearch(BaseQuerystringSearch):
             fullobjects=fullobjects
         )
         return results
+
+    def cleanup_query(self, query, b_size):
+        """
+        If b_size == 1 and there is an absolutePath in query that points to a non
+        existing content, reeturn empty query.
+        This is the case where absolutePath points to an UID that is not present on the site.
+        A call with b_size == 1 usually is made in objectbrowser to draw the reference, but with a
+        wrong UID, Plone by default return all site contents and the first one will be returned.
+        If you then save the blocks, you'll have that random content as new absolutePath value.
+        """
+        if b_size != 1:
+            return query
+        fixed_query = []
+        for criteria in query:
+            index = criteria.get("i", "")
+            operation = criteria.get("o", "")
+            if (
+                index == "path"
+                and operation == "plone.app.querystring.operation.string.absolutePath"
+            ):
+                criteria_value = criteria.get("v", "").split("::")
+                value = criteria_value[0]
+
+                if "/" not in value:
+                    # It must be a UID
+                    item = api.content.get(UID=value)
+                    if not item:
+                        continue
+                else:
+                    item = api.content.get(value)
+                    if not item:
+                        continue
+            fixed_query.append(query)
+        return fixed_query
 
     def get_limit(self, data):
         """

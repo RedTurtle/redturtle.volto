@@ -4,7 +4,8 @@ Changelog
 5.4.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Patch in @querystring-search that avoid to search through all the site if there is an absolutePath criteria with non existing UID and b_size==1.
+  [cekk]
 
 
 5.4.7 (2024-03-11)
