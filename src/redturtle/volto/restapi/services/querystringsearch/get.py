@@ -132,7 +132,7 @@ class QuerystringSearch(BaseQuerystringSearch):
                     item = api.content.get(value)
                     if not item:
                         continue
-            fixed_query.append(query)
+            fixed_query.append(criteria)
         return fixed_query
 
     def get_limit(self, data):
