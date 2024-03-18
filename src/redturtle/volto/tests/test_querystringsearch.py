@@ -7,9 +7,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
-from urllib.parse import quote
 
-import json
 import unittest
 
 

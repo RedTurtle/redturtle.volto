@@ -118,7 +118,7 @@ class QuerystringSearch(BaseQuerystringSearch):
             if (
                 index == "path"
                 and operation  # noqa
-                == "plone.app.querystring.operation.string.absolutePath"
+                == "plone.app.querystring.operation.string.absolutePath"  # noqa
             ):
                 criteria_value = criteria.get("v", "").split("::")
                 value = criteria_value[0]
