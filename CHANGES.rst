@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Patch in @querystring-search that avoid to search through all the site if there is an absolutePath criteria with non existing UID and b_size==1.
+  See #99 for more details.
   [cekk]
 
 
