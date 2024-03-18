@@ -4,7 +4,8 @@ Changelog
 5.4.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle None values in link integrity blocks adapter.
+  [cekk]
 
 
 5.4.7 (2024-03-11)
