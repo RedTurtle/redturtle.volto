@@ -5,6 +5,9 @@ Changelog
 ------------------
 
 - Do not try to convert strings in internal paths for *form* blocks.
+- Handle None values in link integrity blocks adapter.
+- Patch in @querystring-search that avoid to search through all the site if there is an absolutePath criteria with non existing UID and b_size==1.
+  See #99 for more details.
   [cekk]
 
 
