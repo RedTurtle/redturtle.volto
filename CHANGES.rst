@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.8 (unreleased)
+5.4.8 (2024-03-19)
 ------------------
 
 - Do not try to convert strings in internal paths for *form* blocks.
