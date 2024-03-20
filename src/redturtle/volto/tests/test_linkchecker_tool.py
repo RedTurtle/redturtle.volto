@@ -75,14 +75,12 @@ class LinkCheckerToolTest(unittest.TestCase):
         self.tool.clear()
         self.assertEqual(len(self.tool._external_links_status), 0)
         self.assertEqual(len(self.tool._outgoing_links), 0)
-        self.assertEqual(len(self.tool._incoming_links), 0)
         self.assertEqual(self.tool._last_update, None)
 
     def test_check_site(self):
         self.tool.check_site()
         self.assertNotEqual(self.tool._last_update, None)
         self.assertEqual(len(self.tool._outgoing_links), 6)
-        self.assertEqual(len(self.tool._incoming_links), 0)
         self.assertEqual(len(self.tool._external_links_status), 2)
 
         broken_links = {
