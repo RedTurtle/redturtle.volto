@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
   <adapter
@@ -15,6 +16,43 @@
       provides="plone.stringinterp.interfaces.IStringSubstitution"
       for="*"
       name="volto_parent_url"
+      />
+
+  <!-- blocks link integrity for contenttypes with BlocksFields -->
+  <configure zcml:condition="installed collective.volto.blocksfield">
+    <adapter factory=".blocks_linkintegrity.BlocksRetrieverContainer" />
+    <adapter factory=".blocks_linkintegrity.BlocksRetrieverItem" />
+
+
+    <subscriber
+        factory=".blocks_linkintegrity.TextBlockLinksRetriever"
+        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+        />
+    <subscriber
+        factory=".blocks_linkintegrity.GenericBlockLinksRetriever"
+        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+        />
+    <subscriber
+        factory=".blocks_linkintegrity.SlateBlockLinksRetriever"
+        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+        />
+  </configure>
+
+
+  <adapter
+      factory=".rss.EventItem"
+      provides="plone.base.interfaces.syndication.IFeedItem"
+      for="plone.app.contenttypes.interfaces.IEvent
+           plone.base.interfaces.syndication.IFeed"
+      zcml:condition="have plone-60"
+      />
+
+  <adapter
+      factory=".rss.EventItem"
+      provides="Products.CMFPlone.interfaces.syndication.IFeedItem"
+      for="plone.app.contenttypes.interfaces.IEvent
+           Products.CMFPlone.interfaces.syndication.IFeed"
+      zcml:condition="not-have plone-60"
       />
 
 </configure>
