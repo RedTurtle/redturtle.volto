@@ -131,7 +131,7 @@ class View(BrowserView):
         if self.check_pattern(value=data):
             res["ok"] = False
             res["fixed"] = True
-            # convert broken links to current site ulr and then deserialize all
+            # convert broken links to current site url and then deserialize all
             # blocks to have the right values
             for url in self.request.form.get("to_replace", "").split():
                 data = data.replace(url, self.portal_url)
