@@ -118,15 +118,15 @@ class LinkCheckerTool(UniqueObject, SimpleItem):
                 external_links.append((link, status))
         self._outgoing_links[uuid] = (datetime.now(), external_links + internal_links)
 
-    # def get_page_with_broken_links(self):
-    #     """
-    #     :return: iterator with items as
-    #              (uid, [(link1, status1), link2, status2), ...])
-    #     """
-    #     for uid, (_, links) in self._outgoing_links.items():
-    #         broken_links = [item for item in links if item[1] != 200]
-    #         if broken_links:
-    #             yield (uid, broken_links)
+    def get_page_with_broken_links(self):
+        """
+        :return: iterator with items as
+                 (uid, [(link1, status1), link2, status2), ...])
+        """
+        for uid, (_, links) in self._outgoing_links.items():
+            broken_links = [item for item in links if item[1] != 200]
+            if broken_links:
+                yield (uid, broken_links)
 
     def get_rows(self, broken=True):
         """
