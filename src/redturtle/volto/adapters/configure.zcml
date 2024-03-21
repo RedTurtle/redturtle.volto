@@ -55,4 +55,16 @@
       zcml:condition="not-have plone-60"
       />
 
+
+    <!-- namechooser adapters -->
+    <adapter
+      factory=".namechooser.NormalizingNameChooser"
+      provides="zope.container.interfaces.INameChooser"
+      for="plone.dexterity.interfaces.IDexterityContainer"
+      />
+    <adapter
+      factory=".namechooser.NormalizingNameChooser"
+      provides="zope.container.interfaces.INameChooser"
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      />
 </configure>
