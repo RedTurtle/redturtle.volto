@@ -216,7 +216,7 @@
       handler=".upgrades.to_4303"
       />
 
-    <genericsetup:upgradeStep
+  <genericsetup:upgradeStep
       title="Add new field in controlpanel"
       description=""
       profile="redturtle.volto:default"
