@@ -1,17 +1,16 @@
+from Acquisition import aq_inner
+from plone import api
 from plone.app.content.namechooser import (
     NormalizingNameChooser as BaseNormalizingNameChooser,
 )
-from plone import api
 from plone.app.redirector.interfaces import IRedirectionStorage
-from zope.component import getUtility
-from zExceptions import BadRequest
-from Acquisition import aq_inner
 from redturtle.volto import _
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
+from zExceptions import BadRequest
+from zope.component import getUtility
 
 
 class NormalizingNameChooser(BaseNormalizingNameChooser):
-
     def chooseName(self, name, obj):
         """
         Additional check: the id should not be in redirection tool.

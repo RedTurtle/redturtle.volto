@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from zope.container.interfaces import INameChooser
-from zExceptions import BadRequest
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
+from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING
+from zExceptions import BadRequest
+from zope.container.interfaces import INameChooser
 
 import unittest
 
