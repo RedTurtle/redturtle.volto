@@ -1,17 +1,15 @@
-from urllib.parse import urlparse
-
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.deserializer.dxfields import DefaultFieldDeserializer
 from plone.restapi.interfaces import IFieldDeserializer
 from Products.CMFCore.utils import getToolByName
+from redturtle.volto.interfaces import IRedturtleVoltoLayer
+from urllib.parse import urlparse
 from z3c.relationfield.interfaces import IRelationChoice
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.component import queryUtility
 from zope.interface import implementer
 from zope.intid.interfaces import IIntIds
-
-from redturtle.volto.interfaces import IRedturtleVoltoLayer
 
 
 @implementer(IFieldDeserializer)

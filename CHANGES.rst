@@ -1,11 +1,62 @@
 Changelog
 =========
 
-5.4.3 (unreleased)
+5.4.9 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+5.4.8 (2024-03-19)
+------------------
+
+- Do not try to convert strings in internal paths for *form* blocks.
+- Handle None values in link integrity blocks adapter.
+- Patch in @querystring-search that avoid to search through all the site if there is an absolutePath criteria with non existing UID and b_size==1.
+  See #99 for more details.
+  [cekk]
+
+
+5.4.7 (2024-03-11)
+------------------
+
+- Add adapter handler for event in rss feed to export
+  start date instead of publication date
+  [lucabel]
+
+
+5.4.6 (2024-03-06)
+------------------
+
+- Added check if value is a dict before using get method.
+  [eikichi18]
+
+
+5.4.5 (2024-03-05)
+------------------
+
+- Update plone.restapi requirement to 9.6.0 version
+  [folix-01]
+- Removed monkeypatch for plone.restartpi.serializer.utils.RESOLVEUID_RE
+  [folix-01]
+
+5.4.4 (2024-02-20)
+------------------
+
+- Add adapters for link integrity for content-types with BlocksField fields.
+  [cekk]
+- Fix: occurrences indexing
+  [mamico]
+
+
+5.4.3 (2024-01-30)
+------------------
+
+- Upgrade step to remove all custom Googlebot rules from robots.txt
+  [mamico]
+
+- Fix: add range_start to function for calculate recurrences in the right way
+  [eikichi18]
 
 5.4.2 (2024-01-11)
 ------------------

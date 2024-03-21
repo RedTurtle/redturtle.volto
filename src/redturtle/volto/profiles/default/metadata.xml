@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <version>4301</version>
+  <version>4303</version>
   <dependencies>
     <dependency>profile-plone.volto:default</dependency>
     <dependency>profile-plone.app.caching:with-caching-proxy</dependency>

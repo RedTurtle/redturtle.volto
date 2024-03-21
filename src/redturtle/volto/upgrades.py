@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
-import json
-import logging
-from copy import deepcopy
-from uuid import uuid4
-
 from Acquisition import aq_base
+from copy import deepcopy
 from plone import api
 from plone.app.upgrade.utils import installOrReinstallProduct
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.behaviors import IBlocks
+from redturtle.volto.setuphandlers import remove_custom_googlebot
+from uuid import uuid4
 from zope.schema import getFields
+
+import json
+import logging
+
 
 try:
     from collective.volto.blocksfield.field import BlocksField
@@ -472,3 +474,23 @@ def to_4301(context):
     for brain in brains:
         event = brain.getObject()
         event.reindexObject(idxs=["start"])
+
+
+def to_4302(context):
+    remove_custom_googlebot(context)
+
+    brains = api.content.find(portal_type="Event")
+    logger.info("Reindexing {} Events".format(len(brains)))
+
+    for brain in brains:
+        event = brain.getObject()
+        event.reindexObject(idxs=["start", "end"])
+
+
+def to_4303(context):
+    brains = api.content.find(portal_type="Event")
+    logger.info("Reindexing {} Events".format(len(brains)))
+
+    for brain in brains:
+        event = brain.getObject()
+        event.reindexObject(idxs=["start", "end"])

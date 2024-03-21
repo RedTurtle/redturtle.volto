@@ -56,7 +56,7 @@
     <tal:block tal:repeat="item item/categories">
       <dc:subject tal:content="item">Item</dc:subject>
     </tal:block>
-    <dc:date tal:content="item/published/HTML4|item/modified/HTML4">Published or last modified date if no published date</dc:date>
+    <dc:date tal:content="item/startdate/HTML4|item/published/HTML4|item/modified/HTML4">Published or last modified date if no published date</dc:date>
     <dc:type tal:content="item/context/portal_type">Type</dc:type>
   </item>
 </tal:block>

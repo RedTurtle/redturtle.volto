@@ -4,6 +4,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
+
 long_description = "\n\n".join(
     [
         open("README.rst").read(),
@@ -15,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="redturtle.volto",
-    version="5.4.3.dev0",
+    version="5.4.9.dev0",
     description="Helper package to setup a RedTurtle's Plone site ready to work with Volto.",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -58,7 +59,7 @@ setup(
         "collective.purgebyid",
         "kitconcept.seo>=2.0.0",
         "plone.volto>=4.0.0",
-        "plone.restapi>=8.43.3",
+        "plone.restapi>=9.6.0",
         "Products.PortalTransforms>=3.2.0",
     ],
     extras_require={
