@@ -5,10 +5,8 @@
 
   <include package=".navigation" />
   <include package=".querystringsearch" />
-  <include package=".search" />
   <include package=".site_search" />
   <include package=".sitemap" />
-  <include package=".search" />
 
   <adapter
       factory=".controlpanel.RedTurtleVoltoSettings"
