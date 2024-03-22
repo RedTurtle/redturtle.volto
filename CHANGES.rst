@@ -4,7 +4,8 @@ Changelog
 5.4.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Customize SearchHandler functionlaity via monkeypatches instead of service override.
+  [folix-01]
 
 
 5.4.8 (2024-03-19)
