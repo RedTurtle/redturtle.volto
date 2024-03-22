@@ -1,13 +1,13 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:monkey="http://namespaces.plone.org/monkey"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="redturtle.volto"
     >
 
   <include package="collective.monkeypatcher" />
 
-    <monkey:patch
+  <monkey:patch
       original="occurrences"
       replacement=".occurrences"
       class="plone.app.event.recurrence.RecurrenceSupport"
@@ -66,20 +66,20 @@
       />
 
   <monkey:patch
-      description="Custom search"
-      class="plone.restapi.search.handler.SearchHandler"
       original="search"
       replacement=".ploneRestapiSearchHandler.search"
+      class="plone.restapi.search.handler.SearchHandler"
       docstringWarning="Monkeypatched search method of the plone.restapi.search.handler.SearchHandler"
+      description="Custom search"
       preserveOriginal="true"
       />
 
   <monkey:patch
-      description="Custom _parse_query"
-      class="plone.restapi.search.handler.SearchHandler"
       original="_parse_query"
       replacement=".ploneRestapiSearchHandler._parse_query"
+      class="plone.restapi.search.handler.SearchHandler"
       docstringWarning="Monkeypatched _parse_quesry method of the plone.restapi.search.handler.SearchHandler"
+      description="Custom _parse_query"
       preserveOriginal="true"
       />
 
