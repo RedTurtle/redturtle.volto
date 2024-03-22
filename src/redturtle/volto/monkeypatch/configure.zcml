@@ -1,0 +1,87 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="redturtle.volto"
+    >
+
+  <include package="collective.monkeypatcher" />
+
+    <monkey:patch
+      original="occurrences"
+      replacement=".occurrences"
+      class="plone.app.event.recurrence.RecurrenceSupport"
+      description="This fix the problem with Events recurrences"
+      />
+
+  <monkey:patch
+      original="_recurrence_upcoming_event"
+      replacement="._recurrence_upcoming_event"
+      class="plone.app.event.dx.behaviors.EventAccessor"
+      description="This fix the problem with Events recurrences"
+      />
+
+  <monkey:patch
+      original="_verifyObjectPaste"
+      replacement="._verifyObjectPaste"
+      class="plone.dexterity.content.PasteBehaviourMixin"
+      description="Patch for disallow paste object also for locally filters"
+      preserveOriginal="True"
+      />
+
+  <monkey:patch
+      original="__call__"
+      replacement=".plone_volto_deserializer_call"
+      class="plone.volto.transforms.NestedResolveUIDDeserializerBase"
+      description="Patch for disallow plone.volto deserialization"
+      />
+  <monkey:patch
+      original="__call__"
+      replacement=".plone_volto_serializer_call"
+      class="plone.volto.transforms.NestedResolveUIDSerializerBase"
+      description="Patch for disallow plone.volto serialization"
+      />
+
+  <monkey:patch
+      original="getPotentialMembers"
+      replacement=".getPotentialMembers"
+      class="Products.CMFPlone.controlpanel.browser.usergroups_groupmembership.GroupMembershipControlPanel"
+      description="Patch for disallow search all users in group"
+      preserveOriginal="True"
+      />
+
+  <monkey:patch
+      original="__call__"
+      replacement=".plone_restapi_pam_translations_get"
+      class="plone.restapi.services.multilingual.pam.Translations"
+      description="Fix long request in case pam is not installed"
+      preserveOriginal="True"
+      />
+  <monkey:patch
+      original="search_for_similar"
+      replacement=".search_for_similar"
+      class="plone.app.redirector.browser.FourOhFourView"
+      description="Cancel the seach_for_similiar call when usin volto frontend"
+      preserveOriginal="True"
+      />
+
+  <monkey:patch
+      description="Custom search"
+      class="plone.restapi.search.handler.SearchHandler"
+      original="search"
+      replacement=".ploneRestapiSearchHandler.search"
+      docstringWarning="Monkeypatched search method of the plone.restapi.search.handler.SearchHandler"
+      preserveOriginal="true"
+      />
+
+  <monkey:patch
+      description="Custom _parse_query"
+      class="plone.restapi.search.handler.SearchHandler"
+      original="_parse_query"
+      replacement=".ploneRestapiSearchHandler._parse_query"
+      docstringWarning="Monkeypatched _parse_quesry method of the plone.restapi.search.handler.SearchHandler"
+      preserveOriginal="true"
+      />
+
+
+</configure>
