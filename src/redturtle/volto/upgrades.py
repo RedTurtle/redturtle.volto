@@ -3,12 +3,17 @@ from Acquisition import aq_base
 from copy import deepcopy
 from plone import api
 from plone.app.upgrade.utils import installOrReinstallProduct
-from plone.base.utils import get_installer
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.behaviors import IBlocks
 from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
 from zope.schema import getFields
+
+
+try:
+    from plone.base.utils import get_installer
+except Exception:
+    from Products.CMFPlone.utils import get_installer
 
 import json
 import logging
