@@ -224,4 +224,12 @@
       destination="4304"
       handler=".upgrades.update_registry"
       />
+  <genericsetup:upgradeStep
+      title="Remove old cookie plugin and install new one"
+      description=""
+      profile="redturtle.volto:default"
+      source="4304"
+      destination="4305"
+      handler=".upgrades.to_4305"
+      />
 </configure>
