@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-03-21 13:53+0000\n"
+"POT-Creation-Date: 2024-03-28 12:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,8 +70,8 @@ msgstr ""
 msgid "enable_advanced_query_ranking_label"
 msgstr ""
 
-#. Default: "The id \"${id}\" is invalid because there is already an alias for that path. Search \"${fixed_path}\" in aliases management to manage it."
-#: redturtle/volto/adapters/namechooser.py:35
+#. Default: "The id \"${id}\" is invalid because there is already an alias for that path. Change its id or ask site administrators to remove \"${fixed_path}\" in aliases management."
+#: redturtle/volto/adapters/namechooser.py:29
 msgid "name_chooser_alias_error"
 msgstr ""
 

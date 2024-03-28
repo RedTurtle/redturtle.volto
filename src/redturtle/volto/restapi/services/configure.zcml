@@ -3,6 +3,7 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
+  <include package=".copymove" />
   <include package=".navigation" />
   <include package=".querystringsearch" />
   <include package=".search" />
