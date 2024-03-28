@@ -9,8 +9,8 @@
       factory=".copymove.Copy"
       for="Products.CMFCore.interfaces.IFolderish"
       permission="zope2.View"
-      name="@copy"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@copy"
       />
 
   <plone:service
@@ -18,8 +18,8 @@
       factory=".copymove.Move"
       for="Products.CMFCore.interfaces.IFolderish"
       permission="zope2.View"
-      name="@move"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@move"
       />
 
 </configure>
