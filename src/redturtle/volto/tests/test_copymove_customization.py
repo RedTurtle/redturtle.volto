@@ -4,11 +4,10 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
-from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from plone.restapi.testing import RelativeSession
+from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
-import os
 import transaction
 import unittest
 
