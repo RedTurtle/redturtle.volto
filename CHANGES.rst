@@ -8,6 +8,8 @@ Changelog
   [cekk]
 - Add flag in controlpanel to enable/disable INameChooser customization.
   [cekk]
+- Exclude bg_color from transformed fields in deserializer.
+  [cekk]
 
 
 5.4.8 (2024-03-19)
