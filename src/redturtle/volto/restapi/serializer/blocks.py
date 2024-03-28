@@ -13,8 +13,14 @@ from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 
-EXCLUDE_KEYS = ["@type"]
-EXCLUDE_TYPES = ["title", "listing", "form"]
+EXCLUDE_KEYS = ["@type", "token", "value", "@id", "query", "bg_color"]
+EXCLUDE_TYPES = [
+    "title",
+    "listing",
+    "calendar",
+    "searchEvents",
+    "form",
+]
 
 
 class GenericResolveUIDSerializer(object):
