@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
+from json.decoder import JSONDecodeError
+from plone import api
+from plone.base.interfaces import ISiteSchema
+from plone.formwidget.namedfile.converter import b64decode_file
+from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.services.site.get import Site as BaseSite
 from plone.restapi.services.site.get import SiteGet as BaseSiteGet
 from Products.CMFPlone.interfaces import ISiteSchema
+from redturtle.volto.interfaces import IRedTurtleVoltoAdditionalSiteSchema
 from zope.component import adapter
 from zope.component import getUtility
 from zope.interface import implementer
 from zope.interface import Interface
-from plone.registry.interfaces import IRegistry
-from redturtle.volto.interfaces import IRedTurtleVoltoAdditionalSiteSchema
-from plone import api
-from plone.base.interfaces import ISiteSchema
-from plone.formwidget.namedfile.converter import b64decode_file
-from json.decoder import JSONDecodeError
 
 import json
 import logging
+
 
 logger = logging.getLogger(__name__)
 

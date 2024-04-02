@@ -1,5 +1,5 @@
-from plone.restapi.serializer.controlpanels import ControlpanelSerializeToJson
 from plone.restapi.interfaces import ISerializeToJson
+from plone.restapi.serializer.controlpanels import ControlpanelSerializeToJson
 from redturtle.volto.interfaces import IRedTurtleVoltoSiteControlpanel
 from zope.component import adapter
 from zope.interface import implementer

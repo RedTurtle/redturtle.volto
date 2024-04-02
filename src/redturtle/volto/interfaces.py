@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-from plone.restapi.controlpanels.interfaces import IControlpanel
+from plone.autoform import directives as form
 from plone.base.interfaces.controlpanel import ISiteSchema
+from plone.restapi.controlpanels import IControlpanel
+from plone.restapi.controlpanels.interfaces import IControlpanel
 from redturtle.volto import _
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-from zope.schema import Bool, SourceText, Bytes, Int
-from plone.restapi.controlpanels import IControlpanel
-from plone.autoform import directives as form
+from zope.schema import Bool
+from zope.schema import Bytes
+from zope.schema import Int
+from zope.schema import SourceText
 
 
 class IRedturtleVoltoLayer(IDefaultBrowserLayer):
