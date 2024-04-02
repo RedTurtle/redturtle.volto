@@ -11,6 +11,13 @@ from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
 from zope.component import getUtility
 
+try:
+    from Products.CMFPlone.factory import _IMREALLYPLONE5  # noqa
+except ImportError:
+    PLONE5 = False
+else:
+    PLONE5 = True
+
 import base64
 import os
 import unittest
@@ -131,6 +138,7 @@ class SiteTest(unittest.TestCase):
             },
         )
 
+    @unittest.skipIf(PLONE5, "Before Plone 6 there wasn't favicon in site settings")
     def test_endpoint_store_favicon_dimensions_if_saved(self):
         image_file = os.path.join(os.path.dirname(__file__), "favicon.ico")
         with open(image_file, "rb") as f:
