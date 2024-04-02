@@ -224,4 +224,13 @@
       destination="4304"
       handler=".upgrades.update_registry"
       />
+
+  <genericsetup:upgradeStep
+      title="Add new settings interface in controlpanel for additional site fields"
+      description=""
+      profile="redturtle.volto:default"
+      source="4305"
+      destination="4306"
+      handler=".upgrades.update_registry"
+      />
 </configure>

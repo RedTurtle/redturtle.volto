@@ -8,7 +8,10 @@ Changelog
   [cekk]
 - Add flag in controlpanel to enable/disable INameChooser customization.
   [cekk]
-
+- Customize `site` controlopanel to allow customize site footer logo, subtitle and title language.
+  [cekk]
+- Customize `@site` endpoint to expose new fields based on language and logos/favicon width and height.
+  [cekk]
 
 5.4.8 (2024-03-19)
 ------------------

@@ -34,4 +34,6 @@
 
   <adapter factory=".dxfields.DatetimeFieldDeserializer" />
 
+
+  <adapter factory=".controlpanels.RedTurtleVoltoSiteSettingsDeserializeFromJson" />
 </configure>

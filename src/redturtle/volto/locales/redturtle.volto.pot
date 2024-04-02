@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-03-21 13:53+0000\n"
+"POT-Creation-Date: 2024-04-02 11:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,33 +51,62 @@ msgid "Uninstalls the redturtle.volto add-on."
 msgstr ""
 
 #. Default: "If enabled, users can't create contents with ids that are already used as aliases."
-#: redturtle/volto/interfaces.py:36
+#: redturtle/volto/interfaces.py:39
 msgid "check_aliases_in_namechooser_help"
 msgstr ""
 
 #. Default: "Disallow ids used in aliases"
-#: redturtle/volto/interfaces.py:32
+#: redturtle/volto/interfaces.py:35
 msgid "check_aliases_in_namechooser_label"
 msgstr ""
 
 #. Default: "If enabled, a custom ranking for SearchableText searches will be used."
-#: redturtle/volto/interfaces.py:23
+#: redturtle/volto/interfaces.py:26
 msgid "enable_advanced_query_ranking_help"
 msgstr ""
 
 #. Default: "Enable AdvancedQuery ranking"
-#: redturtle/volto/interfaces.py:19
+#: redturtle/volto/interfaces.py:22
 msgid "enable_advanced_query_ranking_label"
 msgstr ""
 
+#. Default: "Insert a logo that will be used in the site footer."
+#: redturtle/volto/interfaces.py:75
+msgid "logo_footer_help"
+msgstr ""
+
+#. Default: "Footer logo"
+#: redturtle/volto/interfaces.py:74
+msgid "logo_footer_label"
+msgstr ""
+
 #. Default: "The id \"${id}\" is invalid because there is already an alias for that path. Search \"${fixed_path}\" in aliases management to manage it."
-#: redturtle/volto/adapters/namechooser.py:35
+#: redturtle/volto/adapters/namechooser.py:34
 msgid "name_chooser_alias_error"
 msgstr ""
 
 #. Default: "Insert an external link directly into the field,or select an internal link clicking on the icon."
 #: redturtle/volto/types/adapters.py:25
 msgid "remoteUrl_restapi_label"
+msgstr ""
+
+#. Default: "If you want to translate site title for different available language, use this field to set translations. If set, this field overrides the default one."
+#: redturtle/volto/interfaces.py:55
+msgid "site_localized_help"
+msgstr ""
+
+#. Default: "Translated site title"
+#: redturtle/volto/interfaces.py:54
+msgid "site_localized_label"
+msgstr ""
+
+#: redturtle/volto/interfaces.py:65
+msgid "site_subtitle_help"
+msgstr ""
+
+#. Default: "Site subtitle"
+#: redturtle/volto/interfaces.py:64
+msgid "site_subtitle_label"
 msgstr ""
 
 #. Default: "Volto Parent URL: Content url without \"/api\"."

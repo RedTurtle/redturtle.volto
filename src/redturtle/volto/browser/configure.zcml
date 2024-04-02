@@ -31,6 +31,21 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
 
+  <!-- helpers views for @site endpoint -->
+  <browser:page
+      name="site-favicon"
+      for="*"
+      class=".site_helpers_views.Favicon"
+      permission="zope.Public"
+      />
+  <browser:page
+      name="site-logo_footer"
+      for="*"
+      class=".site_helpers_views.LogoFooter"
+      permission="zope.Public"
+      />
+
+  <!-- helper views -->
   <browser:page
       name="fix-links"
       for="*"

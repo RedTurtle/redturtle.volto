@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
 <registry xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
     <records interface="redturtle.volto.interfaces.IRedTurtleVoltoSettings" />
+    <records interface="redturtle.volto.interfaces.IRedTurtleVoltoAdditionalSiteSchema" prefix="plone"/>
+
 </registry>
