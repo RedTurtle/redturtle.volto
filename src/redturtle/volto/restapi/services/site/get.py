@@ -7,7 +7,6 @@ from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.services.site.get import Site as BaseSite
 from plone.restapi.services.site.get import SiteGet as BaseSiteGet
-from Products.CMFPlone.interfaces import ISiteSchema
 from redturtle.volto.interfaces import IRedTurtleVoltoAdditionalSiteSchema
 from zope.component import adapter
 from zope.component import getUtility
@@ -44,7 +43,7 @@ class Site(BaseSite):
 
         result["site"]["plone.site_title"] = (
             self.get_translated_value(site_title_translated)
-            or result["site"]["plone.site_title"]
+            or result["site"]["plone.site_title"]  # noqa
         )
         result["site"]["plone.site_subtitle"] = self.get_translated_value(site_subtitle)
 
@@ -95,13 +94,6 @@ class Site(BaseSite):
             return ""
         lang = api.portal.get_current_language()
         return value.get(lang, "")
-
-    def get_favicon_url(self, favicon):
-
-        if not favicon:
-            return ""
-        filename, data = b64decode_file(favicon)
-        return f"{site_url}/@@site-favicon/{filename}"
 
 
 class SiteGet(BaseSiteGet):
