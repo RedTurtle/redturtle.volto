@@ -25,7 +25,6 @@
   <adapter factory=".dxfields.TextLineFieldSerializer" />
 
   <adapter factory=".summary.DefaultJSONSummarySerializer" />
-  
   <adapter factory=".controlpanels.RedTurtleVoltoSiteSettingsSerializeFromJson" />
 
 </configure>

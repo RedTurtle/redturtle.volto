@@ -1,9 +1,14 @@
-from plone.base.interfaces import ISiteSchema
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.browser import Download
 from plone.namedfile.file import NamedImage
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
+
+
+try:
+    from plone.base.interfaces.controlpanel import ISiteSchema
+except ImportError:
+    from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
 
 
 class BaseView(Download):

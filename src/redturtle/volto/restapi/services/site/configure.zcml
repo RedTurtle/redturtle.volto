@@ -10,8 +10,8 @@
       factory=".get.SiteGet"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       permission="zope2.View"
-      name="@site"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@site"
       />
 
 </configure>

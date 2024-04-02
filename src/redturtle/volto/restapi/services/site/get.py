@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from json.decoder import JSONDecodeError
 from plone import api
-from plone.base.interfaces import ISiteSchema
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import IExpandableElement
@@ -15,6 +14,12 @@ from zope.interface import Interface
 
 import json
 import logging
+
+
+try:
+    from plone.base.interfaces.controlpanel import ISiteSchema
+except ImportError:
+    from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
 
 
 logger = logging.getLogger(__name__)

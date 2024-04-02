@@ -1,4 +1,3 @@
-from plone.base.interfaces.controlpanel import ISiteSchema
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
 from plone.restapi.deserializer import json_body
@@ -15,6 +14,12 @@ from zope.component import queryMultiAdapter
 from zope.interface import implementer
 from zope.schema import getFields
 from zope.schema.interfaces import ValidationError
+
+
+try:
+    from plone.base.interfaces.controlpanel import ISiteSchema
+except ImportError:
+    from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
 
 
 @implementer(IDeserializeFromJson)
