@@ -4,6 +4,8 @@ Changelog
 5.4.9 (unreleased)
 ------------------
 
+- Limit event occurrences to 100.
+  [mamico]
 - Customize INameChooser adapter to check also alias ids and disallow to create contents that could override aliases.
   [cekk]
 - Add flag in controlpanel to enable/disable INameChooser customization.
