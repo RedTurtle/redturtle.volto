@@ -102,7 +102,7 @@ def occurrences(self, range_start=None, range_end=None):
     for start in starts:
         if limit < 0:
             logger.warning(
-                "Too many occurrences, for %s stopping at 1000",
+                "Too many occurrences for %s, stopping at 1000",
                 self.context.absolute_url(),
             )
             raise StopIteration
