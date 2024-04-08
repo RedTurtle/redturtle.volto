@@ -98,11 +98,11 @@ def occurrences(self, range_start=None, range_end=None):
             id=str(start.date()), start=start, end=start + duration
         ).__of__(self.context)
 
-    limit = 1000
+    limit = 100
     for start in starts:
         if limit < 0:
             logger.warning(
-                "Too many occurrences for %s, stopping at 1000",
+                "Too many occurrences for %s, stopping at 100",
                 self.context.absolute_url(),
             )
             raise StopIteration
