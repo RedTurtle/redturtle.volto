@@ -12,7 +12,10 @@ Changelog
   [cekk]
 - Exclude bg_color from transformed fields in deserializer.
   [cekk]
-
+- Uninstall collective.volto.cookieconsent (deprecated). Will be removed from dependencies in next releases.
+  [cekk]
+- Add dependency to collective.volto.gdprcookie and install it by default.
+  [cekk]
 
 5.4.8 (2024-03-19)
 ------------------
