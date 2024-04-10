@@ -9,7 +9,10 @@ from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
 from zope.schema import getFields
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 try:
     from plone.base.utils import get_installer
 except Exception:
@@ -508,3 +511,9 @@ def to_4305(context):
     installer.uninstall_product(product_id="collective.volto.cookieconsent")
     if not installer.is_product_installed("collective.volto.gdprcookie"):
         installer.install_(product_id="collective.volto.gdprcookie")
+
+def to_4306(context):
+    portal = api.portal.get()
+    installer = get_installer(portal, portal.REQUEST)
+    if not installer.is_product_installed("collective.volto.sitesettings"):
+        installer.install_(product_id="collective.volto.sitesettings")

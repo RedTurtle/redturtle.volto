@@ -232,4 +232,12 @@
       destination="4305"
       handler=".upgrades.to_4305"
       />
+    <genericsetup:upgradeStep
+      title="Install new dependency"
+      description=""
+      profile="redturtle.volto:default"
+      source="4305"
+      destination="4306"
+      handler=".upgrades.to_4306"
+      />
 </configure>

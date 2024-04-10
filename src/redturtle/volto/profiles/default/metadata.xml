@@ -6,5 +6,6 @@
     <dependency>profile-plone.app.caching:with-caching-proxy</dependency>
     <dependency>profile-collective.volto.gdprcookie:default</dependency>
     <dependency>profile-kitconcept.seo:default</dependency>
+    <dependency>profile-collective.volto.sitesettings:default</dependency>
   </dependencies>
 </metadata>

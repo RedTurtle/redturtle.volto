@@ -9,6 +9,7 @@ coverage.json
 *.py?
 *.swp
 # dirs
+__pycache__
 bin/
 buildout-cache/
 develop-eggs/

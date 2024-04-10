@@ -62,6 +62,7 @@ setup(
         "plone.volto>=4.0.0",
         "plone.restapi>=9.6.0",
         "Products.PortalTransforms>=3.2.0",
+        "collective.volto.sitesettings",
     ],
     extras_require={
         "advancedquery": [
