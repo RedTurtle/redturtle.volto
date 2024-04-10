@@ -4,9 +4,13 @@ Changelog
 5.4.9 (unreleased)
 ------------------
 
+- Limit event occurrences to 100.
+  [mamico]
 - Customize INameChooser adapter to check also alias ids and disallow to create contents that could override aliases.
   [cekk]
 - Add flag in controlpanel to enable/disable INameChooser customization.
+  [cekk]
+- Exclude bg_color from transformed fields in deserializer.
   [cekk]
 - Uninstall collective.volto.cookieconsent (deprecated). Will be removed from dependencies in next releases.
   [cekk]
