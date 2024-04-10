@@ -111,3 +111,9 @@ class IRedTurtleVoltoSiteSchema(ISiteSchema, IRedTurtleVoltoAdditionalSiteSchema
 
 class IRedTurtleVoltoSiteControlpanel(IControlpanel):
     """ """
+
+
+class IRegistryImagesView(Interface):
+    """
+    Marker interface for view
+    """

@@ -33,15 +33,15 @@
 
   <!-- helpers views for @site endpoint -->
   <browser:page
-      name="site-favicon"
-      for="*"
-      class=".site_helpers_views.Favicon"
+      name="registry-images"
+      for="plone.base.interfaces.siteroot.INavigationRoot"
+      class=".site_helpers_views.RegistryImagesView"
       permission="zope.Public"
       />
-  <browser:page
-      name="site-logo_footer"
-      for="*"
-      class=".site_helpers_views.LogoFooter"
+    <browser:page
+      name="images"
+      for="redturtle.volto.interfaces.IRegistryImagesView"
+      class=".site_helpers_views.ImagesView"
       permission="zope.Public"
       />
 

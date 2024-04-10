@@ -7,6 +7,7 @@ from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.services.site.get import Site as BaseSite
 from plone.restapi.services.site.get import SiteGet as BaseSiteGet
 from redturtle.volto.interfaces import IRedTurtleVoltoAdditionalSiteSchema
+from redturtle.volto.restapi.services.utils import FIELD_MAPPING
 from zope.component import adapter
 from zope.component import getUtility
 from zope.interface import implementer
@@ -34,7 +35,6 @@ class Site(BaseSite):
         result = super().__call__(expand=expand)
 
         registry = getUtility(IRegistry)
-        site_settings = registry.forInterface(ISiteSchema, prefix="plone", check=False)
         additional_settings = registry.forInterface(
             IRedTurtleVoltoAdditionalSiteSchema, prefix="plone", check=False
         )
@@ -53,29 +53,23 @@ class Site(BaseSite):
         result["site"]["plone.site_subtitle"] = self.get_translated_value(site_subtitle)
 
         # images
-        field_mapping = {
-            "logo": site_settings,
-            "logo_footer": additional_settings,
-            "favicon": site_settings,
-        }
         site_url = api.portal.get().absolute_url()
-        for field, settings_name in field_mapping.items():
-            value = self.get_value_from_registry(settings_name, f"site_{field}")
-            result["site"][f"plone.site_{field}"] = {}
+        for field, interface_name in FIELD_MAPPING.items():
+            settings = registry.forInterface(
+                interface_name, prefix="plone", check=False
+            )
+            value = self.get_value_from_registry(settings, field)
+            result["site"][f"plone.{field}"] = {}
             if value:
                 filename, data = b64decode_file(value)
-                result["site"][f"plone.site_{field}"][
+                result["site"][f"plone.{field}"][
                     "url"
-                ] = f"{site_url}/@@site-{field}/{filename}"
-                result["site"][f"plone.site_{field}"]["width"] = (
-                    self.get_value_from_registry(
-                        additional_settings, f"site_{field}_width"
-                    )
+                ] = f"{site_url}/registry-images/@@images/{field}/{filename}"
+                result["site"][f"plone.{field}"]["width"] = (
+                    self.get_value_from_registry(additional_settings, f"{field}_width")
                 )
-                result["site"][f"plone.site_{field}"]["height"] = (
-                    self.get_value_from_registry(
-                        additional_settings, f"site_{field}_height"
-                    )
+                result["site"][f"plone.{field}"]["height"] = (
+                    self.get_value_from_registry(additional_settings, f"{field}_height")
                 )
 
         return result
