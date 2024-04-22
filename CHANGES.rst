@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.4.9 (unreleased)
+5.4.9 (2024-04-22)
 ------------------
 
 - Limit event occurrences to 100.
