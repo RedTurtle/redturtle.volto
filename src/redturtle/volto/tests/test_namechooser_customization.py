@@ -137,7 +137,7 @@ class TestNameChooserEnabled(unittest.TestCase):
             chooser.chooseName("foo", fake_obj)
 
         self.assertEqual(
-            'The id "foo" is invalid because there is already an alias for that path. Search "/foo" in aliases management to manage it.',
+            'The id "foo" is invalid because there is already an alias for that path. Change its id or ask site administrators to remove "/foo" in aliases management.',
             str(cm.exception),
         )
 
@@ -180,7 +180,7 @@ class TestNameChooserEnabled(unittest.TestCase):
             chooser.chooseName("aaa", fake_obj)
 
         self.assertEqual(
-            'The id "aaa" is invalid because there is already an alias for that path. Search "/container/aaa" in aliases management to manage it.',
+            'The id "aaa" is invalid because there is already an alias for that path. Change its id or ask site administrators to remove "/container/aaa" in aliases management.',
             str(cm.exception),
         )
 
@@ -196,7 +196,7 @@ class TestNameChooserEnabled(unittest.TestCase):
             api.content.rename(obj=item, new_id="foo", safe_id=True)
 
         self.assertEqual(
-            'The id "foo" is invalid because there is already an alias for that path. Search "/foo" in aliases management to manage it.',
+            'The id "foo" is invalid because there is already an alias for that path. Change its id or ask site administrators to remove "/foo" in aliases management.',
             str(cm.exception),
         )
 

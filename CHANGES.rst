@@ -14,6 +14,8 @@ Changelog
   [mamico]
 - Customize INameChooser adapter to check also alias ids and disallow to create contents that could override aliases.
   [cekk]
+- Customize also `copy` and `move` endpoints to raise BadRequest if that action will override some aliases.
+  [cekk]
 - Add flag in controlpanel to enable/disable INameChooser customization.
   [cekk]
 - Exclude bg_color from transformed fields in deserializer.
