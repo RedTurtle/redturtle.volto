@@ -17,5 +17,5 @@ class Move(BaseMove):
 
     def clipboard(self, parent, ids):
         for id in ids:
-            check_alias(context=self.context, id=id)
+            check_alias(context=parent, id=id)
         return parent.manage_cutObjects(ids=ids)
