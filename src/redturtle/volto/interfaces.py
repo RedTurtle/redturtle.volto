@@ -27,3 +27,16 @@ class IRedTurtleVoltoSettings(Interface):
         default=False,
         required=False,
     )
+
+    check_aliases_in_namechooser = Bool(
+        title=_(
+            "check_aliases_in_namechooser_label",
+            default="Disallow ids used in aliases",
+        ),
+        description=_(
+            "check_aliases_in_namechooser_help",
+            default="If enabled, users can't create contents with ids that are already used as aliases.",
+        ),
+        default=False,
+        required=False,
+    )

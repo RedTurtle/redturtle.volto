@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <version>4303</version>
+  <version>4305</version>
   <dependencies>
     <dependency>profile-plone.volto:default</dependency>
     <dependency>profile-plone.app.caching:with-caching-proxy</dependency>
-    <dependency>profile-collective.volto.cookieconsent:default</dependency>
+    <dependency>profile-collective.volto.gdprcookie:default</dependency>
     <dependency>profile-kitconcept.seo:default</dependency>
   </dependencies>
 </metadata>
