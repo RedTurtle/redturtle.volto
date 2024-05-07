@@ -224,13 +224,13 @@ class LinkCheckerTool(UniqueObject, SimpleItem):
         return 404
 
     @view.memoize
-    def _check_external_link(self, link, ttl=3600 * 6, timeout=5.0):
+    def _check_external_link(self, link, ttl=3600 * 6, timeout=1.0):
         """Check the external link"""
-        logger.info("Checking external link %s", link)
+        logger.warning("Checking external link %s", link)
 
         if link in self._external_links_status:
             last_update, status = self._external_links_status[link]
-            if (datetime.now() - last_update).total_seconds() < ttl:
+            if status == 200 and (datetime.now() - last_update).total_seconds() < ttl:
                 return status
         try:
             headers = {"User-Agent": self.user_agent}
