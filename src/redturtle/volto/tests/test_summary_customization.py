@@ -54,30 +54,6 @@ class TestSummaryCustomization(unittest.TestCase):
     def tearDown(self):
         self.api_session.close()
 
-    def test_summary_does_not_return_image_scales_if_not_requested(self):
-        response = self.api_session.get("/@search", params={"portal_type": "News Item"})
-        self.assertEqual(response.status_code, 200)
-        res = response.json()
-
-        self.assertEqual(len(res["items"]), 2)
-        self.assertEqual(res["items"][0]["title"], self.news_with_image.title)
-        self.assertEqual(res["items"][1]["title"], self.news_without_image.title)
-        self.assertNotIn("image", res["items"][0])
-        self.assertNotIn("image", res["items"][1])
-
-    def test_summary_return_image_scales_if_requested(self):
-        response = self.api_session.get(
-            "/@search?metadata_fields=_all", params={"portal_type": "News Item"}
-        )
-        self.assertEqual(response.status_code, 200)
-        res = response.json()
-
-        self.assertEqual(len(res["items"]), 2)
-        self.assertEqual(res["items"][0]["title"], self.news_with_image.title)
-        self.assertEqual(res["items"][1]["title"], self.news_without_image.title)
-        self.assertIn("image", res["items"][0])
-        self.assertNotIn("image", res["items"][1])
-
     def test_summary_return_empty_effective_date_if_not_set(self):
         page = api.content.create(
             container=self.portal,

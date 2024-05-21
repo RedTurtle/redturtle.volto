@@ -4,7 +4,8 @@ Changelog
 5.4.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Remove custom image infos in summary serializer. Now use plone.restapi base feature.
+  [cekk]
 
 
 5.4.9 (2024-04-22)
@@ -144,7 +145,6 @@ Changelog
 
 - Max search limit became configurable by env var 'REDTURTLE_VOLTO_MAX_LIMIT_SEARCH', 500 by default.
   [folix-01]
-
 
 5.2.2 (2023-08-29)
 ------------------
