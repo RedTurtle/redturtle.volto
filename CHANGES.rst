@@ -4,7 +4,8 @@ Changelog
 5.4.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fixed limit event occurrences to 100.
+  [eikichi18]
 
 
 5.4.9 (2024-04-22)
