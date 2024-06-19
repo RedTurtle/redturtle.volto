@@ -508,3 +508,10 @@ def to_4305(context):
     installer.uninstall_product(product_id="collective.volto.cookieconsent")
     if not installer.is_product_installed("collective.volto.gdprcookie"):
         installer.install_product(product_id="collective.volto.gdprcookie")
+
+
+def to_4306(context):
+    portal = api.portal.get()
+    installer = get_installer(portal, portal.REQUEST)
+    if not installer.is_product_installed("collective.volto.sitesettings"):
+        installer.install_product(product_id="collective.volto.sitesettings")

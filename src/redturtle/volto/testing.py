@@ -9,6 +9,7 @@ from plone.restapi.testing import PloneRestApiDXLayer
 from plone.testing import z2
 
 import collective.volto.gdprcookie
+import collective.volto.sitesettings
 import kitconcept.seo
 import plone.app.caching
 import plone.restapi
@@ -24,6 +25,7 @@ class RedturtleVoltoLayer(PloneSandboxLayer):
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
         self.loadZCML(package=collective.volto.gdprcookie)
+        self.loadZCML(package=collective.volto.sitesettings)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.volto)
         self.loadZCML(package=plone.volto)
@@ -67,6 +69,7 @@ class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
         super(RedturtleVoltoRestApiLayer, self).setUpZope(app, configurationContext)
 
         self.loadZCML(package=collective.volto.gdprcookie)
+        self.loadZCML(package=collective.volto.sitesettings)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=plone.volto)
         self.loadZCML(package=redturtle.volto)
