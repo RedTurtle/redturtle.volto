@@ -9,6 +9,7 @@ from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
 from zope.schema import getFields
 
+
 try:
     from plone.base.utils import get_installer
 except Exception:
