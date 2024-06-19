@@ -105,7 +105,7 @@ def occurrences(self, range_start=None, range_end=None):
                 "Too many occurrences for %s, stopping at 100",
                 self.context.absolute_url(),
             )
-            raise StopIteration
+            return
         limit -= 1
         yield get_obj(start)
 
