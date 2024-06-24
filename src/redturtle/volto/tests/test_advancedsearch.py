@@ -111,7 +111,6 @@ class AdvancedSearchTest(BaseTest):
         response = self.api_session.get("/@search", params={"SearchableText": "bar"})
         self.assertEqual(response.status_code, 200)
         result = response.json()
-        import pdb; pdb.set_trace()
         self.assertEqual(result["items_total"], 3)
         self.assertEqual(
             ["d1", "e1", "f1"], [item["@id"].split("/")[-1] for item in result["items"]]
