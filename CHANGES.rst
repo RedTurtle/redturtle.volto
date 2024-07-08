@@ -4,6 +4,9 @@ Changelog
 5.4.10 (unreleased)
 -------------------
 
+- remove newsitem template override, use default dexterity view for newsitem in backend
+  [mamico]
+
 - Fixed limit event occurrences to 100.
   [eikichi18]
 
