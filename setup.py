@@ -63,6 +63,7 @@ setup(
         "plone.restapi>=9.6.0",
         "Products.PortalTransforms>=3.2.0",
         "collective.volto.sitesettings",
+        "z3c.jbot",
     ],
     extras_require={
         "advancedquery": [
