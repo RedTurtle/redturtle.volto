@@ -232,4 +232,12 @@
       destination="4305"
       handler=".upgrades.to_4305"
       />
+  <genericsetup:upgradeStep
+      title="Add new field in registry to select the miniature field for RSS feed"
+      description=""
+      profile="redturtle.volto:default"
+      source="4305"
+      destination="4306"
+      handler=".upgrades.to_4306"
+      />
 </configure>

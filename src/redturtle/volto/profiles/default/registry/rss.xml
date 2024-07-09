@@ -5,4 +5,14 @@
     </field>
     <value>thumb</value>
   </record>
+  <record name="redturtle.volto.rss_image_choice">
+    <field type="plone.registry.field.Choice">
+        <title>RSS Image Choice</title>
+      <values>
+        <element>listing_like</element>
+        <element>image</element>
+        <element>preview_image</element>
+      </values>
+    </field>
+  </record>
 </registry>

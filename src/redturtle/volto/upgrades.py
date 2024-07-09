@@ -508,3 +508,13 @@ def to_4305(context):
     installer.uninstall_product(product_id="collective.volto.cookieconsent")
     if not installer.is_product_installed("collective.volto.gdprcookie"):
         installer.install_product(product_id="collective.volto.gdprcookie")
+
+
+def to_4306(context):
+    context.runImportStepFromProfile(
+        "profile-redturtle.volto:profile_to_4306", "plone.app.registry", False
+    )
+    import pdb
+
+    pdb.set_trace()
+    api.portal.set_registry_record("redturtle.volto.rss_image_choice", "image")

@@ -37,8 +37,9 @@
     <title tal:content="item/title" />
     <link tal:content="link" />
     <description tal:content="item/description" />
-    <tal:image tal:condition="python: item.field_name == 'image'" tal:on-error="string:">
-        <tal:image_metadata tal:define="url string:${link}/@@images/image/${image_miniature};
+    <tal:image tal:condition="python: item.field_name in {'image', 'preview_image'}" >
+        <tal:image_metadata tal:define="image_type python: item.field_name;
+                                        url string:${link}/@@images/${image_type}/${image_miniature};
                                         size item/file/size|nothing;
                                         mime item/file/contentType|nothing">
             <enclosure url="${url}" tal:attributes="size size; type mime"/>

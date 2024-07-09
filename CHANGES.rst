@@ -6,6 +6,9 @@ Changelog
 
 - Fixed limit event occurrences to 100.
   [eikichi18]
+- Allow to select which image miniature use in
+  RSS
+  [lucabel]
 
 
 5.4.9 (2024-04-22)
