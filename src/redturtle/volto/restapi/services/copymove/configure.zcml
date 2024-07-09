@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
+
+  <plone:service
+      method="POST"
+      factory=".copymove.Copy"
+      for="Products.CMFCore.interfaces.IFolderish"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@copy"
+      />
+
+  <plone:service
+      method="POST"
+      factory=".copymove.Move"
+      for="Products.CMFCore.interfaces.IFolderish"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@move"
+      />
+
+</configure>

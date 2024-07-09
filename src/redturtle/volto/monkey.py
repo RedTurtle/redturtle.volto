@@ -14,7 +14,11 @@ from Products.CMFPlone.interfaces import IConstrainTypes
 from zope.globalrequest import getRequest
 
 import datetime
+import logging
 import os
+
+
+logger = logging.getLogger(__name__)
 
 
 def occurrences(self, range_start=None, range_end=None):
@@ -94,7 +98,15 @@ def occurrences(self, range_start=None, range_end=None):
             id=str(start.date()), start=start, end=start + duration
         ).__of__(self.context)
 
+    limit = 100
     for start in starts:
+        if limit < 0:
+            logger.warning(
+                "Too many occurrences for %s, stopping at 100",
+                self.context.absolute_url(),
+            )
+            return
+        limit -= 1
         yield get_obj(start)
 
 

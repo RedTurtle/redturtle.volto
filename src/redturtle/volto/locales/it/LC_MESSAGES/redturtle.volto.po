@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-03-16 14:54+0000\n"
+"POT-Creation-Date: 2024-03-28 10:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: redturtle/volto/configure.zcml:28
+#: redturtle/volto/configure.zcml:29
 msgid "Installs the redturtle.volto add-on."
 msgstr ""
 
@@ -27,11 +27,11 @@ msgstr ""
 msgid "RedTurtle Volto Settings"
 msgstr "Impostazioni RedTurtle Volto"
 
-#: redturtle/volto/configure.zcml:28
+#: redturtle/volto/configure.zcml:29
 msgid "RedTurtle: Volto"
 msgstr ""
 
-#: redturtle/volto/configure.zcml:37
+#: redturtle/volto/configure.zcml:38
 msgid "RedTurtle: Volto (uninstall)"
 msgstr ""
 
@@ -43,19 +43,34 @@ msgstr "Seleziona False per mostrare solo gli elementi non omessi dalla navigazi
 msgid "Show elements excluded from navigation"
 msgstr "Elementi omessi dalla navigazione"
 
-#: redturtle/volto/configure.zcml:37
+#: redturtle/volto/configure.zcml:38
 msgid "Uninstalls the redturtle.volto add-on."
 msgstr ""
 
+#. Default: "If enabled, users can't create contents with ids that are already used as aliases."
+#: redturtle/volto/interfaces.py:36
+msgid "check_aliases_in_namechooser_help"
+msgstr "Se attivato, alla creazione o rinomina di un contenuto, verrà eseguito anche un controllo su eventuali alias presenti (quelli visibili in Gestione URL), ed eventualmente viene impedita la creazione con quell'id."
+
+#. Default: "Disallow ids used in aliases"
+#: redturtle/volto/interfaces.py:32
+msgid "check_aliases_in_namechooser_label"
+msgstr "Controllo degli id anche sugli alias"
+
 #. Default: "If enabled, a custom ranking for SearchableText searches will be used."
-#: redturtle/volto/interfaces.py:24
+#: redturtle/volto/interfaces.py:23
 msgid "enable_advanced_query_ranking_help"
 msgstr "Se abilitato, verrà utilizzato un ranking custom per la ricerca testuale."
 
 #. Default: "Enable AdvancedQuery ranking"
-#: redturtle/volto/interfaces.py:20
+#: redturtle/volto/interfaces.py:19
 msgid "enable_advanced_query_ranking_label"
 msgstr "Abilita ranking custom con AdvancedQuery"
+
+#. Default: "The id \"${id}\" is invalid because there is already an alias for that path. Change its id or ask site administrators to remove \"${fixed_path}\" in aliases management."
+#: redturtle/volto/adapters/namechooser.py:29
+msgid "name_chooser_alias_error"
+msgstr "L'id \"${id}\" non è valido perché già utilizzato per un alias. Modifca l'id oppure rivolgiti agli amministratori per cancellare l'alias esistente: \"${fixed_path}\"."
 
 #. Default: "Insert an external link directly into the field,or select an internal link clicking on the icon."
 #: redturtle/volto/types/adapters.py:25
@@ -63,11 +78,11 @@ msgid "remoteUrl_restapi_label"
 msgstr "Inserisci un link esterno direttamente nel campo, oppure seleziona un collegamento ad un contenuto del sito cliccando sull'icona accanto."
 
 #. Default: "Volto Parent URL: Content url without \"/api\"."
-#: redturtle/volto/adapters/stringinterp.py:31
+#: redturtle/volto/adapters/stringinterp.py:35
 msgid "stringinterp_volto_parent_url"
 msgstr ""
 
 #. Default: "Volto URL: Content url without \"/api\"."
-#: redturtle/volto/adapters/stringinterp.py:13
+#: redturtle/volto/adapters/stringinterp.py:18
 msgid "stringinterp_volto_url"
 msgstr "Volto URL: URL del contenuto Plone senza \"/api\"."
