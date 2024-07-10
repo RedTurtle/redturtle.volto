@@ -514,7 +514,4 @@ def to_4306(context):
     context.runImportStepFromProfile(
         "profile-redturtle.volto:profile_to_4306", "plone.app.registry", False
     )
-    import pdb
-
-    pdb.set_trace()
     api.portal.set_registry_record("redturtle.volto.rss_image_choice", "image")
