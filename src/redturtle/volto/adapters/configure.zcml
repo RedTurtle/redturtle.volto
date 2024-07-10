@@ -72,5 +72,13 @@
       provides="plone.base.interfaces.syndication.IFeedItem"
       for="redturtle.volto.interfaces.ICustomFeedItem
            plone.base.interfaces.syndication.IFeed"
+      zcml:condition="have plone-60"
+      />
+  <adapter
+      factory=".rss.CustomFeedItem"
+      provides="Products.CMFPlone.interfaces.syndication.IFeedItem"
+      for="redturtle.volto.interfaces.ICustomFeedItem
+           Products.CMFPlone.interfaces.syndication.IFeed"
+      zcml:condition="not-have plone-60"
       />
 </configure>
