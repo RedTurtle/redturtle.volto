@@ -44,4 +44,5 @@ reports/
 !.gitkeep
 !.travis.yml
 !src/redturtle
+!src/.bandit
 .idea/
