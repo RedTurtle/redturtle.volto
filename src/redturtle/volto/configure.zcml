@@ -55,4 +55,18 @@
       handler=".events.manage_auth_token"
       />
 
+  <!-- provide interface to News-->
+  <class class="plone.volto.content.FolderishNewsItem">
+    <implements interface="redturtle.volto.interfaces.ICustomFeedItem" />
+  </class>
+  <!-- <class class="plone.volto.content.FolderishEvent">
+    <implements interface="redturtle.volto.interfaces.ICustomFeedItem" />
+  </class> -->
+  <class class="plone.volto.content.FolderishDocument">
+    <implements interface="redturtle.volto.interfaces.ICustomFeedItem" />
+  </class>
+  <class class="plone.app.contenttypes.content.Link">
+    <implements interface="redturtle.volto.interfaces.ICustomFeedItem" />
+  </class>
+
 </configure>

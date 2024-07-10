@@ -6,6 +6,7 @@
     <value>thumb</value>
   </record>
   <record name="redturtle.volto.rss_image_choice">
+    <value>image</value>
     <field type="plone.registry.field.Choice">
         <title>RSS Image Choice</title>
       <values>

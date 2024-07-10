@@ -1,5 +1,4 @@
 from DateTime import DateTime
-from design.plone.contenttypes.interfaces import IDesignPloneContentType
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.contenttypes.behaviors.leadimage import ILeadImageBehavior
@@ -8,6 +7,7 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.namedfile.interfaces import INamedField
 from plone.rfc822.interfaces import IPrimaryFieldInfo
 from plone.volto.behaviors.preview import IPreview
+from redturtle.volto.interfaces import ICustomFeedItem
 
 
 try:
@@ -19,8 +19,8 @@ from Products.CMFPlone.browser.syndication.adapters import DexterityItem
 from zope.component import adapter
 
 
-@adapter(IDesignPloneContentType, IFeed)
-class DesignPloneContentTypeItem(DexterityItem):
+@adapter(ICustomFeedItem, IFeed)
+class CustomFeedItem(DexterityItem):
 
     def _has_valid_image(self, behavior, field_name):
         if not behavior:
@@ -38,6 +38,7 @@ class DesignPloneContentTypeItem(DexterityItem):
     def __init__(self, context, feed):
         super().__init__(context, feed)
         self.dexterity = IDexterityContent.providedBy(context)
+        self.img_choice = None
         self.file = None
         self.field_name = None
         self._set_image_field()
@@ -50,7 +51,7 @@ class DesignPloneContentTypeItem(DexterityItem):
         # if we don't have the record gently fallback on the old behavior
         try:
             img_choice = api.portal.get_registry_record(
-                "redturtle.volto.rss_image_choice", "image"
+                "redturtle.volto.rss_image_choice"
             )
         except InvalidParameterError:
             # seems the default of get_registry_record is not working
@@ -64,7 +65,7 @@ class DesignPloneContentTypeItem(DexterityItem):
         elif img_choice == "image" and self._has_valid_image(lead, "image"):
             self.file = lead.image
             self.field_name = "image"
-        elif img_choice == "like_listing":
+        elif img_choice == "listing_like":
             if self._has_valid_image(preview, "preview_image"):
                 self.file = preview.image
                 self.field_name = "preview_image"
@@ -87,7 +88,7 @@ class DesignPloneContentTypeItem(DexterityItem):
 
 
 @adapter(IEvent, IFeed)
-class EventItem(DesignPloneContentTypeItem):
+class EventItem(CustomFeedItem):
     @property
     def startdate(self):
         """

@@ -68,9 +68,9 @@
       />
 
     <adapter
-      factory=".rss.DesignPloneContentTypeItem"
+      factory=".rss.CustomFeedItem"
       provides="plone.base.interfaces.syndication.IFeedItem"
-      for="design.plone.contenttypes.interfaces.IDesignPloneContentType
+      for="redturtle.volto.interfaces.ICustomFeedItem
            plone.base.interfaces.syndication.IFeed"
       />
 </configure>
