@@ -6,7 +6,8 @@ Changelog
 
 - Fixed limit event occurrences to 100.
   [eikichi18]
-
+- Add dependency with collective.volto.sitesettings.
+  [cekk]
 
 5.4.9 (2024-04-22)
 ------------------
