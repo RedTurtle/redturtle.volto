@@ -522,4 +522,3 @@ def to_4307(context):
         "profile-redturtle.volto:profile_to_4307", "plone.app.registry", False
     )
     api.portal.set_registry_record("redturtle.volto.rss_image_choice", "image")
-
