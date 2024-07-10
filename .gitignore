@@ -10,10 +10,12 @@ coverage.json
 *.py?
 *.swp
 # dirs
+__pycache__
 bin/
 buildout-cache/
 develop-eggs/
 eggs/
+extras/
 htmlcov/
 include/
 lib/
