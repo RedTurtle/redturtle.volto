@@ -38,11 +38,11 @@
       />
 
   <genericsetup:registerProfile
-      name="profile_to_4306"
-      title="RedTurtle: Volto (to 4306)"
+      name="profile_to_4307"
+      title="RedTurtle: Volto (to 4307)"
       description="Installs the redturtle.volto add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      directory="profiles/to_4306"
+      directory="profiles/to_4307"
       />
 
   <utility
