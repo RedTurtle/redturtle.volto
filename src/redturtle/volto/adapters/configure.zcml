@@ -67,7 +67,7 @@
       for="Products.CMFCore.interfaces.ISiteRoot"
       />
 
-    <adapter
+  <adapter
       factory=".rss.CustomFeedItem"
       provides="plone.base.interfaces.syndication.IFeedItem"
       for="redturtle.volto.interfaces.ICustomFeedItem
