@@ -237,6 +237,6 @@ class LinkCheckerTool(UniqueObject, SimpleItem):
             res = requests.get(link, headers=headers, timeout=timeout)
             status = res.status_code
         except requests.exceptions.RequestException:
-            status = 404  # ???
+            status = 999  # ???
         self._external_links_status[link] = (datetime.now(), status)
         return status
