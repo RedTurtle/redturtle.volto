@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.1 (unreleased)
+5.5.1 (2024-07-22)
 ------------------
 
 - Allow to select which image miniature use in
