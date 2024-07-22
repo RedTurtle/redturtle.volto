@@ -515,3 +515,10 @@ def to_4306(context):
     installer = get_installer(portal, portal.REQUEST)
     if not installer.is_product_installed("collective.volto.sitesettings"):
         installer.install_product(product_id="collective.volto.sitesettings")
+
+
+def to_4307(context):
+    context.runImportStepFromProfile(
+        "profile-redturtle.volto:profile_to_4307", "plone.app.registry", False
+    )
+    api.portal.set_registry_record("redturtle.volto.rss_image_choice", "image")

@@ -4,7 +4,9 @@ Changelog
 5.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Allow to select which image miniature use in
+  RSS
+  [lucabel]
 
 
 5.5.0 (2024-07-10)
@@ -14,7 +16,7 @@ Changelog
   [eikichi18]
 - Add dependency with collective.volto.sitesettings.
   [cekk]
-
+  
 5.4.9 (2024-04-22)
 ------------------
 
