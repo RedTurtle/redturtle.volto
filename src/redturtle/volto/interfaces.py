@@ -3,6 +3,7 @@
 from plone.app.contenttypes.interfaces import (
     IPloneAppContenttypesLayer as IDefaultBrowserLayer,
 )
+from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.controlpanels.interfaces import IControlpanel
 from redturtle.volto import _
 from zope.interface import Interface
@@ -43,3 +44,9 @@ class IRedTurtleVoltoSettings(Interface):
         default=False,
         required=False,
     )
+
+
+class ICustomFeedItem(IDexterityContent):
+    """
+    Marker interface for custom feed items.
+    """
