@@ -233,7 +233,7 @@
       handler=".upgrades.to_4305"
       />
   <genericsetup:upgradeStep
-      title="Install new dependency"
+      title="Install collective.volto.sitesettings"
       description=""
       profile="redturtle.volto:default"
       source="4305"
