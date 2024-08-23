@@ -4,7 +4,9 @@ Changelog
 5.5.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix SummarySerializer for collection exporting
+  Links
+  [lucabel]
 
 
 5.5.1 (2024-07-22)

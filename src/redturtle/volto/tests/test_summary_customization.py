@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from plone import api
+from plone.app.contenttypes.behaviors.collection import (
+    ICollection as ICollection_behavior,
+)
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
@@ -104,3 +107,36 @@ class TestSummaryCustomization(unittest.TestCase):
 
         self.assertEqual(len(res["items"]), 1)
         self.assertEqual(res["items"][0]["effective"], page.effective_date)
+
+    def test_summary_serializer_with_links_in_collection_results(self):
+        link = api.content.create(
+            container=self.portal,
+            type="Link",
+            title="Funny link",
+        )
+        link.remoteUrl = "/events"
+        # allow to add collection
+        portal = api.portal.get()
+        pt = portal.portal_types
+        pt["Collection"].global_allow = True
+        # add a collection to find links
+        collection = api.content.create(
+            container=self.portal,
+            type="Collection",
+            title="A collection",
+        )
+        wrapped = ICollection_behavior(collection)
+        wrapped.query = [
+            {
+                "i": "portal_type",
+                "o": "plone.app.querystring.operation.string.is",
+                "v": "Link",
+            },
+        ]
+        transaction.commit()
+        # Check if only the item inside folder1 is returned, since it's a
+        # navigation root.
+        response = self.api_session.get(collection.getId())
+        items = response.json().get("items", [])
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["title"], "Funny link")
