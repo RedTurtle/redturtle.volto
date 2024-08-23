@@ -7,6 +7,8 @@ Changelog
 - Fix SummarySerializer for collection exporting
   Links
   [lucabel]
+- remove newsitem template override, use default dexterity view for newsitem in backend
+  [mamico]
 
 
 5.5.1 (2024-07-22)
@@ -20,13 +22,11 @@ Changelog
 5.5.0 (2024-07-10)
 ------------------
 
-- remove newsitem template override, use default dexterity view for newsitem in backend
-  [mamico]
-
 - Fixed limit event occurrences to 100.
   [eikichi18]
 - Add dependency with collective.volto.sitesettings.
   [cekk]
+
   
 5.4.9 (2024-04-22)
 ------------------
