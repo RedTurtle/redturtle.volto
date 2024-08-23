@@ -20,6 +20,9 @@ Changelog
 5.5.0 (2024-07-10)
 ------------------
 
+- remove newsitem template override, use default dexterity view for newsitem in backend
+  [mamico]
+
 - Fixed limit event occurrences to 100.
   [eikichi18]
 - Add dependency with collective.volto.sitesettings.

@@ -14,6 +14,16 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
 
+  <!-- overrides to default dexterity view -->
+  <browser:page
+      name="newsitem_view"
+      for="plone.app.contenttypes.interfaces.INewsItem"
+      class="plone.dexterity.browser.view.DefaultView"
+      template="item.pt"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
+
   <browser:page
       name="redturtle-volto-settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
