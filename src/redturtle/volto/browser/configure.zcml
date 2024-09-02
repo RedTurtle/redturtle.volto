@@ -66,4 +66,12 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
 
+  <!-- custom display-file -->
+  <browser:page
+      name="display-file"
+      for="*"
+      class=".display_file.DisplayFile"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
 </configure>
