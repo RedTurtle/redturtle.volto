@@ -9,7 +9,8 @@ Changelog
   [lucabel]
 - remove newsitem template override, use default dexterity view for newsitem in backend
   [mamico]
-
+- Customize @@display-file to allow to download files with proper filename.
+  [cekk]
 
 5.5.1 (2024-07-22)
 ------------------
