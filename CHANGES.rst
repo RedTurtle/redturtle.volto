@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.2 (unreleased)
+5.5.2 (2024-09-05)
 ------------------
 
 - Fix SummarySerializer for collection exporting
