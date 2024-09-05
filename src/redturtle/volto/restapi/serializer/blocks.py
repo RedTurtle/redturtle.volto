@@ -13,7 +13,7 @@ from zope.globalrequest import getRequest
 from zope.interface import implementer
 
 
-EXCLUDE_KEYS = ["@type", "token", "value", "@id", "query", "bg_color"]
+EXCLUDE_KEYS = ["@type", "type", "token", "value", "@id", "query", "bg_color"]
 EXCLUDE_TYPES = [
     "title",
     "listing",

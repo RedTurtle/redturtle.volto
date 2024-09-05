@@ -11,6 +11,8 @@ Changelog
   [mamico]
 - Customize @@display-file to allow to download files with proper filename.
   [cekk]
+- Add "type" to EXCLUDE_KEYS in blocks serializer/deserializer to not convert this slate attribute.
+  [cekk]
 
 5.5.1 (2024-07-22)
 ------------------
