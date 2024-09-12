@@ -30,4 +30,6 @@
     <adapter factory=".collection.SerializeCollectionToJson" />
   </configure>
 
+  <adapter factory=".group.SerializeGroupToJson" />
+
 </configure>
