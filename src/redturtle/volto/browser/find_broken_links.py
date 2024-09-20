@@ -1,10 +1,11 @@
-from Products.Five import BrowserView
-from plone import api
-from plone.restapi.serializer.utils import uid_to_url
 from Acquisition import aq_base
+from plone import api
 from plone.dexterity.utils import iterSchemata
-from zope.schema import getFieldsInOrder
+from plone.restapi.serializer.utils import uid_to_url
+from Products.Five import BrowserView
 from six import StringIO
+from zope.schema import getFieldsInOrder
+
 
 try:
     from collective.volto.blocksfield.field import BlocksField
@@ -16,11 +17,11 @@ except ImportError:
 import csv
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 
 class View(BrowserView):
-
     def __call__(self):
         """
         Check all contents if there are some internal links with resolveuid broken
