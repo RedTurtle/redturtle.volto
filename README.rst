@@ -280,6 +280,10 @@ Find blocks
 
 There is a view **@@find-blocks** that will return contents that have at least one block of the given type.
 
+Find broken links
+=================
+
+There is a view **@@find-broken-links** that will return a csv file with a list of contents with broken internal links in blocks.
 
 Stringinterp adapters
 =====================
