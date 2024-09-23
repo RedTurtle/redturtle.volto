@@ -83,7 +83,7 @@ class View(BrowserView):
             item = brain.getObject()
             aq_base_obj = aq_base(item)
 
-            blocks = getattr(item, "blocks", {})
+            blocks = getattr(aq_base_obj, "blocks", {})
             if blocks:
                 if self.check_blocks_broken_links(data=blocks):
                     res.append(brain.getURL())

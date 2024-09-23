@@ -4,7 +4,8 @@ Changelog
 5.5.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Avoid acquisition in find-broken-links view when checking blocks.
+  [cekk]
 
 
 5.5.4 (2024-09-23)
