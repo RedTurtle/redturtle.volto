@@ -4,7 +4,8 @@ Changelog
 5.5.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add view "find-broken-links" that return a csv file with a list of contents with broken links in blocks.
+  [cekk]
 
 
 5.5.2 (2024-09-05)
