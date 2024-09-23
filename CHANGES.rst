@@ -4,7 +4,8 @@ Changelog
 5.5.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix typo in filename generation in "find-broken-links" view.
+  [cekk]
 
 
 5.5.3 (2024-09-23)

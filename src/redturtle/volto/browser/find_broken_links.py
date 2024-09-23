@@ -26,11 +26,11 @@ class View(BrowserView):
         """
         Check all contents if there are some internal links with resolveuid broken
         """
-
+        site_id = api.portal.get().getId()
         results = self.check_links()
         self.request.response.setHeader("Content-type", "application/csv")
         self.request.response.setHeader(
-            "Content-disposition", "attachment; filename=incarichi.csv"
+            "Content-disposition", f"attachment; filename={site_id}_broken_links.csv"
         )
 
         sbuf = StringIO()
