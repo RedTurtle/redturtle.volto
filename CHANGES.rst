@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.5 (unreleased)
+5.5.5 (2024-09-23)
 ------------------
 
 - Avoid acquisition in find-broken-links view when checking blocks.
