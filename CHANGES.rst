@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.3 (unreleased)
+5.5.3 (2024-09-23)
 ------------------
 
 - Add view "find-broken-links" that return a csv file with a list of contents with broken links in blocks.
