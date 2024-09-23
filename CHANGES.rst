@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.4 (unreleased)
+5.5.4 (2024-09-23)
 ------------------
 
 - Fix typo in filename generation in "find-broken-links" view.
