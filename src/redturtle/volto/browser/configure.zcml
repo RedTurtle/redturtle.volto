@@ -80,7 +80,7 @@
       permission="zope2.View"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
-    
+
   <!-- override @@download view -->
   <browser:page
       name="download"
