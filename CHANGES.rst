@@ -4,7 +4,8 @@ Changelog
 5.5.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove dependency with *collective.volto.cookieconsent*.
+  [cekk]
 
 
 5.5.5 (2024-09-23)
