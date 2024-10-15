@@ -2,11 +2,12 @@
 from plone.app.contenttypes.interfaces import IEvent
 from plone.dexterity.interfaces import IDexterityContent
 from plone.indexer.decorator import indexer
+from plone.restapi.indexers import extract_text
 from plone.restapi.interfaces import IBlockSearchableText
 from zope.component import adapter
 from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
-from plone.restapi.indexers import extract_text
+
 
 try:
     from plone.base.utils import safe_text
@@ -65,7 +66,6 @@ def recursive_slate_text(paragraph):
 
 
 class BaseBlockSearchableText:
-
     def __init__(self, context, request):
         self.context = context
         self.request = request
@@ -89,7 +89,6 @@ class BaseBlockSearchableText:
 @implementer(IBlockSearchableText)
 @adapter(IDexterityContent, IBrowserRequest)
 class AccordionBlockSearchableText(BaseBlockSearchableText):
-
     def get_extra_text(self, value):
         text = []
         for subblock in value.get("subblocks", []):

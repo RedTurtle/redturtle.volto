@@ -279,7 +279,6 @@ class TestBlocksSearchable(unittest.TestCase):
         )
 
     def test_slate_table_block_indexed(self):
-
         search_words = [
             "tableheader1",
             "tableheader2",
@@ -289,7 +288,6 @@ class TestBlocksSearchable(unittest.TestCase):
         ]
 
         for word in search_words:
-
             self.assertEqual(len(api.content.find(SearchableText=word)), 0)
 
         self.document.blocks = {

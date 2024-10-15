@@ -248,7 +248,7 @@
       destination="4307"
       handler=".upgrades.to_4307"
       />
-    <genericsetup:upgradeStep
+  <genericsetup:upgradeStep
       title="Reindex SearchableText"
       description=""
       profile="redturtle.volto:default"
