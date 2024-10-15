@@ -54,7 +54,6 @@ setup(
     python_requires=">=3.7",
     install_requires=[
         "setuptools",
-        "collective.volto.cookieconsent",  # this will be uninstalled and removed soon.
         "collective.volto.gdprcookie",
         "collective.monkeypatcher",
         "collective.purgebyid",
