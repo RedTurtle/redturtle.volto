@@ -17,6 +17,7 @@ except Exception:
 
 import json
 import logging
+import transaction
 
 
 try:
@@ -522,3 +523,20 @@ def to_4307(context):
         "profile-redturtle.volto:profile_to_4307", "plone.app.registry", False
     )
     api.portal.set_registry_record("redturtle.volto.rss_image_choice", "image")
+
+
+def to_4308(context):
+    catalog = api.portal.get_tool(name="portal_catalog")
+    brains = catalog()
+    tot = len(brains)
+
+    i = 0
+    for brain in brains:
+        i += 1
+        obj = brain.getObject()
+        if i % 100 == 0:
+            logger.info(f"Progress: {i}/{tot}")
+            catalog.catalog_object(obj, idxs=["SearchableText"], update_metadata=False)
+            if i % 1000 == 0:
+                transaction.commit()
+                logger.info(f"{i} items processed. Commit.")
