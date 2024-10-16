@@ -536,7 +536,7 @@ def to_4308(context):
         obj = brain.getObject()
         if i % 100 == 0:
             logger.info(f"Progress: {i}/{tot}")
-        catalog.catalog_object(obj, idxs=["SearchableText"], update_metadata=False)
+        obj.reindexObject(idxs=["SearchableText"], update_metadata=True)
         if i % 1000 == 0:
             transaction.commit()
             logger.info(f"{i} items processed. Commit.")
