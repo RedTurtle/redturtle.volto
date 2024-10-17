@@ -641,3 +641,34 @@ class TestBlocksSearchable(unittest.TestCase):
             res = api.content.find(SearchableText=word)
             self.assertEqual(len(res), 1)
             self.assertEqual(res[0].UID, self.document.UID())
+
+    def test_countdown_block_indexed(self):
+        search_words = [
+            "countdowntitle",
+            "countdowntext",
+        ]
+
+        for word in search_words:
+            self.assertEqual(len(api.content.find(SearchableText=word)), 0)
+
+        self.document.blocks = {
+            "xyz": {
+                "@type": "count_down",
+                "countdown_text": [
+                    {
+                        "children": [{"text": "countdowntext"}],
+                        "styleName": "text-center",
+                        "type": "p",
+                    }
+                ],
+                "text": [{"children": [{"text": "countdowntitle"}], "type": "h2"}],
+            }
+        }
+
+        self.document.blocks_layout = {"items": ["xyz"]}
+        self.document.reindexObject()
+        commit()
+        for word in search_words:
+            res = api.content.find(SearchableText=word)
+            self.assertEqual(len(res), 1)
+            self.assertEqual(res[0].UID, self.document.UID())

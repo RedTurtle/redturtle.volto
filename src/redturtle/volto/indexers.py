@@ -226,3 +226,12 @@ class NumbersBlockSearchableText(BaseBlockSearchableText):
 @adapter(IDexterityContent, IBrowserRequest)
 class RemoteCounterBlockSearchableText(BaseBlockSearchableText):
     """reomte counter"""
+
+
+@implementer(IBlockSearchableText)
+@adapter(IDexterityContent, IBrowserRequest)
+class CountDownBlockSearchableText(BaseBlockSearchableText):
+    """count-down block"""
+
+    def get_extra_text(self, value):
+        return " ".join((_extract_text(value.get("countdown_text", {})),))

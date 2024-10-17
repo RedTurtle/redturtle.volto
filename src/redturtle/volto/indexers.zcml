@@ -71,4 +71,9 @@
       factory=".indexers.RemoteCounterBlockSearchableText"
       name="remote-counter"
       />
+  <adapter
+      factory=".indexers.CountDownBlockSearchableText"
+      name="count_down"
+      />
+      
 </configure>
