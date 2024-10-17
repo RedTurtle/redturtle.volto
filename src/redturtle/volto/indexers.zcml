@@ -75,5 +75,5 @@
       factory=".indexers.CountDownBlockSearchableText"
       name="count_down"
       />
-      
+
 </configure>
