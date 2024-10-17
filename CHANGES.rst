@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.6 (unreleased)
+5.5.6 (2024-10-17)
 ------------------
 
 - Remove dependency with *collective.volto.cookieconsent*.
