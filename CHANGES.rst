@@ -6,7 +6,8 @@ Changelog
 
 - Remove dependency with *collective.volto.cookieconsent*.
   [cekk]
-
+- Add more block indexers for SearchableText.
+  [cekk]
 
 5.5.5 (2024-09-23)
 ------------------

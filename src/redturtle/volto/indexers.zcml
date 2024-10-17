@@ -35,6 +35,45 @@
       factory=".indexers.CardWithImageBlockSearchableText"
       name="testo_riquadro_immagine"
       />
-
+  <adapter
+      factory=".indexers.CalloutBlockSearchableText"
+      name="callout_block"
+      />
+  <adapter
+      factory=".indexers.HeroBlockSearchableText"
+      name="hero"
+      />
+  <adapter
+      factory=".indexers.CTABlockSearchableText"
+      name="cta_block"
+      />
+  <adapter
+      factory=".indexers.GridBlockSearchableText"
+      name="gridBlock"
+      />
+  <adapter
+      factory=".indexers.SlateTableBlockSearchableText"
+      name="slateTable"
+      />
+  <adapter
+      factory=".indexers.ContactsBlockSearchableText"
+      name="contacts"
+      />
+  <adapter
+      factory=".indexers.IconBlockSearchableText"
+      name="iconBlocks"
+      />
+  <adapter
+      factory=".indexers.NumbersBlockSearchableText"
+      name="numbersBlock"
+      />
+  <adapter
+      factory=".indexers.RemoteCounterBlockSearchableText"
+      name="remote-counter"
+      />
+  <adapter
+      factory=".indexers.CountDownBlockSearchableText"
+      name="count_down"
+      />
 
 </configure>
