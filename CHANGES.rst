@@ -4,7 +4,8 @@ Changelog
 5.5.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Refactored AdvancedQuery part in @search endpoint to be more extendable.
+  [cekk]
 
 
 5.5.6 (2024-10-17)
