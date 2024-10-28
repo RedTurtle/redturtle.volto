@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.7 (unreleased)
+5.5.7 (2024-10-28)
 ------------------
 
 - Refactored AdvancedQuery part in @search endpoint to be more extendable.
