@@ -1,93 +1,33 @@
-from collective.volto.blocksfield.field import BlocksField
-from plone.app.linkintegrity.interfaces import IRetriever
-from plone.app.linkintegrity.parser import extractLinks
-from plone.app.textfield import RichText
-from plone.dexterity.interfaces import IDexterityContainer
 from plone.dexterity.interfaces import IDexterityContent
-from plone.dexterity.interfaces import IDexterityFTI
-from plone.dexterity.interfaces import IDexterityItem
-from plone.dexterity.utils import getAdditionalSchemata
-from plone.restapi.blocks import iter_block_transform_handlers
-from plone.restapi.blocks import visit_blocks
-from plone.restapi.blocks_linkintegrity import BlocksRetriever as BaseBlocksRetriever
 from plone.restapi.blocks_linkintegrity import (
     GenericBlockLinksRetriever as BaseGenericBlockLinksRetriever,
-)
-from plone.restapi.blocks_linkintegrity import (
-    SlateBlockLinksRetriever as BaseSlateBlockLinksRetriever,
-)
-from plone.restapi.blocks_linkintegrity import (
+    SlateBlockLinksRetriever,
     TextBlockLinksRetriever as BaseTextBlockLinksRetriever,
+    get_urls_from_value,
 )
+from plone.restapi.deserializer.blocks import iterate_children
 from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
-from zope.component import getUtility
 from zope.interface import implementer
-from zope.schema import getFieldsInOrder
+from zope.publisher.interfaces.browser import IBrowserRequest
 
 
-class BaseRTRetriever(BaseBlocksRetriever):
-    def retrieveLinks(self):
-        """
-        Check links in:
-        - blocks field
-        - text fields
-        - BlocksField fields
-        """
-        # first do plone.restapi links generation
-        links = super().retrieveLinks()
+class SubBlocksRetriever(SlateBlockLinksRetriever):
 
-        # then iterate over content schema and check for other references
-        fti = getUtility(IDexterityFTI, name=self.context.portal_type)
-        schema = fti.lookupSchema()
-        additional_schema = getAdditionalSchemata(
-            context=self.context, portal_type=self.context.portal_type
-        )
-        schemas = [i for i in additional_schema] + [schema]
-        links = set()
-        for schema in schemas:
-            for name, field in getFieldsInOrder(schema):
-                if isinstance(field, RichText):
-                    value = getattr(schema(self.context), name)
-                    if not value or not getattr(value, "raw", None):
-                        continue
-                    links |= set(extractLinks(value.raw))
-                elif isinstance(field, BlocksField):
-                    value = field.get(self.context)
-                    if not value:
-                        continue
-                    if not isinstance(value, dict):
-                        continue
-                    blocks = value.get("blocks", {})
-                    if not blocks:
-                        continue
-                    for block in visit_blocks(self.context, blocks):
-                        for handler in iter_block_transform_handlers(
-                            self.context, block, IBlockFieldLinkIntegrityRetriever
-                        ):
-                            links |= set(handler(block))
-        return links
+    def extract_links(self, block_data):
+        children = iterate_children(block_data or [])
+        for child in children:
+            node_type = child.get("type")
+            if node_type:
+                handler = getattr(self, f"handle_{node_type}", None)
+                if handler:
+                    value = handler(child)
+                    if value:
+                        self.links.append(value)
 
 
-@implementer(IRetriever)
-@adapter(IDexterityItem)
-class BlocksRetrieverItem(BaseRTRetriever):
-    """
-    Retriever for Item contents.
-    Needed a more specific than IDexterityContent because it's already registered.
-    """
-
-
-@implementer(IRetriever)
-@adapter(IDexterityContainer)
-class BlocksRetrieverContainer(BaseRTRetriever):
-    """
-    Retriever for Container contents.
-    Needed a more specific than IDexterityContent because it's already registered.
-    """
-
-
+# Specific blocks adapters
 @adapter(IDexterityContent, IRedturtleVoltoLayer)
 @implementer(IBlockFieldLinkIntegrityRetriever)
 class TextBlockLinksRetriever(BaseTextBlockLinksRetriever):
@@ -96,7 +36,7 @@ class TextBlockLinksRetriever(BaseTextBlockLinksRetriever):
 
 @adapter(IDexterityContent, IRedturtleVoltoLayer)
 @implementer(IBlockFieldLinkIntegrityRetriever)
-class SlateBlockLinksRetriever(BaseSlateBlockLinksRetriever):
+class RTSlateBlockLinksRetriever(SlateBlockLinksRetriever):
     """Retriever for slate blocks"""
 
 
@@ -104,3 +44,135 @@ class SlateBlockLinksRetriever(BaseSlateBlockLinksRetriever):
 @implementer(IBlockFieldLinkIntegrityRetriever)
 class GenericBlockLinksRetriever(BaseGenericBlockLinksRetriever):
     """Retriever for generic blocks"""
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class SimpleCardBlockLinksRetriever(SlateBlockLinksRetriever):
+    order = 200
+    block_type = "testo_riquadro_semplice"
+    field = "simple_card_content"
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class AccordionBlockLinksRetriever(SubBlocksRetriever):
+    order = 200
+    block_type = "accordion"
+
+    def __call__(self, block):
+        if not block:
+            return self.links
+        description = block.get("description", [])
+        self.extract_links(block_data=description)
+
+        for subblock in block.get("subblocks", []):
+            self.extract_links(block_data=subblock.get("text", {}))
+
+        return self.links
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class AlertBlockLinksRetriever(SlateBlockLinksRetriever):
+    order = 200
+    block_type = "alert"
+    field = "text"
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class ImageCardBlockLinksRetriever(SlateBlockLinksRetriever):
+    order = 200
+    block_type = "testo_riquadro_immagine"
+    field = "image_card_content"
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class CalloutBlockLinksRetriever(SlateBlockLinksRetriever):
+    order = 200
+    block_type = "callout_block"
+    field = "text"
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class CTABlockLinksRetriever(SlateBlockLinksRetriever):
+    order = 200
+    block_type = "cta_block"
+    field = "cta_content"
+
+    def __call__(self, block):
+        super().__call__(block=block)
+
+        for url in get_urls_from_value(block.get("ctaLink", "")):
+            self.links.append(url)
+        for img in block.get("ctaImage", []):
+            self.links.append(f"resolveuid/{img}")
+
+        return self.links
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class TableBlockLinksRetriever(SubBlocksRetriever):
+    order = 200
+    block_type = "slateTable"
+
+    def __call__(self, block):
+        if not block:
+            return self.links
+
+        for row in block.get("table", {}).get("rows", []):
+            for cell in row.get("cells", []):
+
+                self.extract_links(block_data=cell.get("value", {}))
+
+        return self.links
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class ContactsBlockLinksRetriever(SubBlocksRetriever):
+    order = 200
+    block_type = "contacts"
+
+    def __call__(self, block):
+        if not block:
+            return self.links
+        description = block.get("description", [])
+        self.extract_links(block_data=description)
+
+        for subblock in block.get("subblocks", []):
+            self.extract_links(block_data=subblock.get("text", {}))
+            self.extract_links(block_data=subblock.get("tel", {}))
+            self.extract_links(block_data=subblock.get("email", {}))
+
+        return self.links
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class IconBlockLinksRetriever(SubBlocksRetriever):
+    order = 200
+    block_type = "iconBlocks"
+
+    def __call__(self, block):
+        if not block:
+            return self.links
+        description = block.get("description", [])
+        self.extract_links(block_data=description)
+
+        for url in get_urls_from_value(block.get("href", "")):
+            self.links.append(url)
+
+        for img in block.get("background", []):
+            self.links.append(f"resolveuid/{img}")
+
+        for subblock in block.get("subblocks", []):
+            self.extract_links(block_data=subblock.get("text", {}))
+            for url in get_urls_from_value(subblock.get("href", "")):
+                self.links.append(url)
+
+        return self.links
