@@ -4,8 +4,8 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from redturtle.volto.testing import REDTURTLE_VOLTO_FUNCTIONAL_TESTING
 from transaction import commit
-from zope.lifecycleevent import ObjectModifiedEvent
 from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
 

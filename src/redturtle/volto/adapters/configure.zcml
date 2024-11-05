@@ -26,17 +26,17 @@
 
   <!-- blocks linkintegrity for specific blocks -->
   <subscriber
-        factory=".blocks_linkintegrity.TextBlockLinksRetriever"
-        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
-        />
-    <subscriber
-        factory=".blocks_linkintegrity.GenericBlockLinksRetriever"
-        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
-        />
-    <subscriber
-        factory=".blocks_linkintegrity.RTSlateBlockLinksRetriever"
-        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
-        />
+      factory=".blocks_linkintegrity.TextBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.GenericBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.RTSlateBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
   <subscriber
       factory=".blocks_linkintegrity.SimpleCardBlockLinksRetriever"
       provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"

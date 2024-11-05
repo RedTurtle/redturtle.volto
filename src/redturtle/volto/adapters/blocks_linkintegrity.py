@@ -1,9 +1,11 @@
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.blocks_linkintegrity import (
     GenericBlockLinksRetriever as BaseGenericBlockLinksRetriever,
-    SlateBlockLinksRetriever,
+)
+from plone.restapi.blocks_linkintegrity import get_urls_from_value
+from plone.restapi.blocks_linkintegrity import SlateBlockLinksRetriever
+from plone.restapi.blocks_linkintegrity import (
     TextBlockLinksRetriever as BaseTextBlockLinksRetriever,
-    get_urls_from_value,
 )
 from plone.restapi.deserializer.blocks import iterate_children
 from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
