@@ -2,7 +2,6 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.blocks_linkintegrity import (
     GenericBlockLinksRetriever as BaseGenericBlockLinksRetriever,
 )
-from plone.restapi.blocks_linkintegrity import get_urls_from_value
 from plone.restapi.blocks_linkintegrity import SlateBlockLinksRetriever
 from plone.restapi.blocks_linkintegrity import (
     TextBlockLinksRetriever as BaseTextBlockLinksRetriever,
@@ -13,6 +12,28 @@ from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
+
+
+def get_urls_from_value(value):
+    """Generator of urls from a block field value
+
+    Recognizes:
+    - strings containing "resolveuid"
+    - objects with an @id property containing "resolveuid"
+    - objects with an UID property
+    - lists of either of the above
+    """
+    if isinstance(value, str) and "resolveuid" in value:
+        yield value
+    elif isinstance(value, list):
+        for item in value:
+            yield from get_urls_from_value(item)
+    elif isinstance(value, dict):
+        uid = value.get("UID", "")
+        if uid:
+            yield f"resolveuid/{uid}"
+        else:
+            yield from get_urls_from_value(value.get("@id"))
 
 
 class SubBlocksRetriever(SlateBlockLinksRetriever):
@@ -47,6 +68,30 @@ class RTSlateBlockLinksRetriever(SlateBlockLinksRetriever):
 class GenericBlockLinksRetriever(BaseGenericBlockLinksRetriever):
     """Retriever for generic blocks"""
 
+    def __call__(self, block):
+        """
+        The customization is the list of field names.
+        """
+        links = []
+        for field in [
+            "url",
+            "href",
+            "preview_image",
+            "linkHref",
+            "linkMore",
+            "moreHref",
+            "background",
+            "audio",
+            "linkHrefColumn",
+            "ctaImage",
+            "ctaLink",
+        ]:
+            value = block.get(field, "")
+            if value:
+                for url in get_urls_from_value(value):
+                    links.append(url)
+        return links
+
 
 @adapter(IDexterityContent, IBrowserRequest)
 @implementer(IBlockFieldLinkIntegrityRetriever)
@@ -70,7 +115,8 @@ class AccordionBlockLinksRetriever(SubBlocksRetriever):
 
         for subblock in block.get("subblocks", []):
             self.extract_links(block_data=subblock.get("text", {}))
-
+            for url in get_urls_from_value(subblock.get("href", "")):
+                self.links.append(url)
         return self.links
 
 
@@ -104,16 +150,6 @@ class CTABlockLinksRetriever(SlateBlockLinksRetriever):
     order = 200
     block_type = "cta_block"
     field = "cta_content"
-
-    def __call__(self, block):
-        super().__call__(block=block)
-
-        for url in get_urls_from_value(block.get("ctaLink", "")):
-            self.links.append(url)
-        for img in block.get("ctaImage", []):
-            self.links.append(f"resolveuid/{img}")
-
-        return self.links
 
 
 @adapter(IDexterityContent, IBrowserRequest)
@@ -166,10 +202,8 @@ class IconBlockLinksRetriever(SubBlocksRetriever):
         description = block.get("description", [])
         self.extract_links(block_data=description)
 
-        for url in get_urls_from_value(block.get("href", "")):
-            self.links.append(url)
-
         for img in block.get("background", []):
+            # this is not standard, is a list of uids, no a list of objects with UID key
             self.links.append(f"resolveuid/{img}")
 
         for subblock in block.get("subblocks", []):

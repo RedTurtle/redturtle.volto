@@ -606,3 +606,60 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(len(reference["sources"]), 1)
         self.assertEqual(reference["sources"][0]["uid"], self.document.UID())
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
+
+    def test_listing_block_linkHref_link_integrity(self):
+
+        self.assertEqual(self.get_references(), [])
+        self.document.blocks = {
+            "xyz": {
+                "@type": "listing",
+                "linkHref": [
+                    {
+                        "@id": f"resolveuid/{self.ref.UID()}",
+                        "Description": "",
+                        "Title": "PAgina da linkare",
+                        "title": "PAgina da linkare",
+                    }
+                ],
+            }
+        }
+        notify(ObjectModifiedEvent(self.document))
+
+        references = self.get_references()
+        reference = references[0]
+
+        self.assertEqual(len(references), 1)
+        self.assertEqual(len(reference["sources"]), 1)
+        self.assertEqual(reference["sources"][0]["uid"], self.document.UID())
+        self.assertEqual(reference["target"]["uid"], self.ref.UID())
+
+    def test_rss_block_linkMore_link_integrity(self):
+
+        self.assertEqual(self.get_references(), [])
+        self.document.blocks = {
+            "xyz": {"@type": "rssBlock", "linkMore": f"resolveuid/{self.ref.UID()}"}
+        }
+        notify(ObjectModifiedEvent(self.document))
+
+        references = self.get_references()
+        reference = references[0]
+
+        self.assertEqual(len(references), 1)
+        self.assertEqual(len(reference["sources"]), 1)
+        self.assertEqual(reference["sources"][0]["uid"], self.document.UID())
+        self.assertEqual(reference["target"]["uid"], self.ref.UID())
+
+    def test_audio_block_link_integrity(self):
+
+        self.assertEqual(self.get_references(), [])
+        self.document.blocks = {
+            "xyz": {"@type": "audioBlock", "audio": [{"UID": self.ref.UID()}]}
+        }
+        notify(ObjectModifiedEvent(self.document))
+        references = self.get_references()
+        reference = references[0]
+
+        self.assertEqual(len(references), 1)
+        self.assertEqual(len(reference["sources"]), 1)
+        self.assertEqual(reference["sources"][0]["uid"], self.document.UID())
+        self.assertEqual(reference["target"]["uid"], self.ref.UID())
