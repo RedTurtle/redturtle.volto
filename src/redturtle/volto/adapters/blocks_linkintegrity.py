@@ -83,7 +83,6 @@ class GenericBlockLinksRetriever(BaseGenericBlockLinksRetriever):
             "background",
             "audio",
             "linkHrefColumn",
-            "ctaImage",
             "ctaLink",
         ]:
             value = block.get(field, "")
@@ -150,6 +149,13 @@ class CTABlockLinksRetriever(SlateBlockLinksRetriever):
     order = 200
     block_type = "cta_block"
     field = "cta_content"
+
+    def __call__(self, block):
+        super().__call__(block=block)
+
+        for image_uid in block.get("ctaImage", []):
+            self.links.append(f"resolveuid/{image_uid}")
+        return self.links
 
 
 @adapter(IDexterityContent, IBrowserRequest)
