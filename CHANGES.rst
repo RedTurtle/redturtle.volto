@@ -4,7 +4,8 @@ Changelog
 5.5.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add linkintegrity indexers for some custom blocks.
+  [cekk]
 
 
 5.5.7 (2024-10-28)
