@@ -35,7 +35,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         return links_info.get_breaches()
 
     def test_testo_riquadro_semplice_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -67,7 +66,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_alert_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -99,7 +97,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_accordion_description_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -131,7 +128,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_accordion_subblocks_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -169,7 +165,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_testo_riquadro_immagine_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -201,7 +196,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_callout_block_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -233,7 +227,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_cta_block_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -265,7 +258,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_cta_block_ctalink_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {"@type": "cta_block", "ctaLink": f"/resolveuid/{self.ref.UID()}"}
@@ -281,7 +273,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_cta_block_background_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {"@type": "cta_block", "ctaImage": [self.ref.UID()]}
@@ -297,7 +288,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_table_block_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -349,7 +339,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_contacts_block_description_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -381,7 +370,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_contacts_block_subblocks_text_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -417,7 +405,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_contacts_block_subblocks_tel_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -453,7 +440,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_contacts_block_subblocks_email_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -489,7 +475,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_icon_block_description_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -521,7 +506,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_icon_block_href_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {"@type": "iconBlocks", "href": f"/resolveuid/{self.ref.UID()}"}
@@ -537,7 +521,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_icon_block_background_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {"@type": "iconBlocks", "background": [self.ref.UID()]}
@@ -553,7 +536,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_icon_block_subblocks_text_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -589,7 +571,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_icon_block_subblocks_href_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -608,7 +589,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_listing_block_linkHref_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {
@@ -634,7 +614,6 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_rss_block_linkMore_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {"@type": "rssBlock", "linkMore": f"resolveuid/{self.ref.UID()}"}
@@ -650,12 +629,73 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
     def test_audio_block_link_integrity(self):
-
         self.assertEqual(self.get_references(), [])
         self.document.blocks = {
             "xyz": {"@type": "audioBlock", "audio": [{"UID": self.ref.UID()}]}
         }
         notify(ObjectModifiedEvent(self.document))
+        references = self.get_references()
+        reference = references[0]
+
+        self.assertEqual(len(references), 1)
+        self.assertEqual(len(reference["sources"]), 1)
+        self.assertEqual(reference["sources"][0]["uid"], self.document.UID())
+        self.assertEqual(reference["target"]["uid"], self.ref.UID())
+
+    def test_count_down_text_link_integrity(self):
+        self.assertEqual(self.get_references(), [])
+        self.document.blocks = {
+            "xyz": {
+                "@type": "count_down",
+                "text": [
+                    {
+                        "type": "p",
+                        "children": [
+                            {
+                                "type": "link",
+                                "data": {
+                                    "url": f"/resolveuid/{self.ref.UID()}",
+                                },
+                                "children": [{"text": "foo"}],
+                            },
+                        ],
+                    }
+                ],
+            }
+        }
+        notify(ObjectModifiedEvent(self.document))
+
+        references = self.get_references()
+        reference = references[0]
+
+        self.assertEqual(len(references), 1)
+        self.assertEqual(len(reference["sources"]), 1)
+        self.assertEqual(reference["sources"][0]["uid"], self.document.UID())
+        self.assertEqual(reference["target"]["uid"], self.ref.UID())
+
+    def test_count_down_countdown_text_link_integrity(self):
+        self.assertEqual(self.get_references(), [])
+        self.document.blocks = {
+            "xyz": {
+                "@type": "count_down",
+                "countdown_text": [
+                    {
+                        "type": "p",
+                        "children": [
+                            {
+                                "type": "link",
+                                "data": {
+                                    "url": f"/resolveuid/{self.ref.UID()}",
+                                },
+                                "children": [{"text": "foo"}],
+                            },
+                        ],
+                    }
+                ],
+            }
+        }
+        notify(ObjectModifiedEvent(self.document))
+
         references = self.get_references()
         reference = references[0]
 

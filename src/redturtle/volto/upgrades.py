@@ -526,9 +526,7 @@ def to_4307(context):
 
 
 def to_4308(context):
-
     def should_reindex(blocks):
-
         reindexable_blocks = [
             "accordion",
             "alert",

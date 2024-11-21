@@ -21,7 +21,6 @@ from zope.component import adapter
 
 @adapter(ICustomFeedItem, IFeed)
 class CustomFeedItem(DexterityItem):
-
     def _has_valid_image(self, behavior, field_name):
         if not behavior:
             return False

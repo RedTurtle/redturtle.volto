@@ -85,7 +85,6 @@ class TestCustomRSSFeed(unittest.TestCase):
         self.assertTrue(ICustomFeedItem.providedBy(self.news2))
 
     def test_rss_item_field_name_image(self):
-
         adapter_news_1 = CustomFeedItem(self.news1, self.feed)
         adapter_news_2 = CustomFeedItem(self.news2, self.feed)
 
@@ -97,7 +96,6 @@ class TestCustomRSSFeed(unittest.TestCase):
         self.assertEqual(adapter_news_2.field_name, None)
 
     def test_rss_item_field_name_preview_image(self):
-
         api.portal.set_registry_record(
             "redturtle.volto.rss_image_choice", "preview_image"
         )

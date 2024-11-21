@@ -4,7 +4,8 @@ Changelog
 5.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add linkintegrity check also for count_down block.
+  [cekk]
 
 
 5.6.0 (2024-11-21)

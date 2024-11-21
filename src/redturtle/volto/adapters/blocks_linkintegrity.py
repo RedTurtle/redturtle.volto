@@ -37,7 +37,6 @@ def get_urls_from_value(value):
 
 
 class SubBlocksRetriever(SlateBlockLinksRetriever):
-
     def extract_links(self, block_data):
         children = iterate_children(block_data or [])
         for child in children:
@@ -170,7 +169,6 @@ class TableBlockLinksRetriever(SubBlocksRetriever):
 
         for row in block.get("table", {}).get("rows", []):
             for cell in row.get("cells", []):
-
                 self.extract_links(block_data=cell.get("value", {}))
 
         return self.links
@@ -216,5 +214,20 @@ class IconBlockLinksRetriever(SubBlocksRetriever):
             self.extract_links(block_data=subblock.get("text", {}))
             for url in get_urls_from_value(subblock.get("href", "")):
                 self.links.append(url)
+
+        return self.links
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class CountDownBlockLinksRetriever(SubBlocksRetriever):
+    order = 200
+    block_type = "count_down"
+
+    def __call__(self, block):
+        if not block:
+            return self.links
+        for field_id in ["text", "countdown_text"]:
+            self.extract_links(block_data=block.get(field_id, []))
 
         return self.links
