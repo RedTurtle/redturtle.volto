@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.8 (unreleased)
+5.6.0 (2024-11-21)
 ------------------
 
 - Add linkintegrity indexers for some custom blocks.
