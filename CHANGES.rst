@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.6.1 (unreleased)
+5.6.1 (2024-11-21)
 ------------------
 
 - Add linkintegrity check also for count_down block.
