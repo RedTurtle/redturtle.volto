@@ -40,7 +40,7 @@ class SubBlocksRetriever(SlateBlockLinksRetriever):
     def extract_links(self, block_data):
         children = iterate_children(block_data or [])
         for child in children:
-            node_type = child.get("type")
+            node_type = child.get("type", "")
             if node_type:
                 handler = getattr(self, f"handle_{node_type}", None)
                 if handler:
