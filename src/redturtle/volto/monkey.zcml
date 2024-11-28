@@ -34,6 +34,7 @@
       class="plone.volto.transforms.NestedResolveUIDDeserializerBase"
       description="Patch for disallow plone.volto deserialization"
       />
+
   <monkey:patch
       original="__call__"
       replacement=".monkey.plone_volto_serializer_call"
@@ -56,6 +57,15 @@
       description="Fix long request in case pam is not installed"
       preserveOriginal="True"
       />
+
+  <monkey:patch
+      original="__call__"
+      replacement=".monkey.plone_restapi_slateblocklinksretriever_call"
+      class="plone.restapi.blocks_linkintegrity.SlateBlockLinksRetriever"
+      description="Fix default of get methon on dict"
+      preserveOriginal="True"
+      />
+
   <monkey:patch
       original="search_for_similar"
       replacement=".monkey.search_for_similar"
