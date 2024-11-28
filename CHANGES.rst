@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.6.2 (unreleased)
+5.6.2 (2024-11-28)
 ------------------
 
 - Add patch for SlateBlockslinkRetriever.
