@@ -4,7 +4,8 @@ Changelog
 5.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add patch for blocksRetriever.
+  [eikichi18]
 
 
 5.6.2 (2024-11-28)
@@ -93,7 +94,7 @@ Changelog
 - Add dependency with collective.volto.sitesettings.
   [cekk]
 
-  
+
 5.4.9 (2024-04-22)
 ------------------
 
