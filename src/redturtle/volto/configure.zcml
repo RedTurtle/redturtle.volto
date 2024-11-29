@@ -69,4 +69,8 @@
     <implements interface="redturtle.volto.interfaces.ICustomFeedItem" />
   </class>
 
+  <!-- enable linkintegrity also on site root -->
+  <class class="Products.CMFPlone.Portal.PloneSite">
+    <implements interface="plone.app.relationfield.interfaces.IDexterityHasRelations" />
+  </class>
 </configure>

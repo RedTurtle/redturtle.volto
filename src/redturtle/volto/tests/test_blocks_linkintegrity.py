@@ -703,3 +703,34 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(len(reference["sources"]), 1)
         self.assertEqual(reference["sources"][0]["uid"], self.document.UID())
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
+
+    def test_linkintegrity_works_also_on_site_root(self):
+        self.assertEqual(self.get_references(), [])
+        self.portal.blocks = {
+            "xyz": {
+                "@type": "testo_riquadro_semplice",
+                "simple_card_content": [
+                    {
+                        "type": "p",
+                        "children": [
+                            {
+                                "type": "link",
+                                "data": {
+                                    "url": f"/resolveuid/{self.ref.UID()}",
+                                },
+                                "children": [{"text": "foo"}],
+                            },
+                        ],
+                    }
+                ],
+            }
+        }
+        notify(ObjectModifiedEvent(self.portal))
+
+        references = self.get_references()
+        reference = references[0]
+
+        self.assertEqual(len(references), 1)
+        self.assertEqual(len(reference["sources"]), 1)
+        self.assertEqual(reference["sources"][0]["uid"], self.portal.UID())
+        self.assertEqual(reference["target"]["uid"], self.ref.UID())
