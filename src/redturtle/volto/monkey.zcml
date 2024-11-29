@@ -59,10 +59,10 @@
       />
 
   <monkey:patch
-      original="__call__"
-      replacement=".monkey.plone_restapi_slateblocklinksretriever_call"
-      class="plone.restapi.blocks_linkintegrity.SlateBlockLinksRetriever"
-      description="Fix default of get methon on dict"
+      original="retrieveLinks"
+      replacement=".monkey.plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks"
+      class="plone.restapi.blocks_linkintegrity.BlocksRetriever"
+      description="Add check on block"
       preserveOriginal="True"
       />
 
