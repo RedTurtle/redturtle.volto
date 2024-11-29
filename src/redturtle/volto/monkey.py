@@ -8,7 +8,8 @@ from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
 from plone.event.interfaces import IRecurrenceSupport
 from plone.event.recurrence import recurrence_sequence_ical
-from plone.restapi.blocks import iter_block_transform_handlers, visit_blocks
+from plone.restapi.blocks import iter_block_transform_handlers
+from plone.restapi.blocks import visit_blocks
 from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
 
 # from plone.event.utils import pydt
@@ -208,7 +209,6 @@ def plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks(self):
     if not blocks:
         return links
     for block in visit_blocks(self.context, blocks):
-
         if not isinstance(block, dict):
             continue
 
