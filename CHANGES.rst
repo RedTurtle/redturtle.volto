@@ -6,7 +6,8 @@ Changelog
 
 - Add patch for blocksRetriever.
   [eikichi18]
-
+- Enable blocks linkintegrity also on Site Root.
+  [cekk]
 
 5.6.2 (2024-11-28)
 ------------------
