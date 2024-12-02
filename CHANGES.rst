@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.6.3 (unreleased)
+5.6.3 (2024-12-02)
 ------------------
 
 - Add patch for blocksRetriever.
