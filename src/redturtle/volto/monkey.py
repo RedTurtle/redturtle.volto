@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
+from collections import deque
 from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day
 from plone.app.event.dx.behaviors import IEventBasic
@@ -208,6 +209,7 @@ def plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks(self):
     blocks = getattr(self.context, "blocks", {})
     if not blocks:
         return links
+
     for block in visit_blocks(self.context, blocks):
         if not isinstance(block, dict):
             continue
@@ -217,3 +219,37 @@ def plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks(self):
         ):
             links |= set(handler(block))
     return links
+
+
+def iterate_children(value):
+    """iterate_children.
+
+    plone.restapi.deserializer.blocks.iterate_childen
+    """
+    queue = deque(value)
+    while queue:
+        child = queue.pop()
+        yield child
+        if isinstance(child, dict) and child.get("children"):
+            queue.extend(child["children"] or [])
+
+
+def plone_restapi_blocks_linkintegrity_slateblocklinksretriever_call(self, block):
+    """
+    plone.restapi.blocks_linkintegrity.SlateBlockLinksRetriever.__call__ patch
+    """
+    value = (block or {}).get(self.field, [])
+    children = iterate_children(value or [])
+    for child in children:
+        if not isinstance(child, dict):
+            continue
+
+        node_type = child.get("type")
+        if node_type:
+            handler = getattr(self, f"handle_{node_type}", None)
+            if handler:
+                value = handler(child)
+                if value:
+                    self.links.append(value)
+
+    return self.links
