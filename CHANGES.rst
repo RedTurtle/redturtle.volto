@@ -5,7 +5,7 @@ Changelog
 ------------------
 
 - Add patch for SlateBlockLinksRetriever.
- [eikichi18]
+  [eikichi18]
 
 
 5.6.3 (2024-12-02)

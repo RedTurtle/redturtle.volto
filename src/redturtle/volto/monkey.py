@@ -236,7 +236,8 @@ def iterate_children(value):
 
 def plone_restapi_blocks_linkintegrity_slateblocklinksretriever_call(self, block):
     """
-    plone.restapi.blocks_linkintegrity.SlateBlockLinksRetriever.__call__ patch
+    plone.restapi.blocks_linkintegrity.SlateBlockLinksRetriever.__call__
+    patch
     """
     value = (block or {}).get(self.field, [])
     children = iterate_children(value or [])
