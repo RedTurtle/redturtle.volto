@@ -25,7 +25,7 @@ msgstr ""
 #: redturtle/volto/browser/controlpanel.py:11
 #: redturtle/volto/profiles/default/controlpanel.xml
 msgid "RedTurtle Volto Settings"
-msgstr "Impostazioni RedTurtle Volto"
+msgstr "RedTurtle Volto"
 
 #: redturtle/volto/configure.zcml:29
 msgid "RedTurtle: Volto"

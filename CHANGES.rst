@@ -4,7 +4,8 @@ Changelog
 5.6.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update it translations
+  [lucabel]
 
 
 5.6.3 (2024-12-02)
