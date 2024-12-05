@@ -8,8 +8,8 @@ from redturtle.volto.config import MAX_LIMIT
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from zope.component import getMultiAdapter
 
-
 import logging
+
 
 logger = logging.getLogger(__name__)
 

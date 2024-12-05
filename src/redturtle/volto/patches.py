@@ -1,21 +1,21 @@
 # These are patches not managed by collective.monkeypatcher
-from Products.CMFPlone.controlpanel.browser import redirects
+from experimental.noacquisition import config
+from plone.app.content.browser.vocabulary import PERMISSIONS
 from plone.app.redirector.interfaces import IRedirectionStorage
+from plone.folder.nogopip import GopipIndex
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.controlpanel.browser import redirects
+from Products.ZCatalog.Catalog import Catalog
+from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
 from urllib.parse import urlparse
 from zope.component import getUtility
 from zope.component.hooks import getSite
 from zope.i18nmessageid import MessageFactory
-from plone.app.content.browser.vocabulary import PERMISSIONS
-from plone.folder.nogopip import GopipIndex
-from Products.ZCatalog.Catalog import Catalog
-from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
 from ZTUtils.Lazy import LazyCat
 from ZTUtils.Lazy import LazyMap
-from experimental.noacquisition import config
-
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 
