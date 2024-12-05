@@ -4,7 +4,10 @@ Changelog
 5.6.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add experimental.noacquisition as dependency.
+  [cekk]
+- Patch absolutize_path method to disable acquisition when checking aliases.
+  [cekk]
 
 
 5.6.3 (2024-12-02)

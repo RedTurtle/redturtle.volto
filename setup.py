@@ -63,6 +63,7 @@ setup(
         "Products.PortalTransforms>=3.2.0",
         "collective.volto.sitesettings",
         "z3c.jbot",
+        "experimental.noacquisition",
     ],
     extras_require={
         "advancedquery": [
