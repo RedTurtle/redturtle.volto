@@ -76,7 +76,7 @@ def absolutize_path_patched(path, is_source=True):
                 # Check whether obj exists at source path.
                 # A redirect would be useless then.
 
-                ### THIS IS THE PATCH ###
+                # THIS IS THE PATCH
                 # unrestrictedTraverse returns the object with acquisition, so if
                 # you have a content with path /Plone/aaa and try to call unrestrictedTraverse
                 # with /Plone/aaa/aaa/aaa/aaa it will always return /Plone/aaa object
@@ -90,7 +90,7 @@ def absolutize_path_patched(path, is_source=True):
                     # if paths are different, it's an acquisition false positive,
                     # so go on and let create the alias
                     err = _("Cannot use a working path as alternative url.")
-                ### END OF THE PATCH ###
+                # END OF PATCH
         else:
             # Check whether obj exists at target path
             result = catalog.searchResults(path={"query": path})
