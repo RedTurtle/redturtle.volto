@@ -166,4 +166,4 @@ logger.info(
 redirects.absolutize_path = absolutize_path_patched
 
 logger.info("enable experimental.noacquisition")
-# config.DRYRUN = False
+config.DRYRUN = False
