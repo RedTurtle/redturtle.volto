@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from importlib import import_module
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -8,6 +9,10 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
+
+HAS_PLONE_6 = getattr(
+    import_module("Products.CMFPlone.factory"), "PLONE60MARKER", False
+)
 
 
 class TestBlocksLinkIntegrity(unittest.TestCase):
@@ -704,6 +709,10 @@ class TestBlocksLinkIntegrity(unittest.TestCase):
         self.assertEqual(reference["sources"][0]["uid"], self.document.UID())
         self.assertEqual(reference["target"]["uid"], self.ref.UID())
 
+    @unittest.skipIf(
+        not HAS_PLONE_6,
+        "This test is only intended to run for Plone 6 and DX site root enabled",
+    )
     def test_linkintegrity_works_also_on_site_root(self):
         self.assertEqual(self.get_references(), [])
         self.portal.blocks = {
