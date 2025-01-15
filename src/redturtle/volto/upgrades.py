@@ -525,7 +525,7 @@ def to_4307(context):
     api.portal.set_registry_record("redturtle.volto.rss_image_choice", "image")
 
 
-def to_4308(context):
+def to_4308(context):  # noqa: C901
     def should_reindex(blocks):
         reindexable_blocks = [
             "accordion",
