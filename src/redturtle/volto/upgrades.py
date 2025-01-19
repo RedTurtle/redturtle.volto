@@ -525,7 +525,7 @@ def to_4307(context):
     api.portal.set_registry_record("redturtle.volto.rss_image_choice", "image")
 
 
-def to_4308(context):
+def to_4308(context):  # noqa: C901
     def should_reindex(blocks):
         reindexable_blocks = [
             "accordion",
@@ -562,8 +562,9 @@ def to_4308(context):
         if i % 100 == 0:
             logger.info(f"Progress: {i}/{tot}")
 
-        if should_reindex(blocks=getattr(obj, "blocks", {})):
-            reindex = True
+        if getattr(obj, "blocks", {}):
+            if should_reindex(blocks=getattr(obj, "blocks", {})):
+                reindex = True
         for schema in iterSchemata(obj):
             for name, field in getFields(schema).items():
                 if name == "blocks":
@@ -576,9 +577,10 @@ def to_4308(context):
                 value = field.get(obj)
                 try:
                     blocks = value.get("blocks", {})
-                    if should_reindex(blocks):
-                        reindex = True
-                        break
+                    if blocks:
+                        if should_reindex(blocks):
+                            reindex = True
+                            break
                 except AttributeError:
                     logger.warning(
                         f"[RICHTEXT] - {brain.getURL()} (should not reindexed)"

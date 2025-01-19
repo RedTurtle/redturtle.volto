@@ -8,6 +8,8 @@ Changelog
   [cekk]
 - Patch absolutize_path method to disable acquisition when checking aliases.
   [cekk]
+- Update it translations
+  [lucabel]
 
 
 5.6.3 (2024-12-02)
