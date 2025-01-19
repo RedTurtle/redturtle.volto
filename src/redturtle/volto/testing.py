@@ -10,6 +10,7 @@ from plone.testing import z2
 
 import collective.volto.gdprcookie
 import collective.volto.sitesettings
+import experimental.noacquisition
 import kitconcept.seo
 import plone.app.caching
 import plone.restapi
@@ -31,6 +32,7 @@ class RedturtleVoltoLayer(PloneSandboxLayer):
         self.loadZCML(package=plone.volto)
         self.loadZCML(package=plone.app.caching)
         self.loadZCML(package=kitconcept.seo)
+        self.loadZCML(package=experimental.noacquisition)
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plone.app.caching:default")
@@ -75,6 +77,7 @@ class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
         self.loadZCML(package=redturtle.volto)
         self.loadZCML(package=plone.app.caching)
         self.loadZCML(package=kitconcept.seo)
+        self.loadZCML(package=experimental.noacquisition)
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, "plone.app.caching:default")
