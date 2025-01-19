@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.6.4 (unreleased)
+5.7.0 (unreleased)
 ------------------
 
 - Add experimental.noacquisition as dependency.
