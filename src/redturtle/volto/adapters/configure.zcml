@@ -20,24 +20,64 @@
 
   <!-- blocks link integrity for contenttypes with BlocksFields -->
   <configure zcml:condition="installed collective.volto.blocksfield">
-    <adapter factory=".blocks_linkintegrity.BlocksRetrieverContainer" />
-    <adapter factory=".blocks_linkintegrity.BlocksRetrieverItem" />
-
-
-    <subscriber
-        factory=".blocks_linkintegrity.TextBlockLinksRetriever"
-        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
-        />
-    <subscriber
-        factory=".blocks_linkintegrity.GenericBlockLinksRetriever"
-        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
-        />
-    <subscriber
-        factory=".blocks_linkintegrity.SlateBlockLinksRetriever"
-        provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
-        />
+    <adapter factory=".blocks_linkintegrity_blocksfield.BlocksRetrieverContainer" />
+    <adapter factory=".blocks_linkintegrity_blocksfield.BlocksRetrieverItem" />
   </configure>
 
+  <!-- blocks linkintegrity for specific blocks -->
+  <subscriber
+      factory=".blocks_linkintegrity.TextBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.GenericBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.RTSlateBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.SimpleCardBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.AccordionBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.AlertBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.ImageCardBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.CalloutBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.CTABlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.TableBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.ContactsBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.IconBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <subscriber
+      factory=".blocks_linkintegrity.CountDownBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
+  <!-- end of blocks linkintegrity for specific blocks -->
 
   <adapter
       factory=".rss.EventItem"
@@ -65,5 +105,20 @@
       factory=".namechooser.NormalizingNameChooser"
       provides="zope.container.interfaces.INameChooser"
       for="Products.CMFCore.interfaces.ISiteRoot"
+      />
+
+  <adapter
+      factory=".rss.CustomFeedItem"
+      provides="plone.base.interfaces.syndication.IFeedItem"
+      for="redturtle.volto.interfaces.ICustomFeedItem
+           plone.base.interfaces.syndication.IFeed"
+      zcml:condition="have plone-60"
+      />
+  <adapter
+      factory=".rss.CustomFeedItem"
+      provides="Products.CMFPlone.interfaces.syndication.IFeedItem"
+      for="redturtle.volto.interfaces.ICustomFeedItem
+           Products.CMFPlone.interfaces.syndication.IFeed"
+      zcml:condition="not-have plone-60"
       />
 </configure>

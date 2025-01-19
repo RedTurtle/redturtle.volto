@@ -8,6 +8,9 @@ from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
 from plone.event.interfaces import IRecurrenceSupport
 from plone.event.recurrence import recurrence_sequence_ical
+from plone.restapi.blocks import iter_block_transform_handlers
+from plone.restapi.blocks import visit_blocks
+from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
 
 # from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
@@ -193,3 +196,24 @@ def search_for_similar(*args, **kwargs):
         return original_obj._old_search_for_similar()
 
     return []
+
+
+def plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks(self):
+    """
+    plone.restapi.blocks_linkintegrity.BlocksRetriever.retrieveLinks patch
+    Add check on block
+    """
+
+    links = set()
+    blocks = getattr(self.context, "blocks", {})
+    if not blocks:
+        return links
+    for block in visit_blocks(self.context, blocks):
+        if not isinstance(block, dict):
+            continue
+
+        for handler in iter_block_transform_handlers(
+            self.context, block, IBlockFieldLinkIntegrityRetriever
+        ):
+            links |= set(handler(block))
+    return links

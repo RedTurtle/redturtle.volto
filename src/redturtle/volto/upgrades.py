@@ -17,6 +17,7 @@ except Exception:
 
 import json
 import logging
+import transaction
 
 
 try:
@@ -515,3 +516,81 @@ def to_4306(context):
     installer = get_installer(portal, portal.REQUEST)
     if not installer.is_product_installed("collective.volto.sitesettings"):
         installer.install_product(product_id="collective.volto.sitesettings")
+
+
+def to_4307(context):
+    context.runImportStepFromProfile(
+        "profile-redturtle.volto:profile_to_4307", "plone.app.registry", False
+    )
+    api.portal.set_registry_record("redturtle.volto.rss_image_choice", "image")
+
+
+def to_4308(context):  # noqa: C901
+    def should_reindex(blocks):
+        reindexable_blocks = [
+            "accordion",
+            "alert",
+            "testo_riquadro_semplice",
+            "testo_riquadro_immagine",
+            "callout_block",
+            "hero",
+            "cta_block",
+            "gridBlock",
+            "slateTable",
+            "contacts",
+            "iconBlocks",
+            "numbersBlock",
+            "remote-counter",
+            "count_down",
+        ]
+
+        for block in blocks.values():
+            if block.get("@type", "") in reindexable_blocks:
+                return True
+        return False
+
+    catalog = api.portal.get_tool(name="portal_catalog")
+    brains = catalog()
+    tot = len(brains)
+    logger.info(f"Analyzing {tot} items.")
+    reindexed = []
+    i = 0
+    for brain in brains:
+        i += 1
+        obj = aq_base(brain.getObject())
+        reindex = False
+        if i % 100 == 0:
+            logger.info(f"Progress: {i}/{tot}")
+
+        if getattr(obj, "blocks", {}):
+            if should_reindex(blocks=getattr(obj, "blocks", {})):
+                reindex = True
+        for schema in iterSchemata(obj):
+            for name, field in getFields(schema).items():
+                if name == "blocks":
+                    continue
+                if not HAS_BLOCKSFIELD:
+                    # blocks are only in blocks field
+                    continue
+                if not isinstance(field, BlocksField):
+                    continue
+                value = field.get(obj)
+                try:
+                    blocks = value.get("blocks", {})
+                    if blocks:
+                        if should_reindex(blocks):
+                            reindex = True
+                            break
+                except AttributeError:
+                    logger.warning(
+                        f"[RICHTEXT] - {brain.getURL()} (should not reindexed)"
+                    )
+        if reindex:
+            obj.reindexObject(idxs=["SearchableText"], update_metadata=True)
+            reindexed.append(brain.getURL())
+        if i % 1000 == 0:
+            transaction.commit()
+            logger.info(f"{i} items processed. Commit.")
+    logger.info(f"Reindex complete. Reindexed {len(reindexed)} contents:")
+    for url in reindexed:
+        logger.info(f"- {url}")

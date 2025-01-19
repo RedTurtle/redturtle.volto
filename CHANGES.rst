@@ -1,10 +1,97 @@
 Changelog
 =========
 
-5.5.1 (unreleased)
+5.6.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update it translations
+  [lucabel]
+
+
+5.6.3 (2024-12-02)
+------------------
+
+- Add patch for blocksRetriever.
+  [eikichi18]
+- Enable blocks linkintegrity on Site Root too.
+  [cekk]
+
+5.6.2 (2024-11-28)
+------------------
+
+- Add patch for SlateBlockslinkRetriever.
+  [eikichi18]
+
+
+5.6.1 (2024-11-21)
+------------------
+
+- Add linkintegrity check also for count_down block.
+  [cekk]
+
+
+5.6.0 (2024-11-21)
+------------------
+
+- Add linkintegrity indexers for some custom blocks.
+  [cekk]
+
+
+5.5.7 (2024-10-28)
+------------------
+
+- Refactored AdvancedQuery part in @search endpoint to be more extendable.
+  [cekk]
+
+
+5.5.6 (2024-10-17)
+------------------
+
+- Remove dependency with *collective.volto.cookieconsent*.
+  [cekk]
+- Add more block indexers for SearchableText.
+  [cekk]
+
+5.5.5 (2024-09-23)
+------------------
+
+- Avoid acquisition in find-broken-links view when checking blocks.
+  [cekk]
+
+
+5.5.4 (2024-09-23)
+------------------
+
+- Fix typo in filename generation in "find-broken-links" view.
+  [cekk]
+
+
+5.5.3 (2024-09-23)
+------------------
+
+- Add view "find-broken-links" that return a csv file with a list of contents with broken links in blocks.
+  [cekk]
+
+
+5.5.2 (2024-09-05)
+------------------
+
+- Fix SummarySerializer for collection exporting
+  Links
+  [lucabel]
+- remove newsitem template override, use default dexterity view for newsitem in backend
+  [mamico]
+- Customize @@display-file to allow to download files with proper filename.
+  [cekk]
+- Add "type" to EXCLUDE_KEYS in blocks serializer/deserializer to not convert this slate attribute.
+  [cekk]
+
+5.5.1 (2024-07-22)
+------------------
+
+- Allow to select which image miniature use in
+  RSS
+  [lucabel]
 
 
 5.5.0 (2024-07-10)
@@ -14,6 +101,7 @@ Changelog
   [eikichi18]
 - Add dependency with collective.volto.sitesettings.
   [cekk]
+
 
 5.4.9 (2024-04-22)
 ------------------

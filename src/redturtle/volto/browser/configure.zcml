@@ -14,6 +14,16 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
 
+  <!-- overrides to default dexterity view -->
+  <browser:page
+      name="newsitem_view"
+      for="plone.app.contenttypes.interfaces.INewsItem"
+      class="plone.dexterity.browser.view.DefaultView"
+      template="item.pt"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
+
   <browser:page
       name="redturtle-volto-settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -47,7 +57,13 @@
       permission="cmf.ManagePortal"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
-
+  <browser:page
+      name="find-broken-links"
+      for="*"
+      class=".find_broken_links.View"
+      permission="cmf.ManagePortal"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
   <browser:page
       name="sitemap.xml.gz"
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
@@ -56,4 +72,12 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
 
+  <!-- custom display-file -->
+  <browser:page
+      name="display-file"
+      for="*"
+      class=".display_file.DisplayFile"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
 </configure>
