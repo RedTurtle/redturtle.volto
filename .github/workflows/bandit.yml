@@ -7,6 +7,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+    - name: Start Measurement
+      uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+      with:
+        task: start-measurement
+
     - uses: actions/checkout@v4
 
     - name: Security check - Bandit
@@ -22,3 +28,15 @@ jobs:
     #    name: Security report
     #    path: output/security_report.txt
 
+    - name: Tests measurement
+      uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+      with:
+        task: get-measurement
+        label: 'pytest'
+      # continue-on-error: true # recommended setting for production. See notes below.
+
+    - name: Show Energy Results
+      uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+      with:
+        task: display-results
+      # continue-on-error: true # recommended setting for production. See notes below.
