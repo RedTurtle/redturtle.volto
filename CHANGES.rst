@@ -4,6 +4,9 @@ Changelog
 5.6.4 (unreleased)
 ------------------
 
+- fix file:/// as external link in summary
+  [mamico]
+
 - Update it translations
   [lucabel]
 
