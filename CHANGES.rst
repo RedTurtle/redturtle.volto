@@ -4,7 +4,8 @@ Changelog
 5.7.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Include experimental.noacquisition in the confing.
+  [folix-01]
 
 
 5.7.0 (2025-02-06)
