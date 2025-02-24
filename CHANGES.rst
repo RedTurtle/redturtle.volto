@@ -4,7 +4,8 @@ Changelog
 5.7.1 (unreleased)
 ------------------
 
-- Include experimental.noacquisition in the confing.
+- Include experimental.noacquisition in the config.
+  Needed for pip buidls.
   [folix-01]
 
 
