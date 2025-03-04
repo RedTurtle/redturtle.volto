@@ -83,7 +83,6 @@ class TestBlocksSerializer(unittest.TestCase):
 
 
 class TestRepeatableBlockSerializer(unittest.TestCase):
-
     layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
     maxDiff = None
 
