@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
 from plone import api
+from plone.app.uuid.utils import uuidToCatalogBrain
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.blocks import uid_to_url
+from plone.restapi.serializer.utils import RESOLVEUID_RE
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
-
 
 EXCLUDE_KEYS = ["@type", "type", "token", "value", "@id", "query", "bg_color"]
 EXCLUDE_TYPES = [
@@ -108,6 +109,42 @@ class TableResolveUIDSerializer(object):
                     if entity.get("type") == "LINK":
                         url = entity.get("data", {}).get("url", "")
                         entity["data"]["url"] = uid_to_url(url)
+        return value
+
+
+@implementer(IBlockFieldSerializationTransformer)
+@adapter(IBlocks, IRedturtleVoltoLayer)
+class RepeatableContentBlockSerializer:
+    order = 0  # before standard ones
+    block_type = "repeatableContentBlock"
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self, value):
+        """
+        We don't want to resolve uids in href field with default transformers because
+        if you link a Link object, for anonymous href will be converted with remoteURL
+        and the frontend can't fetch data from original Link object.
+        """
+        # copied from plone.restapi.serializer.utils.resolve_uid
+        path = value.get("href", "")
+        if not path:
+            return value
+        match = RESOLVEUID_RE.match(path)
+        if match is None:
+            return value
+
+        uid, suffix = match.groups()
+        brain = uuidToCatalogBrain(uid)
+        if brain is None:
+            return value
+        href = brain.getURL()
+        if suffix:
+            href = href + suffix
+        value["href"] = href
+
         return value
 
 
