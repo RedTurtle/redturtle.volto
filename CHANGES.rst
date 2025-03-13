@@ -4,6 +4,8 @@ Changelog
 5.7.1 (unreleased)
 ------------------
 
+- Customize serialzier for repeatableContentBlock.
+  [cekk]
 - Include experimental.noacquisition in the config.
   Needed for pip buidls.
   [folix-01]
