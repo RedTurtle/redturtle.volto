@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.7.1 (unreleased)
+5.7.1 (2025-03-13)
 ------------------
 
 - Customize serialzier for repeatableContentBlock.
