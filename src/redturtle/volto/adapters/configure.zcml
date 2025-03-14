@@ -4,6 +4,8 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
+  <adapter factory=".link_linkintegrity_retriever.LinkRetriever" />
+
   <adapter
       factory=".stringinterp.VoltoUrlSubstitution"
       provides="plone.stringinterp.interfaces.IStringSubstitution"
