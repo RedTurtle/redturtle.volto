@@ -4,7 +4,8 @@ Changelog
 5.7.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add linkintegrity retriever for Link objects so when the referred object will be deleted, linkintegrity check will be raised also for Links.
+  [cekk]
 
 
 5.7.1 (2025-03-13)
