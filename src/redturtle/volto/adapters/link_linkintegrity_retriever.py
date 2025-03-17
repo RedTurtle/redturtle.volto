@@ -19,6 +19,6 @@ class LinkRetriever:
         If Link object refers to an internal object, enable linkintegrity
         """
         remote_url = self.context.remoteUrl
-        if "resolveuid" in remote_url:
+        if remote_url and "resolveuid" in remote_url:
             return [remote_url]
         return []
