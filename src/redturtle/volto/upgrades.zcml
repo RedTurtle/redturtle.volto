@@ -256,4 +256,12 @@
       destination="4308"
       handler=".upgrades.to_4308"
       />
+    <genericsetup:upgradeStep
+      title="Fix linkintegrity also for Link objects"
+      description=""
+      profile="redturtle.volto:default"
+      source="4308"
+      destination="4400"
+      handler=".upgrades.to_4400"
+      />
 </configure>
