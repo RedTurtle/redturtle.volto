@@ -2,16 +2,16 @@
 from Acquisition import aq_base
 from copy import deepcopy
 from plone import api
+from plone.app.linkintegrity.handlers import check_linkintegrity_dependencies
+from plone.app.linkintegrity.handlers import getObjectsFromLinks
+from plone.app.linkintegrity.handlers import updateReferences
+from plone.app.linkintegrity.interfaces import IRetriever
 from plone.app.upgrade.utils import installOrReinstallProduct
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.behaviors import IBlocks
 from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
 from zope.schema import getFields
-from plone.app.linkintegrity.handlers import check_linkintegrity_dependencies
-from plone.app.linkintegrity.handlers import getObjectsFromLinks
-from plone.app.linkintegrity.handlers import updateReferences
-from plone.app.linkintegrity.interfaces import IRetriever
 
 
 try:

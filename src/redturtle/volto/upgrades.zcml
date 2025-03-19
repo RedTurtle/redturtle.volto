@@ -256,7 +256,7 @@
       destination="4308"
       handler=".upgrades.to_4308"
       />
-    <genericsetup:upgradeStep
+  <genericsetup:upgradeStep
       title="Fix linkintegrity also for Link objects"
       description=""
       profile="redturtle.volto:default"
