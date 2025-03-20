@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.7.2 (unreleased)
+5.8.0 (2025-03-20)
 ------------------
 
 - Add linkintegrity retriever for Link objects so when the referred object will be deleted, linkintegrity check will be raised also for Links.
