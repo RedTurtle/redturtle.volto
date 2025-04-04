@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.9 (unreleased)
+5.5.9 (2025-04-04)
 ------------------
 
 - Make sure that the teaser block is not handled by the GenericResolveUIDDeserializer/Serializer.
