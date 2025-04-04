@@ -1,15 +1,11 @@
 Changelog
 =========
-5.5.9 (xxxx-xx-xx)
-------------------
-
-- Make sure that the teaser block is not handled by the GenericResolveUIDDeserializer/Serializer.
-  [lucabel]
 
 5.5.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make sure that the teaser block is not handled by the GenericResolveUIDDeserializer/Serializer.
+  [lucabel]
 
 
 5.5.8 (2024-12-12)
@@ -17,6 +13,7 @@ Changelog
 
 - Update translations
   [lucabel]
+
 
 5.5.7 (2024-10-28)
 ------------------
