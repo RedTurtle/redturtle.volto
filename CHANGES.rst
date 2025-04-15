@@ -4,7 +4,8 @@ Changelog
 5.8.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make querystringsearch endpoint more customizable: now custom_query is defined in a separate method.
+  [cekk]
 
 
 5.8.0 (2025-03-20)
