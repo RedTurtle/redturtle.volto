@@ -4,7 +4,8 @@ Changelog
 5.8.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Customize @download view to allow downloading miniature images with their original filename and not with miniature as filename.
+  [cekk]
 
 
 5.8.0 (2025-03-20)
