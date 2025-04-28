@@ -67,6 +67,14 @@
       />
 
   <monkey:patch
+      original="__call__"
+      replacement=".monkey.plone_restapi_blocks_linkintegrity_slateblocklinksretriever_call"
+      class="plone.restapi.blocks_linkintegrity.SlateBlockLinksRetriever"
+      description="Add check on child"
+      preserveOriginal="True"
+      />
+
+  <monkey:patch
       original="search_for_similar"
       replacement=".monkey.search_for_similar"
       class="plone.app.redirector.browser.FourOhFourView"
