@@ -61,6 +61,19 @@ jobs:
           COVERALLS_FLAG_NAME: py${{ matrix.python }}-plone${{ matrix.plone }}-tz${{ matrix.tz }}
           COVERALLS_PARALLEL: true
 
+      - name: Tests measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: get-measurement
+          label: 'pytest'
+        # continue-on-error: true # recommended setting for production. See notes below.
+    
+      - name: Show Energy Results
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: display-results
+        # continue-on-error: true # recommended setting for production. See notes below.
+
   coveralls_finish:
     needs: build
     runs-on: ubuntu-latest
