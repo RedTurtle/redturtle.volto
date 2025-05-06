@@ -28,6 +28,9 @@ Changelog
   [cekk]
 - Enable kitconcept.seo behavior on Site Root.
   [cekk]
+- Use custom creator criteria.
+  [folix-01]
+
 
 5.8.0 (2025-03-20)
 ------------------
