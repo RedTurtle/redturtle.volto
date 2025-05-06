@@ -271,5 +271,14 @@
       source="4400"
       destination="4500"
       handler=".upgrades.to_4500"
+    />
+
+  <genericsetup:upgradeStep
+      title="Change vocabulary for Creator criteria"
+      description=""
+      profile="redturtle.volto:default"
+      source="4500"
+      destination="4501"
+      handler=".upgrades.to_4501"
       />
 </configure>

@@ -12,6 +12,9 @@ from plone.restapi.behaviors import IBlocks
 from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
 from zope.schema import getFields
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+from plone.app.querystring.interfaces import IQueryField
 
 
 try:
@@ -629,3 +632,11 @@ def to_4500(context):
     behaviors.append("kitconcept.seo")
     # adjust behaviors
     portal_types["Plone Site"].behaviors = tuple(behaviors)
+
+
+def to_4501(context):
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(
+        IQueryField, prefix="plone.app.querystring.field.Creator"
+    )
+    settings.vocabulary = "redturtle.volto.vocabularies.Creators"
