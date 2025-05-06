@@ -17,6 +17,7 @@ Changelog
 - Force indexing subjects in SearchableText with ICategorization to keep the old Plone functionality (remove this when the official pr is merged).
   [cekk]
 - Use custom creator criteria.
+- Use custom creator criteria to list only creators present in the catalog.
   [folix-01]
 
 
