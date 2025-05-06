@@ -29,6 +29,7 @@ Changelog
 - Enable kitconcept.seo behavior on Site Root.
   [cekk]
 - Use custom creator criteria.
+- Use custom creator criteria to list only creators present in the catalog.
   [folix-01]
 
 
