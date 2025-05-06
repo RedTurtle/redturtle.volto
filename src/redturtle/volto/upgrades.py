@@ -12,6 +12,9 @@ from plone.restapi.behaviors import IBlocks
 from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
 from zope.schema import getFields
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+from plone.app.querystring.interfaces import IQueryField
 
 
 try:
@@ -617,3 +620,11 @@ def to_4400(context):
             links = retriever.retrieveLinks()
             refs = getObjectsFromLinks(obj, links)
             updateReferences(obj, refs)
+
+
+def to_4401(context):
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(
+        IQueryField, prefix="plone.app.querystring.field.Creator"
+    )
+    settings.vocabulary = "redturtle.volto.vocabularies.Creators"
