@@ -4,7 +4,7 @@ Changelog
 5.8.1 (unreleased)
 ------------------
 
-- Use custom creator criteria.
+- Use custom creator criteria to list only creators present in the catalog.
   [folix-01]
 
 
