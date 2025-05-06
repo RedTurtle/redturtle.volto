@@ -4,7 +4,8 @@ Changelog
 5.8.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use custom creator criteria.
+  [folix-01]
 
 
 5.8.0 (2025-03-20)
