@@ -17,4 +17,8 @@
        <value key="group" i18n:translate="">Metadata</value>
     </records>
 
+  <records interface="plone.app.querystring.interfaces.IQueryField" prefix="plone.app.querystring.field.Creator" purge="False">
+      <value key="vocabulary">redturtle.volto.vocabularies.Creators</value>
+  </records>
+
 </registry>

@@ -4,7 +4,9 @@ Changelog
 5.8.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use custom creator criteria to list only creators present in the catalog
+      to avoid an empty list when using LDAP and many_users flag
+  [folix-01]
 
 
 5.8.0 (2025-03-20)
