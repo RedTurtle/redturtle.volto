@@ -5,7 +5,7 @@ Changelog
 ------------------
 
 - Use custom creator criteria to list only creators present in the catalog
-      avoiding the plone.many_users setting to send the empty users list.
+      to avoid an empty list when using LDAP and many_users flag
   [folix-01]
 
 
