@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.10 (unreleased)
+5.5.10 (2025-05-09)
 -------------------
 
 - Fix issue with event search in @querystring-search override:
