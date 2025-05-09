@@ -4,7 +4,10 @@ Changelog
 5.8.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix issue with event search in @querystring-search override:
+  converting a timezone-aware DateTime to utcdatetime causes a problem when searching for
+  "today", as it shifts start=day x at 00:00 to start=day x-1 at 22:00 in GMT+2 timezone.
+  [lucabel]
 
 
 5.8.0 (2025-03-20)
