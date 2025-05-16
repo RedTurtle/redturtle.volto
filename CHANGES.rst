@@ -10,6 +10,9 @@ Changelog
 5.5.10 (2025-05-09)
 -------------------
 
+- Fix rss feed image selection, now it uses the correct field for preview_image.
+  [mamico]
+  
 - Fix issue with event search in @querystring-search override:
   converting a timezone-aware DateTime to utcdatetime causes a problem when searching for
   "today", as it shifts start=day x at 00:00 to start=day x-1 at 22:00 in GMT+2 timezone.  
