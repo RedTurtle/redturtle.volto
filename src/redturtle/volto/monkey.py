@@ -201,7 +201,7 @@ def _get_object_keywords(self, obj, attr):
     """
     # indexes that we want to use with not queries
     keywords = self._old__get_object_keywords(obj, attr)
-    if attr in ("Subject", ):
+    if attr in ("Subject",):
         if not keywords and hasattr(obj, attr):
             return ("__empty__",)
     return keywords
