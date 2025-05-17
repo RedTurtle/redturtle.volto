@@ -10,6 +10,8 @@ Changelog
 5.5.10 (2025-05-09)
 -------------------
 
+- Fix Searches with "not" in a KeywordIndex do not return records that do not contain a value for the index
+  [mamico]
 - Fix issue with event search in @querystring-search override:
   converting a timezone-aware DateTime to utcdatetime causes a problem when searching for
   "today", as it shifts start=day x at 00:00 to start=day x-1 at 22:00 in GMT+2 timezone.  
