@@ -74,7 +74,7 @@
       preserveOriginal="True"
       />
 
-    <monkey:patch
+  <monkey:patch
       original="_get_object_keywords"
       replacement=".monkey._get_object_keywords"
       class="Products.PluginIndexes.KeywordIndex.KeywordIndex.KeywordIndex"
