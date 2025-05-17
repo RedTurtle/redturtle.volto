@@ -243,7 +243,7 @@ class QuerystringSearch(BaseQuerystringSearch):
 
     def get_datetime_value(self, value):
         if isinstance(value, DateTime):
-            # return value.utcdatetime()
+            # return value.utcdatetime()
             # manteniamo il possibile timezone
             return value.asdatetime()
         return datetime.fromisoformat(value)
