@@ -7,14 +7,18 @@ from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
 from zope.i18nmessageid import MessageFactory
 from ZTUtils.Lazy import LazyCat
 from ZTUtils.Lazy import LazyMap
+from plone.app.dexterity.textindexer import utils
+from plone.app.dexterity.behaviors.metadata import ICategorization
+
 
 import logging
 
 
 logger = logging.getLogger(__name__)
-
-
 _ = MessageFactory("redturtle.volto")
+
+# Index also subjects in SearchableText.
+utils.searchable(ICategorization, "subjects")
 
 PERMISSIONS["plone.app.vocabularies.Keywords"] = "View"
 

@@ -75,6 +75,11 @@ class SearchHandler(OriginalHandler):
             # XXX: il default sul subject ha senso ? (probabilmente no), rivedere eventualmente anche i test
             term = query.get("SearchableText")
 
+            rs = RankByQueries_Sum(
+                (Eq("Subject", term), 16),
+                (Eq("Title", term), 8),
+                (Eq("Description", term), 6),
+            )
             if "sort_on" in query:
                 sort_order = query.get("sort_order", "asc")
                 if sort_order == "reverse":

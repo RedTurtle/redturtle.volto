@@ -19,7 +19,6 @@
   <link tal:content="feed/link" />
   <description tal:content="feed/description" />
   <image tal:attributes="rdf:resource string:${portal_url}/logo.png" />
-
   <items>
     <rdf:Seq>
       <tal:block repeat="item python: items">
