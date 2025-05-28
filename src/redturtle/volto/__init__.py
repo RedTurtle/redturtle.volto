@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 """Init and utils."""
 from plone.app.content.browser.vocabulary import PERMISSIONS
+from plone.app.dexterity.behaviors.metadata import ICategorization
+from plone.app.dexterity.textindexer import utils
 from plone.folder.nogopip import GopipIndex
 from Products.ZCatalog.Catalog import Catalog
 from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
 from zope.i18nmessageid import MessageFactory
 from ZTUtils.Lazy import LazyCat
 from ZTUtils.Lazy import LazyMap
-from plone.app.dexterity.textindexer import utils
-from plone.app.dexterity.behaviors.metadata import ICategorization
-
 
 import logging
 
