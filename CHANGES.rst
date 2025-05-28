@@ -6,7 +6,8 @@ Changelog
 
 - Fix rss feed image selection, now it uses the correct field for preview_image.
   [mamico]
-
+- Handle sort_on also when using AdvancedQuery.
+  [cekk]
 
 5.5.10 (2025-05-09)
 -------------------
