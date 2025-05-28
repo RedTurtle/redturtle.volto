@@ -72,7 +72,7 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
 
-    <browser:page
+  <browser:page
       name="document_view"
       template="templates/document.pt"
       permission="zope2.View"
