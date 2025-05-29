@@ -78,7 +78,7 @@ class SearchHandler(OriginalHandler):
             if "sort_on" in query:
                 sort_order = query.get("sort_order", "asc")
                 if sort_order == "reverse":
-                    sort_order = "desc"
+                    sort_order = "asc"
                 rs = (query["sort_on"], sort_order)
             else:
                 # use custom ranking
