@@ -75,8 +75,14 @@ class SearchHandler(OriginalHandler):
             # XXX: il default sul subject ha senso ? (probabilmente no), rivedere eventualmente anche i test
             term = query.get("SearchableText")
 
-            if "sort_on" in query:
-                sort_order = query.get("sort_order", "asc")
+            sort_on = query.get("sort_on", "")
+            if sort_on:
+                sort_order = query.get("sort_order", "")
+                if not sort_order:
+                    if sort_on in ["Date", "effective"]:
+                        sort_order = "desc"
+                    else:
+                        sort_order = "asc"
                 if sort_order == "reverse":
                     sort_order = "desc"
                 rs = (query["sort_on"], sort_order)
