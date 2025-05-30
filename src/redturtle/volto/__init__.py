@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Init and utils."""
 from plone.app.content.browser.vocabulary import PERMISSIONS
+from plone.app.dexterity.behaviors.metadata import ICategorization
+from plone.app.dexterity.textindexer import utils
 from plone.folder.nogopip import GopipIndex
 from Products.ZCatalog.Catalog import Catalog
 from redturtle.volto.catalogplan import Catalog_sorted_search_indexes
@@ -12,9 +14,10 @@ import logging
 
 
 logger = logging.getLogger(__name__)
-
-
 _ = MessageFactory("redturtle.volto")
+
+# Index also subjects in SearchableText.
+utils.searchable(ICategorization, "subjects")
 
 PERMISSIONS["plone.app.vocabularies.Keywords"] = "View"
 

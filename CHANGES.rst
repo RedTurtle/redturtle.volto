@@ -6,7 +6,12 @@ Changelog
 
 - Fix rss feed image selection, now it uses the correct field for preview_image.
   [mamico]
-
+- Handle sort_on also when using AdvancedQuery.
+  [cekk]
+- Remove z3c.jbot compatibility and customize templates in standard-way.
+  [cekk]
+- Force indexing subjects in SearchableText with ICategorization to keep the old Plone functionality (remove this when the official pr is merged).
+  [cekk]
 
 5.5.10 (2025-05-09)
 -------------------
