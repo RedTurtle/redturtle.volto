@@ -30,8 +30,7 @@ Changelog
   [cekk]
 - Use custom creator criteria.
 - Use custom creator criteria to list only creators present in the catalog.
-- Use custom creator criteria to list only creators present in the catalog
-      to avoid an empty list when using LDAP and many_users flag
+- Use custom creator criteria to list only creators present in the catalog to avoid an empty list when using LDAP and many_users flag
   [folix-01]
 
 
