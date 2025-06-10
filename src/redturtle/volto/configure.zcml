@@ -13,6 +13,7 @@
   <include package=".browser" />
   <include package=".restapi" />
   <include package=".types" />
+  <include package=".vocabularies" />
 
   <include file="indexers.zcml" />
   <include file="monkey.zcml" />

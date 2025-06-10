@@ -256,4 +256,12 @@
       destination="4308"
       handler=".upgrades.to_4308"
       />
+  <genericsetup:upgradeStep
+      title="Change vocabulary for Creator criteria"
+      description=""
+      profile="redturtle.volto:default"
+      source="4308"
+      destination="4309"
+      handler=".upgrades.to_4309"
+      />
 </configure>
