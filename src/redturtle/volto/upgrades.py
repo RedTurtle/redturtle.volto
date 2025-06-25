@@ -617,3 +617,15 @@ def to_4400(context):
             links = retriever.retrieveLinks()
             refs = getObjectsFromLinks(obj, links)
             updateReferences(obj, refs)
+
+
+def to_4500(context):
+    portal_types = api.portal.get_tool(name="portal_types")
+    behaviors = list(portal_types["Plone Site"].behaviors)
+
+    if "kitconcept.seo" in behaviors:
+        return
+
+    behaviors.append("kitconcept.seo")
+    # adjust behaviors
+    portal_types["Plone Site"].behaviors = tuple(behaviors)

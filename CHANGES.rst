@@ -16,7 +16,8 @@ Changelog
   [cekk]
 - Force indexing subjects in SearchableText with ICategorization to keep the old Plone functionality (remove this when the official pr is merged).
   [cekk]
-
+- Enable kitconcept.seo behavior on Site Root.
+  [cekk]
 
 5.8.0 (2025-03-20)
 ------------------
