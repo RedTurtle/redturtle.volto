@@ -1,7 +1,13 @@
 Changelog
 =========
 
-5.8.1 (unreleased)
+5.9.1 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+5.9.0 (2025-06-26)
 ------------------
 
 - Fix rss feed image selection, now it uses the correct field for preview_image.
