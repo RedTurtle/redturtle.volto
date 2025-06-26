@@ -264,4 +264,12 @@
       destination="4400"
       handler=".upgrades.to_4400"
       />
+  <genericsetup:upgradeStep
+      title="Enable seo behavior for Plone Site"
+      description=""
+      profile="redturtle.volto:default"
+      source="4400"
+      destination="4500"
+      handler=".upgrades.to_4500"
+      />
 </configure>
