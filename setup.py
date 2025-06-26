@@ -84,5 +84,7 @@ setup(
     target = plone
     [console_scripts]
     update_locale = redturtle.volto.locales.update:update_locale
+    [paste.filter_app_factory]
+    ddtrace = redturtle.volto.middleware:make_dd_middleware
     """,
 )
