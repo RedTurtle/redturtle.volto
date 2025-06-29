@@ -9,6 +9,11 @@ jobs:
         python-version: [3.11]
 
     steps:
+      - name: Start Measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: start-measurement
+
       - uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
@@ -28,3 +33,16 @@ jobs:
 
       - name: run black
         run: black src/ --check --diff
+
+      - name: Tests measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: get-measurement
+          label: 'pytest'
+        # continue-on-error: true # recommended setting for production. See notes below.
+  
+      - name: Show Energy Results
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: display-results
+        # continue-on-error: true # recommended setting for production. See notes below.
