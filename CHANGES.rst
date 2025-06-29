@@ -4,7 +4,8 @@ Changelog
 5.9.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make querystringsearch endpoint more customizable: now custom_query is defined in a separate method.
+  [cekk]
 
 
 5.9.0 (2025-06-26)

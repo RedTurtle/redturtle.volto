@@ -79,12 +79,9 @@ class QuerystringSearch(BaseQuerystringSearch):
             limit=limit,
         )
 
-        # Exclude "self" content item from the results when ZCatalog supports NOT UUID
-        # queries and it is called on a content object.
-        if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
-            querybuilder_parameters.update(
-                dict(custom_query={"UID": {"not": self.context.UID()}})
-            )
+        custom_query = self.get_custom_query(data)
+        if custom_query:
+            querybuilder_parameters.update(dict(custom_query=custom_query))
 
         try:
             results = querybuilder(**querybuilder_parameters)
@@ -99,6 +96,15 @@ class QuerystringSearch(BaseQuerystringSearch):
             fullobjects=fullobjects
         )
         return results
+
+    def get_custom_query(self, data):
+        """
+        Exclude "self" content item from the results when ZCatalog supports NOT UUID
+        queries and it is called on a content object.
+        """
+        if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
+            return {"UID": {"not": [self.context.UID()]}}
+        return {}
 
     def cleanup_query(self, query, b_size):
         """
