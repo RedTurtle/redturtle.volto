@@ -4,7 +4,8 @@ Changelog
 5.9.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add patch for SlateBlockLinksRetriever.
+  [eikichi18]
 
 
 5.9.0 (2025-06-26)
