@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.12 (unreleased)
+5.5.12 (2025-07-02)
 -------------------
 
 - Fix not search [mamico]
