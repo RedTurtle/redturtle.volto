@@ -4,7 +4,8 @@ Changelog
 5.5.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix not search [mamico]
+  - fix tests [lucabel]
 
 
 5.5.11 (2025-05-30)
