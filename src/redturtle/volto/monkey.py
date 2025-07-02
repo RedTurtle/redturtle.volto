@@ -186,10 +186,22 @@ def search_for_similar(*args, **kwargs):
 
     original_obj = args and args[0] or None
 
-    if (
-        os.environ.get("REDTURTLE_VOLTO_ENABLE_SEARCH_FOR_SIMILAR", default=None)
-        and original_obj  # noqa
-    ):
-        return original_obj._old_search_for_similar()
+    if os.environ.get("REDTURTLE_VOLTO_ENABLE_SEARCH_FOR_SIMILAR"):
+        if original_obj:
+            return original_obj._old_search_for_similar()
 
     return []
+
+
+def _get_object_keywords(self, obj, attr):
+    """Products.PluginIndexes.KeywordIndex.KeywordIndex.KeywordIndex._get_object_keywords patch
+
+    See: https://github.com/zopefoundation/Products.ZCatalog/issues/148
+         https://github.com/zopefoundation/Products.ZCatalog/pull/158
+    """
+    # indexes that we want to use with not queries
+    keywords = self._old__get_object_keywords(obj, attr)
+    if attr in ("Subject",):
+        if not keywords and hasattr(obj, attr):
+            return ("__empty__",)
+    return keywords
