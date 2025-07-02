@@ -89,9 +89,11 @@ class TestVocabularyEndpoint(unittest.TestCase):
         response = api_session.get("/@vocabularies/plone.app.vocabularies.Keywords")
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["items_total"], 2)
-        self.assertEqual(response.json()["items"][0]["title"], "bar")
-        self.assertEqual(response.json()["items"][1]["title"], "foo")
+        self.assertEqual(response.json()["items_total"], 3)
+        # we patch the catalog to deal with not operator so we have the "empty" sjb keyword
+        self.assertEqual(response.json()["items"][0]["title"], "__empty__")
+        self.assertEqual(response.json()["items"][1]["title"], "bar")
+        self.assertEqual(response.json()["items"][2]["title"], "foo")
 
         api_session.close()
 
@@ -103,9 +105,11 @@ class TestVocabularyEndpoint(unittest.TestCase):
             api_session.auth = (username, "secret!!!")
             response = api_session.get("/@vocabularies/plone.app.vocabularies.Keywords")
             self.assertEqual(response.status_code, 200)
-            self.assertEqual(response.json()["items_total"], 2)
-            self.assertEqual(response.json()["items"][0]["title"], "bar")
-            self.assertEqual(response.json()["items"][1]["title"], "foo")
+            self.assertEqual(response.json()["items_total"], 3)
+            # we patch the catalog to deal with not operator so we have the "empty" sjb keyword
+            self.assertEqual(response.json()["items"][0]["title"], "__empty__")
+            self.assertEqual(response.json()["items"][1]["title"], "bar")
+            self.assertEqual(response.json()["items"][2]["title"], "foo")
 
         api_session.close()
 
