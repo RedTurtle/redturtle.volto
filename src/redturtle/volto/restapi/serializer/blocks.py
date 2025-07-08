@@ -46,6 +46,9 @@ class GenericResolveUIDSerializer(object):
     def resolve_uids(self, block):
         if isinstance(block, str):
             return uid_to_url(block)
+        if not hasattr(block, "get"):
+            # block is not a dict nor dict-like
+            return block
         if block.get("@type", "") in EXCLUDE_TYPES:
             return block
         if isinstance(block, dict) and "UID" in block.keys():

@@ -4,7 +4,8 @@ Changelog
 5.9.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix in resolveuid serializer if block is not a dict nor dict-like 
+  [mamico]
 
 
 5.9.0 (2025-06-26)
