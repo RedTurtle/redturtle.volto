@@ -11,8 +11,10 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python: ["3.8", "3.9", "3.10", "3.11"]
-        plone: ["52", "60"]
+        # python: ["3.8", "3.9", "3.10", "3.11"]
+        # plone: ["52", "60"]
+        python: ["3.9", "3.10", "3.11"]
+        plone: ["60"]
         tz: ["UTC", "Europe/Rome"]
         exclude:
           - python: "3.8"
@@ -24,15 +26,14 @@ jobs:
           - python: "3.11"
             plone: "52"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Cache eggs
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: eggs
           key: ${{ runner.OS }}-build-python${{ matrix.python }}-${{ matrix.plone }}
       - name: Set up Python ${{ matrix.python }}
-        # don't upgrade this action version, as we want to support plone52/py38
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
       - name: Install dependencies

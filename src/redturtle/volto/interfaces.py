@@ -5,12 +5,13 @@ from plone.app.contenttypes.interfaces import (
 )
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.controlpanels.interfaces import IControlpanel
+from plone.volto.interfaces import IPloneVoltoCoreLayer
 from redturtle.volto import _
 from zope.interface import Interface
 from zope.schema import Bool
 
 
-class IRedturtleVoltoLayer(IDefaultBrowserLayer):
+class IRedturtleVoltoLayer(IDefaultBrowserLayer, IPloneVoltoCoreLayer):
     """Marker interface that defines a browser layer."""
 
 

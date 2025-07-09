@@ -1,12 +1,55 @@
 Changelog
 =========
 
-5.6.4 (unreleased)
+5.9.1 (unreleased)
 ------------------
 
 - fix file:/// as external link in summary
   [mamico]
 
+
+5.9.0 (2025-06-26)
+------------------
+
+- Fix rss feed image selection, now it uses the correct field for preview_image.
+  [mamico]
+- Fix issue with event search in @querystring-search override:
+  converting a timezone-aware DateTime to utcdatetime causes a problem when searching for
+  "today", as it shifts start=day x at 00:00 to start=day x-1 at 22:00 in GMT+2 timezone.
+  [lucabel]
+- Handle sort_on also when using AdvancedQuery.
+  [cekk]
+- Remove z3c.jbot compatibility and customize templates in standard-way.
+  [cekk]
+- Force indexing subjects in SearchableText with ICategorization to keep the old Plone functionality (remove this when the official pr is merged).
+  [cekk]
+- Enable kitconcept.seo behavior on Site Root.
+  [cekk]
+
+5.8.0 (2025-03-20)
+------------------
+
+- Add linkintegrity retriever for Link objects so when the referred object will be deleted, linkintegrity check will be raised also for Links.
+  [cekk]
+
+
+5.7.1 (2025-03-13)
+------------------
+
+- Customize serialzier for repeatableContentBlock.
+  [cekk]
+- Include experimental.noacquisition in the config.
+  Needed for pip buidls.
+  [folix-01]
+
+
+5.7.0 (2025-02-06)
+------------------
+
+- Add experimental.noacquisition as dependency.
+  [cekk]
+- Patch absolutize_path method to disable acquisition when checking aliases.
+  [cekk]
 - Update it translations
   [lucabel]
 

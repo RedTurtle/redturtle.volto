@@ -2,6 +2,10 @@
 from Acquisition import aq_base
 from copy import deepcopy
 from plone import api
+from plone.app.linkintegrity.handlers import check_linkintegrity_dependencies
+from plone.app.linkintegrity.handlers import getObjectsFromLinks
+from plone.app.linkintegrity.handlers import updateReferences
+from plone.app.linkintegrity.interfaces import IRetriever
 from plone.app.upgrade.utils import installOrReinstallProduct
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.behaviors import IBlocks
@@ -594,3 +598,34 @@ def to_4308(context):  # noqa: C901
     logger.info(f"Reindex complete. Reindexed {len(reindexed)} contents:")
     for url in reindexed:
         logger.info(f"- {url}")
+
+
+def to_4400(context):
+    brains = api.content.find(portal_type="Link")
+    tot = len(brains)
+    i = 0
+    for brain in brains:
+        i += 1
+        if i % 100 == 0:
+            logger.info(f"Progress: {i}/{tot}")
+        obj = aq_base(brain.getObject())
+
+        if not check_linkintegrity_dependencies(obj):
+            continue
+        retriever = IRetriever(obj, None)
+        if retriever is not None:
+            links = retriever.retrieveLinks()
+            refs = getObjectsFromLinks(obj, links)
+            updateReferences(obj, refs)
+
+
+def to_4500(context):
+    portal_types = api.portal.get_tool(name="portal_types")
+    behaviors = list(portal_types["Plone Site"].behaviors)
+
+    if "kitconcept.seo" in behaviors:
+        return
+
+    behaviors.append("kitconcept.seo")
+    # adjust behaviors
+    portal_types["Plone Site"].behaviors = tuple(behaviors)
