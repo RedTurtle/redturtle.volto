@@ -34,6 +34,7 @@
       class="plone.volto.transforms.NestedResolveUIDDeserializerBase"
       description="Patch for disallow plone.volto deserialization"
       />
+
   <monkey:patch
       original="__call__"
       replacement=".monkey.plone_volto_serializer_call"
@@ -56,6 +57,15 @@
       description="Fix long request in case pam is not installed"
       preserveOriginal="True"
       />
+
+  <monkey:patch
+      original="retrieveLinks"
+      replacement=".monkey.plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks"
+      class="plone.restapi.blocks_linkintegrity.BlocksRetriever"
+      description="Add check on block"
+      preserveOriginal="True"
+      />
+
   <monkey:patch
       original="search_for_similar"
       replacement=".monkey.search_for_similar"

@@ -1,12 +1,104 @@
 Changelog
 =========
 
-5.5.6 (unreleased)
+5.9.1 (unreleased)
 ------------------
 
 - Customize @download view to allow downloading miniature images with their original filename and not with miniature as filename.
   [cekk]
+- fix file:/// as external link in summary
+  [mamico]
 
+
+5.9.0 (2025-06-26)
+------------------
+
+- Fix rss feed image selection, now it uses the correct field for preview_image.
+  [mamico]
+- Fix issue with event search in @querystring-search override:
+  converting a timezone-aware DateTime to utcdatetime causes a problem when searching for
+  "today", as it shifts start=day x at 00:00 to start=day x-1 at 22:00 in GMT+2 timezone.
+  [lucabel]
+- Handle sort_on also when using AdvancedQuery.
+  [cekk]
+- Remove z3c.jbot compatibility and customize templates in standard-way.
+  [cekk]
+- Force indexing subjects in SearchableText with ICategorization to keep the old Plone functionality (remove this when the official pr is merged).
+  [cekk]
+- Enable kitconcept.seo behavior on Site Root.
+  [cekk]
+
+5.8.0 (2025-03-20)
+------------------
+
+- Add linkintegrity retriever for Link objects so when the referred object will be deleted, linkintegrity check will be raised also for Links.
+  [cekk]
+
+
+5.7.1 (2025-03-13)
+------------------
+
+- Customize serialzier for repeatableContentBlock.
+  [cekk]
+- Include experimental.noacquisition in the config.
+  Needed for pip buidls.
+  [folix-01]
+
+
+5.7.0 (2025-02-06)
+------------------
+
+- Add experimental.noacquisition as dependency.
+  [cekk]
+- Patch absolutize_path method to disable acquisition when checking aliases.
+  [cekk]
+- Update it translations
+  [lucabel]
+
+
+5.6.3 (2024-12-02)
+------------------
+
+- Add patch for blocksRetriever.
+  [eikichi18]
+- Enable blocks linkintegrity on Site Root too.
+  [cekk]
+
+5.6.2 (2024-11-28)
+------------------
+
+- Add patch for SlateBlockslinkRetriever.
+  [eikichi18]
+
+
+5.6.1 (2024-11-21)
+------------------
+
+- Add linkintegrity check also for count_down block.
+  [cekk]
+
+
+5.6.0 (2024-11-21)
+------------------
+
+- Add linkintegrity indexers for some custom blocks.
+  [cekk]
+
+
+5.5.7 (2024-10-28)
+------------------
+
+- Refactored AdvancedQuery part in @search endpoint to be more extendable.
+  [cekk]
+
+
+5.5.6 (2024-10-17)
+------------------
+
+- Remove dependency with *collective.volto.cookieconsent*.
+  [cekk]
+- Add more block indexers for SearchableText.
+  [cekk]
 
 5.5.5 (2024-09-23)
 ------------------
@@ -58,7 +150,7 @@ Changelog
 - Add dependency with collective.volto.sitesettings.
   [cekk]
 
-  
+
 5.4.9 (2024-04-22)
 ------------------
 

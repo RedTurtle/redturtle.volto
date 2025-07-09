@@ -69,4 +69,12 @@
     <implements interface="redturtle.volto.interfaces.ICustomFeedItem" />
   </class>
 
+  <class class="Products.CMFPlone.Portal.PloneSite">
+    <!-- enable linkintegrity also on site root -->
+    <implements interface="plone.app.relationfield.interfaces.IDexterityHasRelations" />
+    <!-- enable image scales on site root -->
+    <implements interface="plone.namedfile.interfaces.IImageScaleTraversable" />
+  </class>
+
+
 </configure>
