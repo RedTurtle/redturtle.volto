@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="redturtle.volto",
-    version="5.8.1.dev0",
+    version="5.9.1.dev0",
     description="Helper package to setup a RedTurtle's Plone site ready to work with Volto.",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -62,7 +62,6 @@ setup(
         "plone.restapi>=9.6.0",
         "Products.PortalTransforms>=3.2.0",
         "collective.volto.sitesettings",
-        "z3c.jbot",
         "experimental.noacquisition",
     ],
     extras_require={
