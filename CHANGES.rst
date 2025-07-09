@@ -4,9 +4,10 @@ Changelog
 5.9.1 (unreleased)
 ------------------
 
+- Make querystringsearch endpoint more customizable: now custom_query is defined in a separate method.
+  [cekk]
 - fix file:/// as external link in summary
   [mamico]
-
 
 5.9.0 (2025-06-26)
 ------------------
