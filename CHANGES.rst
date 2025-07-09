@@ -4,8 +4,8 @@ Changelog
 5.5.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Use custom creator criteria to list only creators present in the catalog to avoid an empty list when using LDAP and many_users flag
+  [folix-01]
 
 5.5.12 (2025-07-02)
 -------------------
@@ -33,7 +33,7 @@ Changelog
   [mamico]
 - Fix issue with event search in @querystring-search override:
   converting a timezone-aware DateTime to utcdatetime causes a problem when searching for
-  "today", as it shifts start=day x at 00:00 to start=day x-1 at 22:00 in GMT+2 timezone.  
+  "today", as it shifts start=day x at 00:00 to start=day x-1 at 22:00 in GMT+2 timezone.
   [lucabel]
 
 
@@ -116,7 +116,7 @@ Changelog
 - Add dependency with collective.volto.sitesettings.
   [cekk]
 
-  
+
 5.4.9 (2024-04-22)
 ------------------
 
