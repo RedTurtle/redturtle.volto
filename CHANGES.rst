@@ -4,6 +4,8 @@ Changelog
 5.9.1 (unreleased)
 ------------------
 
+- Customize @download view to allow downloading miniature images with their original filename and not with miniature as filename.
+  [cekk]
 - fix file:/// as external link in summary
   [mamico]
 
