@@ -4,6 +4,8 @@ Changelog
 5.9.1 (unreleased)
 ------------------
 
+- Fix in resolveuid serializer if block is not a dict nor dict-like 
+  [mamico]
 - Make querystringsearch endpoint more customizable: now custom_query is defined in a separate method.
   [cekk]
 - fix file:/// as external link in summary

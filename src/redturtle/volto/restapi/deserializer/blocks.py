@@ -39,6 +39,8 @@ class GenericResolveUIDDeserializer(object):
     def fix_urls_in_block(self, block):
         if isinstance(block, str):
             return self.get_uid_from_path(link=block)
+        if not hasattr(block, "get"):
+            return block
         if block.get("@type", "") in EXCLUDE_TYPES:
             return block
         if "UID" in block.keys():
