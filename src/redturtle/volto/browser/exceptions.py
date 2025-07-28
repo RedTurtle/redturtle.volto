@@ -9,4 +9,4 @@ class RTExceptionView(ExceptionView):
         if any(x in self.request.environ.get("REQUEST_URI") for x in matches):
             return self.request.response.redirect(self.request.URL)
 
-        return super(RTExceptionView, self).__call__()
+        return super().__call__()
