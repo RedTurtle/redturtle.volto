@@ -10,6 +10,8 @@ Changelog
   [cekk]
 - fix file:/// as external link in summary
   [mamico]
+- Updated error message template. Handle redirects for @@download, @@images and @@display-file requests.
+  [daniele]
 
 5.9.0 (2025-06-26)
 ------------------

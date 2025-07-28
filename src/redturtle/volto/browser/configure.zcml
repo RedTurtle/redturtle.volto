@@ -98,4 +98,13 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       condition="have plone-60"
       />
+
+  <browser:page
+      name="index.html"
+      for="Exception"
+      class=".exceptions.RTExceptionView"
+      template="templates/error_message.pt"
+      permission="zope.Public"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
 </configure>
