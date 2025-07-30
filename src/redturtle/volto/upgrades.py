@@ -2,11 +2,14 @@
 from Acquisition import aq_base
 from copy import deepcopy
 from plone import api
+from plone.app.querystring.interfaces import IQueryField
 from plone.app.upgrade.utils import installOrReinstallProduct
 from plone.dexterity.utils import iterSchemata
+from plone.registry.interfaces import IRegistry
 from plone.restapi.behaviors import IBlocks
 from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
+from zope.component import getUtility
 from zope.schema import getFields
 
 
@@ -594,3 +597,11 @@ def to_4308(context):
     logger.info(f"Reindex complete. Reindexed {len(reindexed)} contents:")
     for url in reindexed:
         logger.info(f"- {url}")
+
+
+def to_4309(context):
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(
+        IQueryField, prefix="plone.app.querystring.field.Creator"
+    )
+    settings.vocabulary = "redturtle.volto.vocabularies.Creators"
