@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/@@main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+<metal:main fill-slot="main"
+     tal:define="err_type options/error_type|nothing;
+                 err_tb options/error_tb|nothing;
+                 err_log_id options/error_log_id|nothing">
+
+        <metal:notfound tal:condition="python:err_type == 'NotFound'">
+
+            <tal:redirect define="redirection_view nocall:view/@@plone_redirector_view">
+
+                <h1 class="documentFirstHeading"
+                    i18n:translate="heading_site_there_seems_to_be_an_error">
+                    This page does not seem to exist&hellip;
+                </h1>
+
+                <div id="content-core">
+                    <p i18n:translate="description_site_error" class="description">
+ 	                    We apologize for the inconvenience, but the page you were trying to access is not at this address.
+                        You can use the links below to help you find what you are looking for.
+                     </p>
+
+                    <p i18n:translate="description_site_error_mail_site_admin" class="discreet">
+                        If you are certain you have the correct web address but are encountering an error, please
+                        contact the <span i18n:name="site_admin">
+                        <a href="#"
+                           i18n:translate="label_site_administration"
+                           tal:attributes="href string:${context/portal_url}/contact-info">site administration</a></span>.
+                    </p>
+
+                    <p i18n:translate="description_site_error_thank_you">
+                    Thank you.
+                    </p>
+
+                </div>
+            </tal:redirect>
+
+        </metal:notfound>
+
+        <metal:othererror tal:condition="python: err_type != 'NotFound'"
+             tal:define="isManager view/is_manager">
+
+            <h1 class="documentFirstHeading"
+                i18n:translate="heading_site_error_sorry">
+                We&#8217;re sorry, but there seems to be an error&hellip;
+            </h1>
+
+            <div id="content-core">
+                <div tal:condition="isManager">
+                   <p i18n:translate="description_site_admin_full_error">
+                   Here is the full error message:
+                   </p>
+
+                   <pre tal:content="err_tb"/>
+                </div>
+
+                <tal:noentry condition="not:isManager">
+                    <p i18n:translate="description_site_error_mail_site_admin">
+                    If you are certain you have the correct web address but are encountering an error, please
+                    contact the <span i18n:name="site_admin">
+                    <a href="#"
+                       i18n:translate="label_site_admin"
+                       tal:attributes="href string:${context/portal_url}/contact-info">site administration</a></span>.
+                    </p>
+                </tal:noentry>
+            </div>
+
+        </metal:othererror>
+
+</metal:main>
+</body>
+</html>
