@@ -98,4 +98,13 @@
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       condition="have plone-60"
       />
+
+      <browser:page
+        name="homepage_view"
+        layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+        for="plone.base.interfaces.IPloneSiteRoot"
+        class="plone.app.dexterity.browser.folder_listing.FolderView"
+        template="templates/homepage_view.pt"
+        permission="zope2.View"
+        />
 </configure>
