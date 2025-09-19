@@ -272,4 +272,12 @@
       destination="4500"
       handler=".upgrades.to_4500"
       />
+  <genericsetup:upgradeStep
+      title="Set default and immediate view for Plone Site"
+      description=""
+      profile="redturtle.volto:default"
+      source="4500"
+      destination="4600"
+      handler=".upgrades.to_4600"
+      />
 </configure>
