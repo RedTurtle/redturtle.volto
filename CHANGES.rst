@@ -1,6 +1,12 @@
 Changelog
 =========
 
+5.9.2 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 5.9.1 (2025-09-25)
 ------------------
 - Exclude "teaser" to avoid block modification by resolveuidserializer
