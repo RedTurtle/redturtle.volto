@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.9.1 (unreleased)
+5.9.1 (2025-09-25)
 ------------------
 - Exclude "teaser" to avoid block modification by resolveuidserializer
   [mamico]
