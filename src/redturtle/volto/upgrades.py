@@ -629,3 +629,9 @@ def to_4500(context):
     behaviors.append("kitconcept.seo")
     # adjust behaviors
     portal_types["Plone Site"].behaviors = tuple(behaviors)
+
+
+def to_4600(context):
+    portal_types = api.portal.get_tool(name="portal_types")
+    portal_types["Plone Site"].default_view = "homepage_view"
+    portal_types["Plone Site"].immediate_view = "homepage_view"

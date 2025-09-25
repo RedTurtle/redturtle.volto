@@ -13,7 +13,7 @@ jobs:
       matrix:
         # python: ["3.8", "3.9", "3.10", "3.11"]
         # plone: ["52", "60"]
-        python: ["3.9", "3.10", "3.11"]
+        python: ["3.11"]
         plone: ["60"]
         tz: ["UTC", "Europe/Rome"]
         exclude:

@@ -11,6 +11,8 @@ Changelog
   [cekk]
 - fix file:/// as external link in summary
   [mamico]
+- Set a default view for Plone Site different by default_view because in plone.restapi 9.15.2 is exposed and we don't need it because it broke agid layout.
+  [cekk]
 
 5.9.0 (2025-06-26)
 ------------------
