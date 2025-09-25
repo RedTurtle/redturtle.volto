@@ -3,21 +3,8 @@ Changelog
 
 5.5.13 (unreleased)
 -------------------
-5.9.1 (unreleased)
-------------------
-- Exclude "teaser" to aavoid block mmodification by resolveuidseriializer
-  [mamico]
-- Fix in resolveuid serializer if block is not a dict nor dict-like 
-  [mamico]
-- Make querystringsearch endpoint more customizable: now custom_query is defined in a separate method.
-  [cekk]
-- fix file:/// as external link in summary
-  [mamico]
 - Set a default view for Plone Site different by default_view because in plone.restapi 9.15.2 is exposed and we don't need it because it broke agid layout.
   [cekk]
-
-- Nothing changed yet.
-
 
 5.5.12 (2025-07-02)
 -------------------
