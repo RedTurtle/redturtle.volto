@@ -594,3 +594,9 @@ def to_4308(context):
     logger.info(f"Reindex complete. Reindexed {len(reindexed)} contents:")
     for url in reindexed:
         logger.info(f"- {url}")
+
+
+def to_4309(context):
+    portal_types = api.portal.get_tool(name="portal_types")
+    portal_types["Plone Site"].default_view = "homepage_view"
+    portal_types["Plone Site"].immediate_view = "homepage_view"
