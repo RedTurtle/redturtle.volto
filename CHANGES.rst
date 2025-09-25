@@ -3,7 +3,7 @@ Changelog
 
 5.9.1 (unreleased)
 ------------------
-- Exclude "teaser" to aavoid block mmodification by resolveuidseriializer
+- Exclude "teaser" to avoid block modification by resolveuidserializer
   [mamico]
 - Fix in resolveuid serializer if block is not a dict nor dict-like 
   [mamico]
