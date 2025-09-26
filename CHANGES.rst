@@ -3,9 +3,8 @@ Changelog
 
 5.5.13 (unreleased)
 -------------------
-
-- Nothing changed yet.
-
+- Set a default view for Plone Site different by default_view because in plone.restapi 9.15.2 is exposed and we don't need it because it broke agid layout.
+  [cekk]
 
 5.5.12 (2025-07-02)
 -------------------
