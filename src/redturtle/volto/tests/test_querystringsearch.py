@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+from datetime import timedelta
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+from plone.dexterity.utils import createContentInContainer
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
-from datetime import datetime
-from datetime import timedelta
-from plone.dexterity.utils import createContentInContainer
 
 import unittest
 
@@ -86,7 +86,7 @@ class TestQuerystringSearch(unittest.TestCase):
     def test_search_event(self):
         start_date = datetime.strptime("1/11/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
         end_date = start_date + timedelta(days=1, hours=1)
-        event = createContentInContainer(
+        createContentInContainer(
             self.portal,
             "Event",
             id="test-event",
@@ -100,11 +100,19 @@ class TestQuerystringSearch(unittest.TestCase):
         response = self.api_session.post(
             "/@querystring-search",
             json={
-                "query":[
-                    {"i":"portal_type","o":"plone.app.querystring.operation.selection.any","v":["Event"]},
-                    {"i":"start","o":"plone.app.querystring.operation.date.lessThan","v":"2024-11-02"},
+                "query": [
+                    {
+                        "i": "portal_type",
+                        "o": "plone.app.querystring.operation.selection.any",
+                        "v": ["Event"],
+                    },
+                    {
+                        "i": "start",
+                        "o": "plone.app.querystring.operation.date.lessThan",
+                        "v": "2024-11-02",
+                    },
                 ],
-            }
+            },
         )
         result = response.json()
         self.assertEqual(response.status_code, 200)
@@ -113,11 +121,19 @@ class TestQuerystringSearch(unittest.TestCase):
         response = self.api_session.post(
             "/@querystring-search",
             json={
-                "query":[
-                    {"i":"portal_type","o":"plone.app.querystring.operation.selection.any","v":["Event"]},
-                    {"i":"start","o":"plone.app.querystring.operation.date.lessThan","v":"2024-10-29"},
+                "query": [
+                    {
+                        "i": "portal_type",
+                        "o": "plone.app.querystring.operation.selection.any",
+                        "v": ["Event"],
+                    },
+                    {
+                        "i": "start",
+                        "o": "plone.app.querystring.operation.date.lessThan",
+                        "v": "2024-10-29",
+                    },
                 ],
-            }
+            },
         )
         result = response.json()
         self.assertEqual(response.status_code, 200)
