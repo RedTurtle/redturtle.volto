@@ -179,7 +179,10 @@ class QuerystringSearch(BaseQuerystringSearch):
         indexes_check = False
         if "start" in indexes:
             # TODO: do we have other cases to handle?
-            if indexes["start"].get("o") == "plone.app.querystring.operation.date.lessThan":  # noqa
+            custom_ops = [
+                "plone.app.querystring.operation.date.lessThan",
+            ]
+            if indexes["start"].get("o") in custom_ops:
                 # this is a custom search, not an "event" search
                 indexes_check = False
             else:
