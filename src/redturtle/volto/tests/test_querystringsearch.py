@@ -7,6 +7,9 @@ from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
+from datetime import datetime
+from datetime import timedelta
+from plone.dexterity.utils import createContentInContainer
 
 import unittest
 
@@ -79,3 +82,43 @@ class TestQuerystringSearch(unittest.TestCase):
         result = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(result["items_total"], 2)
+
+    def test_search_event(self):
+        start_date = datetime.strptime("1/11/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
+        end_date = start_date + timedelta(days=1, hours=1)
+        event = createContentInContainer(
+            self.portal,
+            "Event",
+            id="test-event",
+            title="Test Event",
+            start=start_date,
+            end=end_date,
+            location="Vienna",
+        )
+        commit()
+
+        response = self.api_session.post(
+            "/@querystring-search",
+            json={
+                "query":[
+                    {"i":"portal_type","o":"plone.app.querystring.operation.selection.any","v":["Event"]},
+                    {"i":"start","o":"plone.app.querystring.operation.date.lessThan","v":"2024-11-02"},
+                ],
+            }
+        )
+        result = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(result["items_total"], 1)
+
+        response = self.api_session.post(
+            "/@querystring-search",
+            json={
+                "query":[
+                    {"i":"portal_type","o":"plone.app.querystring.operation.selection.any","v":["Event"]},
+                    {"i":"start","o":"plone.app.querystring.operation.date.lessThan","v":"2024-10-29"},
+                ],
+            }
+        )
+        result = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(result["items_total"], 0)
