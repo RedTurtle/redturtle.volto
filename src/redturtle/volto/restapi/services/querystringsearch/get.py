@@ -36,6 +36,7 @@ class QuerystringSearch(BaseQuerystringSearch):
         query = data.get("query", None)
 
         if self.is_event_search(query=query):
+            import pdb; pdb.set_trace()
             return self.reply_events()
 
         try:
@@ -173,10 +174,17 @@ class QuerystringSearch(BaseQuerystringSearch):
         if not query:
             return False
 
-        indexes = [x["i"] for x in query]
+        indexes = {x["i"]: x for x in query}
 
         portal_type_check = False
-        indexes_check = "start" in indexes
+        indexes_check = False
+        if "start" in indexes:
+            # TODO: do we have other cases to handle?
+            if indexes["start"].get("o") == "plone.app.querystring.operation.date.lessThan":
+                # this is a custom search, not an "event" search
+                indexes_check = False
+            else:
+                indexs_check = True
 
         for param in query:
             i = param.get("i", "")
@@ -220,6 +228,7 @@ class QuerystringSearch(BaseQuerystringSearch):
 
         query_start = parsed_query.get("start", {})
         query_end = parsed_query.get("end", {})
+        
         if not query_start and not query_end:
             return start, end
 
@@ -232,6 +241,7 @@ class QuerystringSearch(BaseQuerystringSearch):
                 end = self.get_datetime_value(value[1])
                 return start, end
             start = self.get_datetime_value(value)
+
         if query_end:
             range = query_end.get("range", "")
             value = query_end.get("query", "")

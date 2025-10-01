@@ -83,7 +83,7 @@ class TestQuerystringSearch(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(result["items_total"], 2)
 
-    def test_search_event(self):
+    def test_search_event_no_event_search(self):
         start_date = datetime.strptime("1/11/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
         end_date = start_date + timedelta(days=1, hours=1)
         createContentInContainer(
@@ -138,3 +138,8 @@ class TestQuerystringSearch(unittest.TestCase):
         result = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(result["items_total"], 0)
+
+    def test_search_event_event_search(self):
+        # TODO
+        # {"metadata_fields":"_all","b_size":24,"limit":"9","query":[{"i":"portal_type","o":"plone.app.querystring.operation.selection.any","v":["Event"]},{"i":"path","o":"plone.app.querystring.operation.string.relativePath","v":"novita/eventi"},{"i":"start","o":"plone.app.querystring.operation.date.today","v":""}],"sort_on":"start","sort_order":"descending","b_start":0}
+        pass
