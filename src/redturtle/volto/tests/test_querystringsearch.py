@@ -83,7 +83,7 @@ class TestQuerystringSearch(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(result["items_total"], 2)
 
-    def test_search_event_no_event_search(self):
+    def test_search_event_no_event_search_lessthan(self):
         start_date = datetime.strptime("1/11/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
         end_date = start_date + timedelta(days=1, hours=1)
         createContentInContainer(
@@ -138,6 +138,62 @@ class TestQuerystringSearch(unittest.TestCase):
         result = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(result["items_total"], 0)
+
+    def test_search_event_no_event_search_largerthan(self):
+        start_date = datetime.strptime("1/11/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
+        end_date = start_date + timedelta(days=1, hours=1)
+        createContentInContainer(
+            self.portal,
+            "Event",
+            id="test-event",
+            title="Test Event",
+            start=start_date,
+            end=end_date,
+            location="Vienna",
+        )
+        commit()
+
+        response = self.api_session.post(
+            "/@querystring-search",
+            json={
+                "query": [
+                    {
+                        "i": "portal_type",
+                        "o": "plone.app.querystring.operation.selection.any",
+                        "v": ["Event"],
+                    },
+                    {
+                        "i": "start",
+                        "o": "plone.app.querystring.operation.date.largerThan",
+                        "v": "2024-11-02",
+                    },
+                ],
+            },
+        )
+        result = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(result["items_total"], 0)
+
+        response = self.api_session.post(
+            "/@querystring-search",
+            json={
+                "query": [
+                    {
+                        "i": "portal_type",
+                        "o": "plone.app.querystring.operation.selection.any",
+                        "v": ["Event"],
+                    },
+                    {
+                        "i": "start",
+                        "o": "plone.app.querystring.operation.date.largerThan",
+                        "v": "2024-10-29",
+                    },
+                ],
+            },
+        )
+        result = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(result["items_total"], 1)
 
     def test_search_event_event_search(self):
         # TODO

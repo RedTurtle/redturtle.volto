@@ -181,6 +181,7 @@ class QuerystringSearch(BaseQuerystringSearch):
             # TODO: do we have other cases to handle?
             custom_ops = [
                 "plone.app.querystring.operation.date.lessThan",
+                "plone.app.querystring.operation.date.largerThan",
             ]
             if indexes["start"].get("o") in custom_ops:
                 # this is a custom search, not an "event" search
