@@ -21,7 +21,7 @@ class TestOccurrences(unittest.TestCase):
     def test_get_occurrences_from_catalog(self):
         start_date = datetime.strptime("01/01/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
         end_date = start_date + timedelta(hours=1)
-        event = createContentInContainer(
+        createContentInContainer(
             self.portal,
             "Event",
             id="test-event",
