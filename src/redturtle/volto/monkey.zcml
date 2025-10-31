@@ -74,4 +74,12 @@
       preserveOriginal="True"
       />
 
+  <monkey:patch
+      original="filter_query"
+      replacement=".monkey.restapi_handler_filter_query"
+      class="plone.restapi.search.handler.SearchHandler"
+      description="https://github.com/plone/plone.restapi/pull/1954"
+      preserveOriginal="True"
+      />
+
 </configure>

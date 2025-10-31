@@ -34,6 +34,7 @@ Changelog
 ------------------
 
 - Fix on #151 changes (#152)
+- backport https://github.com/plone/plone.restapi/pull/1954 sort_order in search handler
   [mamico]
 
 
