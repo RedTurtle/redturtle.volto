@@ -205,3 +205,13 @@ def _get_object_keywords(self, obj, attr):
         if not keywords and hasattr(obj, attr):
             return ("__empty__",)
     return keywords
+
+
+def restapi_handler_filter_query(self, query):
+    if query:
+        sort_order = query.get("sort_order")
+    query = self._old_filter_query(query)
+    if sort_order and not query.get("sort_order"):
+        query["sort_order"] = sort_order
+    return query
+
