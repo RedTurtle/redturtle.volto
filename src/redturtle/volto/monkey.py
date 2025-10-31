@@ -217,3 +217,13 @@ def plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks(self):
         ):
             links |= set(handler(block))
     return links
+
+
+def restapi_handler_filter_query(self, query):
+    if query:
+        sort_order = query.get("sort_order")
+    query = self._old_filter_query(query)
+    if sort_order and not query.get("sort_order"):
+        query["sort_order"] = sort_order
+    return query
+
