@@ -214,4 +214,3 @@ def restapi_handler_filter_query(self, query):
     if sort_order and not query.get("sort_order"):
         query["sort_order"] = sort_order
     return query
-
