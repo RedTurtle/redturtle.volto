@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.5.14 (unreleased)
+5.5.14 (2025-11-03)
 -------------------
 
 - backport https://github.com/plone/plone.restapi/pull/1954 sort_order in search handler
