@@ -205,15 +205,16 @@ def plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks(self):
     """
 
     links = set()
-    blocks = getattr(self.context, "blocks", {})
+    context = self.context.aq_base
+    blocks = getattr(context, "blocks", {})
     if not blocks:
         return links
-    for block in visit_blocks(self.context, blocks):
+    for block in visit_blocks(context, blocks):
         if not isinstance(block, dict):
             continue
 
         for handler in iter_block_transform_handlers(
-            self.context, block, IBlockFieldLinkIntegrityRetriever
+            context, block, IBlockFieldLinkIntegrityRetriever
         ):
             links |= set(handler(block))
     return links
