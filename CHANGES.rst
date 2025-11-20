@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.9.2 (unreleased)
+5.9.2 (2025-11-20)
 ------------------
 
 - Avoid acquisition problems in monkeypatch (#151).
