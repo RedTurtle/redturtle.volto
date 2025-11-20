@@ -4,8 +4,8 @@ Changelog
 5.9.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Avoid acquisition problems in monkeypatch (#151).
+  [cekk]
 
 5.9.1 (2025-09-25)
 ------------------
