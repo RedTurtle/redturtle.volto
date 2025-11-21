@@ -205,7 +205,7 @@ def plone_restapi_blocks_linkintegrity_blocksretriever_retrieveLinks(self):
     """
 
     links = set()
-    context = self.context.aq_base
+    context = aq_base(self.context)
     blocks = getattr(context, "blocks", {})
     if not blocks:
         return links
