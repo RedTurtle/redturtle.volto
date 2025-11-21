@@ -4,7 +4,8 @@ Changelog
 5.9.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- backport https://github.com/plone/plone.restapi/pull/1954 sort_order in search handler
+  [mamico]
 
 
 5.9.2 (2025-11-20)
