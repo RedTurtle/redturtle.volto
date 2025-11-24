@@ -4,7 +4,8 @@ Changelog
 5.9.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix on #151 changes (#152)
+  [mamico]
 
 
 5.9.2 (2025-11-20)
