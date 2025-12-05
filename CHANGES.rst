@@ -1,11 +1,24 @@
 Changelog
 =========
 
-5.9.2 (unreleased)
+5.9.4 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+5.9.3 (2025-11-24)
+------------------
+
+- Fix on #151 changes (#152)
+  [mamico]
+
+
+5.9.2 (2025-11-20)
+------------------
+
+- Avoid acquisition problems in monkeypatch (#151).
+  [cekk]
 
 5.9.1 (2025-09-25)
 ------------------
