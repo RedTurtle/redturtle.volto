@@ -4,7 +4,8 @@ Changelog
 5.9.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix bug search event restapi (#148)
+  [mamico]
 
 
 5.9.3 (2025-11-24)
