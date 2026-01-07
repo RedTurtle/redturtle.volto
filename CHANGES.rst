@@ -4,6 +4,8 @@ Changelog
 5.9.4 (unreleased)
 ------------------
 
+- backport https://github.com/plone/plone.restapi/pull/1954 sort_order in search handler
+  [mamico]
 - Fix bug search event restapi (#148)
   [mamico]
 
