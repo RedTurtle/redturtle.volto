@@ -16,6 +16,7 @@ EXCLUDE_TYPES = [
     "calendar",
     "searchEvents",
     "form",
+    "teaser",
 ]
 
 

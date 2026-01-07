@@ -1,15 +1,38 @@
 Changelog
 =========
 
-5.9.1 (unreleased)
+5.9.4 (unreleased)
 ------------------
 
+- Fix bug search event restapi (#148)
+  [mamico]
+
+
+5.9.3 (2025-11-24)
+------------------
+
+- Fix on #151 changes (#152)
+  [mamico]
+
+
+5.9.2 (2025-11-20)
+------------------
+
+- Avoid acquisition problems in monkeypatch (#151).
+  [cekk]
+
+5.9.1 (2025-09-25)
+------------------
+- Exclude "teaser" to avoid block modification by resolveuidserializer
+  [mamico]
 - Fix in resolveuid serializer if block is not a dict nor dict-like 
   [mamico]
 - Make querystringsearch endpoint more customizable: now custom_query is defined in a separate method.
   [cekk]
 - fix file:/// as external link in summary
   [mamico]
+- Set a default view for Plone Site different by default_view because in plone.restapi 9.15.2 is exposed and we don't need it because it broke agid layout.
+  [cekk]
 
 5.9.0 (2025-06-26)
 ------------------

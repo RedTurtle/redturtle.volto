@@ -8,5 +8,12 @@
   <property name="behaviors" purge="false">
     <element value="kitconcept.seo" />
   </property>
-  
+
+  <!--
+    these are needed because plone.restapi 9.15.2 add layout to SiteRoot serializer.
+    This will broke agid-like themese because will render also title and description in homepage
+  -->
+  <property name="default_view">homepage_view</property>
+  <property name="immediate_view">homepage_view</property> 
 </object>
+ 
