@@ -6,7 +6,8 @@ Changelog
 
 - Fix bug search event restapi (#148)
   [mamico]
-
+- Use custom creator criteria to list only creators present in the catalog to avoid an empty list when using LDAP and many_users flag
+  [folix-01]
 
 5.9.3 (2025-11-24)
 ------------------
@@ -51,11 +52,6 @@ Changelog
   [cekk]
 - Enable kitconcept.seo behavior on Site Root.
   [cekk]
-- Use custom creator criteria.
-- Use custom creator criteria to list only creators present in the catalog.
-- Use custom creator criteria to list only creators present in the catalog to avoid an empty list when using LDAP and many_users flag
-  [folix-01]
-
 
 5.8.0 (2025-03-20)
 ------------------
