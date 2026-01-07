@@ -6,11 +6,14 @@ from plone.app.linkintegrity.handlers import check_linkintegrity_dependencies
 from plone.app.linkintegrity.handlers import getObjectsFromLinks
 from plone.app.linkintegrity.handlers import updateReferences
 from plone.app.linkintegrity.interfaces import IRetriever
+from plone.app.querystring.interfaces import IQueryField
 from plone.app.upgrade.utils import installOrReinstallProduct
 from plone.dexterity.utils import iterSchemata
+from plone.registry.interfaces import IRegistry
 from plone.restapi.behaviors import IBlocks
 from redturtle.volto.setuphandlers import remove_custom_googlebot
 from uuid import uuid4
+from zope.component import getUtility
 from zope.schema import getFields
 
 
@@ -629,6 +632,14 @@ def to_4500(context):
     behaviors.append("kitconcept.seo")
     # adjust behaviors
     portal_types["Plone Site"].behaviors = tuple(behaviors)
+
+
+def to_4501(context):
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(
+        IQueryField, prefix="plone.app.querystring.field.Creator"
+    )
+    settings.vocabulary = "redturtle.volto.vocabularies.Creators"
 
 
 def to_4600(context):
