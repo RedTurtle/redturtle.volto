@@ -24,7 +24,8 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: install black
-        run: pip install black
+        # temporary fix: https://community.plone.org/t/clash-between-isort-and-black-after-pre-commit-autoupdate/22787
+        run: pip install black==25.12.0
 
       - name: run black
         run: black src/ --check --diff
