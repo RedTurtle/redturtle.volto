@@ -44,7 +44,13 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       directory="profiles/to_4307"
       />
-
+  <genericsetup:registerProfile
+      name="profile_to_4700"
+      title="RedTurtle: Volto (to 4700)"
+      description="Installs the redturtle.volto add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/to_4700"
+      />
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="redturtle.volto-hiddenprofiles"

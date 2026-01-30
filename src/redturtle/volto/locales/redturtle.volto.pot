@@ -1,10 +1,10 @@
-#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-#SOME DESCRIPTIVE TITLE.
-#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-03-28 12:42+0000\n"
+"POT-Creation-Date: 2026-01-30 10:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,18 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.volto\n"
+
+#: redturtle/volto/patches.py:62
+msgid "Alternative url path must not be a view."
+msgstr ""
+
+#: redturtle/volto/patches.py:51
+msgid "Alternative url path must start with a slash."
+msgstr ""
+
+#: redturtle/volto/patches.py:92
+msgid "Cannot use a working path as alternative url."
+msgstr ""
 
 #: redturtle/volto/configure.zcml:29
 msgid "Installs the redturtle.volto add-on."
@@ -34,6 +46,14 @@ msgstr ""
 msgid "RedTurtle: Volto"
 msgstr ""
 
+#: redturtle/volto/configure.zcml:46
+msgid "RedTurtle: Volto (to 4307)"
+msgstr ""
+
+#: redturtle/volto/configure.zcml:53
+msgid "RedTurtle: Volto (to 4700)"
+msgstr ""
+
 #: redturtle/volto/configure.zcml:38
 msgid "RedTurtle: Volto (uninstall)"
 msgstr ""
@@ -46,27 +66,65 @@ msgstr ""
 msgid "Show elements excluded from navigation"
 msgstr ""
 
+#: redturtle/volto/patches.py:64
+msgid "Target path must not be a view."
+msgstr ""
+
+#: redturtle/volto/patches.py:59
+msgid "Target path must start with a slash."
+msgstr ""
+
+#: redturtle/volto/patches.py:74
+msgid "The provided alternative url already exists!"
+msgstr ""
+
+#: redturtle/volto/patches.py:98
+msgid "The provided target object does not exist."
+msgstr ""
+
 #: redturtle/volto/configure.zcml:38
 msgid "Uninstalls the redturtle.volto add-on."
 msgstr ""
 
+#: redturtle/volto/browser/configure.zcml:82
+msgid "View Document"
+msgstr ""
+
+#: redturtle/volto/patches.py:48
+msgid "You have to enter a target."
+msgstr ""
+
+#: redturtle/volto/patches.py:46
+msgid "You have to enter an alternative url."
+msgstr ""
+
+#. Default: "List of AdvancedQuery ranking rules. Use '__TERM__' for current search term."
+#: redturtle/volto/interfaces.py:48
+msgid "advanced_query_ranking_rules_help"
+msgstr ""
+
+#. Default: "AdvancedQuery Ranking rules"
+#: redturtle/volto/interfaces.py:45
+msgid "advanced_query_ranking_rules_label"
+msgstr ""
+
 #. Default: "If enabled, users can't create contents with ids that are already used as aliases."
-#: redturtle/volto/interfaces.py:36
+#: redturtle/volto/interfaces.py:61
 msgid "check_aliases_in_namechooser_help"
 msgstr ""
 
 #. Default: "Disallow ids used in aliases"
-#: redturtle/volto/interfaces.py:32
+#: redturtle/volto/interfaces.py:57
 msgid "check_aliases_in_namechooser_label"
 msgstr ""
 
 #. Default: "If enabled, a custom ranking for SearchableText searches will be used."
-#: redturtle/volto/interfaces.py:23
+#: redturtle/volto/interfaces.py:37
 msgid "enable_advanced_query_ranking_help"
 msgstr ""
 
 #. Default: "Enable AdvancedQuery ranking"
-#: redturtle/volto/interfaces.py:19
+#: redturtle/volto/interfaces.py:33
 msgid "enable_advanced_query_ranking_label"
 msgstr ""
 
