@@ -110,16 +110,15 @@ class SearchHandler(OriginalHandler):
                 sort_order = "desc"
             return (query["sort_on"], sort_order)
 
-        ranking_json = api.portal.get_registry_record(
-            "advanced_query_ranking_rules",
-            interface=IRedTurtleVoltoSettings,
-            default="[]",
-        )
-
         try:
+            ranking_json = api.portal.get_registry_record(
+                "advanced_query_ranking_rules",
+                interface=IRedTurtleVoltoSettings,
+                default="[]",
+            )
             ranking_rules = json.loads(ranking_json)
-        except (ValueError, TypeError):
-            logger.error("Invalid JSON in ranking_rules_json configuration")
+        except (ValueError, TypeError, KeyError):
+            logger.error("Invalid or missing JSON in ranking_rules_json configuration")
             ranking_rules = []
 
         # Costruiamo dinamicamente la lista per RankByQueries_Sum
