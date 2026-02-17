@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.9.4 (unreleased)
+5.9.4 (2025-12-05)
 ------------------
 
 - Fix bug search event restapi (#148)
