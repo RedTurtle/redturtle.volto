@@ -63,6 +63,7 @@ setup(
         "Products.PortalTransforms>=3.2.0",
         "collective.volto.sitesettings",
         "experimental.noacquisition",
+        "collective.searchblocks",
     ],
     extras_require={
         "advancedquery": [

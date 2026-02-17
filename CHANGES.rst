@@ -6,7 +6,8 @@ Changelog
 
 - Fix bug search event restapi (#148)
   [mamico]
-
+- Install collective.searchblocks.
+  [cekk]
 
 5.9.3 (2025-11-24)
 ------------------
@@ -25,7 +26,7 @@ Changelog
 ------------------
 - Exclude "teaser" to avoid block modification by resolveuidserializer
   [mamico]
-- Fix in resolveuid serializer if block is not a dict nor dict-like 
+- Fix in resolveuid serializer if block is not a dict nor dict-like
   [mamico]
 - Make querystringsearch endpoint more customizable: now custom_query is defined in a separate method.
   [cekk]

@@ -280,4 +280,12 @@
       destination="4600"
       handler=".upgrades.to_4600"
       />
+  <genericsetup:upgradeStep
+      title="Install collective.searchblocks"
+      description=""
+      profile="redturtle.volto:default"
+      source="4600"
+      destination="4700"
+      handler=".upgrades.to_4700"
+      />
 </configure>
