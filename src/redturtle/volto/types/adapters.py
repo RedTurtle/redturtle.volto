@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """JsonSchema providers."""
+
 from plone.restapi.types.adapters import TextLineJsonSchemaProvider as Base
 from plone.restapi.types.interfaces import IJsonSchemaProvider
 from redturtle.volto import _
