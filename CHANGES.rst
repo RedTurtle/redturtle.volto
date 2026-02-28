@@ -12,6 +12,8 @@ Changelog
 
 - Fix bug search event restapi (#148)
   [mamico]
+- Added new service to list blocks types and where are used.
+  [daniele]
 
 
 5.9.3 (2025-11-24)
