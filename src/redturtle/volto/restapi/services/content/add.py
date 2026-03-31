@@ -2,8 +2,6 @@ from plone.restapi.deserializer import json_body
 from plone.restapi.services.content.add import FolderPost as BaseFolderPost
 from zExceptions import BadRequest
 
-import plone.protect.interfaces
-
 
 class FolderPost(BaseFolderPost):
     """Creates a new content object."""
@@ -17,12 +15,5 @@ class FolderPost(BaseFolderPost):
 
             msg = "Il nome breve non deve contenere spazi"
             raise BadRequest(msg)
-
-            return dict(
-                error=dict(
-                    type="Bad Request",
-                    message=str("Il nome breve non deve contenere spazi"),
-                )
-            )
 
         return super().reply()
