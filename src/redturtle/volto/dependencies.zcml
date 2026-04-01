@@ -13,6 +13,7 @@
   <include package="collective.purgebyid" />
   <include package="kitconcept.seo" />
   <include package="plone.volto" />
+  <include package="experimental.noacquisition" />
 
   <include
       package="dm.plone.advancedquery"

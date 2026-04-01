@@ -3,11 +3,15 @@ name: Security check - Bandit
 on: push
 
 jobs:
-  build:
+  analyze:
     runs-on: ubuntu-latest
-
+    permissions:
+      # required for all workflows
+      security-events: write
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
     steps:
-
     - name: Start Measurement
       uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
       with:
@@ -40,3 +44,7 @@ jobs:
       with:
         task: display-results
       # continue-on-error: true # recommended setting for production. See notes below.
+      - name: Perform Bandit Analysis
+        uses: PyCQA/bandit-action@v1
+        with:
+            targets: ./src

@@ -79,12 +79,9 @@ class QuerystringSearch(BaseQuerystringSearch):
             limit=limit,
         )
 
-        # Exclude "self" content item from the results when ZCatalog supports NOT UUID
-        # queries and it is called on a content object.
-        if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
-            querybuilder_parameters.update(
-                dict(custom_query={"UID": {"not": self.context.UID()}})
-            )
+        custom_query = self.get_custom_query(data)
+        if custom_query:
+            querybuilder_parameters.update(dict(custom_query=custom_query))
 
         try:
             results = querybuilder(**querybuilder_parameters)
@@ -99,6 +96,15 @@ class QuerystringSearch(BaseQuerystringSearch):
             fullobjects=fullobjects
         )
         return results
+
+    def get_custom_query(self, data):
+        """
+        Exclude "self" content item from the results when ZCatalog supports NOT UUID
+        queries and it is called on a content object.
+        """
+        if not IPloneSiteRoot.providedBy(self.context) and SUPPORT_NOT_UUID_QUERIES:
+            return {"UID": {"not": [self.context.UID()]}}
+        return {}
 
     def cleanup_query(self, query, b_size):
         """
@@ -167,10 +173,21 @@ class QuerystringSearch(BaseQuerystringSearch):
         if not query:
             return False
 
-        indexes = [x["i"] for x in query]
+        indexes = {x["i"]: x for x in query}
 
         portal_type_check = False
-        indexes_check = "start" in indexes
+        indexes_check = False
+        if "start" in indexes:
+            # TODO: do we have other cases to handle?
+            custom_ops = [
+                "plone.app.querystring.operation.date.lessThan",
+                "plone.app.querystring.operation.date.largerThan",
+            ]
+            if indexes["start"].get("o") in custom_ops:
+                # this is a custom search, not an "event" search
+                indexes_check = False
+            else:
+                indexes_check = True
 
         for param in query:
             i = param.get("i", "")
@@ -214,6 +231,7 @@ class QuerystringSearch(BaseQuerystringSearch):
 
         query_start = parsed_query.get("start", {})
         query_end = parsed_query.get("end", {})
+
         if not query_start and not query_end:
             return start, end
 
@@ -226,6 +244,7 @@ class QuerystringSearch(BaseQuerystringSearch):
                 end = self.get_datetime_value(value[1])
                 return start, end
             start = self.get_datetime_value(value)
+
         if query_end:
             range = query_end.get("range", "")
             value = query_end.get("query", "")
@@ -243,7 +262,9 @@ class QuerystringSearch(BaseQuerystringSearch):
 
     def get_datetime_value(self, value):
         if isinstance(value, DateTime):
-            return value.utcdatetime()
+            # return value.utcdatetime()
+            # manteniamo il possibile timezone
+            return value.asdatetime()
         return datetime.fromisoformat(value)
 
     def reply_events(self):

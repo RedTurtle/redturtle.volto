@@ -17,21 +17,21 @@ class TestOccurrences(unittest.TestCase):
         self.request = self.layer["request"]
         set_browserlayer(self.request)
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        self.start_date = datetime.strptime("01/01/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
-        self.end_date = self.start_date + timedelta(hours=1)
 
-        self.event = createContentInContainer(
+    def test_get_occurrences_from_catalog(self):
+        start_date = datetime.strptime("01/01/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
+        end_date = start_date + timedelta(hours=1)
+        createContentInContainer(
             self.portal,
             "Event",
             id="test-event",
             title="Test Event",
-            start=self.start_date,
-            end=self.end_date,
+            start=start_date,
+            end=end_date,
             location="Vienna",
             recurrence="RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=MO;COUNT=50",
         )
 
-    def test_get_occurrences_from_catalog(self):
         catalog = self.portal.portal_catalog
 
         start_date_search = datetime.strptime(

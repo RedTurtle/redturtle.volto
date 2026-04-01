@@ -41,7 +41,7 @@ class BaseTest(unittest.TestCase):
             type="Document",
             id="d1",
             title="document",
-            description="Foo document",
+            description="Document with subject",
             subject=["foo", "bar"],
         )
         # 3rd for "Foo" (title + searchableText)
@@ -84,7 +84,7 @@ class AdvancedSearchTest(BaseTest):
         self.assertEqual(result["items_total"], 3)
         # explain why the order is different from the one in the test above
         self.assertEqual(
-            ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
+            ["f1", "e1", "d1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
     def test_search_foo(self):
@@ -163,7 +163,7 @@ class AdvancedSearchTest(BaseTest):
         result = response.json()
         self.assertEqual(result["items_total"], 3)
         self.assertEqual(
-            ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
+            ["f1", "e1", "d1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
     def test_search_no_query(self):
@@ -195,7 +195,31 @@ class AdvancedSearchTest(BaseTest):
         result = response.json()
         self.assertEqual(result["items_total"], 3)
         self.assertEqual(
-            ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
+            ["f1", "e1", "d1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
+
+    def test_search_use_sort_on_if_in_query_and_ignore_custom_order(
+        self,
+    ):
+        response = self.api_session.get(
+            "/@search", params={"SearchableText": "foo", "sort_on": "sortable_title"}
+        )
+        result = response.json()
+        self.assertEqual(result["items_total"], 3)
+        self.assertEqual(
+            ["d1", "e1", "f1"],
+            [item["@id"].split("/")[-1] for item in result["items"]],
+        )
+
+        # now repeat query with no sort_on and have custom order
+        response = self.api_session.get(
+            "/@search",
+            params={"SearchableText": "foo"},
+        )
+        result = response.json()
+        self.assertEqual(result["items_total"], 3)
+        self.assertEqual(
+            ["d1", "f1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
 
@@ -207,7 +231,7 @@ class AdvancedSearchWithFlagTest(BaseTest):
         self.assertEqual(result["items_total"], 3)
         # explain why the order is different from the one in the test above
         self.assertEqual(
-            ["f1", "d1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
+            ["f1", "e1", "d1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
     def test_enabling_flag_return_custom_order(self):

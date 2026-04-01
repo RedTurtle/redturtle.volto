@@ -20,6 +20,10 @@
       factory=".blocks.TableResolveUIDSerializerRoot"
       provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
       />
+  <subscriber
+      factory=".blocks.RepeatableContentBlockSerializer"
+      provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
+      />
 
   <adapter factory=".dxfields.DateTimeFieldSerializer" />
   <adapter factory=".dxfields.TextLineFieldSerializer" />

@@ -4,11 +4,14 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.search.handler import SearchHandler as OriginalHandler
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.services import Service
-from redturtle.volto import logger
 from redturtle.volto.config import MAX_LIMIT
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from zope.component import getMultiAdapter
 
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 # search for 'ranking' in 'SearchableText' and rank very high
 # when the term is in 'Subject' and high when it is in 'Title'.
@@ -44,8 +47,6 @@ class SearchHandler(OriginalHandler):
     def is_advanced_query(self, query):
         if not query:
             return False
-        if query.get("sort_on", None):
-            return False
         if query.get("SimpleQuery", None):
             return False
         custom_ranking_enabled = api.portal.get_registry_record(
@@ -76,11 +77,25 @@ class SearchHandler(OriginalHandler):
             # TODO: mettere i parametri di ranking in registry
             # XXX: il default sul subject ha senso ? (probabilmente no), rivedere eventualmente anche i test
             term = query.get("SearchableText")
-            rs = RankByQueries_Sum(
-                (Eq("Subject", term), 16),
-                (Eq("Title", term), 8),
-                (Eq("Description", term), 6),
-            )
+
+            sort_on = query.get("sort_on", "")
+            if sort_on:
+                sort_order = query.get("sort_order", "")
+                if not sort_order:
+                    if sort_on in ["Date", "effective"]:
+                        sort_order = "desc"
+                    else:
+                        sort_order = "asc"
+                if sort_order == "reverse":
+                    sort_order = "desc"
+                rs = (query["sort_on"], sort_order)
+            else:
+                # use custom ranking
+                rs = RankByQueries_Sum(
+                    (Eq("Subject", term), 16),
+                    (Eq("Title", term), 8),
+                    (Eq("Description", term), 6),
+                )
             lazy_resultset = self.catalog.evalAdvancedQuery(
                 # Eq("SearchableText", term), (rs,), **query
                 And(*queries),
