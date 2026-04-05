@@ -5,8 +5,15 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING
+from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
+
 from zExceptions import BadRequest
 from zope.container.interfaces import INameChooser
+
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
+from plone.app.testing import TEST_USER_ID
+from plone.restapi.testing import RelativeSession
 
 import unittest
 
@@ -131,10 +138,25 @@ class TestNameChooserEnabled(unittest.TestCase):
         res = api.content.rename(obj=item, new_id="foo")
         self.assertEqual(res.getId(), "foo")
 
+
+class TestCreation(unittest.TestCase):
+    layer = REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
+
+    def setUp(self):
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        self.portal_url = self.portal.absolute_url()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+        self.api_session = RelativeSession(self.portal_url)
+        self.api_session.headers.update({"Accept": "application/json"})
+        self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
+
     def test_fix_id_if_contains_spaces(self):
         """Test that id with spaces is fixed"""
-        obj = api.content.create(
-            container=self.portal, type="Document", title="test", id="aa bb"
-        )
+        import pdb
 
-        self.assertEqual("aa-bb", obj.id)
+        pdb.set_trace()
+        response = self.api_session.post("/@add", json={"source": ["/aa bb"]})
+
+        self.assertEqual(response.json()["message"], "aa-bb")
