@@ -4,7 +4,8 @@ Changelog
 5.9.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Check spaces in shortname when adding a content.
+  [daniele]
 
 
 5.9.4 (2025-12-05)

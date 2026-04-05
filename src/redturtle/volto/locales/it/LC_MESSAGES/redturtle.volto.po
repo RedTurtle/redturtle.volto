@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-03-28 10:20+0000\n"
+"POT-Creation-Date: 2026-04-02 13:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,75 +14,124 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: redturtle/volto/configure.zcml:29
+#: ../patches.py:62
+msgid "Alternative url path must not be a view."
+msgstr ""
+
+#: ../patches.py:51
+msgid "Alternative url path must start with a slash."
+msgstr ""
+
+#: ../patches.py:92
+msgid "Cannot use a working path as alternative url."
+msgstr ""
+
+#: ../configure.zcml:29
 msgid "Installs the redturtle.volto add-on."
 msgstr ""
 
-#: redturtle/volto/profiles/default/registry/criteria.xml
+#: ../profiles/default/registry/criteria.xml
 msgid "Metadata"
 msgstr ""
 
-#: redturtle/volto/browser/controlpanel.py:11
-#: redturtle/volto/profiles/default/controlpanel.xml
+#: ../browser/controlpanel.py:11
+#: ../profiles/default/controlpanel.xml
 msgid "RedTurtle Volto Settings"
 msgstr "RedTurtle Volto"
 
-#: redturtle/volto/configure.zcml:29
+#: ../configure.zcml:29
 msgid "RedTurtle: Volto"
 msgstr ""
 
-#: redturtle/volto/configure.zcml:38
+#: ../configure.zcml:46
+msgid "RedTurtle: Volto (to 4307)"
+msgstr ""
+
+#: ../configure.zcml:38
 msgid "RedTurtle: Volto (uninstall)"
 msgstr ""
 
-#: redturtle/volto/profiles/default/registry/criteria.xml
+#: ../profiles/default/registry/criteria.xml
 msgid "Select False to show only elements not excluded from navigation."
 msgstr "Seleziona False per mostrare solo gli elementi non omessi dalla navigazione."
 
-#: redturtle/volto/profiles/default/registry/criteria.xml
+#: ../profiles/default/registry/criteria.xml
 msgid "Show elements excluded from navigation"
 msgstr "Elementi omessi dalla navigazione"
 
-#: redturtle/volto/configure.zcml:38
+#: ../patches.py:64
+msgid "Target path must not be a view."
+msgstr ""
+
+#: ../patches.py:59
+msgid "Target path must start with a slash."
+msgstr ""
+
+#: ../patches.py:74
+msgid "The provided alternative url already exists!"
+msgstr ""
+
+#: ../patches.py:98
+msgid "The provided target object does not exist."
+msgstr ""
+
+#: ../configure.zcml:38
 msgid "Uninstalls the redturtle.volto add-on."
 msgstr ""
 
+#: ../browser/configure.zcml:82
+msgid "View Document"
+msgstr ""
+
+#: ../patches.py:48
+msgid "You have to enter a target."
+msgstr ""
+
+#: ../patches.py:46
+msgid "You have to enter an alternative url."
+msgstr ""
+
 #. Default: "If enabled, users can't create contents with ids that are already used as aliases."
-#: redturtle/volto/interfaces.py:36
+#: ../interfaces.py:41
 msgid "check_aliases_in_namechooser_help"
 msgstr "Se attivato, alla creazione o rinomina di un contenuto, verrà eseguito anche un controllo su eventuali alias presenti (quelli visibili in Gestione URL), ed eventualmente viene impedita la creazione con quell'id."
 
 #. Default: "Disallow ids used in aliases"
-#: redturtle/volto/interfaces.py:32
+#: ../interfaces.py:37
 msgid "check_aliases_in_namechooser_label"
 msgstr "Controllo degli id anche sugli alias"
 
+#. Default: "The id \"${id}\" is invalid because contains spaces."
+#: ../adapters/namechooser.py:18
+msgid "check_spaces_in_shortname"
+msgstr "Il nome breve (id) non è valido perché contiene degli spazi."
+
 #. Default: "If enabled, a custom ranking for SearchableText searches will be used."
-#: redturtle/volto/interfaces.py:23
+#: ../interfaces.py:28
 msgid "enable_advanced_query_ranking_help"
 msgstr "Se abilitato, verrà utilizzato un ranking custom per la ricerca testuale."
 
 #. Default: "Enable AdvancedQuery ranking"
-#: redturtle/volto/interfaces.py:19
+#: ../interfaces.py:24
 msgid "enable_advanced_query_ranking_label"
 msgstr "Abilita ranking custom con AdvancedQuery"
 
 #. Default: "The id \"${id}\" is invalid because there is already an alias for that path. Change its id or ask site administrators to remove \"${fixed_path}\" in aliases management."
-#: redturtle/volto/adapters/namechooser.py:29
+#: ../adapters/namechooser.py:39
 msgid "name_chooser_alias_error"
 msgstr "L'id \"${id}\" non è valido perché già utilizzato per un alias. Modifca l'id oppure rivolgiti agli amministratori per cancellare l'alias esistente: \"${fixed_path}\"."
 
 #. Default: "Insert an external link directly into the field,or select an internal link clicking on the icon."
-#: redturtle/volto/types/adapters.py:25
+#: ../types/adapters.py:25
 msgid "remoteUrl_restapi_label"
 msgstr "Inserisci un link esterno direttamente nel campo, oppure seleziona un collegamento ad un contenuto del sito cliccando sull'icona accanto."
 
 #. Default: "Volto Parent URL: Content url without \"/api\"."
-#: redturtle/volto/adapters/stringinterp.py:35
+#: ../adapters/stringinterp.py:35
 msgid "stringinterp_volto_parent_url"
 msgstr ""
 
 #. Default: "Volto URL: Content url without \"/api\"."
-#: redturtle/volto/adapters/stringinterp.py:18
+#: ../adapters/stringinterp.py:18
 msgid "stringinterp_volto_url"
 msgstr "Volto URL: URL del contenuto Plone senza \"/api\"."

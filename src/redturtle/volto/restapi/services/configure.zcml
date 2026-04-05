@@ -10,8 +10,6 @@
   <include package=".site_search" />
   <include package=".sitemap" />
   <include package=".search" />
-  <include package=".content" />
-
 
   <adapter
       factory=".controlpanel.RedTurtleVoltoSettings"

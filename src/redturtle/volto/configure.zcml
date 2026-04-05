@@ -55,6 +55,12 @@
       handler=".events.manage_auth_token"
       />
 
+  <subscriber
+      for="plone.dexterity.interfaces.IDexterityContent
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler=".events.avoid_spaces_in_shortname"
+      />
+
   <!-- provide interface to News-->
   <class class="plone.volto.content.FolderishNewsItem">
     <implements interface="redturtle.volto.interfaces.ICustomFeedItem" />
