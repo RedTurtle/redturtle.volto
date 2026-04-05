@@ -12,7 +12,6 @@ from zope.container.interfaces import INameChooser
 
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
-from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 
 import unittest
@@ -154,9 +153,13 @@ class TestCreation(unittest.TestCase):
 
     def test_fix_id_if_contains_spaces(self):
         """Test that id with spaces is fixed"""
-        import pdb
+        response = self.api_session.post(
+            self.portal_url,
+            json={
+                "@type": "Document",
+                "title": "My doc",
+                "id": "aa bb",
+            },
+        )
 
-        pdb.set_trace()
-        response = self.api_session.post("/@add", json={"source": ["/aa bb"]})
-
-        self.assertEqual(response.json()["message"], "aa-bb")
+        self.assertEqual(response.json()["id"], "aa-bb")
