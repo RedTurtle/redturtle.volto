@@ -4,7 +4,7 @@ Changelog
 5.9.5 (unreleased)
 ------------------
 
-- Check spaces in shortname when adding a content.
+- Fixed empty spaces in shortname when adding a content.
   [daniele]
 
 
