@@ -1,7 +1,6 @@
 from plone import api
 from redturtle.volto.adapters.namechooser import NormalizingNameChooser
 
-
 import os
 
 
