@@ -22,7 +22,6 @@ from zope.component import getMultiAdapter
 
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 
