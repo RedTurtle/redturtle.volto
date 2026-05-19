@@ -40,8 +40,10 @@ class NormalizingNameChooser(BaseNormalizingNameChooser):
         """
         Additional check: the id should not be in redirection tool.
         """
+
         id = super().chooseName(name=name, obj=obj)
 
         # this raise BadRequest if there is an override with aliases
         check_alias(context=self.context, id=id)
+
         return id

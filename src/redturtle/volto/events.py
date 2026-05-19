@@ -1,6 +1,3 @@
-from plone import api
-from redturtle.volto.adapters.namechooser import NormalizingNameChooser
-
 import os
 
 
@@ -19,8 +16,3 @@ def manage_auth_token(event):
         auth_token = request.cookies.get("auth_token")
         if auth_token:
             request._auth = "Bearer " + auth_token
-
-
-def avoid_spaces_in_shortname(obj, event):
-    fixed_id = NormalizingNameChooser(obj).chooseName(obj.id, obj)
-    api.content.rename(obj, new_id=fixed_id)

@@ -26,6 +26,7 @@ class TestCreation(unittest.TestCase):
 
     def test_fix_id_if_contains_spaces(self):
         """Test that id with spaces is fixed"""
+
         response = self.api_session.post(
             self.portal_url,
             json={
@@ -36,3 +37,31 @@ class TestCreation(unittest.TestCase):
         )
 
         self.assertEqual(response.json()["id"], "aa-bb")
+
+        obj_url = response.json()["@id"]
+        response = self.api_session.patch(
+            obj_url,
+            json={"id": "aa bb"},
+        )
+
+        self.assertEqual(response.status_code, 204)
+
+        response = self.api_session.get(
+            obj_url,
+        )
+
+        self.assertEqual(response.json()["id"], "aa-bb-1")
+
+    def test_fix_id_if_contains_invalid_chars(self):
+        """Test that id with spaces is fixed"""
+
+        response = self.api_session.post(
+            self.portal_url,
+            json={
+                "@type": "Document",
+                "title": "My doc",
+                "id": "aàbbù",
+            },
+        )
+
+        self.assertEqual(response.status_code, 400)
