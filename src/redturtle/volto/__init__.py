@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-from plone.app.dexterity.behaviors.metadata import ICategorization
-from plone.app.dexterity.textindexer import utils
-from redturtle.volto import patches  # noqa
-from zope.i18nmessageid import MessageFactory
-from plone.restapi.services.content import utils as rest_utils
 
 from Acquisition import aq_base
 from plone.app.content.interfaces import INameFromTitle
+from plone.app.dexterity.behaviors.metadata import ICategorization
+from plone.app.dexterity.textindexer import utils
 from plone.app.uuid.utils import uuidToObject
 from plone.restapi.bbb import base_hasattr
+from plone.restapi.services.content import utils as rest_utils
 from plone.uuid.interfaces import IUUID
+from redturtle.volto import patches  # noqa
 from zope.container.contained import notifyContainerModified
 from zope.container.contained import ObjectAddedEvent
 from zope.container.interfaces import INameChooser
 from zope.event import notify
+from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory("redturtle.volto")
 
