@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
+
 from Acquisition import aq_base
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity.behaviors.metadata import ICategorization
 from plone.app.dexterity.textindexer import utils
 from plone.app.uuid.utils import uuidToObject
 from plone.restapi.bbb import base_hasattr
-from plone.restapi.services.content import utils as rest_utils
+from plone.restapi.services.content import add as restapi_add_module
+from plone.restapi.services.content import utils as restapi_utils
 from plone.uuid.interfaces import IUUID
 from redturtle.volto import patches  # noqa
 from zope.container.contained import notifyContainerModified
@@ -35,8 +37,9 @@ def add_patched(container, obj, rename=True):
             obj._renameAfterCreation(check_auto_id=True)
         return obj
     else:
+        chooser = INameChooser(container)
+
         if rename:
-            chooser = INameChooser(container)
             # INameFromTitle adaptable objects should not get a name
             # suggestion. NameChooser would prefer the given name instead of
             # the one provided by the INameFromTitle adapter.
@@ -46,10 +49,12 @@ def add_patched(container, obj, rename=True):
                 suggestion = obj.Title()
             id_ = chooser.chooseName(suggestion, obj)
             obj.id = id_
+        else:
+            normalized_id = chooser.chooseName(id_, obj)
+            if normalized_id != id_:
+                obj.id = normalized_id
+                id_ = normalized_id
 
-        chooser = INameChooser(container)
-        id_ = chooser.chooseName(obj.id, obj)
-        obj.id = id_
         new_id = container._setObject(id_, obj)
         # _setObject triggers ObjectAddedEvent which can end up triggering a
         # content rule to move the item to a different container. In this case
@@ -61,4 +66,5 @@ def add_patched(container, obj, rename=True):
             return uuidToObject(uuid)
 
 
-rest_utils.add = add_patched
+restapi_utils.add = add_patched
+restapi_add_module.add = add_patched
