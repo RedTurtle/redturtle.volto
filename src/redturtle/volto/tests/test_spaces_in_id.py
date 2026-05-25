@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
 
+from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+from plone.restapi.services.content.utils import add
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 
@@ -65,3 +67,31 @@ class TestCreation(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, 400)
+
+    def test_restapi_add_utils_fix_id_when_rename_false(self):
+
+        container = api.content.create(
+            container=self.portal, type="Folder", title="Test Folder"
+        )
+
+        obj = api.content.create(
+            container=self.portal, type="Folder", title="Folder in"
+        )
+
+        obj.id = "ID with spaces"
+        result = add(container, obj, rename=False)
+        assert result.id == "id-with-spaces"
+
+    def test_restapi_add_utils_fix_id_when_rename_true(self):
+
+        container = api.content.create(
+            container=self.portal, type="Folder", title="Test Folder"
+        )
+
+        obj = api.content.create(
+            container=self.portal, type="Folder", title="Folder in"
+        )
+
+        obj.id = "ID with spaces"
+        result = add(container, obj, rename=True)
+        assert result.id == "folder-in"
