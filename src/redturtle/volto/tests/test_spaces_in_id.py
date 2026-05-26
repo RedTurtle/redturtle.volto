@@ -52,7 +52,7 @@ class TestCreation(unittest.TestCase):
         self.assertEqual(response.json()["id"], "aa-bb-1")
 
     def test_fix_id_if_contains_invalid_chars(self):
-        """Test that id with spaces is fixed"""
+        """Test that id with invalid chars is fixed"""
 
         response = self.api_session.post(
             self.portal_url,

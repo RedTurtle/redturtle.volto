@@ -14,13 +14,13 @@ def fix_id(request, container):
         return
 
     normalizer = getUtility(IIDNormalizer)
-    id_pulito = normalizer.normalize(id_)
+    id_normalized = normalizer.normalize(id_)
 
     # Same check of INameChooser.
-    check_alias(context=container, id=id_pulito)
+    check_alias(context=container, id=id_normalized)
 
-    if id_pulito != id_:
-        data["id"] = id_pulito
+    if id_normalized != id_:
+        data["id"] = id_normalized
         request.set("BODY", json.dumps(data).encode("utf-8"))
 
 
