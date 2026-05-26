@@ -4,7 +4,8 @@ Changelog
 5.9.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Override POST to normalize id.
+  [daniele]
 
 
 5.9.4 (2025-12-05)
