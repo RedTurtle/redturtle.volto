@@ -4,7 +4,7 @@ Changelog
 5.9.5 (unreleased)
 ------------------
 
-- Override POST to normalize id.
+- Override creation POST to normalize id when adding new content.
   [daniele]
 
 
