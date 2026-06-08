@@ -4,7 +4,6 @@ from plone.app.dexterity.textindexer import utils
 from redturtle.volto import patches  # noqa
 from zope.i18nmessageid import MessageFactory
 
-
 _ = MessageFactory("redturtle.volto")
 
 # Index also subjects in SearchableText.
