@@ -16,7 +16,6 @@ from ZTUtils.Lazy import LazyMap
 
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 _ = MessageFactory("plone")

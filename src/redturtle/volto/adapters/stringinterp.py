@@ -4,7 +4,6 @@ from Products.CMFCore.interfaces import IContentish
 from redturtle.volto import _
 from zope.component import adapter
 
-
 try:
     from plone.stringinterp import _ as stringinterp_mf
 except ImportError:

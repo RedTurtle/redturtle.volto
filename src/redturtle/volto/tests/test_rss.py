@@ -6,7 +6,6 @@ from plone.app.testing import TEST_USER_ID
 from redturtle.volto.adapters.rss import CustomFeedItem
 from redturtle.volto.interfaces import ICustomFeedItem
 
-
 try:
     from plone.base.interfaces.syndication import IFeed
 except ModuleNotFoundError:

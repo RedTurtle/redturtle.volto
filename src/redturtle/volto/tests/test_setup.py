@@ -7,7 +7,6 @@ from redturtle.volto.testing import REDTURTLE_VOLTO_INTEGRATION_TESTING  # noqa:
 
 import unittest
 
-
 try:
     from Products.CMFPlone.utils import get_installer
 except ImportError:
