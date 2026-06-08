@@ -4,7 +4,8 @@ Changelog
 5.9.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
+  [mamico]
 
 
 5.9.4 (2025-12-05)

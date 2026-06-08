@@ -78,6 +78,25 @@ class TestDXFieldDeserializer(unittest.TestCase):
 
         self.assertIsNone(value)
 
+    def test_relationlist_deserialization_correct_with_url(self):
+        login(self.portal, "user1")
+
+        value = self.deserialize(
+            "relatedItems",
+            [self.portal.doc1.absolute_url()],
+        )
+
+        self.assertTrue(value)
+
+    def test_relationlist_rejects_non_content_object_by_path(self):
+        login(self.portal, "user1")
+
+        with self.assertRaises(ValueError):
+            self.deserialize(
+                "relatedItems",
+                ["/plone/portal_catalog"],
+            )
+
     def test_relationlist_deserialization_correct_with_uid(self):
         # documents
         doc2 = self.portal.folder.otherfolder[
