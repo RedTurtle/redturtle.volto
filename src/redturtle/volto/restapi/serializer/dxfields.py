@@ -15,7 +15,6 @@ from zope.schema.interfaces import ITextLine
 
 import re
 
-
 RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 
 

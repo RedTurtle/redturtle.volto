@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
+
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from redturtle.volto.adapters.rss import CustomFeedItem
 from redturtle.volto.interfaces import ICustomFeedItem
-
 
 try:
     from plone.base.interfaces.syndication import IFeed

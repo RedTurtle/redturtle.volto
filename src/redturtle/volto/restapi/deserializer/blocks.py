@@ -8,7 +8,6 @@ from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 
-
 EXCLUDE_KEYS = ["@type", "type", "token", "value", "@id", "query", "bg_color"]
 EXCLUDE_TYPES = [
     "title",

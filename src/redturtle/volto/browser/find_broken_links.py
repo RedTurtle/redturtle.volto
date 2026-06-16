@@ -6,7 +6,6 @@ from Products.Five import BrowserView
 from six import StringIO
 from zope.schema import getFieldsInOrder
 
-
 try:
     from collective.volto.blocksfield.field import BlocksField
 
@@ -16,7 +15,6 @@ except ImportError:
 
 import csv
 import logging
-
 
 logger = logging.getLogger(__name__)
 
