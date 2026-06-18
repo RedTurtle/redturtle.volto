@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.9.5 (unreleased)
+5.9.5 (2026-06-18)
 ------------------
 
 - Override creation POST to normalize id when adding new content.
