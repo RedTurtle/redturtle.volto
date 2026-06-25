@@ -52,7 +52,7 @@ jobs:
           # of the buildout egg, which is built pure-python and falls back to
           # the slow PyTracer. See bin/test-coverage in base.cfg.
           pip install "coverage[toml]"
-          coverage debug sys | grep -i core
+          python -c "import coverage.tracer; print('coverage C tracer OK')"
           coverage run bin/test
           coverage html
           coverage report -m --fail-under=60
