@@ -13,7 +13,6 @@ from zope.schema import SourceText
 
 import json
 
-
 # Default JSON configuration
 DEFAULT_RANKING_CONFIG = [
     {"index": "Subject", "value": "__TERM__", "weight": 16},
