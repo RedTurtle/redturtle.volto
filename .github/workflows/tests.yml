@@ -48,7 +48,14 @@ jobs:
           bin/code-analysis
       - name: Run tests
         run: |
-          bin/test-coverage
+          # Use the pip wheel of coverage (with the compiled C tracer) instead
+          # of the buildout egg, which is built pure-python and falls back to
+          # the slow PyTracer. See bin/test-coverage in base.cfg.
+          pip install "coverage[toml]"
+          coverage debug sys | grep -i core
+          coverage run bin/test
+          coverage html
+          coverage report -m --fail-under=60
         env:
           PROXY_BEARER_AUTH: on
           TZ: ${{ matrix.tz }}
