@@ -633,3 +633,12 @@ def to_4600(context):
     portal_types = api.portal.get_tool(name="portal_types")
     portal_types["Plone Site"].default_view = "homepage_view"
     portal_types["Plone Site"].immediate_view = "homepage_view"
+
+
+def to_4700(context):
+    logger.info("Make AdvancedQuery ranking rules configurable")
+    context.runImportStepFromProfile(
+        "profile-redturtle.volto:profile_to_4700",
+        "plone.app.registry",
+        run_dependencies=False,
+    )

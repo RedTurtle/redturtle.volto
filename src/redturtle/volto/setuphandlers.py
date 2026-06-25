@@ -12,7 +12,11 @@ logger = logging.getLogger(__name__)
 class HiddenProfiles(object):
     def getNonInstallableProfiles(self):
         """Hide uninstall profile from site-creation and quickinstaller."""
-        return ["redturtle.volto:uninstall"]
+        return [
+            "redturtle.volto:uninstall",
+            "redturtle.volto:profile_to_4307",
+            "redturtle.volto:profile_to_4700",
+        ]
 
 
 # DEPRECATED

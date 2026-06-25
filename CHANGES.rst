@@ -20,7 +20,8 @@ Changelog
 
 - Fix bug search event restapi (#148)
   [mamico]
-
+- Make AdvancedQuery ranking rules configurable.
+  [cekk]
 
 5.9.3 (2025-11-24)
 ------------------
