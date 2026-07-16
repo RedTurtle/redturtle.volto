@@ -8,7 +8,6 @@ from zope.component import adapter
 from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
 
-
 try:
     from plone.base.utils import safe_text
 except ImportError:

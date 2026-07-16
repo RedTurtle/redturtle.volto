@@ -1,12 +1,12 @@
 <registry>
-    <records interface="redturtle.volto.interfaces.IRedTurtleVoltoSettings">
-        <record field="ranking_rules_json">
-            <value>[
+  <records interface="redturtle.volto.interfaces.IRedTurtleVoltoSettings">
+    <record field="ranking_rules_json">
+      <value>[
                 {"index": "Subject", "value": "__TERM__", "weight": 16},
                 {"index": "Title", "value": "__TERM__", "weight": 8},
                 {"index": "Description", "value": "__TERM__", "weight": 6},
                 {"index": "portal_type", "value": "UnitaOrganizzativa", "weight": 20}
             ]</value>
-        </record>
-    </records>
+    </record>
+  </records>
 </registry>

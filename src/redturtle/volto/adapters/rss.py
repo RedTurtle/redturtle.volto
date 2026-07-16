@@ -9,7 +9,6 @@ from plone.rfc822.interfaces import IPrimaryFieldInfo
 from plone.volto.behaviors.preview import IPreview
 from redturtle.volto.interfaces import ICustomFeedItem
 
-
 try:
     from plone.base.interfaces.syndication import IFeed
 except ModuleNotFoundError:
@@ -59,14 +58,14 @@ class CustomFeedItem(DexterityItem):
         if img_choice == "preview_image" and self._has_valid_image(
             preview, "preview_image"
         ):
-            self.file = preview.image
+            self.file = preview.preview_image
             self.field_name = "preview_image"
         elif img_choice == "image" and self._has_valid_image(lead, "image"):
             self.file = lead.image
             self.field_name = "image"
         elif img_choice == "listing_like":
             if self._has_valid_image(preview, "preview_image"):
-                self.file = preview.image
+                self.file = preview.preview_image
                 self.field_name = "preview_image"
             elif self._has_valid_image(lead, "image"):
                 self.file = lead.image

@@ -4,11 +4,14 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.search.handler import SearchHandler as OriginalHandler
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.services import Service
-from redturtle.volto import logger
 from redturtle.volto.config import MAX_LIMIT
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from zope.component import getMultiAdapter
 
+import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 # search for 'ranking' in 'SearchableText' and rank very high
 # when the term is in 'Subject' and high when it is in 'Title'.
@@ -44,8 +47,6 @@ class SearchHandler(OriginalHandler):
     def is_advanced_query(self, query):
         if not query:
             return False
-        if query.get("sort_on", None):
-            return False
         if query.get("SimpleQuery", None):
             return False
         custom_ranking_enabled = api.portal.get_registry_record(
@@ -73,14 +74,7 @@ class SearchHandler(OriginalHandler):
                 query = unflatten_dotted_dict(query)
                 return super(SearchHandler, self).search(query)
 
-            # TODO: mettere i parametri di ranking in registry
-            # XXX: il default sul subject ha senso ? (probabilmente no), rivedere eventualmente anche i test
-            term = query.get("SearchableText")
-            rs = RankByQueries_Sum(
-                (Eq("Subject", term), 16),
-                (Eq("Title", term), 8),
-                (Eq("Description", term), 6),
-            )
+            rs = self.get_ranking_scheme(query)
             lazy_resultset = self.catalog.evalAdvancedQuery(
                 # Eq("SearchableText", term), (rs,), **query
                 And(*queries),
@@ -95,6 +89,57 @@ class SearchHandler(OriginalHandler):
 
             return results
         return super().search(query)
+
+    def get_ranking_scheme(self, query):
+        """
+        Read from registry the ranking rules and build the RankByQueries_Sum
+        accordingly.
+        """
+        term = query.get("SearchableText")
+
+        sort_on = query.get("sort_on", "")
+        if sort_on:
+            sort_order = query.get("sort_order", "")
+            if not sort_order:
+                if sort_on in ["Date", "effective"]:
+                    sort_order = "desc"
+                else:
+                    sort_order = "asc"
+            if sort_order == "reverse":
+                sort_order = "desc"
+            return (query["sort_on"], sort_order)
+
+        try:
+            ranking_json = api.portal.get_registry_record(
+                "advanced_query_ranking_rules",
+                interface=IRedTurtleVoltoSettings,
+                default="[]",
+            )
+            ranking_rules = json.loads(ranking_json)
+        except (ValueError, TypeError, KeyError):
+            logger.error("Invalid or missing JSON in ranking_rules_json configuration")
+            ranking_rules = []
+
+        # Costruiamo dinamicamente la lista per RankByQueries_Sum
+        rank_args = []
+
+        for rule in ranking_rules:
+            index = rule.get("index")
+            raw_value = rule.get("value")
+            weight = rule.get("weight", 0)
+
+            if not index or not raw_value:
+                continue
+
+            if raw_value == "__TERM__":
+                if not term:
+                    continue
+                final_value = term
+            else:
+                final_value = raw_value
+
+            rank_args.append((Eq(index, final_value), weight))
+        return RankByQueries_Sum(*rank_args)
 
     def get_advanced_search_query(self, query):
         if "use_site_search_settings" in query:

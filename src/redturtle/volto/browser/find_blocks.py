@@ -9,7 +9,6 @@ from zope.schema import getFieldsInOrder
 import json
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 BLOCKS = [
