@@ -14,7 +14,6 @@ class NotFound(BrowserView):
     """
 
     @property
-    @memoize
     def plone_redirector_view(self):
         return getMultiAdapter(
             (self.__parent__, self.request), name="plone_redirector_view"
