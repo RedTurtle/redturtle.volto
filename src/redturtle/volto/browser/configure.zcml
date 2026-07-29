@@ -107,4 +107,16 @@
       permission="zope2.View"
       layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
       />
+
+  <!-- Simple, standalone 404 page for requests that hit the backend
+       directly instead of Volto (e.g. haproxy misrouting), replacing
+       Plone's themed error page which depends on frontend assets. -->
+  <browser:page
+      name="index.html"
+      for="zExceptions.NotFound"
+      class=".notfound.NotFound"
+      template="templates/notfound.pt"
+      permission="zope.Public"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      />
 </configure>
