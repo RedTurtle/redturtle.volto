@@ -18,7 +18,6 @@ import plone.restapi
 import plone.volto
 import redturtle.volto
 
-
 # bin/test (zc.recipe.testrunner) doesn't set this, unlike the zope instance
 # (see base.cfg), so .po files never get compiled to .mo and translations
 # are never available unless we set it here before the layers below load ZCML.
