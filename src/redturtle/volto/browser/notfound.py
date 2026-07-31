@@ -27,6 +27,10 @@ class NotFound(BrowserView):
             return ""
 
         request.response.setStatus(404)
+        # Never let the site theme wrap this page: it must stay
+        # renderable even when the frontend/theme assets are unreachable,
+        # which is the whole point of this view.
+        request.response.setHeader("X-Theme-Disabled", "1")
 
         if "text/html" not in request.getHeader("Accept", ""):
             request.response.setHeader("Content-Type", "application/json")

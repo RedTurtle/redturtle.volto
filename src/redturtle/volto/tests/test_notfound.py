@@ -4,9 +4,12 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+from plone.i18n.interfaces import ILanguageSchema
+from plone.registry.interfaces import IRegistry
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
+from zope.component import getUtility
 
 import unittest
 
@@ -34,6 +37,24 @@ class TestNotFoundView(unittest.TestCase):
         self.assertIn("Page not found", response.text)
 
     def test_html_request_with_italian_accept_language_is_translated(self):
+        # Plone doesn't negotiate a language from the Accept-Language header
+        # unless the site is explicitly configured to do so, and "it" has to
+        # be listed as an available language to be picked.
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(ILanguageSchema, prefix="plone")
+        original_languages = settings.available_languages
+        original_use_request_negotiation = settings.use_request_negotiation
+        settings.available_languages = ["en", "it"]
+        settings.use_request_negotiation = True
+        commit()
+
+        def _restore_settings():
+            settings.available_languages = original_languages
+            settings.use_request_negotiation = original_use_request_negotiation
+            commit()
+
+        self.addCleanup(_restore_settings)
+
         response = self.api_session.get(
             "/this-page-does-not-exist",
             headers={"Accept": "text/html", "Accept-Language": "it"},
