@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="redturtle.volto"
+      lang="en"
+      tal:attributes="lang request/LANGUAGE | string:en">
 <head>
   <meta charset="utf-8" />
-  <title>Page not found</title>
+  <title i18n:translate="">Page not found</title>
 </head>
 <body>
   <div class="notfound">
-    <h1>404 - Page not found</h1>
-    <p>
+    <h1 i18n:translate="">404 - Page not found</h1>
+    <p i18n:translate="">
       The page you are looking for does not exist.
     </p>
   </div>

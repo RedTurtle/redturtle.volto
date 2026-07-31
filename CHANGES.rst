@@ -6,7 +6,7 @@ Changelog
 
 - Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
   [mamico]
-- Serve a minimal standalone 404 page for HTML requests that hit the backend directly instead of Volto, overriding Plone's themed error page.
+- Serve a minimal standalone 404 page for HTML requests that hit the backend directly instead of Volto, overriding Plone's themed error page. The page text is translatable (Italian translation included).
   [fedevancin]
 
 

@@ -33,6 +33,17 @@ class TestNotFoundView(unittest.TestCase):
         self.assertIn("404", response.text)
         self.assertIn("Page not found", response.text)
 
+    def test_html_request_with_italian_accept_language_is_translated(self):
+        response = self.api_session.get(
+            "/this-page-does-not-exist",
+            headers={"Accept": "text/html", "Accept-Language": "it"},
+        )
+
+        self.assertEqual(response.status_code, 404)
+        self.assertIn('lang="it"', response.text)
+        self.assertIn("Pagina non trovata", response.text)
+        self.assertIn("La pagina che stai cercando non esiste.", response.text)
+
     def test_non_html_request_to_unknown_url_returns_json_error(self):
         response = self.api_session.get(
             "/this-page-does-not-exist", headers={"Accept": "application/json"}
