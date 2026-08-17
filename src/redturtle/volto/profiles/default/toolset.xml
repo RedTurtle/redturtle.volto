@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tool-setup>
+  <required class="redturtle.volto.linkchecker.LinkCheckerTool"
+            tool_id="portal_linkchecker"
+  />
+</tool-setup>

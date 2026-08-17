@@ -8,6 +8,12 @@ Changelog
   [mamico]
 - Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
   [mamico]
+- New ``portal_linkchecker`` tool: crawls the site, checks internal and
+  external links (deduplicated site-wide, checked concurrently, with a
+  persistent status cache) and exposes a csv report of the broken links via
+  the ``@@find-broken-links`` view (pass ``?run=1`` to run a new full check).
+  See README for details.
+  [cekk]
 
 
 5.9.5 (2026-06-18)

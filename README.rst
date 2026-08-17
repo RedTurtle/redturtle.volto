@@ -283,7 +283,40 @@ There is a view **@@find-blocks** that will return contents that have at least o
 Find broken links
 =================
 
-There is a view **@@find-broken-links** that will return a csv file with a list of contents with broken internal links in blocks.
+There is a **portal_linkchecker** tool that crawls the whole site, extracts internal and external links
+from contents (blocks and richtext fields) and checks them (external links are deduplicated site-wide and
+checked concurrently, and their status is cached for 6 hours by default).
+
+To avoid hammering a single server (which would answer 503 / time out and produce false positives),
+requests to the same host are throttled to a few at a time while different hosts run in parallel. Links
+are checked once, without retries: a transient failure (timeout, 429, 503) is reported as-is and may be
+a false positive, but retrying every failing link would slow a full-site check down too much.
+
+The view **@@find-broken-links** returns a csv report (PAGE, LINK, TYPE, STATUS, DESCRIPTION) built from
+the results of the last check (TYPE is INTERNAL or EXTERNAL). Pass **?run=1** to run a new full site
+check first (it can take a while on big sites).
+
+Links answering with a bot-protection status (``403``, ``429`` or LinkedIn's non-standard ``999``) are
+**not** counted as broken: they usually work for a human but cannot be verified automatically. They still
+appear in the csv, with a dedicated DESCRIPTION, so you can tell them apart from real errors.
+
+Besides real http status codes, the report can contain a few fake (negative) statuses, so they can
+never collide with a real one:
+
+- **-1**: timeout (the server is there but too slow; often recoverable by raising the timeout)
+- **-2**: the ``http://`` link is broken but works over ``https://`` (browsers upgrade it silently):
+  update the link in the content
+- **-3**: connection error (host unreachable, DNS failure, connection refused/reset, ...)
+
+On big sites it's better to run the check outside of a request, e.g. from a script run with
+``bin/instance run`` (or a cron job)::
+
+    from plone import api
+    import transaction
+
+    tool = api.portal.get_tool("portal_linkchecker")
+    tool.check_site()
+    transaction.commit()
 
 Stringinterp adapters
 =====================
