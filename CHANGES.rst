@@ -4,6 +4,8 @@ Changelog
 5.9.6 (unreleased)
 ------------------
 
+- overrides max_occurences with environment
+  [mamico]
 - Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
   [mamico]
 - Require Python >= 3.9 (Plone 6.0 does not support Python 3.8 anymore) and drop
