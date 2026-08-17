@@ -27,7 +27,6 @@ setup(
         "Framework :: Plone :: 5.2",
         "Framework :: Plone :: 6.0",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
@@ -53,7 +52,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    python_requires=">=3.7",
+    python_requires=">=3.9",
     install_requires=[
         "setuptools",
         "collective.volto.gdprcookie",
@@ -77,6 +76,9 @@ setup(
             "plone.testing>=5.0.0",
             "plone.app.contenttypes",
             "plone.app.robotframework[debug]",
+            # not imported directly, but plone.restapi.testing (that we use in
+            # our layers) does `import collective.MockMailHost`
+            "collective.MockMailHost",
         ],
     },
     entry_points="""
