@@ -76,12 +76,12 @@ setup(
             "plone.app.contenttypes",
             "plone.app.robotframework[debug]",
             "collective.MockMailHost",
+            # test advancedquery
+            "dm.plone.advancedquery",
         ],
     },
     entry_points="""
     [z3c.autoinclude.plugin]
     target = plone
-    [console_scripts]
-    update_locale = redturtle.volto.locales.update:update_locale
     """,
 )
