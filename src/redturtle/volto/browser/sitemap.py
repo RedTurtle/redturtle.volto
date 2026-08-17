@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from BTrees.OOBTree import OOBTree
 from plone.app.layout.sitemap.sitemap import SiteMapView as LayoutSiteMapView
 from plone.registry.interfaces import IRegistry

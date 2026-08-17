@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Installer for the redturtle.volto package."""
 
 from setuptools import find_packages

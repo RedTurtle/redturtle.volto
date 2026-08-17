@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from DateTime import DateTime
 from plone import api
 from plone.app.testing import setRoles
@@ -13,7 +12,6 @@ from transaction import commit
 
 import json
 import unittest
-
 
 # dm.plone.advancedquery (and Products.AdvancedQuery) is an optional dependency
 # available only for Plone 6.0

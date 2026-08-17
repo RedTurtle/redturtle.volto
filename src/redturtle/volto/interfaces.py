@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from plone.app.contenttypes.interfaces import (
     IPloneAppContenttypesLayer as IDefaultBrowserLayer,

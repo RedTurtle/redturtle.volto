@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.search.handler import SearchHandler as OriginalHandler
@@ -72,7 +71,7 @@ class SearchHandler(OriginalHandler):
             except AdvancedQueryParsingException:
                 query = self.request.form.copy()
                 query = unflatten_dotted_dict(query)
-                return super(SearchHandler, self).search(query)
+                return super().search(query)
 
             rs = self.get_ranking_scheme(query)
             lazy_resultset = self.catalog.evalAdvancedQuery(

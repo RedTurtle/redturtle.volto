@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from importlib import import_module
 from plone import api
 from plone.app.testing import setRoles

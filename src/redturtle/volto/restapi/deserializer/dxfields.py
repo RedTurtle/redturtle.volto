@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.contenttypes.interfaces import ILink
 from plone.app.dexterity.behaviors.metadata import IPublication
 from plone.app.event.base import default_timezone
@@ -43,7 +42,7 @@ class RichTextFieldDeserializer(BaseRichTextDeserializer):
                     value["data"] = self.convert_internal_links(html=html)
             else:
                 value = self.convert_internal_links(html=value)
-        return super(RichTextFieldDeserializer, self).__call__(value=value)
+        return super().__call__(value=value)
 
     def convert_internal_links(self, html):
         root = lxml.html.fromstring(html)
@@ -63,7 +62,7 @@ class RichTextFieldDeserializer(BaseRichTextDeserializer):
 @adapter(ITextLine, ILink, IRedturtleVoltoLayer)
 class LinkTextLineFieldDeserializer(BaseTextLineDeserializer):
     def __call__(self, value):
-        value = super(LinkTextLineFieldDeserializer, self).__call__(value)
+        value = super().__call__(value)
         if self.field.getName() == "remoteUrl":
             portal = getMultiAdapter(
                 (self.context, self.context.REQUEST), name="plone_portal_state"
@@ -71,7 +70,7 @@ class LinkTextLineFieldDeserializer(BaseTextLineDeserializer):
 
             transformed_url = path2uid(context=portal, link=value)
             if transformed_url != value and "resolveuid" in transformed_url:
-                value = "${{portal_url}}/{uid}".format(uid=transformed_url)
+                value = f"${{portal_url}}/{transformed_url}"
         return value
 
 

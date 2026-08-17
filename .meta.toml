@@ -17,6 +17,8 @@ i18ndude_extra_lines = """
 """
 
 [pyproject]
+# "possibile" is a legit italian word used in a code comment
+codespell_ignores = "discreet,assertin,thet,possibile,"
 # redturtle.volto is a Plone add-on: everything below is pulled in transitively
 # by Products.CMFPlone / Plone core, so it is not declared in install_requires.
 dependencies_ignores = "['Acquisition', 'BTrees', 'Products.AdvancedQuery', 'Products.CMFCore', 'Products.CMFPlone', 'Products.Five', 'Products.GenericSetup', 'Products.ZCTextIndex', 'Products.ZCatalog', 'ZPublisher', 'ZTUtils', 'collective.MockMailHost', 'collective.volto.blocksfield', 'dateutil', 'dm.plone.advancedquery', 'lxml', 'plone.api', 'plone.app', 'plone.base', 'plone.browserlayer', 'plone.dexterity', 'plone.event', 'plone.folder', 'plone.i18n', 'plone.indexer', 'plone.namedfile', 'plone.registry', 'plone.rfc822', 'plone.stringinterp', 'pytz', 'transaction', 'z3c.form', 'z3c.relationfield', 'zExceptions', 'zope.component', 'zope.container', 'zope.event', 'zope.globalrequest', 'zope.i18n', 'zope.i18nmessageid', 'zope.interface', 'zope.intid', 'zope.lifecycleevent', 'zope.publisher', 'zope.schema']"

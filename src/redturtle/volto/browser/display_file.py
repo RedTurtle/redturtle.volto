@@ -9,7 +9,7 @@ class DisplayFile(BaseView):
 
     def set_headers(self, file):
         """
-        We need to add filename to the reponse because otherwise the browser
+        We need to add filename to the response because otherwise the browser
         use the field name as filename (last path element).
 
         content-disposition should be "inline" to allow to display the file in the browser

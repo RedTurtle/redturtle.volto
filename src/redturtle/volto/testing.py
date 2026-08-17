@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
@@ -68,7 +67,7 @@ class RedturtleVoltoRestApiLayer(PloneRestApiDXLayer):
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        super(RedturtleVoltoRestApiLayer, self).setUpZope(app, configurationContext)
+        super().setUpZope(app, configurationContext)
 
         self.loadZCML(package=collective.volto.gdprcookie)
         self.loadZCML(package=collective.volto.sitesettings)

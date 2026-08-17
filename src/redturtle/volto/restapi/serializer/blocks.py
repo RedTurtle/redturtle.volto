@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from copy import deepcopy
 from plone import api
 from plone.app.uuid.utils import uuidToCatalogBrain
@@ -24,7 +23,7 @@ EXCLUDE_TYPES = [
 ]
 
 
-class GenericResolveUIDSerializer(object):
+class GenericResolveUIDSerializer:
     """
     Generic deserializer: parse all block data and try to convert uids into
     proper urls.
@@ -95,7 +94,7 @@ class GenericResolveUIDSerializer(object):
         return adapter(force_all_metadata=True)
 
 
-class TableResolveUIDSerializer(object):
+class TableResolveUIDSerializer:
     """ """
 
     order = 210  # after standard ones

@@ -61,7 +61,7 @@ Custom blocks transformers
 There are custom transformers for serializer and deserializer to better manage resolveuids.
 
 If a block refers to some internal content, on deserialization we only store its UID, and in serialization
-we "expand" informations with the summary-serialized content.
+we "expand" information with the summary-serialized content.
 
 @context-navigation endpoint
 ----------------------------

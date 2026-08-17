@@ -70,7 +70,7 @@
       original="search_for_similar"
       replacement=".monkey.search_for_similar"
       class="plone.app.redirector.browser.FourOhFourView"
-      description="Cancel the seach_for_similiar call when usin volto frontend"
+      description="Cancel the seach_for_similiar call when using volto frontend"
       preserveOriginal="True"
       />
 
