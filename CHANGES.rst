@@ -4,6 +4,8 @@ Changelog
 5.9.6 (unreleased)
 ------------------
 
+- overrides max_occurences with environment
+  [mamico]
 - Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
   [mamico]
 

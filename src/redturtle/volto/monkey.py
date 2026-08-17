@@ -21,6 +21,7 @@ import logging
 import os
 
 logger = logging.getLogger(__name__)
+MAX_OCCURRENCES = os.environ.get("REDTURTLE_VOLTO_MAX_OCCURRENCES", 100)
 
 
 def occurrences(self, range_start=None, range_end=None):
@@ -100,12 +101,13 @@ def occurrences(self, range_start=None, range_end=None):
             id=str(start.date()), start=start, end=start + duration
         ).__of__(self.context)
 
-    limit = 100
+    limit = MAX_OCCURRENCES
     for start in starts:
         if limit < 0:
             logger.warning(
-                "Too many occurrences for %s, stopping at 100",
+                "Too many occurrences for %s, stopping at %d",
                 self.context.absolute_url(),
+                MAX_OCCURRENCES,
             )
             return
         limit -= 1
