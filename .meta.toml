@@ -4,6 +4,11 @@
 [meta]
 template = "default"
 commit-id = "2.11.1"
+[tox]
+test_deps_additional = """
+    # dm.plone.advancedquery (and Products.AdvancedQuery) works only with Plone 6.0
+    plone60: dm.plone.advancedquery
+"""
 [gitignore]
 extra_lines = """
 .python-version
