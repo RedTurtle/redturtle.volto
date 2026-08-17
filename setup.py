@@ -62,7 +62,6 @@ setup(
         "kitconcept.seo>=2.0.0",
         "plone.volto>=4.0.0",
         "plone.restapi>=9.6.0",
-        "Products.PortalTransforms>=3.2.0",
         "collective.volto.sitesettings",
         "experimental.noacquisition",
     ],
@@ -78,7 +77,6 @@ setup(
             "plone.testing>=5.0.0",
             "plone.app.contenttypes",
             "plone.app.robotframework[debug]",
-            "collective.MockMailHost",
         ],
     },
     entry_points="""

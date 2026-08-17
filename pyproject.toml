@@ -86,6 +86,8 @@ Zope = [
 ]
 python-dateutil = ['dateutil']
 pytest-plone = ['pytest', 'zope.pytestlayer', 'plone.testing', 'plone.app.testing']
+setuptools = ['pkg_resources']
+ignore-packages = ['Acquisition', 'BTrees', 'Products.AdvancedQuery', 'Products.CMFCore', 'Products.CMFPlone', 'Products.Five', 'Products.GenericSetup', 'Products.ZCTextIndex', 'Products.ZCatalog', 'ZPublisher', 'ZTUtils', 'collective.volto.blocksfield', 'dateutil', 'dm.plone.advancedquery', 'lxml', 'plone.api', 'plone.app', 'plone.base', 'plone.browserlayer', 'plone.dexterity', 'plone.event', 'plone.folder', 'plone.i18n', 'plone.indexer', 'plone.namedfile', 'plone.registry', 'plone.rfc822', 'plone.stringinterp', 'pytz', 'transaction', 'z3c.form', 'z3c.relationfield', 'zExceptions', 'zope.component', 'zope.container', 'zope.event', 'zope.globalrequest', 'zope.i18n', 'zope.i18nmessageid', 'zope.interface', 'zope.intid', 'zope.lifecycleevent', 'zope.publisher', 'zope.schema']
 
 ##
 # Add extra configuration options in .meta.toml:
@@ -99,6 +101,7 @@ pytest-plone = ['pytest', 'zope.pytestlayer', 'plone.testing', 'plone.app.testin
 
 [tool.check-manifest]
 ignore = [
+    ".coveragerc",
     ".editorconfig",
     ".flake8",
     ".meta.toml",

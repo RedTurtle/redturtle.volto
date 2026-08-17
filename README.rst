@@ -152,6 +152,26 @@ Returns a data structure like this::
 
 We customized @search endpoint for that bug: https://github.com/plone/plone.restapi/pull/1066
 
+AdvancedQuery ranking
+---------------------
+
+The @search endpoint can rank results with `Products.AdvancedQuery`, when the
+optional dependency `dm.plone.advancedquery` is installed::
+
+    redturtle.volto[advancedquery]
+
+It is then enabled with the `enable_advanced_query_ranking` registry record
+(disabled by default) and tuned with `advanced_query_ranking_rules`.
+
+.. warning::
+
+   As of today this feature is supported **only on Plone 6.0**:
+   `dm.plone.advancedquery` / `Products.AdvancedQuery` is not available for
+   newer Plone versions. When the package is not installed, the ranking is
+   simply not applied (the endpoint falls back to the standard search) and the
+   related tests are skipped. For the same reason `dm.plone.advancedquery` is
+   installed only in the `plone60` tox environments.
+
 @querystring-search endpoint customization
 ------------------------------------------
 
