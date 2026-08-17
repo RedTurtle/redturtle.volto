@@ -21,7 +21,7 @@ import logging
 import os
 
 logger = logging.getLogger(__name__)
-MAX_OCCURRENCES = os.environ.get("REDTURTLE_VOLTO_MAX_OCCURRENCES", 100)
+MAX_OCCURRENCES = int(os.environ.get("REDTURTLE_VOLTO_MAX_OCCURRENCES", 100))
 
 
 def occurrences(self, range_start=None, range_end=None):
