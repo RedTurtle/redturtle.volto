@@ -1,66 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF
-  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
-  xmlns="http://purl.org/rss/1.0/"
-  xmlns:tal="http://xml.zope.org/namespaces/tal"
-  xmlns:media="http://search.yahoo.com/mrss/">
+<rdf:rdf xmlns="http://purl.org/rss/1.0/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:media="http://search.yahoo.com/mrss/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
+         xmlns:tal="http://xml.zope.org/namespaces/tal"
+>
 
-<tal:block
-    tal:define="portal_url context/portal_url;
-                image_miniature python:context.portal_registry.get('redturtle.volto.rss_image_miniature', None) or 'thumb';
-                portal_url_no_api python: portal_url.replace('/api', '');
-                feed view/feed;
-                items python: [f for f in feed.items]">
+  <tal:block tal:define="
+               portal_url context/portal_url;
+               image_miniature python:context.portal_registry.get('redturtle.volto.rss_image_miniature', None) or 'thumb';
+               portal_url_no_api python: portal_url.replace('/api', '');
+               feed view/feed;
+               items python: [f for f in feed.items];
+             ">
 
-<channel rdf:about="" tal:attributes="rdf:about request/URL">
-  <title tal:content="feed/title">The title</title>
-  <link tal:content="feed/link" />
-  <description tal:content="feed/description" />
-  <image tal:attributes="rdf:resource string:${portal_url}/logo.png" />
+    <channel rdf:about=""
+             tal:attributes="
+               rdf:about request/URL;
+             "
+    >
+      <title tal:content="feed/title">The title</title>
+      <link tal:content="feed/link" />
+      <description tal:content="feed/description"></description>
+      <image tal:attributes="
+               rdf:resource string:${portal_url}/logo.png;
+             "></image>
 
-  <items>
-    <rdf:Seq>
-      <tal:block repeat="item python: items">
-        <rdf:li rdf:resource=""
-                tal:attributes="rdf:resource python:getattr(item, 'link', '').replace(portal_url, portal_url_no_api)" />
-      </tal:block>
-    </rdf:Seq>
-  </items>
+      <items>
+        <rdf:seq>
+          <tal:block repeat="item python: items">
+            <rdf:li rdf:resource=""
+                    tal:attributes="
+                      rdf:resource python:getattr(item, 'link', '').replace(portal_url, portal_url_no_api);
+                    "
+            ></rdf:li>
+          </tal:block>
+        </rdf:seq>
+      </items>
 
-</channel>
-<tal:block repeat="item python: items">
-  <item rdf:about=""
-        tal:define="link python:getattr(item, 'link', '').replace(portal_url, portal_url_no_api)"
-        tal:attributes="rdf:about link">
-    <title tal:content="item/title" />
-    <link tal:content="link" />
-    <description tal:content="item/description" />
-    <tal:image tal:condition="python: item.field_name in {'image', 'preview_image'}" >
-        <tal:image_metadata tal:define="image_type python: item.field_name;
-                                        url string:${link}/@@images/${image_type}/${image_miniature};
-                                        size item/file/size|nothing;
-                                        mime item/file/contentType|nothing">
-            <enclosure url="${url}" tal:attributes="size size; type mime"/>
-        </tal:image_metadata>
-    </tal:image>
-    <content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/"
-        tal:condition="feed/settings/render_body">
-        <tal:opencdata tal:replace="structure python:'&lt;![CDATA['" />
-        <tal:block tal:replace="structure item/render_content_core"/>
-        <tal:closecdata tal:replace="structure python:']]&gt;'" />
-    </content:encoded>
-    <dc:publisher tal:content="item/publisher" />
-    <dc:creator tal:condition="feed/show_about" tal:content="item/author_name">Creator</dc:creator>
-    <dc:rights tal:content="item/rights">Rights</dc:rights>
-    <tal:block tal:repeat="item item/categories">
-      <dc:subject tal:content="item">Item</dc:subject>
+    </channel>
+    <tal:block repeat="item python: items">
+      <item rdf:about=""
+            tal:define="
+              link python:getattr(item, 'link', '').replace(portal_url, portal_url_no_api);
+            "
+            tal:attributes="
+              rdf:about link;
+            "
+      >
+        <title tal:content="item/title"></title>
+        <link tal:content="link" />
+        <description tal:content="item/description"></description>
+        <tal:image tal:condition="python: item.field_name in {'image', 'preview_image'}">
+          <tal:image_metadata tal:define="
+                                image_type python: item.field_name;
+                                url string:${link}/@@images/${image_type}/${image_miniature};
+                                size item/file/size|nothing;
+                                mime item/file/contentType|nothing;
+                              ">
+            <enclosure url="${url}"
+                       tal:attributes="
+                         size size;
+                         type mime;
+                       "
+            ></enclosure>
+          </tal:image_metadata>
+        </tal:image>
+        <content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/"
+                         tal:condition="feed/settings/render_body"
+        >
+          <tal:opencdata tal:replace="structure python:'&lt;![CDATA['" />
+          <tal:block tal:replace="structure item/render_content_core" />
+          <tal:closecdata tal:replace="structure python:']]&gt;'" />
+        </content:encoded>
+        <dc:publisher tal:content="item/publisher"></dc:publisher>
+        <dc:creator tal:condition="feed/show_about"
+                    tal:content="item/author_name"
+        >Creator</dc:creator>
+        <dc:rights tal:content="item/rights">Rights</dc:rights>
+        <tal:block tal:repeat="item item/categories">
+          <dc:subject tal:content="item">Item</dc:subject>
+        </tal:block>
+        <dc:date tal:content="item/startdate/HTML4|item/published/HTML4|item/modified/HTML4">Published or last modified date if no published date</dc:date>
+        <dc:type tal:content="item/context/portal_type">Type</dc:type>
+      </item>
     </tal:block>
-    <dc:date tal:content="item/startdate/HTML4|item/published/HTML4|item/modified/HTML4">Published or last modified date if no published date</dc:date>
-    <dc:type tal:content="item/context/portal_type">Type</dc:type>
-  </item>
-</tal:block>
 
-</tal:block>
-</rdf:RDF>
+  </tal:block>
+</rdf:rdf>

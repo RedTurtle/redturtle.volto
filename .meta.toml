@@ -1,0 +1,35 @@
+# Generated from:
+# https://github.com/plone/meta/tree/2.x/src/plone/meta/default
+# See the inline comments on how to expand/tweak this configuration file
+[meta]
+template = "default"
+commit-id = "2.11.1"
+[tox]
+test_deps_additional = """
+    # dm.plone.advancedquery (and Products.AdvancedQuery) works only with Plone 6.0
+    plone60: dm.plone.advancedquery
+"""
+[pre_commit]
+# @@fix-links and @@find-blocks are maintenance views for site administrators,
+# they are not part of the translated UI.
+i18ndude_extra_lines = """
+        exclude: ^src/redturtle/volto/browser/(find_blocks|fix_links)\\.pt$
+"""
+
+[pyproject]
+# "possibile" is a legit italian word used in a code comment
+codespell_ignores = "discreet,assertin,thet,possibile,"
+# redturtle.volto is a Plone add-on: everything below is pulled in transitively
+# by Products.CMFPlone / Plone core, so it is not declared in install_requires.
+dependencies_ignores = "['Acquisition', 'BTrees', 'Products.AdvancedQuery', 'Products.CMFCore', 'Products.CMFPlone', 'Products.Five', 'Products.GenericSetup', 'Products.ZCTextIndex', 'Products.ZCatalog', 'ZPublisher', 'ZTUtils', 'collective.MockMailHost', 'collective.volto.blocksfield', 'dateutil', 'dm.plone.advancedquery', 'lxml', 'plone.api', 'plone.app', 'plone.base', 'plone.browserlayer', 'plone.dexterity', 'plone.event', 'plone.folder', 'plone.i18n', 'plone.indexer', 'plone.namedfile', 'plone.registry', 'plone.rfc822', 'plone.stringinterp', 'pytz', 'transaction', 'z3c.form', 'z3c.relationfield', 'zExceptions', 'zope.component', 'zope.container', 'zope.event', 'zope.globalrequest', 'zope.i18n', 'zope.i18nmessageid', 'zope.interface', 'zope.intid', 'zope.lifecycleevent', 'zope.publisher', 'zope.schema']"
+dependencies_mappings = [
+  "setuptools = ['pkg_resources']",
+]
+check_manifest_ignores = """
+    ".coveragerc",
+"""
+
+[gitignore]
+extra_lines = """
+.python-version
+"""

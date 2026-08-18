@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.restapi.controlpanels import RegistryConfigletPanel
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
 from redturtle.volto.interfaces import IRedTurtleVoltoSettingsControlpanel

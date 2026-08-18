@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
   <records interface="redturtle.volto.interfaces.IRedTurtleVoltoSettings">
     <record field="ranking_rules_json">

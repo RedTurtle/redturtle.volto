@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
 
 from plone import api
@@ -39,13 +38,13 @@ class TestContentTypeLink(unittest.TestCase):
             container=self.portal,
             type="Link",
             title="Link with public page",
-            remoteUrl="/plone/resolveuid/{}".format(self.public_page.UID()),
+            remoteUrl=f"/plone/resolveuid/{self.public_page.UID()}",
         )
         self.link_with_private_page = api.content.create(
             container=self.portal,
             type="Link",
             title="Link with private page",
-            remoteUrl="/plone/resolveuid/{}".format(self.private_page.UID()),
+            remoteUrl=f"/plone/resolveuid/{self.private_page.UID()}",
         )
 
         self.link_with_external_page = api.content.create(

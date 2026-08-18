@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
-  <record name="redturtle.volto.rss_image_miniature" remove="True" />
+  <record name="redturtle.volto.rss_image_miniature"
+          remove="True"
+  />
 </registry>

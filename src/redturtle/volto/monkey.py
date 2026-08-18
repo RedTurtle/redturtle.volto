@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day

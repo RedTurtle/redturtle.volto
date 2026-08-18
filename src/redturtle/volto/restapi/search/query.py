@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.restapi.interfaces import IIndexQueryParser
 from plone.restapi.search.query import (
     ZCTextIndexQueryParser as BaseZCTextIndexQueryParser,
@@ -16,6 +15,6 @@ import re
 @adapter(ZCTextIndex, Interface, IRedturtleVoltoLayer)
 class ZCTextIndexQueryParser(BaseZCTextIndexQueryParser):
     def parse_query_value(self, query_value):
-        value = super(ZCTextIndexQueryParser, self).parse_query_value(query_value)
+        value = super().parse_query_value(query_value)
         value = re.sub(r"[\([{})\]]|\bnot\b", " ", value)
         return " ".join(value.split())  # remove multiple whitespaces

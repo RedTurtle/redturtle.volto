@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.app.contenttypes.behaviors.collection import (
     ICollection as ICollection_behavior,
@@ -90,7 +89,7 @@ class TestSummaryCustomization(unittest.TestCase):
         transaction.commit()
 
         response = self.api_session.get(
-            "/@search?metadata_fields=effective&UID={}".format(page.UID())
+            f"/@search?metadata_fields=effective&UID={page.UID()}"
         )
         self.assertEqual(response.status_code, 200)
         res = response.json()
@@ -102,7 +101,7 @@ class TestSummaryCustomization(unittest.TestCase):
         transaction.commit()
 
         res = self.api_session.get(
-            "/@search?metadata_fields=effective&UID={}".format(page.UID())
+            f"/@search?metadata_fields=effective&UID={page.UID()}"
         ).json()
 
         self.assertEqual(len(res["items"]), 1)
