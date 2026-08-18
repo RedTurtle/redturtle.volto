@@ -1,3 +1,4 @@
+from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.deserializer.dxfields import DefaultFieldDeserializer
 from plone.restapi.interfaces import IFieldDeserializer
@@ -6,7 +7,6 @@ from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from urllib.parse import urlparse
 from z3c.relationfield.interfaces import IRelationChoice
 from zope.component import adapter
-from zope.component import getMultiAdapter
 from zope.component import queryUtility
 from zope.interface import implementer
 from zope.intid.interfaces import IIntIds
@@ -30,17 +30,14 @@ class RelationChoiceFieldDeserializer(DefaultFieldDeserializer):
             obj = intids.queryObject(value)
             resolved_by = "intid"
         elif isinstance(value, str):
-            portal = getMultiAdapter(
-                (self.context, self.request), name="plone_portal_state"
-            ).portal()
-            portal_url = portal.absolute_url()
+            portal_url = api.portal.get().absolute_url()
             if value.startswith(portal_url):
                 # Resolve by URL
-                obj = portal.restrictedTraverse(urlparse(value).path.lstrip("/"), None)
+                obj = api.content.get(path=urlparse(value).path)
                 resolved_by = "URL"
             elif value.startswith("/"):
                 # Resolve by path
-                obj = portal.restrictedTraverse(value.lstrip("/"), None)
+                obj = api.content.get(path=value)
                 resolved_by = "path"
             else:
                 # Resolve by UID

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.app.contenttypes.interfaces import ILink
 from plone.app.contenttypes.utils import replace_link_variables_by_paths
@@ -13,7 +12,6 @@ from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
-
 
 EMPTY_STRINGS = ["None"]
 

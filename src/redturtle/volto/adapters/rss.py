@@ -9,7 +9,6 @@ from plone.rfc822.interfaces import IPrimaryFieldInfo
 from plone.volto.behaviors.preview import IPreview
 from redturtle.volto.interfaces import ICustomFeedItem
 
-
 try:
     from plone.base.interfaces.syndication import IFeed
 except ModuleNotFoundError:

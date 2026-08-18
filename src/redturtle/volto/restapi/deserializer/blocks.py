@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from copy import deepcopy
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.deserializer.blocks import path2uid
@@ -7,7 +6,6 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
-
 
 EXCLUDE_KEYS = ["@type", "type", "token", "value", "@id", "query", "bg_color"]
 EXCLUDE_TYPES = [
@@ -20,7 +18,7 @@ EXCLUDE_TYPES = [
 ]
 
 
-class GenericResolveUIDDeserializer(object):
+class GenericResolveUIDDeserializer:
     """
     Generic deserializer: parse all block data and try to change urls to
     resolveuids.
@@ -78,7 +76,7 @@ class GenericResolveUIDDeserializer(object):
             return link
 
 
-class TableResolveUIDDeserializer(object):
+class TableResolveUIDDeserializer:
     """ """
 
     order = 210  # after standard ones

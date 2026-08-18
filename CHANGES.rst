@@ -1,13 +1,35 @@
 Changelog
 =========
 
-5.9.4 (unreleased)
+5.9.6 (unreleased)
+------------------
+
+- overrides max_occurences with environment
+  [mamico]
+- Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
+  [mamico]
+- Configuring with plone.meta 2.x
+  [mamico]
+- Require Python >= 3.9 (Plone 6.0 does not support Python 3.8 anymore) and drop
+  the unused ``Products.PortalTransforms`` requirement.
+  [mamico]
+- Use custom creator criteria to list only creators present in the catalog to avoid an empty list when using LDAP and many_users flag
+  [folix-01]
+
+5.9.5 (2026-06-18)
+------------------
+
+- Override creation POST to normalize id when adding new content.
+  [daniele]
+
+
+5.9.4 (2025-12-05)
 ------------------
 
 - Fix bug search event restapi (#148)
   [mamico]
-- Use custom creator criteria to list only creators present in the catalog to avoid an empty list when using LDAP and many_users flag
-  [folix-01]
+- Make AdvancedQuery ranking rules configurable.
+  [cekk]
 
 5.9.3 (2025-11-24)
 ------------------
@@ -66,7 +88,7 @@ Changelog
 - Customize serialzier for repeatableContentBlock.
   [cekk]
 - Include experimental.noacquisition in the config.
-  Needed for pip buidls.
+  Needed for pip builds.
   [folix-01]
 
 
@@ -268,7 +290,7 @@ Changelog
 5.4.0 (2023-11-14)
 ------------------
 
-- Return error instead of raise Excpetion for BadRequest in querystringsearch
+- Return error instead of raise Exception for BadRequest in querystringsearch
   [mamico]
 
 - Add upgrade step and setuphandler to fix robots.txt
@@ -490,7 +512,7 @@ Changelog
 3.8.3 (2022-03-07)
 ------------------
 
-- Fix null dates in summary serialization (now we handle differente use-cases).
+- Fix null dates in summary serialization (now we handle different use-cases).
   [cekk]
 - Return remoteUrl metadata when serializing a brain for backward compatibility with non-brain serializers.
   [cekk]

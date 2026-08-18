@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
+
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from redturtle.volto.adapters.rss import CustomFeedItem
 from redturtle.volto.interfaces import ICustomFeedItem
-
 
 try:
     from plone.base.interfaces.syndication import IFeed
@@ -88,7 +87,7 @@ class TestCustomRSSFeed(unittest.TestCase):
         adapter_news_1 = CustomFeedItem(self.news1, self.feed)
         adapter_news_2 = CustomFeedItem(self.news2, self.feed)
 
-        # news 1 has image feld
+        # news 1 has image field
         self.assertEqual(adapter_news_1.field_name, "image")
 
         # news 2 has the preview image field compiled, so has the default options

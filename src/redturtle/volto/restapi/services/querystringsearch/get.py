@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 from DateTime import DateTime
 from plone import api
@@ -21,7 +20,6 @@ from zExceptions import BadRequest
 from zope.component import getMultiAdapter
 
 import logging
-
 
 logger = logging.getLogger(__name__)
 
@@ -109,7 +107,7 @@ class QuerystringSearch(BaseQuerystringSearch):
     def cleanup_query(self, query, b_size):
         """
         If b_size == 1 and there is an absolutePath in query that points to a non
-        existing content, reeturn empty query.
+        existing content, return empty query.
         This is the case where absolutePath points to an UID that is not present on the site.
         A call with b_size == 1 usually is made in objectbrowser to draw the reference, but with a
         wrong UID, Plone by default return all site contents and the first one will be returned.

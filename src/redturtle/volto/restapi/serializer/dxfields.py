@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.contenttypes.interfaces import ILink
 from plone.app.contenttypes.utils import replace_link_variables_by_paths
 from plone.app.dexterity.behaviors.metadata import IPublication
@@ -15,7 +14,6 @@ from zope.schema.interfaces import ITextLine
 
 import re
 
-
 RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 
 
@@ -23,7 +21,7 @@ RESOLVEUID_RE = re.compile(".*?/resolve[Uu]id/([^/]*)/?(.*)$")
 class TextLineFieldSerializer(DefaultFieldSerializer):
     def __call__(self):
         if self.field.getName() != "remoteUrl":
-            return super(TextLineFieldSerializer, self).__call__()
+            return super().__call__()
         value = self.get_value()
         path = replace_link_variables_by_paths(context=self.context, url=value)
         url = uid_to_url(path)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from copy import deepcopy
 from plone import api
@@ -16,7 +15,6 @@ from uuid import uuid4
 from zope.component import getUtility
 from zope.schema import getFields
 
-
 try:
     from plone.base.utils import get_installer
 except Exception:
@@ -25,7 +23,6 @@ except Exception:
 import json
 import logging
 import transaction
-
 
 try:
     from collective.volto.blocksfield.field import BlocksField
@@ -72,7 +69,7 @@ def to_1003(context):
 def to_1004(context):
     """ """
     brains = api.content.find(portal_type="Event")
-    logger.info("Reindexing {} Events".format(len(brains)))
+    logger.info(f"Reindexing {len(brains)} Events")
 
     for brain in brains:
         event = brain.getObject()
@@ -103,10 +100,10 @@ def to_volto13(context):  # noqa: C901
             if block.get("template", False) and not block.get("variation", False):
                 block["variation"] = block["template"]
                 del block["template"]
-                logger.info("- {}".format(url))
+                logger.info(f"- {url}")
             if block.get("template", False) and block.get("variation", False):
                 del block["template"]
-                logger.info("- {}".format(url))
+                logger.info(f"- {url}")
 
             # Migrate to internal structure
             if not block.get("querystring", False):
@@ -171,7 +168,7 @@ def to_volto13(context):  # noqa: C901
                 else:
                     block["linkHref"] = [{"@id": href, "title": href}]
                 del block["linkMore"]
-                logger.info(" - [LINKMORE] {}".format(url))
+                logger.info(f" - [LINKMORE] {url}")
 
     # fix root
     portal = api.portal.get()
@@ -190,7 +187,7 @@ def to_volto13(context):  # noqa: C901
     for brain in brains:
         i += 1
         if i % 1000 == 0:
-            logger.info("Progress: {}/{}".format(i, tot))
+            logger.info(f"Progress: {i}/{tot}")
         item = aq_base(brain.getObject())
         if getattr(item, "blocks", {}):
             blocks = deepcopy(item.blocks)
@@ -225,7 +222,7 @@ def to_volto13(context):  # noqa: C901
                             blocks = value.get("blocks", {})
                         except AttributeError:
                             logger.warning(
-                                "[RICHTEXT] - {} (not converted)".format(brain.getURL())
+                                f"[RICHTEXT] - {brain.getURL()} (not converted)"
                             )
                         if blocks:
                             fix_listing(blocks, brain.getURL())
@@ -247,7 +244,7 @@ def to_volto13_bis(context):  # noqa: C901
             if block.get("b_size", False):
                 block["querystring"]["b_size"] = block["b_size"]
                 del block["b_size"]
-            logger.info("- {}".format(url))
+            logger.info(f"- {url}")
 
     # fix root
     portal = api.portal.get()
@@ -266,7 +263,7 @@ def to_volto13_bis(context):  # noqa: C901
     for brain in brains:
         i += 1
         if i % 1000 == 0:
-            logger.info("Progress: {}/{}".format(i, tot))
+            logger.info(f"Progress: {i}/{tot}")
         item = aq_base(brain.getObject())
         if getattr(item, "blocks", {}):
             blocks = deepcopy(item.blocks)
@@ -301,7 +298,7 @@ def to_volto13_bis(context):  # noqa: C901
                             blocks = value.get("blocks", {})
                         except AttributeError:
                             logger.warning(
-                                "[RICHTEXT] - {} (not converted)".format(brain.getURL())
+                                f"[RICHTEXT] - {brain.getURL()} (not converted)"
                             )
                         if blocks:
                             fix_listing(blocks, brain.getURL())
@@ -361,7 +358,7 @@ def to_2100(context):  # noqa: C901
     for brain in brains:
         i += 1
         if i % 1000 == 0:
-            logger.info("Progress: {}/{}".format(i, tot))
+            logger.info(f"Progress: {i}/{tot}")
         item_obj = brain.getObject()
         item = aq_base(item_obj)
         if getattr(item, "blocks", {}):
@@ -391,9 +388,9 @@ def to_2100(context):  # noqa: C901
                             items_reindexed.append(brain.getPath())
                             item_obj.reindexObject(idxs=["SearchableText"])
 
-    logger.info("Reindexed {} items".format(len(items_reindexed)))
+    logger.info(f"Reindexed {len(items_reindexed)} items")
     for path in items_reindexed:
-        logger.info("- {}".format(path))
+        logger.info(f"- {path}")
 
 
 def to_2200(context):  # noqa: C901
@@ -407,7 +404,7 @@ def to_2200(context):  # noqa: C901
     for brain in brains:
         i += 1
         if i % 500 == 0:
-            logger.info("Progress: {}/{}".format(i, tot))
+            logger.info(f"Progress: {i}/{tot}")
         item_obj = brain.getObject()
         item = aq_base(item_obj)
         blocks = getattr(item, "blocks", {})
@@ -416,7 +413,7 @@ def to_2200(context):  # noqa: C901
             item.blocks = {title_uuid: {"@type": "title"}}
             item.blocks_layout = {"items": [title_uuid]}
             items_fixed.append(brain.getPath())
-    logger.info("Fixed {} items".format(len(items_fixed)))
+    logger.info(f"Fixed {len(items_fixed)} items")
 
 
 def to_3000(context):
@@ -431,7 +428,7 @@ def to_3000(context):
     for brain in brains:
         i += 1
         if i % 500 == 0:
-            logger.info("Progress: {}/{}".format(i, tot))
+            logger.info(f"Progress: {i}/{tot}")
         obj = brain.getObject()
         catalog.catalog_object(obj)
 
@@ -447,7 +444,7 @@ def to_3100(context):
     for brain in brains:
         i += 1
         if i % 500 == 0:
-            logger.info("Progress: {}/{}".format(i, tot))
+            logger.info(f"Progress: {i}/{tot}")
         obj = brain.getObject()
         catalog.catalog_object(obj)
 
@@ -483,7 +480,7 @@ def to_4200(context):
 
 def to_4301(context):
     brains = api.content.find(portal_type="Event")
-    logger.info("Reindexing {} Events".format(len(brains)))
+    logger.info(f"Reindexing {len(brains)} Events")
 
     for brain in brains:
         event = brain.getObject()
@@ -494,7 +491,7 @@ def to_4302(context):
     remove_custom_googlebot(context)
 
     brains = api.content.find(portal_type="Event")
-    logger.info("Reindexing {} Events".format(len(brains)))
+    logger.info(f"Reindexing {len(brains)} Events")
 
     for brain in brains:
         event = brain.getObject()
@@ -503,7 +500,7 @@ def to_4302(context):
 
 def to_4303(context):
     brains = api.content.find(portal_type="Event")
-    logger.info("Reindexing {} Events".format(len(brains)))
+    logger.info(f"Reindexing {len(brains)} Events")
 
     for brain in brains:
         event = brain.getObject()
@@ -646,3 +643,12 @@ def to_4600(context):
     portal_types = api.portal.get_tool(name="portal_types")
     portal_types["Plone Site"].default_view = "homepage_view"
     portal_types["Plone Site"].immediate_view = "homepage_view"
+
+
+def to_4700(context):
+    logger.info("Make AdvancedQuery ranking rules configurable")
+    context.runImportStepFromProfile(
+        "profile-redturtle.volto:profile_to_4700",
+        "plone.app.registry",
+        run_dependencies=False,
+    )

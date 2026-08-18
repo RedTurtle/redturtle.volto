@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 from datetime import timedelta
 from plone import api
@@ -39,7 +38,7 @@ class TestQuerystringSearch(unittest.TestCase):
         self,
     ):
         """
-        objectbrowser calls always ask for an absolutePath adn b_size == 1.
+        objectbrowser calls always ask for an absolutePath and b_size == 1.
         absolutePath is the uid of the referenced object
         """
         response = self.api_session.post(
@@ -63,7 +62,7 @@ class TestQuerystringSearch(unittest.TestCase):
         self,
     ):
         """
-        objectbrowser calls always ask for an absolutePath adn b_size == 1.
+        objectbrowser calls always ask for an absolutePath and b_size == 1.
         absolutePath is the uid of the referenced object.
         By default Plone (querystringsearch) set /Plone as query path if absolutePath is invalid
         """

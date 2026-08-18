@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.layout.navigation.navtree import buildFolderTree
 from plone.app.layout.navigation.navtree import NavtreeStrategyBase
 from plone.dexterity.interfaces import IDexterityContainer
@@ -11,7 +10,7 @@ from zope.interface import Interface
 
 @implementer(IExpandableElement)
 @adapter(IDexterityContainer, Interface)
-class ContextNavigation(object):
+class ContextNavigation:
     def __init__(self, context, request):
         self.context = context
         self.request = request
@@ -22,9 +21,7 @@ class ContextNavigation(object):
         else:
             depth = 1
         result = {
-            "navigation": {
-                "@id": "{}/@context-navigation".format(self.context.absolute_url())
-            }
+            "navigation": {"@id": f"{self.context.absolute_url()}/@context-navigation"}
         }
         if not expand:
             return result

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.contenttypes.interfaces import IEvent
 from plone.dexterity.interfaces import IDexterityContent
 from plone.indexer.decorator import indexer
@@ -7,7 +6,6 @@ from plone.restapi.interfaces import IBlockSearchableText
 from zope.component import adapter
 from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
-
 
 try:
     from plone.base.utils import safe_text

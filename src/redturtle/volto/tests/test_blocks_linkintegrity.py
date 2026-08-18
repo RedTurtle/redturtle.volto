@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from importlib import import_module
 from plone import api
 from plone.app.testing import setRoles
@@ -9,7 +8,6 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
-
 
 HAS_PLONE_6 = getattr(
     import_module("Products.CMFPlone.factory"), "PLONE60MARKER", False

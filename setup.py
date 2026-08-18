@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 """Installer for the redturtle.volto package."""
 
 from setuptools import find_packages
 from setuptools import setup
-
 
 long_description = "\n\n".join(
     [
@@ -16,7 +14,7 @@ long_description = "\n\n".join(
 
 setup(
     name="redturtle.volto",
-    version="5.9.4.dev0",
+    version="5.9.6.dev0",
     description="Helper package to setup a RedTurtle's Plone site ready to work with Volto.",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -25,13 +23,17 @@ setup(
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: Addon",
-        "Framework :: Plone :: 5.2",
         "Framework :: Plone :: 6.0",
+        "Framework :: Plone :: 6.1",
+        "Framework :: Plone :: 6.2",
+        "Framework :: Plone :: 6.3",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
@@ -51,7 +53,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    python_requires=">=3.7",
+    python_requires=">=3.9",
     install_requires=[
         "setuptools",
         "collective.volto.gdprcookie",
@@ -60,7 +62,6 @@ setup(
         "kitconcept.seo>=2.0.0",
         "plone.volto>=4.0.0",
         "plone.restapi>=9.6.0",
-        "Products.PortalTransforms>=3.2.0",
         "collective.volto.sitesettings",
         "experimental.noacquisition",
     ],
@@ -76,13 +77,13 @@ setup(
             "plone.testing>=5.0.0",
             "plone.app.contenttypes",
             "plone.app.robotframework[debug]",
+            # not imported directly, but plone.restapi.testing (that we use in
+            # our layers) does `import collective.MockMailHost`
             "collective.MockMailHost",
         ],
     },
     entry_points="""
     [z3c.autoinclude.plugin]
     target = plone
-    [console_scripts]
-    update_locale = redturtle.volto.locales.update:update_locale
     """,
 )

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 CUSTOM = {
     "allowedRolesAndUsers": 80,
     "effectiveRange": 100,

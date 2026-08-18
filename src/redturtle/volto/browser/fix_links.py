@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from plone import api
 from plone.dexterity.utils import iterSchemata
@@ -12,7 +11,6 @@ from zope.schema import getFieldsInOrder
 import json
 import logging
 import re
-
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +34,7 @@ class View(BrowserView):
         logger.info("## START ##")
         for brain in results:
             if (i + 1) % 200 == 0:
-                logger.info(" - Progress {}/{}".format(i + 1, tot))
+                logger.info(f" - Progress {i + 1}/{tot}")
             item = brain.getObject()
             aq_base_obj = aq_base(item)
             for schemata in iterSchemata(aq_base_obj):
@@ -73,8 +71,8 @@ class View(BrowserView):
                         item.reindexObject()
             i += 1
         logger.info("### END ###")
-        logger.info("### {} items fixed ###".format(len(fixed_objects)))
-        logger.info("### {} items NOT fixed ###".format(len(not_fixed_objects)))
+        logger.info(f"### {len(fixed_objects)} items fixed ###")
+        logger.info(f"### {len(not_fixed_objects)} items NOT fixed ###")
 
         if dry_mode:
             api.portal.show_message(
@@ -102,14 +100,14 @@ class View(BrowserView):
         destination_host = urlparse(self.portal_url).netloc
 
         for url in self.request.form.get("to_replace", "").split():
-            match = re.search(r"(?<={}).*".format(url), value)
+            match = re.search(rf"(?<={url}).*", value)
             if match:
                 try:
                     path = match.group()
                     obj = api.content.get(path)
                 except Exception as e:
                     logger.exception(e)
-                    logger.warning("Ignoring: {}".format(value))
+                    logger.warning(f"Ignoring: {value}")
                     return value
                 if obj:
                     if is_link:

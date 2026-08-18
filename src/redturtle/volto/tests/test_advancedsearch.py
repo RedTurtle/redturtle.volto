@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from DateTime import DateTime
 from plone import api
 from plone.app.testing import setRoles
@@ -7,10 +6,18 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
+from redturtle.volto.restapi.services.search.get import HAS_ADVANCEDQUERY
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
 
+import json
 import unittest
+
+# dm.plone.advancedquery (and Products.AdvancedQuery) is an optional dependency
+# available only for Plone 6.0
+skip_without_advancedquery = unittest.skipIf(
+    not HAS_ADVANCEDQUERY, "dm.plone.advancedquery is not installed"
+)
 
 
 class BaseTest(unittest.TestCase):
@@ -60,6 +67,7 @@ class BaseTest(unittest.TestCase):
         self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
 
 
+@skip_without_advancedquery
 class AdvancedSearchTest(BaseTest):
     def setUp(self):
         super().setUp()
@@ -222,6 +230,44 @@ class AdvancedSearchTest(BaseTest):
             ["d1", "f1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
+    def test_search_with_custom_rank(self):
+        query = {"SearchableText": "foo"}
+
+        # this is a query with default ranking values
+        result = self.api_session.get("/@search", params=query).json()
+        self.assertEqual(result["items_total"], 3)
+        self.assertEqual(
+            ["d1", "f1", "e1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
+
+        # now we change ranking rules to have different order: add Event with
+        # weight 20 (higher than others)
+        api.portal.set_registry_record(
+            "advanced_query_ranking_rules",
+            json.dumps(
+                [
+                    {"index": "Subject", "value": "__TERM__", "weight": 16},
+                    {"index": "Title", "value": "__TERM__", "weight": 8},
+                    {"index": "Description", "value": "__TERM__", "weight": 6},
+                    {
+                        "index": "portal_type",
+                        "value": "Event",
+                        "weight": 20,
+                    },
+                ]
+            ),
+            interface=IRedTurtleVoltoSettings,
+        )
+
+        commit()
+
+        # re-execute query
+        result = self.api_session.get("/@search", params=query).json()
+        self.assertEqual(result["items_total"], 3)
+        self.assertEqual(
+            ["e1", "d1", "f1"], [item["@id"].split("/")[-1] for item in result["items"]]
+        )
+
 
 class AdvancedSearchWithFlagTest(BaseTest):
     def test_by_default_flag_is_disabled(self):
@@ -234,6 +280,7 @@ class AdvancedSearchWithFlagTest(BaseTest):
             ["f1", "e1", "d1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
+    @skip_without_advancedquery
     def test_enabling_flag_return_custom_order(self):
         api.portal.set_registry_record(
             "enable_advanced_query_ranking", True, interface=IRedTurtleVoltoSettings

@@ -50,7 +50,7 @@ class TestDXFieldDeserializer(unittest.TestCase):
         )
         return deserializer(value)
 
-    def test_relationlist_deserialization_broke_with_path(self):
+    def test_relationlist_deserialization_correct_with_path(self):
         # documents
         doc2 = self.portal.folder.otherfolder[
             self.portal.folder.otherfolder.invokeFactory(
@@ -65,18 +65,36 @@ class TestDXFieldDeserializer(unittest.TestCase):
         ]
         self.wftool.doActionFor(self.portal.folder.otherfolder.doc3, "publish")
 
+        transaction.commit()
+
         setRoles(self.portal, TEST_USER_ID, ["Member"])
         login(self.portal, TEST_USER_NAME)
 
-        try:
-            value = self.deserialize(
-                "relatedItems",
-                [str(doc2.absolute_url_path()), str(doc3.absolute_url_path())],
-            )
-        except ValueError:
-            value = None
+        value = self.deserialize(
+            "relatedItems",
+            [str(doc2.absolute_url_path()), str(doc3.absolute_url_path())],
+        )
 
-        self.assertIsNone(value)
+        self.assertTrue(value)
+
+    def test_relationlist_deserialization_correct_with_url(self):
+        login(self.portal, "user1")
+
+        value = self.deserialize(
+            "relatedItems",
+            [self.portal.doc1.absolute_url()],
+        )
+
+        self.assertTrue(value)
+
+    def test_relationlist_rejects_non_content_object_by_path(self):
+        login(self.portal, "user1")
+
+        with self.assertRaises(ValueError):
+            self.deserialize(
+                "relatedItems",
+                ["/plone/portal_catalog"],
+            )
 
     def test_relationlist_deserialization_correct_with_uid(self):
         # documents
