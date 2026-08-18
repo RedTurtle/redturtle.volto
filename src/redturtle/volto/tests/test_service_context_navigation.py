@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -65,25 +64,25 @@ class TestServicesContextNavigation(unittest.TestCase):
         self.assertEqual(
             response.json(),
             {
-                "@id": "{}/folder".format(self.portal_url),
+                "@id": f"{self.portal_url}/folder",
                 "items": [
                     {
-                        "@id": "{}/folder/page".format(self.portal_url),
+                        "@id": f"{self.portal_url}/folder/page",
                         "description": "",
                         "title": "Page",
                     },
                     {
-                        "@id": "{}/folder/folder-a".format(self.portal_url),
+                        "@id": f"{self.portal_url}/folder/folder-a",
                         "description": "",
                         "title": "Folder A",
                     },
                     {
-                        "@id": "{}/folder/folder-b".format(self.portal_url),
+                        "@id": f"{self.portal_url}/folder/folder-b",
                         "description": "",
                         "title": "Folder B",
                     },
                     {
-                        "@id": "{}/folder/folder-c".format(self.portal_url),
+                        "@id": f"{self.portal_url}/folder/folder-c",
                         "description": "",
                         "title": "Folder C",
                     },
@@ -99,15 +98,15 @@ class TestServicesContextNavigation(unittest.TestCase):
         self.assertEqual(
             response.json(),
             {
-                "@id": "{}/folder".format(self.portal_url),
+                "@id": f"{self.portal_url}/folder",
                 "items": [
                     {
-                        "@id": "{}/folder/page".format(self.portal_url),
+                        "@id": f"{self.portal_url}/folder/page",
                         "description": "",
                         "title": "Page",
                     },
                     {
-                        "@id": "{}/folder/folder-a".format(self.portal_url),
+                        "@id": f"{self.portal_url}/folder/folder-a",
                         "description": "",
                         "items": [
                             {
@@ -128,12 +127,12 @@ class TestServicesContextNavigation(unittest.TestCase):
                         "title": "Folder A",
                     },
                     {
-                        "@id": "{}/folder/folder-b".format(self.portal_url),
+                        "@id": f"{self.portal_url}/folder/folder-b",
                         "description": "",
                         "title": "Folder B",
                     },
                     {
-                        "@id": "{}/folder/folder-c".format(self.portal_url),
+                        "@id": f"{self.portal_url}/folder/folder-c",
                         "description": "",
                         "title": "Folder C",
                     },

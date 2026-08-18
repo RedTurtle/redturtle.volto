@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.contenttypes.interfaces import IEvent
 from plone.dexterity.interfaces import IDexterityContent
 from plone.indexer.decorator import indexer

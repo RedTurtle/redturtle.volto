@@ -1,9 +1,9 @@
 from Acquisition import aq_base
+from io import StringIO
 from plone import api
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.serializer.utils import uid_to_url
 from Products.Five import BrowserView
-from six import StringIO
 from zope.schema import getFieldsInOrder
 
 try:

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """JsonSchema providers."""
 
 from plone.restapi.types.adapters import TextLineJsonSchemaProvider as Base
@@ -18,7 +17,7 @@ class TextLineJsonSchemaProvider(Base):
     def get_widget(self):
         if self.field.__name__ == "remoteUrl":
             return "url"
-        return super(TextLineJsonSchemaProvider, self).get_widget()
+        return super().get_widget()
 
     def get_description(self):
         if self.field.__name__ == "remoteUrl":
@@ -30,4 +29,4 @@ class TextLineJsonSchemaProvider(Base):
                 ),
                 context=self.request,
             )
-        return super(TextLineJsonSchemaProvider, self).get_description()
+        return super().get_description()

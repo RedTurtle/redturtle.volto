@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from copy import deepcopy
 from plone import api
@@ -66,7 +65,7 @@ class View(BrowserView):
         logger.info("## START ##")
         for brain in results:
             if (i + 1) % 200 == 0:
-                logger.info(" - Progress {}/{}".format(i + 1, tot))
+                logger.info(f" - Progress {i + 1}/{tot}")
             item = brain.getObject()
             aq_base_obj = aq_base(item)
             for schemata in iterSchemata(aq_base_obj):
@@ -84,7 +83,7 @@ class View(BrowserView):
                         found.append({"url": brain.getURL(), "title": brain.Title})
             i += 1
         logger.info("### END ###")
-        logger.info('### {} items with block "{}" ###'.format(len(found), block_type))
+        logger.info(f'### {len(found)} items with block "{block_type}" ###')
 
         self.results = {"found": found}
         return super().__call__()

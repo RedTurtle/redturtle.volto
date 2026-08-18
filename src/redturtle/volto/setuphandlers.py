@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
@@ -9,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 @implementer(INonInstallable)
-class HiddenProfiles(object):
+class HiddenProfiles:
     def getNonInstallableProfiles(self):
         """Hide uninstall profile from site-creation and quickinstaller."""
         return [
@@ -25,7 +24,7 @@ def upgrade_robots_txt(context):
     lines = robots.splitlines()
 
     googlebot_user_agent = "User-Agent: Googlebot"
-    # I saw this writed also as googlebot, so:
+    # I saw this written also as googlebot, so:
     normalized_google_bot_user_agent = googlebot_user_agent.lower().replace(" ", "")
 
     useragent_string = "User-Agent: "

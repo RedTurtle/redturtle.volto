@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from DateTime import DateTime
 from plone import api
 from plone.app.testing import setRoles
@@ -7,11 +6,18 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from redturtle.volto.interfaces import IRedTurtleVoltoSettings
+from redturtle.volto.restapi.services.search.get import HAS_ADVANCEDQUERY
 from redturtle.volto.testing import REDTURTLE_VOLTO_API_FUNCTIONAL_TESTING
 from transaction import commit
 
 import json
 import unittest
+
+# dm.plone.advancedquery (and Products.AdvancedQuery) is an optional dependency
+# available only for Plone 6.0
+skip_without_advancedquery = unittest.skipIf(
+    not HAS_ADVANCEDQUERY, "dm.plone.advancedquery is not installed"
+)
 
 
 class BaseTest(unittest.TestCase):
@@ -61,6 +67,7 @@ class BaseTest(unittest.TestCase):
         self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
 
 
+@skip_without_advancedquery
 class AdvancedSearchTest(BaseTest):
     def setUp(self):
         super().setUp()
@@ -273,6 +280,7 @@ class AdvancedSearchWithFlagTest(BaseTest):
             ["f1", "e1", "d1"], [item["@id"].split("/")[-1] for item in result["items"]]
         )
 
+    @skip_without_advancedquery
     def test_enabling_flag_return_custom_order(self):
         api.portal.set_registry_record(
             "enable_advanced_query_ranking", True, interface=IRedTurtleVoltoSettings
