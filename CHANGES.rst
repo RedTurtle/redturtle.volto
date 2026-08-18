@@ -8,6 +8,8 @@ Changelog
   [mamico]
 - Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
   [mamico]
+- Configuring with plone.meta 2.x
+  [mamico]
 - Require Python >= 3.9 (Plone 6.0 does not support Python 3.8 anymore) and drop
   the unused ``Products.PortalTransforms`` requirement.
   [mamico]
