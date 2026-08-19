@@ -17,7 +17,7 @@ This is an helper package that setup a RedTurtle's Plone site ready to work with
 .. |version| image:: http://img.shields.io/pypi/v/redturtle.volto.svg
   :target: https://pypi.python.org/pypi/redturtle.volto
 
-.. |ci| image:: https://github.com/RedTurtle/redturtle.volto/actions/workflows/tests.yml/badge.svg
+.. |ci| image:: https://github.com/RedTurtle/redturtle.volto/actions/workflows/test-matrix.yml/badge.svg
   :target: https://github.com/RedTurtle/redturtle.volto/actions
 
 .. |downloads| image:: https://img.shields.io/pypi/dm/redturtle.volto.svg
