@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.9.6 (unreleased)
+5.9.6 (2026-08-19)
 ------------------
 
 - overrides max_occurences with environment
