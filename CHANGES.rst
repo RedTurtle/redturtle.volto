@@ -14,6 +14,8 @@ Changelog
   [mamico]
 - Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
   [mamico]
+- Serve a minimal standalone 404 page for HTML requests that hit the backend directly instead of Volto, overriding Plone's themed error page and disabling the site theme so it renders even when the frontend/theme assets are unreachable. The page text is translatable (Italian translation included).
+  [fedevancin]
 - Configuring with plone.meta 2.x
   [mamico]
 - Require Python >= 3.9 (Plone 6.0 does not support Python 3.8 anymore) and drop
@@ -54,7 +56,7 @@ Changelog
 ------------------
 - Exclude "teaser" to avoid block modification by resolveuidserializer
   [mamico]
-- Fix in resolveuid serializer if block is not a dict nor dict-like 
+- Fix in resolveuid serializer if block is not a dict nor dict-like
   [mamico]
 - Make querystringsearch endpoint more customizable: now custom_query is defined in a separate method.
   [cekk]

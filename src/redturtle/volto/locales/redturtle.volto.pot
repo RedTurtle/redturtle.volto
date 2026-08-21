@@ -17,6 +17,10 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.volto\n"
 
+#: redturtle/volto/browser/templates/notfound.pt
+msgid "404 - Page not found"
+msgstr ""
+
 #: redturtle/volto/patches.py:62
 msgid "Alternative url path must not be a view."
 msgstr ""
@@ -35,6 +39,10 @@ msgstr ""
 
 #: redturtle/volto/profiles/default/registry/criteria.xml
 msgid "Metadata"
+msgstr ""
+
+#: redturtle/volto/browser/templates/notfound.pt
+msgid "Page not found"
 msgstr ""
 
 #: redturtle/volto/browser/controlpanel.py:11
@@ -72,6 +80,10 @@ msgstr ""
 
 #: redturtle/volto/patches.py:59
 msgid "Target path must start with a slash."
+msgstr ""
+
+#: redturtle/volto/browser/templates/notfound.pt
+msgid "The page you are looking for does not exist."
 msgstr ""
 
 #: redturtle/volto/patches.py:74
