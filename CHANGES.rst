@@ -19,7 +19,8 @@ Changelog
 - Require Python >= 3.9 (Plone 6.0 does not support Python 3.8 anymore) and drop
   the unused ``Products.PortalTransforms`` requirement.
   [mamico]
-
+- Use custom creator criteria to list only creators present in the catalog to avoid an empty list when using LDAP and many_users flag
+  [folix-01]
 
 5.9.5 (2026-06-18)
 ------------------

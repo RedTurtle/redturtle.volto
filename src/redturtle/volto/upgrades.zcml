@@ -273,6 +273,14 @@
       handler=".upgrades.to_4500"
       />
   <genericsetup:upgradeStep
+      title="Change vocabulary for Creator criteria"
+      description=""
+      profile="redturtle.volto:default"
+      source="4500"
+      destination="4501"
+      handler=".upgrades.to_4501"
+      />
+  <genericsetup:upgradeStep
       title="Set default and immediate view for Plone Site"
       description=""
       profile="redturtle.volto:default"
