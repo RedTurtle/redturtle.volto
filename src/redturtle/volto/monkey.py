@@ -227,3 +227,15 @@ def restapi_handler_filter_query(self, query):
     if sort_order and not query.get("sort_order"):
         query["sort_order"] = sort_order
     return query
+
+
+def monkey_mailhost_send(self, messageText, mto=None, mfrom=None, subject=None, **kwargs):
+    """Monkey patch to log the email sent"""
+    logger.info(
+        "Sending email to %s from %s with subject %s (immediate %s)",
+        mto,
+        mfrom,
+        subject,
+        kwargs.get("immediate", False)
+    )
+    return self._old_mailhost_send(messageText, mto=mto, mfrom=mfrom, subject=subject, **kwargs)

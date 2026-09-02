@@ -4,7 +4,8 @@ Changelog
 5.9.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- log send mail
+  [mamico]
 
 
 5.9.6 (2026-08-19)

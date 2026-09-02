@@ -82,4 +82,12 @@
       preserveOriginal="True"
       />
 
+  <monkey:patch
+      original="send"
+      replacement=".monkey.mailhost_send"
+      class="Products.MailHost.MailHost"
+      description="log the email sent"
+      preserveOriginal="True"
+      />
+
 </configure>
