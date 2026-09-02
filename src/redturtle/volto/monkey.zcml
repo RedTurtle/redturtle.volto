@@ -85,7 +85,7 @@
   <monkey:patch
       original="send"
       replacement=".monkey.mailhost_send"
-      class="Products.MailHost.MailHost"
+      class="Products.MailHost.MailHost.MailHost"
       description="log the email sent"
       preserveOriginal="True"
       />
