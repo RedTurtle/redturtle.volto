@@ -79,6 +79,10 @@
       factory=".blocks_linkintegrity.CountDownBlockLinksRetriever"
       provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
       />
+  <subscriber
+      factory=".blocks_linkintegrity.HeroBlockLinksRetriever"
+      provides="plone.restapi.interfaces.IBlockFieldLinkIntegrityRetriever"
+      />
   <!-- end of blocks linkintegrity for specific blocks -->
 
   <adapter
