@@ -231,3 +231,11 @@ class CountDownBlockLinksRetriever(SubBlocksRetriever):
             self.extract_links(block_data=block.get(field_id, []))
 
         return self.links
+
+
+@adapter(IDexterityContent, IBrowserRequest)
+@implementer(IBlockFieldLinkIntegrityRetriever)
+class HeroBlockLinksRetriever(SlateBlockLinksRetriever):
+    order = 200
+    block_type = "hero"
+    field = "description"

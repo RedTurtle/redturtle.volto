@@ -6,6 +6,8 @@ Changelog
 
 - log send mail
   [mamico]
+- Added hero block type in linkintegrity blocks adapter.
+  [daniele]
 
 
 5.9.6 (2026-08-19)
