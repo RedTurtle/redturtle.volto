@@ -90,4 +90,20 @@
       preserveOriginal="True"
       />
 
+  <monkey:patch
+      original="__init__"
+      replacement=".monkey.smtpmailer_init"
+      class="zope.sendmail.mailer.SMTPMailer"
+      description="Backport a configurable connection timeout (default 10s, see REDTURTLE_VOLTO_SMTP_TIMEOUT) until zope.sendmail ships one, see https://github.com/zopefoundation/zope.sendmail/pull/73"
+      preserveOriginal="True"
+      />
+
+  <monkey:patch
+      original="vote"
+      replacement=".monkey.smtpmailer_vote"
+      class="zope.sendmail.mailer.SMTPMailer"
+      description="Use the connection timeout set by smtpmailer_init, see https://github.com/zopefoundation/zope.sendmail/pull/73"
+      preserveOriginal="True"
+      />
+
 </configure>

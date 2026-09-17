@@ -239,3 +239,68 @@ def mailhost_send(self, messageText, mto=None, mfrom=None, subject=None, **kwarg
         kwargs.get("immediate", False),
     )
     return self._old_send(messageText, mto=mto, mfrom=mfrom, subject=subject, **kwargs)
+
+
+# Backport of a configurable connection timeout for zope.sendmail's
+# SMTPMailer: https://github.com/zopefoundation/zope.sendmail/pull/73
+# so we don't have to wait for a released version that ships it.
+# Defaults to SMTP_TIMEOUT seconds (10s), tunable (or disabled, with an
+# empty/"None" value) via the REDTURTLE_VOLTO_SMTP_TIMEOUT environment
+# variable.
+# TODO: remove this patch once redturtle.volto can depend on a
+# zope.sendmail release that includes
+# https://github.com/zopefoundation/zope.sendmail/pull/73.
+def _get_smtp_timeout():
+    value = os.environ.get("REDTURTLE_VOLTO_SMTP_TIMEOUT", "10")
+    if not value or value.lower() == "none":
+        return None
+    return float(value)
+
+
+SMTP_TIMEOUT = _get_smtp_timeout()
+
+
+def smtpmailer_init(
+    self,
+    hostname="localhost",
+    port=25,
+    username=None,
+    password=None,
+    no_tls=False,
+    force_tls=False,
+    implicit_tls=False,
+):
+    """Monkey patch to set a default connection timeout on SMTPMailer.
+
+    See the note above ``_get_smtp_timeout`` for the rationale.
+    """
+    self._old___init__(
+        hostname=hostname,
+        port=port,
+        username=username,
+        password=password,
+        no_tls=no_tls,
+        force_tls=force_tls,
+        implicit_tls=implicit_tls,
+    )
+    self.timeout = SMTP_TIMEOUT
+
+
+def smtpmailer_vote(self, fromaddr, toaddrs, message):
+    """Monkey patch to actually pass the timeout set by smtpmailer_init
+    along to the smtp connection.
+    """
+    timeout = getattr(self, "timeout", None)
+    kwargs = {} if timeout is None else {"timeout": timeout}
+    self.connection = self.smtp(self.hostname, str(self.port), **kwargs)
+
+    code, response = self.connection.ehlo()
+    if code < 200 or code >= 300:
+        code, response = self.connection.helo()
+        if code < 200 or code >= 300:
+            raise RuntimeError(
+                "Error sending HELO to the SMTP server "
+                "(code=%s, response=%s)" % (code, response)
+            )
+
+    self.code, self.response = code, response

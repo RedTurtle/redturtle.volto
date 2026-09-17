@@ -4,7 +4,12 @@ Changelog
 5.9.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Backport a configurable connection timeout for ``zope.sendmail``'s
+  ``SMTPMailer`` (default 10s, configurable with the
+  ``REDTURTLE_VOLTO_SMTP_TIMEOUT`` environment variable), until a
+  zope.sendmail release with this feature
+  (https://github.com/zopefoundation/zope.sendmail/pull/73) is available.
+  [mamico]
 
 
 5.9.7 (2026-09-17)
