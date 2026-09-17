@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.9.7 (unreleased)
+5.9.7 (2026-09-17)
 ------------------
 
 - log send mail
