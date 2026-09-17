@@ -9,6 +9,15 @@ test_deps_additional = """
     # dm.plone.advancedquery (and Products.AdvancedQuery) works only with Plone 6.0
     plone60: dm.plone.advancedquery
 """
+# TEMPORARY: Plone 6.3 is manually dropped from the CI matrix (see
+# test-matrix.yml) and the coverage env is manually pinned to 6.2-dev (see
+# tox.ini) because several third-party dependencies pulled in transitively
+# (collective.purgebyid, experimental.noacquisition, possibly more) still
+# `import pkg_resources`, which is gone on newer setuptools. Note: running
+# `config-package` to regenerate from this file will NOT restore these two
+# manual tweaks (there is no plone.meta option for them) - re-apply by hand,
+# or better, remove this whole note once those dependencies are fixed
+# upstream and 6.3 is added back everywhere.
 [pre_commit]
 # @@fix-links and @@find-blocks are maintenance views for site administrators,
 # they are not part of the translated UI.
