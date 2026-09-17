@@ -6,7 +6,8 @@ Changelog
 
 - log send mail
   [mamico]
-
+- Serve a minimal standalone 404 page for HTML requests that hit the backend directly instead of Volto, overriding Plone's themed error page and disabling the site theme so it renders even when the frontend/theme assets are unreachable. The page text is translatable (Italian translation included).
+  [fedevancin]
 
 5.9.6 (2026-08-19)
 ------------------
@@ -15,8 +16,6 @@ Changelog
   [mamico]
 - Security fix: use ``api.content.get`` instead of ``restrictedTraverse`` in ``RelationChoiceFieldDeserializer`` to prevent type confusion via path/URL resolution
   [mamico]
-- Serve a minimal standalone 404 page for HTML requests that hit the backend directly instead of Volto, overriding Plone's themed error page and disabling the site theme so it renders even when the frontend/theme assets are unreachable. The page text is translatable (Italian translation included).
-  [fedevancin]
 - Configuring with plone.meta 2.x
   [mamico]
 - Require Python >= 3.9 (Plone 6.0 does not support Python 3.8 anymore) and drop
