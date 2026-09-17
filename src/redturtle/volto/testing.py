@@ -11,10 +11,16 @@ import collective.volto.gdprcookie
 import collective.volto.sitesettings
 import experimental.noacquisition
 import kitconcept.seo
+import os
 import plone.app.caching
 import plone.restapi
 import plone.volto
 import redturtle.volto
+
+# bin/test (zc.recipe.testrunner) doesn't set this, unlike the zope instance
+# (see base.cfg), so .po files never get compiled to .mo and translations
+# are never available unless we set it here before the layers below load ZCML.
+os.environ.setdefault("zope_i18n_compile_mo_files", "true")
 
 
 class RedturtleVoltoLayer(PloneSandboxLayer):
