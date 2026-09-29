@@ -10,6 +10,11 @@ from plone.event.recurrence import recurrence_sequence_ical
 from plone.restapi.blocks import iter_block_transform_handlers
 from plone.restapi.blocks import visit_blocks
 from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
+from AccessControl.requestmethod import postonly
+from plone.protect import CheckAuthenticator
+from plone.protect import protect
+from Products.CMFCore.permissions import ChangeLocalRoles
+from Products.CMFCore.utils import _checkPermission
 
 # from plone.event.utils import pydt
 from Products.CMFPlone.interfaces import IConstrainTypes
@@ -239,3 +244,59 @@ def mailhost_send(self, messageText, mto=None, mfrom=None, subject=None, **kwarg
         kwargs.get("immediate", False),
     )
     return self._old_send(messageText, mto=mto, mfrom=mfrom, subject=subject, **kwargs)
+
+
+@postonly
+def deleteLocalRoles(
+    self, obj, member_ids, reindex=1, recursive=0, REQUEST=None, depth=3
+):
+    """Delete local roles of specified members.
+
+    Differences from the CMFCore implementation
+    (see https://community.plone.org/t/delete-user-that-created-content/3787):
+
+    - fluid depth: if an object has no local roles to delete and no
+      interesting local roles for other users, the search depth is
+      decreased, so uninteresting subtrees are skipped. This may fail to
+      delete some local roles.
+    - reindexObjectSecurity is called only on the topmost modified objects
+      and not on obj: the original reindexes the whole site (it is always
+      recursive), and that is where almost all the time was spent.
+    """
+    changed = []
+    _delete_local_roles(obj, member_ids, recursive, depth, changed)
+    if not reindex:
+        return
+    reindexed = []
+    # parents before children, so already reindexed subtrees are skipped
+    for ob in sorted(changed, key=lambda ob: len(ob.getPhysicalPath())):
+        path = ob.getPhysicalPath()
+        if any(path[: len(p)] == p for p in reindexed):
+            continue
+        if hasattr(aq_base(ob), "reindexObjectSecurity"):
+            ob.reindexObjectSecurity()
+        reindexed.append(path)
+
+
+deleteLocalRoles = protect(CheckAuthenticator)(deleteLocalRoles)
+
+
+def _delete_local_roles(obj, member_ids, recursive, depth, changed):
+    if _checkPermission(ChangeLocalRoles, obj):
+        local_roles = obj.get_local_roles()
+        if any(user in member_ids for user, roles in local_roles):
+            obj.manage_delLocalRoles(userids=member_ids)
+            changed.append(obj)
+        elif not any(
+            roles and tuple(roles) != ("Owner",) for user, roles in local_roles
+        ):
+            # Nothing deleted at this level, and no interesting local
+            # roles for other users.  Decrease search depth.
+            depth -= 1
+            if depth <= 0:
+                # Ignore the rest of this content tree, if any.
+                return
+
+    if recursive and hasattr(aq_base(obj), "contentValues"):
+        for subobj in obj.contentValues():
+            _delete_local_roles(subobj, member_ids, recursive, depth, changed)
