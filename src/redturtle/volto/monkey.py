@@ -1,3 +1,4 @@
+from AccessControl.requestmethod import postonly
 from Acquisition import aq_base
 from plone.app.caching import purge
 from plone.app.event.base import dt_start_of_day
@@ -7,12 +8,11 @@ from plone.app.multilingual.interfaces import IPloneAppMultilingualInstalled
 from plone.event.interfaces import IEventAccessor
 from plone.event.interfaces import IRecurrenceSupport
 from plone.event.recurrence import recurrence_sequence_ical
+from plone.protect import CheckAuthenticator
+from plone.protect import protect
 from plone.restapi.blocks import iter_block_transform_handlers
 from plone.restapi.blocks import visit_blocks
 from plone.restapi.interfaces import IBlockFieldLinkIntegrityRetriever
-from AccessControl.requestmethod import postonly
-from plone.protect import CheckAuthenticator
-from plone.protect import protect
 from Products.CMFCore.permissions import ChangeLocalRoles
 from Products.CMFCore.utils import _checkPermission
 
