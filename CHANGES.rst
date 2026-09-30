@@ -4,7 +4,12 @@ Changelog
 5.9.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Patch ``portal_membership.deleteLocalRoles`` to speed up user deletion on big sites:
+  the search uses a fluid depth that skips subtrees without interesting local roles,
+  and security indexes are reindexed only on the topmost objects that actually changed,
+  instead of the whole site.
+  See https://community.plone.org/t/delete-user-that-created-content/3787
+  [cekk]
 
 
 5.9.7 (2026-09-17)
