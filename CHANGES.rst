@@ -4,7 +4,10 @@ Changelog
 5.9.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Generic blocks resolveuid deserializer now skips "title" and "simple_card_title" fields.
+  Before, a text equal to the id of a site-root object (e.g. a card title "titolo"
+  when /titolo exists) was saved as a link to that object.
+  [fedevancin]
 
 
 5.9.7 (2026-09-17)
