@@ -7,7 +7,19 @@ from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 
-EXCLUDE_KEYS = ["@type", "type", "token", "value", "@id", "query", "bg_color"]
+EXCLUDE_KEYS = [
+    "@type",
+    "type",
+    "token",
+    "value",
+    "@id",
+    "query",
+    "bg_color",
+    # plain text fields: a value equal to a site-root object id (e.g. "titolo")
+    # would otherwise be converted into a link to that object
+    "title",
+    "simple_card_title",
+]
 EXCLUDE_TYPES = [
     "title",
     "listing",
@@ -16,7 +28,6 @@ EXCLUDE_TYPES = [
     "form",
     "teaser",
 ]
-URL_PREFIXES = ("/", "./", "../", "http://", "https://")
 
 
 class GenericResolveUIDDeserializer:
@@ -38,7 +49,7 @@ class GenericResolveUIDDeserializer:
 
     def fix_urls_in_block(self, block):
         if isinstance(block, str):
-            return self.get_uid_from_text(text=block)
+            return self.get_uid_from_path(link=block)
         if not hasattr(block, "get"):
             return block
         if block.get("@type", "") in EXCLUDE_TYPES:
@@ -52,7 +63,7 @@ class GenericResolveUIDDeserializer:
             if key in EXCLUDE_KEYS:
                 continue
             if isinstance(val, str):
-                block[key] = self.get_uid_from_text(text=val)
+                block[key] = self.get_uid_from_path(link=val)
             elif isinstance(val, list):
                 block[key] = [self.fix_urls_in_block(x) for x in val]
             elif isinstance(val, dict):
@@ -64,17 +75,6 @@ class GenericResolveUIDDeserializer:
                 else:
                     block[key] = self.fix_urls_in_block(block=val)
         return block
-
-    def get_uid_from_text(self, text):
-        """
-        Generic block string values can be plain text (e.g. a card title):
-        convert them only if they look like a path or an url, otherwise a
-        text equal to a site-root object id (e.g. "titolo") would be
-        resolved as a link to that object.
-        """
-        if not text.startswith(URL_PREFIXES):
-            return text
-        return self.get_uid_from_path(link=text)
 
     def get_uid_from_path(self, link):
         """get_uid_from_path.

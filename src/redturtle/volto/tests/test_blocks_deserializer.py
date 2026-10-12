@@ -26,7 +26,8 @@ class TestGenericBlocksDeserializer(unittest.TestCase):
         self.document = api.content.create(
             container=self.portal, type="Document", title="Page"
         )
-        self.ref = api.content.create(
+        # a site-root object whose id is equal to the texts used below
+        api.content.create(
             container=self.portal, type="Document", id="titolo", title="Titolo"
         )
         commit()
@@ -42,24 +43,14 @@ class TestGenericBlocksDeserializer(unittest.TestCase):
         commit()
         return self.document.blocks["xyz"]
 
-    def test_plain_text_equal_to_object_id_is_not_converted(self):
-        block = self.patch_block({"@type": "custom_block", "title": "titolo"})
-        self.assertEqual(block["title"], "titolo")
-
-    def test_plain_text_in_list_equal_to_object_id_is_not_converted(self):
-        block = self.patch_block({"@type": "custom_block", "items": ["titolo"]})
-        self.assertEqual(block["items"], ["titolo"])
-
-    def test_paths_and_urls_are_converted_to_resolveuid(self):
+    def test_simple_card_title_equal_to_object_id_is_not_converted(self):
         block = self.patch_block(
-            {
-                "@type": "custom_block",
-                "path": "/titolo",
-                "url": f"{self.portal_url}/titolo",
-                "items": ["/titolo"],
-            }
+            {"@type": "testo_riquadro_semplice", "simple_card_title": "titolo"}
         )
-        resolveuid = f"../resolveuid/{self.ref.UID()}"
-        self.assertEqual(block["path"], resolveuid)
-        self.assertEqual(block["url"], resolveuid)
-        self.assertEqual(block["items"], [resolveuid])
+        self.assertEqual(block["simple_card_title"], "titolo")
+
+    def test_subblocks_title_equal_to_object_id_is_not_converted(self):
+        block = self.patch_block(
+            {"@type": "iconBlocks", "subblocks": [{"id": "abc", "title": "titolo"}]}
+        )
+        self.assertEqual(block["subblocks"][0]["title"], "titolo")

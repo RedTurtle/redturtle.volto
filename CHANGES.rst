@@ -4,9 +4,9 @@ Changelog
 5.9.8 (unreleased)
 ------------------
 
-- Generic blocks resolveuid deserializer now convert only string values that look like
-  a path or an url. Before, plain texts equal to the id of a site-root object
-  (e.g. a card title "titolo" when /titolo exists) were saved as a link to that object.
+- Generic blocks resolveuid deserializer now skips "title" and "simple_card_title" fields.
+  Before, a text equal to the id of a site-root object (e.g. a card title "titolo"
+  when /titolo exists) was saved as a link to that object.
   [fedevancin]
 
 
