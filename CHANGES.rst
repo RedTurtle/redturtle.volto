@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.9.8 (unreleased)
+5.9.8 (2026-10-12)
 ------------------
 
 - Generic blocks resolveuid deserializer now skips "title" and "simple_card_title" fields.
