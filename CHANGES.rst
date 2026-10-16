@@ -4,7 +4,9 @@ Changelog
 5.9.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix 404 view override: aliases (redirects) were ignored for requests going through
+  the "++api++" traverser. Now the redirect logic of plone.rest is used.
+  [fedevancin]
 
 
 5.9.8 (2026-10-12)

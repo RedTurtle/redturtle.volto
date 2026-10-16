@@ -3,6 +3,7 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+from plone.app.redirector.interfaces import IRedirectionStorage
 from plone.i18n.interfaces import ILanguageSchema
 from plone.registry.interfaces import IRegistry
 from plone.restapi.testing import RelativeSession
@@ -101,3 +102,23 @@ class TestNotFoundView(unittest.TestCase):
 
         self.assertIn(response.status_code, (301, 302, 307))
         self.assertIn(new_id, response.headers.get("Location", ""))
+
+    def test_alias_is_redirected_instead_of_returning_404(self):
+        page = api.content.create(
+            container=self.portal, type="Document", title="Target page"
+        )
+        storage = getUtility(IRedirectionStorage)
+        storage.add(
+            "/".join(self.portal.getPhysicalPath()) + "/my-alias",
+            "/".join(page.getPhysicalPath()),
+            manual=True,
+        )
+        commit()
+
+        for path in ("/my-alias", "/++api++/my-alias", "/my-alias/@navigation"):
+            for accept in ("text/html", "application/json"):
+                response = self.api_session.get(
+                    path, headers={"Accept": accept}, allow_redirects=False
+                )
+                self.assertIn(response.status_code, (301, 302, 307), (path, accept))
+                self.assertIn(page.getId(), response.headers.get("Location", ""))
