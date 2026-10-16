@@ -1,5 +1,5 @@
+from plone.rest.errors import ErrorHandling
 from Products.Five import BrowserView
-from zope.component import getMultiAdapter
 
 import json
 
@@ -12,16 +12,18 @@ class NotFound(BrowserView):
     haproxy misconfiguration routing there instead of to the frontend.
     """
 
-    @property
-    def plone_redirector_view(self):
-        return getMultiAdapter(
-            (self.__parent__, self.request), name="plone_redirector_view"
-        )
+    def attempt_redirect(self):
+        # Use plone.rest's redirect logic instead of plone.app.redirector's
+        # one: Volto reaches the backend through the "++api++" traverser,
+        # which plone.app.redirector doesn't strip, so it never matches the
+        # stored aliases. This view is more specific than plone.rest's
+        # error view, so it would otherwise shadow it.
+        return ErrorHandling(self.context, self.request).attempt_redirect()
 
     def __call__(self):
         request = self.request
 
-        if self.plone_redirector_view.attempt_redirect():
+        if self.attempt_redirect():
             # a redirect is possible: attempt_redirect already set the
             # Location header and status on the response.
             return ""
