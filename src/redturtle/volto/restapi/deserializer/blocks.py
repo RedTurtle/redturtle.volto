@@ -7,7 +7,19 @@ from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.component import adapter
 from zope.interface import implementer
 
-EXCLUDE_KEYS = ["@type", "type", "token", "value", "@id", "query", "bg_color"]
+EXCLUDE_KEYS = [
+    "@type",
+    "type",
+    "token",
+    "value",
+    "@id",
+    "query",
+    "bg_color",
+    # plain text fields: a value equal to a site-root object id (e.g. "titolo")
+    # would otherwise be converted into a link to that object
+    "title",
+    "simple_card_title",
+]
 EXCLUDE_TYPES = [
     "title",
     "listing",

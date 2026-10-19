@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.9.8 (unreleased)
+5.9.9 (unreleased)
 ------------------
 
 - Patch ``portal_membership.deleteLocalRoles`` to speed up user deletion on big sites:
@@ -10,6 +10,15 @@ Changelog
   instead of the whole site.
   See https://community.plone.org/t/delete-user-that-created-content/3787
   [cekk]
+
+
+5.9.8 (2026-10-12)
+------------------
+
+- Generic blocks resolveuid deserializer now skips "title" and "simple_card_title" fields.
+  Before, a text equal to the id of a site-root object (e.g. a card title "titolo"
+  when /titolo exists) was saved as a link to that object.
+  [fedevancin]
 
 
 5.9.7 (2026-09-17)
