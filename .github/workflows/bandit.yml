@@ -16,3 +16,5 @@ jobs:
         uses: PyCQA/bandit-action@v1
         with:
             targets: ./src
+            # the action defaults to Python 3.8, not available on ubuntu-latest anymore
+            python-version: "3.12"
