@@ -6,7 +6,6 @@ from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
 
-
 # The frontend only needs @id and title of the navigation root: blocks are
 # useless there and, on homepages, they duplicate the whole page payload.
 EXCLUDED_FIELDS = ("blocks", "blocks_layout")

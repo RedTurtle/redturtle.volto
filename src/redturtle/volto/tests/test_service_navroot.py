@@ -17,7 +17,6 @@ from zope.interface import noLongerProvides
 import transaction
 import unittest
 
-
 SITE_BLOCKS = {
     "site-title": {"@type": "title"},
     "site-text": {"@type": "slate", "plaintext": "site root text"},
