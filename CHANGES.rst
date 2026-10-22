@@ -4,7 +4,10 @@ Changelog
 5.9.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ``@navroot`` (endpoint and expander) no longer returns ``blocks`` and ``blocks_layout``
+  of the navigation root: the frontend only needs its ``@id`` and title, and on homepages
+  they duplicated the whole page payload.
+  [cekk]
 
 
 5.9.8 (2026-10-12)
