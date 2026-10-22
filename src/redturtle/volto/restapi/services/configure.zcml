@@ -6,6 +6,7 @@
   <include package=".content" />
   <include package=".copymove" />
   <include package=".navigation" />
+  <include package=".navroot" />
   <include package=".querystringsearch" />
   <include package=".search" />
   <include package=".site_search" />
