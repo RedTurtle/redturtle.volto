@@ -4,7 +4,10 @@ Changelog
 5.9.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add ``sitemap_page_excluded_types`` setting to RedTurtle Volto Settings and make
+  ``@sitemap`` return the site tree (same as ``@navigation``) without the excluded
+  types, to be used by the sitemap page. ``sitemap.xml.gz`` and ``@navigation`` are not affected.
+  [fedevancin]
 
 
 5.9.8 (2026-10-12)

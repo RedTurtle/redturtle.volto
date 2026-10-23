@@ -288,4 +288,12 @@
       destination="4700"
       handler=".upgrades.to_4700"
       />
+  <genericsetup:upgradeStep
+      title="Add sitemap_page_excluded_types setting"
+      description=""
+      profile="redturtle.volto:default"
+      source="4700"
+      destination="4800"
+      handler=".upgrades.to_4800"
+      />
 </configure>
