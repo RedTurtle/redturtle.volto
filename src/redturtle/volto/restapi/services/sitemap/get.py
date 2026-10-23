@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.restapi.services import Service
 from plone.restapi.services.navigation.get import Navigation
@@ -18,14 +17,17 @@ class SitemapNavigation(Navigation):
 
     @property
     def excluded_types(self):
-        return (
-            api.portal.get_registry_record(
-                "sitemap_page_excluded_types",
-                interface=IRedTurtleVoltoSettings,
-                default=[],
+        try:
+            return (
+                api.portal.get_registry_record(
+                    "sitemap_page_excluded_types",
+                    interface=IRedTurtleVoltoSettings,
+                )
+                or []  # noqa
             )
-            or []  # noqa
-        )
+        except KeyError:
+            # record not registered yet (upgrade step 4800 not run)
+            return []
 
     @property
     def settings(self):
