@@ -8,6 +8,8 @@ from plone.volto.interfaces import IPloneVoltoCoreLayer
 from redturtle.volto import _
 from zope.interface import Interface
 from zope.schema import Bool
+from zope.schema import Choice
+from zope.schema import List
 from zope.schema import SourceText
 
 import json
@@ -63,6 +65,23 @@ class IRedTurtleVoltoSettings(Interface):
             default="If enabled, users can't create contents with ids that are already used as aliases.",
         ),
         default=False,
+        required=False,
+    )
+
+    sitemap_page_excluded_types = List(
+        title=_(
+            "sitemap_page_excluded_types_label",
+            default="Content-types excluded from the sitemap page",
+        ),
+        description=_(
+            "sitemap_page_excluded_types_help",
+            default="Contents of these types are not shown in the sitemap page "
+            "(the one visible to users, served by the @sitemap endpoint). "
+            "It does not affect the sitemap.xml.gz file or the site navigation.",
+        ),
+        value_type=Choice(vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes"),
+        default=[],
+        missing_value=[],
         required=False,
     )
 
