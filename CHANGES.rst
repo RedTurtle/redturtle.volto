@@ -7,6 +7,13 @@ Changelog
 - Add ``sitemap_page_excluded_types`` setting to RedTurtle Volto Settings and make
   ``@sitemap`` return the site tree (same as ``@navigation``) without the excluded
   types, to be used by the sitemap page. ``sitemap.xml.gz`` and ``@navigation`` are not affected.
+- Patch ``portal_membership.deleteLocalRoles`` to speed up user deletion on big sites:
+  the search uses a fluid depth that skips subtrees without interesting local roles,
+  and security indexes are reindexed only on the topmost objects that actually changed,
+  instead of the whole site.
+  See https://community.plone.org/t/delete-user-that-created-content/3787
+  [cekk]
+- Fixed a test.
   [fedevancin]
 
 
