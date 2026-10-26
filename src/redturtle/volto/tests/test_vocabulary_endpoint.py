@@ -111,7 +111,7 @@ class TestVocabularyEndpoint(unittest.TestCase):
     def test_anonymous_cant_get_other_vocabularies(self):
         api_session = RelativeSession(self.portal_url)
         api_session.headers.update({"Accept": "application/json"})
-        response = api_session.get("/@vocabularies/plone.app.vocabularies.Users")
+        response = api_session.get("/@vocabularies/plone.app.vocabularies.SyndicatableFeedItems")
 
         self.assertEqual(response.status_code, 401)
 
@@ -122,7 +122,7 @@ class TestVocabularyEndpoint(unittest.TestCase):
     #     api_session.headers.update({"Accept": "application/json"})
 
     #     api_session.auth = ("member", "secret!!!")
-    #     response = api_session.get("/@vocabularies/plone.app.vocabularies.Users")
+    #     response = api_session.get("/@vocabularies/plone.app.vocabularies.SyndicatableFeedItems")
 
     #     self.assertEqual(response.status_code, 403)
 
