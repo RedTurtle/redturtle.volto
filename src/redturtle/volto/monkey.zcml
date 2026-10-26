@@ -90,4 +90,14 @@
       preserveOriginal="True"
       />
 
+  <!-- https://community.plone.org/t/delete-user-that-created-content/3787 -->
+  <monkey:patch
+      original="deleteLocalRoles"
+      replacement=".monkey.deleteLocalRoles"
+      class="Products.CMFCore.MembershipTool.MembershipTool"
+      description="Dynamic depth of local roles removal"
+      preserveOriginal="True"
+      />
+
+
 </configure>

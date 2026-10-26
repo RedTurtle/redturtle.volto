@@ -8,6 +8,13 @@ Changelog
   the "++api++" traverser.
   [fedevancin]
 - API 404 responses now use the standard plone.rest JSON body.
+- Patch ``portal_membership.deleteLocalRoles`` to speed up user deletion on big sites:
+  the search uses a fluid depth that skips subtrees without interesting local roles,
+  and security indexes are reindexed only on the topmost objects that actually changed,
+  instead of the whole site.
+  See https://community.plone.org/t/delete-user-that-created-content/3787
+  [cekk]
+- Fixed a test.
   [fedevancin]
 
 
