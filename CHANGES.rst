@@ -10,6 +10,8 @@ Changelog
   instead of the whole site.
   See https://community.plone.org/t/delete-user-that-created-content/3787
   [cekk]
+- Fixed a test.
+  [fedevancin]
 
 
 5.9.8 (2026-10-12)
