@@ -4,8 +4,11 @@ Changelog
 5.9.9 (unreleased)
 ------------------
 
-- Fix 404 view override: aliases (redirects) were ignored for requests going through
-  the "++api++" traverser. Now the redirect logic of plone.rest is used.
+- Fix 404 page override: aliases (redirects) were ignored for requests going through
+  the "++api++" traverser. Now the NotFound view extends Plone's standard error view
+  (redirects are handled by Plone before rendering the blank page) and gives the API
+  requests back to plone.rest, which has its own redirect logic.
+  API 404 responses now use the standard plone.rest JSON body.
   [fedevancin]
 
 

@@ -72,7 +72,8 @@ class TestNotFoundView(unittest.TestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.headers.get("Content-Type"), "application/json")
-        self.assertEqual(response.json(), {"error_type": "NotFound"})
+        # API requests are handled by plone.rest
+        self.assertEqual(response.json()["type"], "NotFound")
 
     def test_request_without_accept_header_returns_json_error(self):
         response = self.api_session.get(
