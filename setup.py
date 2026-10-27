@@ -62,6 +62,7 @@ setup(
         "kitconcept.seo>=2.0.0",
         "plone.volto>=4.0.0",
         "plone.restapi>=9.6.0",
+        "plone.rest",
         "collective.volto.sitesettings",
         "experimental.noacquisition",
     ],
