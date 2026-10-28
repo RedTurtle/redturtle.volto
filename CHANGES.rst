@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.9.9 (unreleased)
-------------------
+5.10.0 (2026-10-28)
+-------------------
 
 - Fix 404 page override: redirects were ignored for requests going through
   the "++api++" traverser.
