@@ -7,6 +7,10 @@ Changelog
 - Add ``sitemap_page_excluded_types`` setting to RedTurtle Volto Settings and make
   ``@sitemap`` return the site tree (same as ``@navigation``) without the excluded
   types, to be used by the sitemap page. ``sitemap.xml.gz`` and ``@navigation`` are not affected.
+- Fix 404 page override: redirects were ignored for requests going through
+  the "++api++" traverser.
+  [fedevancin]
+- API 404 responses now use the standard plone.rest JSON body.
 - Patch ``portal_membership.deleteLocalRoles`` to speed up user deletion on big sites:
   the search uses a fluid depth that skips subtrees without interesting local roles,
   and security indexes are reindexed only on the topmost objects that actually changed,
