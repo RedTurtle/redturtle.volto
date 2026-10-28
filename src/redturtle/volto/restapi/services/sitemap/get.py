@@ -48,7 +48,9 @@ class SitemapNavigation(Navigation):
         excluded = self.excluded_types
         if not excluded:
             return tabs
-        brains = api.portal.get_tool("portal_catalog").unrestrictedSearchResults(
+        # tabs don't have the portal_type, so we need to ask it to the catalog.
+        # (portal_tabs are already filtered by permissions)
+        brains = api.content.find(
             path={"query": self.navtree_path, "depth": 1},
             portal_type=list(excluded),
         )
