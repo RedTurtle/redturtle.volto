@@ -193,6 +193,44 @@ Restapi Search Limits
 Search results length is limited to 500 items by default, but you can change this limit
 using the environment variable `REDTURTLE_VOLTO_MAX_LIMIT_SEARCH`
 
+Navigation depth limit
+----------------------
+
+``expand.navigation.depth`` is limited, to avoid very expensive requests that return the whole site tree.
+A request with a depth greater than the maximum, or negative (that means "all levels"), is handled
+as if it had asked for the maximum, and a warning is logged.
+
+The maximum is:
+
+1. the environment variable `REDTURTLE_VOLTO_MAX_NAVIGATION_DEPTH`, if set to an integer > 0;
+2. otherwise the registry record ``plone.navigation_depth``, if it is an integer >= 1;
+3. otherwise ``3``.
+
+Volto hides the ``navigation_depth`` field in its navigation control panel: you can change it from the
+classic ``@@navigation-controlpanel``, directly in the registry, or override it with the environment variable.
+
+A non-integer value returns a 400 error.
+
+The limit covers the ``@navigation`` endpoint, the ``navigation`` expander and ``@context-navigation``.
+It is active only where the redturtle.volto browser layer is installed.
+
+Packages that override the navigation should subclass
+``redturtle.volto.restapi.services.navigation.navigation.Navigation`` to inherit the limits.
+
+Navigation items limit
+----------------------
+
+The navigation tree is also limited in size: by default it can have at most ``1000`` items.
+You can change this limit with the environment variable `REDTURTLE_VOLTO_MAX_NAVIGATION_ITEMS`
+(``0`` or a negative value disables it; a non-integer value means the default).
+
+The tree is cut level by level, never in the middle of a level: going down from the first level,
+the first level that would exceed the limit is removed, with everything below it, and a warning is logged.
+The first level (the tabs) is always kept, even if on its own it exceeds the limit.
+
+This limit covers the same endpoints as the depth limit (``@navigation``, the ``navigation`` expander and
+``@context-navigation``).
+
 Patches
 =======
 
