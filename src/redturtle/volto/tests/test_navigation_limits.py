@@ -22,7 +22,6 @@ import os
 import transaction
 import unittest
 
-
 LIMITS_LOGGER = "redturtle.volto.restapi.services.navigation.limits"
 
 

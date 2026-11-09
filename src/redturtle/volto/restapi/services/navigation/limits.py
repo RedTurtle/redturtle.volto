@@ -5,7 +5,6 @@ from zExceptions import BadRequest
 
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 DEPTH_PARAM = "expand.navigation.depth"
