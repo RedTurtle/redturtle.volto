@@ -15,7 +15,7 @@ jobs:
       - name: Perform Bandit Analysis
         # v1 (1.0.1) hardcodes Python 3.8, not available on ubuntu-latest anymore:
         # pin a main commit, the only one with the python-version input
-        uses: PyCQA/bandit-action@044eb14cd9d9e339d23c8f6511f217824a10a256
+        uses: PyCQA/bandit-action@8970b6163696044b1b81bd86df0d01a7695e65df
         with:
             targets: ./src
             python-version: "3.12"
