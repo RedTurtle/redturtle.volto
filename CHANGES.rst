@@ -10,6 +10,9 @@ Changelog
 5.10.0 (2026-10-28)
 -------------------
 
+- Add ``sitemap_page_excluded_types`` setting to RedTurtle Volto Settings and make
+  ``@sitemap`` return the site tree (same as ``@navigation``) without the excluded
+  types, to be used by the sitemap page. ``sitemap.xml.gz`` and ``@navigation`` are not affected.
 - Fix 404 page override: redirects were ignored for requests going through
   the "++api++" traverser.
   [fedevancin]
