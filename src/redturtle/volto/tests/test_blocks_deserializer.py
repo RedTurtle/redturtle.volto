@@ -54,3 +54,16 @@ class TestGenericBlocksDeserializer(unittest.TestCase):
             {"@type": "iconBlocks", "subblocks": [{"id": "abc", "title": "titolo"}]}
         )
         self.assertEqual(block["subblocks"][0]["title"], "titolo")
+
+    def test_slate_text_leaf_equal_to_object_id_is_not_converted(self):
+        block = self.patch_block(
+            {
+                "@type": "card_with_image",
+                "image_card_content": [
+                    {"type": "p", "children": [{"text": "titolo"}]},
+                ],
+            }
+        )
+        self.assertEqual(
+            block["image_card_content"][0]["children"][0]["text"], "titolo"
+        )

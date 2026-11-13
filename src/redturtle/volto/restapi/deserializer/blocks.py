@@ -19,6 +19,7 @@ EXCLUDE_KEYS = [
     # would otherwise be converted into a link to that object
     "title",
     "simple_card_title",
+    "text",
 ]
 EXCLUDE_TYPES = [
     "title",
