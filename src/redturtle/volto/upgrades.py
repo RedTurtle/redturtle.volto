@@ -641,3 +641,7 @@ def to_4700(context):
         "plone.app.registry",
         run_dependencies=False,
     )
+
+
+def to_4800(context):
+    installOrReinstallProduct(api.portal.get(), "experimental.catalogmoveopt")
