@@ -288,7 +288,7 @@
       destination="4700"
       handler=".upgrades.to_4700"
       />
-    <genericsetup:upgradeStep
+  <genericsetup:upgradeStep
       title="Install experimental.catalogmoveopt"
       description=""
       profile="redturtle.volto:default"

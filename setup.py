@@ -65,7 +65,7 @@ setup(
         "plone.rest",
         "collective.volto.sitesettings",
         "experimental.noacquisition",
-        "experimental.catalogmoveopt"
+        "experimental.catalogmoveopt",
     ],
     extras_require={
         "advancedquery": [
