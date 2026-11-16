@@ -4,7 +4,9 @@ Changelog
 5.10.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Generic blocks resolveuid deserializer now skips slate "text" leaves: a word equal to a
+  site object id (e.g. "Alluvione") was converted into a resolveuid link in card blocks.
+  [fedevancin]
 
 
 5.10.0 (2026-10-28)
