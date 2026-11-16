@@ -182,8 +182,9 @@ class QuerystringSearch(BaseQuerystringSearch):
                 "plone.app.querystring.operation.date.largerThan",
             ]
             if indexes["start"].get("o") in custom_ops:
-                # this is a custom search, not an "event" search
-                indexes_check = False
+                # this is a custom search, not an "event" search, unless it is
+                # a date range filter (see is_date_range_search)
+                indexes_check = self.is_date_range_search(indexes)
             else:
                 indexes_check = True
 
@@ -193,6 +194,20 @@ class QuerystringSearch(BaseQuerystringSearch):
             if i == "portal_type" and v == ["Event"]:
                 portal_type_check = True
         return portal_type_check and indexes_check
+
+    def is_date_range_search(self, indexes):
+        """
+        The date range filter of the event search sends "start >= from" and
+        "end <= to". This would return only the events that are completely inside
+        the range, hiding the ones that start before and/or end after it.
+        Handle it as an event search to get all the events that overlap the range.
+        """
+        return (
+            indexes["start"].get("o")
+            == "plone.app.querystring.operation.date.largerThan"
+            and indexes.get("end", {}).get("o")
+            == "plone.app.querystring.operation.date.lessThan"
+        )
 
     def generate_query_for_events(self):
         data = json_body(self.request)

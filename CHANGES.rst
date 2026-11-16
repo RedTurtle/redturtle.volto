@@ -4,7 +4,10 @@ Changelog
 5.10.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Event search: a date range made of "start largerThan" and "end lessThan" is now handled
+  with plone.app.event (overlap), so events that start before and/or end after the
+  range are returned too.
+  [fedevancin]
 
 
 5.10.1 (2026-11-16)
