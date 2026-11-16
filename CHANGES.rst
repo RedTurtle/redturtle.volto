@@ -8,6 +8,12 @@ Changelog
   of the navigation root: the frontend only needs its ``@id`` and title, and on homepages
   they duplicated the whole page payload.
   [cekk]
+- Limit ``expand.navigation.depth`` for ``@navigation``, the ``navigation`` expander and ``@context-navigation``
+  (env ``REDTURTLE_VOLTO_MAX_NAVIGATION_DEPTH`` or registry ``plone.navigation_depth``, default 3).
+  A non-integer depth now returns 400 instead of 500.
+  [cekk]
+- Cap navigation tree size (``REDTURTLE_VOLTO_MAX_NAVIGATION_ITEMS``, default 1000), pruning whole levels.
+  [cekk]
 
 
 5.10.1 (2026-11-16)
