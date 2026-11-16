@@ -14,7 +14,8 @@ Changelog
   [cekk]
 - Cap navigation tree size (``REDTURTLE_VOLTO_MAX_NAVIGATION_ITEMS``, default 1000), pruning whole levels.
   [cekk]
-
+- Add experimental.catalogmoveopt dependency and upgrade-step to install it.
+  [cekk]
 
 5.10.1 (2026-11-16)
 -------------------
