@@ -81,6 +81,7 @@ setup(
             # not imported directly, but plone.restapi.testing (that we use in
             # our layers) does `import collective.MockMailHost`
             "collective.MockMailHost",
+            "zope.annotation",
         ],
     },
     entry_points="""
