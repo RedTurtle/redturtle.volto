@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cache="http://namespaces.zope.org/cache"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <adapter
+      factory=".get.Navroot"
+      name="navroot"
+      />
+
+  <plone:service
+      method="GET"
+      factory=".get.NavrootGet"
+      for="zope.interface.Interface"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@navroot"
+      />
+
+  <cache:ruleset
+      for=".get.NavrootGet"
+      ruleset="plone.content.dynamic"
+      />
+
+</configure>

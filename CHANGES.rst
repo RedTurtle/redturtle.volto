@@ -4,6 +4,10 @@ Changelog
 5.10.2 (unreleased)
 -------------------
 
+- ``@navroot`` (endpoint and expander) no longer returns ``blocks`` and ``blocks_layout``
+  of the navigation root: the frontend only needs its ``@id`` and title, and on homepages
+  they duplicated the whole page payload.
+  [cekk]
 - Limit ``expand.navigation.depth`` for ``@navigation``, the ``navigation`` expander and ``@context-navigation``
   (env ``REDTURTLE_VOLTO_MAX_NAVIGATION_DEPTH`` or registry ``plone.navigation_depth``, default 3).
   A non-integer depth now returns 400 instead of 500.
