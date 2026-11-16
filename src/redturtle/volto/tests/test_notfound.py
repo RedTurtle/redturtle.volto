@@ -1,4 +1,5 @@
 from plone import api
+from plone.app.redirector.interfaces import IRedirectionStorage
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
@@ -71,7 +72,8 @@ class TestNotFoundView(unittest.TestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.headers.get("Content-Type"), "application/json")
-        self.assertEqual(response.json(), {"error_type": "NotFound"})
+        # API requests are handled by plone.rest
+        self.assertEqual(response.json()["type"], "NotFound")
 
     def test_request_without_accept_header_returns_json_error(self):
         response = self.api_session.get(
@@ -101,3 +103,23 @@ class TestNotFoundView(unittest.TestCase):
 
         self.assertIn(response.status_code, (301, 302, 307))
         self.assertIn(new_id, response.headers.get("Location", ""))
+
+    def test_alias_is_redirected_instead_of_returning_404(self):
+        page = api.content.create(
+            container=self.portal, type="Document", title="Target page"
+        )
+        storage = getUtility(IRedirectionStorage)
+        storage.add(
+            "/".join(self.portal.getPhysicalPath()) + "/my-alias",
+            "/".join(page.getPhysicalPath()),
+            manual=True,
+        )
+        commit()
+
+        for path in ("/my-alias", "/++api++/my-alias", "/my-alias/@navigation"):
+            for accept in ("text/html", "application/json"):
+                response = self.api_session.get(
+                    path, headers={"Accept": accept}, allow_redirects=False
+                )
+                self.assertIn(response.status_code, (301, 302, 307), (path, accept))
+                self.assertIn(page.getId(), response.headers.get("Location", ""))

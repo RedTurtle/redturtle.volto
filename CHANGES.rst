@@ -1,13 +1,38 @@
 Changelog
 =========
 
-5.9.9 (unreleased)
-------------------
+5.10.2 (unreleased)
+-------------------
 
 - ``@navroot`` (endpoint and expander) no longer returns ``blocks`` and ``blocks_layout``
   of the navigation root: the frontend only needs its ``@id`` and title, and on homepages
   they duplicated the whole page payload.
   [cekk]
+
+
+5.10.1 (2026-11-16)
+-------------------
+
+- Generic blocks resolveuid deserializer now skips slate "text" leaves: a word equal to a
+  site object id (e.g. "Alluvione") was converted into a resolveuid link in card blocks.
+  [fedevancin]
+
+
+5.10.0 (2026-10-28)
+-------------------
+
+- Fix 404 page override: redirects were ignored for requests going through
+  the "++api++" traverser.
+  [fedevancin]
+- API 404 responses now use the standard plone.rest JSON body.
+- Patch ``portal_membership.deleteLocalRoles`` to speed up user deletion on big sites:
+  the search uses a fluid depth that skips subtrees without interesting local roles,
+  and security indexes are reindexed only on the topmost objects that actually changed,
+  instead of the whole site.
+  See https://community.plone.org/t/delete-user-that-created-content/3787
+  [cekk]
+- Fixed a test.
+  [fedevancin]
 
 
 5.9.8 (2026-10-12)

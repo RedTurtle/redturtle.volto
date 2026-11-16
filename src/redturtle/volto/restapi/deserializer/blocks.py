@@ -62,6 +62,10 @@ class GenericResolveUIDDeserializer:
                 continue
             if key in EXCLUDE_KEYS:
                 continue
+            if key == "text" and isinstance(val, str):
+                # slate text leaf ({"text": "Alluvione"}): plain text, never a link.
+                # (a "text" key holding a list/dict is a container and is parsed)
+                continue
             if isinstance(val, str):
                 block[key] = self.get_uid_from_path(link=val)
             elif isinstance(val, list):
