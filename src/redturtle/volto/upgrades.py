@@ -641,3 +641,12 @@ def to_4700(context):
         "plone.app.registry",
         run_dependencies=False,
     )
+
+
+def to_4800(context):
+    logger.info("Add sitemap_page_excluded_types setting")
+    context.runImportStepFromProfile(
+        "profile-redturtle.volto:profile_to_4800",
+        "plone.app.registry",
+        run_dependencies=False,
+    )

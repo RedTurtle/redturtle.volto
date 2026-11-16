@@ -150,6 +150,16 @@ msgstr ""
 msgid "remoteUrl_restapi_label"
 msgstr ""
 
+#. Default: "Contents of these types are not shown in the sitemap page (the one visible to users, served by the @sitemap endpoint). It does not affect the sitemap.xml.gz file or the site navigation."
+#: redturtle/volto/interfaces.py:77
+msgid "sitemap_page_excluded_types_help"
+msgstr ""
+
+#. Default: "Content-types excluded from the sitemap page"
+#: redturtle/volto/interfaces.py:73
+msgid "sitemap_page_excluded_types_label"
+msgstr ""
+
 #. Default: "Volto Parent URL: Content url without \"/api\"."
 #: redturtle/volto/adapters/stringinterp.py:35
 msgid "stringinterp_volto_parent_url"
