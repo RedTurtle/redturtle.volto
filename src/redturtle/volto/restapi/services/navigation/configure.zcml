@@ -18,4 +18,23 @@
       ruleset="plone.content.dynamic"
       />
 
+  <adapter
+      factory=".navigation.Navigation"
+      name="navigation"
+      />
+
+  <plone:service
+      method="GET"
+      factory=".navigation.NavigationGet"
+      for="zope.interface.Interface"
+      permission="zope2.View"
+      layer="redturtle.volto.interfaces.IRedturtleVoltoLayer"
+      name="@navigation"
+      />
+
+  <cache:ruleset
+      for=".navigation.NavigationGet"
+      ruleset="plone.content.dynamic"
+      />
+
 </configure>
