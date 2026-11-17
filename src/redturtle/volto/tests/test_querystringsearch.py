@@ -194,6 +194,61 @@ class TestQuerystringSearch(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(result["items_total"], 1)
 
+    def test_search_event_date_range_returns_overlapping_events(self):
+        # the date range filter sends "start >= from" and "end <= to": events that
+        # start before and/or end after the range must be returned anyway
+        start_date = datetime.strptime("23/11/2024 10:00:00", "%d/%m/%Y %H:%M:%S")
+        end_date = datetime.strptime("30/11/2024 18:00:00", "%d/%m/%Y %H:%M:%S")
+        createContentInContainer(
+            self.portal,
+            "Event",
+            id="test-event",
+            title="Test Event",
+            start=start_date,
+            end=end_date,
+            location="Vienna",
+        )
+        commit()
+
+        def search(date_from, date_to):
+            response = self.api_session.post(
+                "/@querystring-search",
+                json={
+                    "query": [
+                        {
+                            "i": "portal_type",
+                            "o": "plone.app.querystring.operation.selection.any",
+                            "v": ["Event"],
+                        },
+                        {
+                            "i": "start",
+                            "o": "plone.app.querystring.operation.date.largerThan",
+                            "v": f"{date_from} 00:00",
+                        },
+                        {
+                            "i": "end",
+                            "o": "plone.app.querystring.operation.date.lessThan",
+                            "v": f"{date_to} 23:59",
+                        },
+                    ],
+                },
+            )
+            self.assertEqual(response.status_code, 200)
+            return response.json()["items_total"]
+
+        # single day inside the event
+        self.assertEqual(search("2024-11-23", "2024-11-23"), 1)
+        self.assertEqual(search("2024-11-26", "2024-11-26"), 1)
+        self.assertEqual(search("2024-11-30", "2024-11-30"), 1)
+        # range that overlaps only partially
+        self.assertEqual(search("2024-11-20", "2024-11-24"), 1)
+        self.assertEqual(search("2024-11-29", "2024-12-05"), 1)
+        # range that contains the event
+        self.assertEqual(search("2024-11-23", "2024-11-30"), 1)
+        # ranges outside
+        self.assertEqual(search("2024-11-20", "2024-11-22"), 0)
+        self.assertEqual(search("2024-12-01", "2024-12-02"), 0)
+
     def test_search_event_event_search(self):
         # TODO
         # {"metadata_fields":"_all","b_size":24,"limit":"9","query":[{"i":"portal_type","o":"plone.app.querystring.operation.selection.any","v":["Event"]},{"i":"path","o":"plone.app.querystring.operation.string.relativePath","v":"novita/eventi"},{"i":"start","o":"plone.app.querystring.operation.date.today","v":""}],"sort_on":"start","sort_order":"descending","b_start":0}

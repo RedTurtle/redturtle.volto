@@ -4,6 +4,10 @@ Changelog
 5.10.2 (unreleased)
 -------------------
 
+- Event search: a date range made of "start largerThan" and "end lessThan" is now handled
+  with plone.app.event (overlap), so events that start before and/or end after the
+  range are returned too.
+  [fedevancin]
 - ``@navroot`` (endpoint and expander) no longer returns ``blocks`` and ``blocks_layout``
   of the navigation root: the frontend only needs its ``@id`` and title, and on homepages
   they duplicated the whole page payload.
@@ -16,6 +20,7 @@ Changelog
   [cekk]
 - Add experimental.catalogmoveopt dependency and upgrade-step to install it.
   [cekk]
+
 
 5.10.1 (2026-11-16)
 -------------------
