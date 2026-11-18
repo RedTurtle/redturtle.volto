@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.10.2 (unreleased)
+5.10.2 (2026-11-18)
 -------------------
 
 - Event search: a date range made of "start largerThan" and "end lessThan" is now handled
